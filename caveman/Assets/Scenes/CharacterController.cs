@@ -9,6 +9,8 @@ public class CharacterController : MonoBehaviour {
 	public float punchReload = 1.0f;
 	float punchLastTime;
 
+	public bool stopOnPunch = true;
+
 	// Use this for initialization
 	void Start () {
 		input = GetComponent<CharacterControllerInput> ();
@@ -21,7 +23,10 @@ public class CharacterController : MonoBehaviour {
 
 		Vector2 movementDirection = input.GetDirection ();
 
-		movement.Move (movementDirection);
+		var isPunching = model.IsPunching ();
+
+		if (!isPunching || !stopOnPunch)
+			movement.Move (movementDirection);
 
 		if (model.IsPunching ())
 			return;
