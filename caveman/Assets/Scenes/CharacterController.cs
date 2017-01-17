@@ -21,6 +21,7 @@ public class CharacterController : MonoBehaviour {
 		movement.Move (movementDirection);
 
 		if (movement.IsMoving ()) {
+			model.SetLookingDirection (movement.GetVelocity());
 			model.Run ();
 		} else {
 			model.Idle ();

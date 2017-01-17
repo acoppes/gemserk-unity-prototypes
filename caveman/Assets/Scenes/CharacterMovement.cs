@@ -7,6 +7,11 @@ public class CharacterMovement : MonoBehaviour
 
 	Vector2 velocity;
 
+	public Vector2 GetVelocity()
+	{
+		return velocity;
+	}
+
 	public bool IsMoving()
 	{
 		return velocity.sqrMagnitude > 0;
