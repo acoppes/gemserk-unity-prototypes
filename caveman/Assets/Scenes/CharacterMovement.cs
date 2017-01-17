@@ -46,6 +46,7 @@ public class CharacterMovement : MonoBehaviour
 			newVelocity = newVelocity.normalized * maxSpeed;
 		}
 
+		newVelocity.y *= 0.75f;
 		velocity = newVelocity;
 
 		var newPosition = transform.position + (Vector3) velocity;

@@ -7,6 +7,12 @@ public class CharacterModel : MonoBehaviour {
 
 	public string idleState;
 	public string runState;
+	public string punchState;
+
+	public bool IsPunching()
+	{
+		return animator.GetCurrentAnimatorStateInfo (0).IsName (punchState);
+	}
 
 	public void SetLookingDirection(Vector2 lookingDirection)
 	{
@@ -23,5 +29,10 @@ public class CharacterModel : MonoBehaviour {
 	public void Idle()
 	{
 		animator.Play (idleState);
+	}
+
+	public void Punch()
+	{
+		animator.Play (punchState);
 	}
 }

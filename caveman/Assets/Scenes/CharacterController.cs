@@ -6,6 +6,9 @@ public class CharacterController : MonoBehaviour {
 	CharacterModel model;
 	CharacterMovement movement;
 
+	public float punchReload = 1.0f;
+	float punchLastTime;
+
 	// Use this for initialization
 	void Start () {
 		input = GetComponent<CharacterControllerInput> ();
@@ -20,11 +23,23 @@ public class CharacterController : MonoBehaviour {
 
 		movement.Move (movementDirection);
 
+		if (model.IsPunching ())
+			return;
+
 		if (movement.IsMoving ()) {
-			model.SetLookingDirection (movement.GetVelocity());
+			model.SetLookingDirection (movement.GetVelocity ());
 			model.Run ();
 		} else {
 			model.Idle ();
+		}
+
+		if (input.WasPunchPressed ()) {
+		
+			if (Time.realtimeSinceStartup - punchLastTime > punchReload) {
+				model.Punch ();
+				punchLastTime = Time.realtimeSinceStartup;
+			}
+		
 		}
 	}
 }
