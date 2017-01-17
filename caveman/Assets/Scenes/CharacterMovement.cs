@@ -26,13 +26,17 @@ public class CharacterMovement : MonoBehaviour
 		if (desiredDirection.sqrMagnitude <= 0) {
 			if (velocity.sqrMagnitude > 0.001f) {
 				Vector2 direction = velocity.normalized;
-				direction.x *= -1;
+				direction *= -1;
 
 				newVelocity = velocity + direction * desacceleration * Time.deltaTime;
 
-				if (Mathf.Abs(Mathf.Sign (newVelocity.x) - Mathf.Sign (velocity.x)) < 0.001f) {
+				if (Vector2.Dot (newVelocity, velocity) < 0.0f) {
 					newVelocity.Set (0, 0);
 				}
+
+//				if (Mathf.Abs(Mathf.Sign (newVelocity.x) - Mathf.Sign (velocity.x)) < 0.001f) {
+//					newVelocity.Set (0, 0);
+//				}
 			} else {
 				newVelocity.Set (0, 0);
 			}
