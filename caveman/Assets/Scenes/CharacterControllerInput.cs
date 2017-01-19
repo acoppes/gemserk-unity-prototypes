@@ -6,10 +6,12 @@ public class CharacterControllerInput : MonoBehaviour {
 	public string verticalAxisName;
 
 	public string punchButtonName;
+	public string jumpButtonName;
 
 	Vector2 direction;
 
 	bool punchPressed;
+	bool jumpPressed;
 
 	public Vector2 GetDirection()
 	{
@@ -21,6 +23,11 @@ public class CharacterControllerInput : MonoBehaviour {
 		return punchPressed;
 	}
 
+	public bool IsJumpPressed()
+	{
+		return jumpPressed;
+	}
+
 	// Update is called once per frame
 	void Update () {
 
@@ -30,5 +37,6 @@ public class CharacterControllerInput : MonoBehaviour {
 		direction.y = Input.GetAxis (verticalAxisName);
 	
 		punchPressed = Input.GetButtonDown (punchButtonName);
+		jumpPressed = Input.GetButton (jumpButtonName);
 	}
 }

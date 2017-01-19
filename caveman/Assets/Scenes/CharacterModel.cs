@@ -9,9 +9,18 @@ public class CharacterModel : MonoBehaviour {
 	public string runState;
 	public string punchState;
 
+	public string jumpState;
+	public string fallState;
+
 	public bool IsPunching()
 	{
 		return animator.GetCurrentAnimatorStateInfo (0).IsName (punchState);
+	}
+
+	public bool IsJumping()
+	{
+		return animator.GetCurrentAnimatorStateInfo (0).IsName (jumpState)
+			|| animator.GetCurrentAnimatorStateInfo (0).IsName (fallState);
 	}
 
 	public void SetLookingDirection(Vector2 lookingDirection)
@@ -34,5 +43,10 @@ public class CharacterModel : MonoBehaviour {
 	public void Punch()
 	{
 		animator.Play (punchState);
+	}
+
+	public void Jump()
+	{
+		animator.Play (jumpState);
 	}
 }

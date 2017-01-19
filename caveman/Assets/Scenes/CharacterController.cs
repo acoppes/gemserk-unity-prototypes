@@ -31,6 +31,10 @@ public class CharacterController : MonoBehaviour {
 		if (model.IsPunching ())
 			return;
 
+		// cant do other thing while jumping?
+		if (model.IsJumping ())
+			return;
+
 		if (movement.IsMoving ()) {
 			model.SetLookingDirection (movement.GetVelocity ());
 			model.Run ();
@@ -45,6 +49,10 @@ public class CharacterController : MonoBehaviour {
 				punchLastTime = Time.realtimeSinceStartup;
 			}
 		
+		}
+
+		if (input.IsJumpPressed ()) {
+			model.Jump ();
 		}
 	}
 }
