@@ -11,6 +11,6 @@ public class PixelPerfectCameraSize : MonoBehaviour {
 		if (myCamera == null)
 			return;
 
-		myCamera.orthographicSize = myCamera.pixelHeight / sizeReference;
+		myCamera.orthographicSize = myCamera.pixelHeight / (sizeReference * 2);
 	}
 }
