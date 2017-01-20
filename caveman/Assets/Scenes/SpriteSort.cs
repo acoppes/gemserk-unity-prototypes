@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+[ExecuteInEditMode]
 public class SpriteSort : MonoBehaviour
 {
 	readonly List<SpriteRenderer> sprites = new List<SpriteRenderer>();
