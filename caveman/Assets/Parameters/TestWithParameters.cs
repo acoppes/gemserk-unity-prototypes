@@ -2,17 +2,17 @@
 
 public class TestWithParameters : MonoBehaviour {
 
-	[ParameterTargetType(typeof(Switchable))]
-	public Parameter switchable;
+	[ParameterTargetType(typeof(Switchable), "switchable")]
+	public Parameter switchableParameter;
 
 	void Start() 
 	{
-		var switchableValue = switchable.Get<Switchable>();
+		var switchable = switchableParameter.Get<Switchable>();
 
-		if (switchableValue == null) {
+		if (switchable == null) {
 			Debug.Log ("Not set");
 		} else {
-			Debug.Log ("Set as " + switchableValue.name);
+			Debug.Log ("Set as " + switchable.name);
 		}
 		
 	}

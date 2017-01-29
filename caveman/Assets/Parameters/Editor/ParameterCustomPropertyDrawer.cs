@@ -62,13 +62,18 @@ public class ParameterCustomPropertyDrawer : PropertyDrawer {
 		var referenceProperty = property.FindPropertyRelative ("targetReference");
 
 		var referenceType = typeof(Object);
+		var name = property.name;
 
 		var parameterTargetType = GetParameterType(property);
 
-		if (parameterTargetType != null)
+		if (parameterTargetType != null) {
 			referenceType = parameterTargetType.GetTargetType ();
+		
+			if (parameterTargetType.Name != null)
+				name = parameterTargetType.Name;
+		}
 			
-		referenceProperty.objectReferenceValue = EditorGUI.ObjectField (position, Capitalize(property.name), 
+		referenceProperty.objectReferenceValue = EditorGUI.ObjectField (position, Capitalize(name), 
 			referenceProperty.objectReferenceValue, referenceType, true);
 	
 		var newValue = referenceProperty.objectReferenceValue;
