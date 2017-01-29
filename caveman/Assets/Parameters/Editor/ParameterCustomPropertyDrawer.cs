@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Globalization;
+using System;
 
 [CustomPropertyDrawer(typeof(Parameter))]
 public class ParameterCustomPropertyDrawer : PropertyDrawer {
 
 	const float propertyHeight = 17;
+
+	ParameterTargetType parameterTargetType;
 
 	public override float GetPropertyHeight (SerializedProperty property, GUIContent label)
 	{
@@ -34,8 +37,16 @@ public class ParameterCustomPropertyDrawer : PropertyDrawer {
 		var typeRect = new Rect (new Vector2 (position.x, position.y), 
 			               new Vector2 (position.size.x, propertyHeight));
 
+		parameterTargetType = GetParameterType<ParameterTargetType>(property, attribute);
+
+		var name = property.displayName;
+
+		if (parameterTargetType != null && parameterTargetType.Name != null) {
+			name = parameterTargetType.Name;
+		}
+
 		var parameterTypeProperty = property.FindPropertyRelative ("parameterType");
-		parameterTypeProperty.intValue = EditorGUI.Popup (typeRect, "Type", parameterTypeProperty.intValue, typeNames);
+		parameterTypeProperty.intValue = EditorGUI.Popup (typeRect, name, parameterTypeProperty.intValue, typeNames);
 
 		Parameter.ParameterType type = (Parameter.ParameterType)parameterTypeProperty.intValue;
 
@@ -47,7 +58,7 @@ public class ParameterCustomPropertyDrawer : PropertyDrawer {
 			var referenceRect = new Rect (new Vector2 (position.x, position.y + propertyHeight), 
 				new Vector2 (position.size.x, propertyHeight));
 			
-			DrawValue (referenceRect, property);	
+			DrawValue (referenceRect, property, label);	
 		}
 	}
 
@@ -57,25 +68,26 @@ public class ParameterCustomPropertyDrawer : PropertyDrawer {
 		referenceProperty.objectReferenceValue = null;
 	}
 
-	void DrawValue(Rect position, SerializedProperty property)
+	void DrawValue(Rect position, SerializedProperty property, GUIContent label)
 	{
 		var referenceProperty = property.FindPropertyRelative ("targetReference");
 
-		var referenceType = typeof(Object);
-		var name = property.name;
+		var referenceType = typeof(UnityEngine.Object);
+//		var name = property.displayName;
 
-		var parameterTargetType = GetParameterType(property);
+//		var parameterTargetType = GetParameterType(property);
 
 		if (parameterTargetType != null) {
 			referenceType = parameterTargetType.GetTargetType ();
 		
-			if (parameterTargetType.Name != null)
-				name = parameterTargetType.Name;
+//			if (parameterTargetType.Name != null) {
+//				name = parameterTargetType.Name;
+//			}
 		}
 			
-		referenceProperty.objectReferenceValue = EditorGUI.ObjectField (position, Capitalize(name), 
+		referenceProperty.objectReferenceValue = EditorGUI.ObjectField (position, GUIContent.none, 
 			referenceProperty.objectReferenceValue, referenceType, true);
-	
+		
 		var newValue = referenceProperty.objectReferenceValue;
 
 		if (newValue != null && !newValue.GetType ().IsAssignableFrom (referenceType)) {
@@ -85,9 +97,9 @@ public class ParameterCustomPropertyDrawer : PropertyDrawer {
 	}
 
 	// workaround to get attribute of a property when not using the PropertyDrawer using PropertyAttribute
-	ParameterTargetType GetParameterType(SerializedProperty property)
+	static T GetParameterType<T>(SerializedProperty property, PropertyAttribute attribute) where T : Attribute
 	{
-		var parameterTargetType = attribute as ParameterTargetType;
+		var parameterTargetType = attribute as T;
 
 		if (parameterTargetType != null)
 			return parameterTargetType;
@@ -105,15 +117,13 @@ public class ParameterCustomPropertyDrawer : PropertyDrawer {
 		if (attributes == null || attributes.Length == 0)
 			return null;
 
-		parameterTargetType = attributes [0] as ParameterTargetType;
-
-		return parameterTargetType;
+		return attributes [0] as T;
 	}
 
-	string Capitalize(string str)
-	{
-		return CultureInfo.CurrentCulture.TextInfo.ToTitleCase (str);
-	}
+//	string Capitalize(string str)
+//	{
+//		return CultureInfo.CurrentCulture.TextInfo.ToTitleCase (str);
+//	}
 
 
 }

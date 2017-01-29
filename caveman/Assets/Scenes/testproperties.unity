@@ -205,9 +205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966ce038efc649345adb9b4817751b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switchable:
-    parameterType: 0
-    targetReference: {fileID: 0}
+  pipote: 
+  switchableParameter:
+    parameterType: 1
+    targetReference: {fileID: 1841567402}
+  superCount: 0
 --- !u!4 &642559818
 Transform:
   m_ObjectHideFlags: 0
@@ -248,9 +250,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09011b49b27e3c744a5ccf9759fe9265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capturable:
+  capturableParameter:
     parameterType: 1
-    targetReference: {fileID: 1665846183}
+    targetReference: {fileID: 0}
+  switchableParameter:
+    parameterType: 0
+    targetReference: {fileID: 0}
 --- !u!4 &1091530588
 Transform:
   m_ObjectHideFlags: 0

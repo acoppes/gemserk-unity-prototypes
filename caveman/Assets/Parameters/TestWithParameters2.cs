@@ -3,5 +3,8 @@
 public class TestWithParameters2 : MonoBehaviour {
 
 	[ParameterTargetType(typeof(Capturable))]
-	public Parameter capturable;
+	public Parameter capturableParameter;
+
+	[ParameterTargetType(typeof(Switchable))]
+	public Parameter switchableParameter;
 }

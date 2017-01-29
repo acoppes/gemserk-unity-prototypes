@@ -2,8 +2,12 @@
 
 public class TestWithParameters : MonoBehaviour {
 
-	[ParameterTargetType(typeof(Switchable), "switchable")]
+	public string pipote;
+
+	[ParameterTargetType(typeof(Switchable), "Switchable")]
 	public Parameter switchableParameter;
+
+	public float superCount;
 
 	void Start() 
 	{
