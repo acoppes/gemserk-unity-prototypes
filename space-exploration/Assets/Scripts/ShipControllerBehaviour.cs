@@ -4,7 +4,10 @@ public class ShipControllerBehaviour : MonoBehaviour, ShipController {
 
 	public float turnSpeed;
 
+	public float moveSpeed;
+
 	float turning;
+	float accelerating;
 
 	float currentAngle;
 
@@ -29,7 +32,7 @@ public class ShipControllerBehaviour : MonoBehaviour, ShipController {
 
 	public void Accelerate ()
 	{
-		
+		accelerating = 1.0f;
 	}
 
 	#endregion
@@ -42,9 +45,20 @@ public class ShipControllerBehaviour : MonoBehaviour, ShipController {
 	void FixedUpdate()
 	{
 		currentAngle += turning * turnSpeed * Time.deltaTime;
+
+		Vector2 position = this.transform.position;
+
+		Vector2 movementDirection = Quaternion.Euler(0, 0, -currentAngle) * new Vector2(0.0f, 1.0f);
+
+		position = position + movementDirection * moveSpeed * accelerating * Time.deltaTime;
+
+		transform.position = position;
+
 		turning = 0.0f;
+		accelerating = 0.0f;
 
 		ShipModel.RotateToAngle (currentAngle);
+		ShipModel.MoveToPosition (position);
 	}
 
 
