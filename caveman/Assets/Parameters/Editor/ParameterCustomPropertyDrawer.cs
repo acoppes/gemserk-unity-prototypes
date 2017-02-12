@@ -60,6 +60,8 @@ public class ParameterCustomPropertyDrawer : PropertyDrawer {
 			
 			DrawValue (referenceRect, property, label);	
 		}
+			
+//		typeof(MonoBehaviour).get
 	}
 
 	void ResetSerializedValues (SerializedProperty property)
