@@ -64,5 +64,23 @@ public class OtherControllerTest : MonoBehaviour {
 		} 
 
 		body.AddRelativeForce (new Vector2 (0, accelerateFactor * control.accelerateForce));
+
+		var currentAngularVelocity = body.angularVelocity;
+		if (Mathf.Abs(currentAngularVelocity) > control.maxAngularVelocity) {
+			body.angularVelocity = control.maxAngularVelocity * Mathf.Sign (currentAngularVelocity);
+		}
+
+		var linearVelocity = body.velocity;
+		if (linearVelocity.SqrMagnitude() > control.maxLinearVelocity * control.maxLinearVelocity) {
+			body.velocity = linearVelocity.normalized * control.maxLinearVelocity;
+		}
+
+	}
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.white;
+		Vector3 d = desiredDirection * 40.0f;
+		Gizmos.DrawLine (body.transform.position, body.transform.position + d);
 	}
 }

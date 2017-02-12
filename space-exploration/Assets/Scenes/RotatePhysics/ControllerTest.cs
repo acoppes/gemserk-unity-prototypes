@@ -2,6 +2,9 @@
 
 public class ControllerTest : MonoBehaviour {
 
+	public InputAxisProcessor verticalAxis;
+	public InputAxisProcessor horizontalAxis;
+
 	public Rigidbody2D body;
 
 	public float accelerateForce = 10.0f;
@@ -10,36 +13,27 @@ public class ControllerTest : MonoBehaviour {
 
 	public float torqueForce = 1.0f;
 
-	public ParticleSystem[] particleSystems;
-
 	void Update()
 	{
-		if (Input.GetKey (KeyCode.W)) {
+		verticalAxis.Update ();
+		horizontalAxis.Update ();
+
+		if (verticalAxis.Value > 0) {
 			body.AddRelativeForce (new Vector2 (0, accelerateForce));
 
-			for (int i = 0; i < particleSystems.Length; i++) {
-				var emission = particleSystems [i].emission;
-				emission.enabled = true;
-			}
+//			for (int i = 0; i < particleSystems.Length; i++) {
+//				var emission = particleSystems [i].emission;
+//				emission.enabled = true;
+//			}
 
 
-		} else if (Input.GetKey (KeyCode.S)) {
+		} else if (verticalAxis.Value < 0) {
 			body.AddRelativeForce (new Vector2 (0, -brakeForce));
-			for (int i = 0; i < particleSystems.Length; i++) {
-				var emission = particleSystems [i].emission;
-				emission.enabled = false;
-			}
-		} else {
-			for (int i = 0; i < particleSystems.Length; i++) {
-				var emission = particleSystems [i].emission;
-				emission.enabled = false;
-			}
-		}
-
-
-		if (Input.GetKey (KeyCode.A)) {
+		} 
+			
+		if (horizontalAxis.Value < 0) {
 			body.AddTorque (torqueForce, ForceMode2D.Force);
-		} else if (Input.GetKey (KeyCode.D)) {
+		} else if (horizontalAxis.Value > 0) {
 			body.AddTorque (-torqueForce, ForceMode2D.Force);
 		}
 	}

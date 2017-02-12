@@ -11,4 +11,8 @@ public class ControlConfig : ScriptableObject
 
 	public AnimationCurve rotateCurve;
 
+	public float maxLinearVelocity = 10000.0f;
+
+	public float maxAngularVelocity = 10000.0f;
+
 }
