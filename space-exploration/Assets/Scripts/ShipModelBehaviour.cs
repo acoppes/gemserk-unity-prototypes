@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class ShipModelBehaviour : MonoBehaviour, ShipModel {
-	
+
 	#region ShipModel implementation
 	public void RotateToAngle (float angle)
 	{

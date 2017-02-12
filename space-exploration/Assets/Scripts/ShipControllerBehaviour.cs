@@ -6,7 +6,9 @@ public class ShipControllerBehaviour : MonoBehaviour, ShipController {
 
 	float turning;
 
-	float currentAngle = 0.0f;
+	float currentAngle;
+
+	public Transform model;
 
 	public ShipModel ShipModel {
 		get;
@@ -34,7 +36,7 @@ public class ShipControllerBehaviour : MonoBehaviour, ShipController {
 
 	void Awake()
 	{
-		ShipModel = GetComponentInChildren<ShipModel> ();	
+		ShipModel = model.GetComponentInChildren<ShipModel> ();	
 	}
 
 	void FixedUpdate()
