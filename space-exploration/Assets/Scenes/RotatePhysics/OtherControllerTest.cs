@@ -1,16 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 public class OtherControllerTest : MonoBehaviour {
 
 	public InputAxisProcessor verticalAxis;
 	public InputAxisProcessor horizontalAxis;
 
-	public Rigidbody2D body;
-
-//	public float accelerateForce = 500.0f;
-
-//	public float torqueForce = 500.0f;
+	public Ship ship;
 
 	[SerializeField]
 	Vector2 desiredDirection;
@@ -21,13 +16,6 @@ public class OtherControllerTest : MonoBehaviour {
 	[SerializeField]
 	float angle;
 
-//	public AnimationCurve accelerateCurve;
-
-//	[FormerlySerializedAs("curve")]
-//	public AnimationCurve rotateCurve;
-
-	public ControlConfig control;
-
 	private static float GetAngle(Vector2 v1, Vector2 v2)
 	{
 		var sign = Mathf.Sign(v1.x * v2.y - v1.y * v2.x);
@@ -36,6 +24,9 @@ public class OtherControllerTest : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		var control = ship.control;
+		var body = ship.body;
 
 		lookingDirection = body.transform.up;
 	
@@ -81,6 +72,6 @@ public class OtherControllerTest : MonoBehaviour {
 	{
 		Gizmos.color = Color.white;
 		Vector3 d = desiredDirection * 40.0f;
-		Gizmos.DrawLine (body.transform.position, body.transform.position + d);
+		Gizmos.DrawLine (ship.body.transform.position, ship.transform.position + d);
 	}
 }
