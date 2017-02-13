@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class OtherControllerTest : MonoBehaviour {
+public class ShipController2 : MonoBehaviour {
 
 	public InputAxisProcessor verticalAxis;
 	public InputAxisProcessor horizontalAxis;
