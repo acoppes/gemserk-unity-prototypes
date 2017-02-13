@@ -28,6 +28,8 @@ public class InputAxisProcessor
 
 	float value;
 
+	public bool raw = false;
+
 	public float Value {
 		get {
 			return value;
@@ -36,7 +38,10 @@ public class InputAxisProcessor
 
 	public void Update()
 	{
-		value = Input.GetAxis (axis);
+		if (raw)
+			value = Input.GetAxisRaw (axis);
+		else
+			value = Input.GetAxis (axis);
 	}
 
 }
