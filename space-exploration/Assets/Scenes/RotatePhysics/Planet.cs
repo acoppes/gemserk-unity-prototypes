@@ -9,6 +9,11 @@ public class Planet : MonoBehaviour {
 	public float minSize;
 	public float maxSize;
 
+	public float minRotationSpeed = 5;
+	public float maxRotationSpeed = 20;
+
+	public Gradient gradient;
+
 	public void Randomize()
 	{
 		float scale = UnityEngine.Random.Range (minSize, maxSize);
@@ -26,5 +31,9 @@ public class Planet : MonoBehaviour {
 
 		renderer.flipX = UnityEngine.Random.Range (-1.0f, 1.0f) > 0.0f;
 		renderer.flipY = UnityEngine.Random.Range (-1.0f, 1.0f) > 0.0f;
+
+		model.GetComponent<PlanetRotation> ().rotationSpeed = UnityEngine.Random.Range (minRotationSpeed, maxRotationSpeed);
+
+		renderer.color = gradient.Evaluate (UnityEngine.Random.Range(0.0f, 1.0f));
 	}
 }
