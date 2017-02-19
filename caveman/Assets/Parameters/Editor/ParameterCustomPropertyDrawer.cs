@@ -92,7 +92,7 @@ public class ParameterCustomPropertyDrawer : PropertyDrawer {
 		
 		var newValue = referenceProperty.objectReferenceValue;
 
-		if (newValue != null && !newValue.GetType ().IsAssignableFrom (referenceType)) {
+		if (newValue != null && !referenceType.IsAssignableFrom (newValue.GetType ())) {
 			// if previously serialized object was not of the parameter type, then unset serialised value
 			referenceProperty.objectReferenceValue = null;
 		}
