@@ -10,7 +10,12 @@ public class WorldGenerator : MonoBehaviour {
 
 	public Planet planetPrefab;
 
-	public float distribution = 0.25f;
+	public Pickup pickupPrefab;
+
+	public float planetDistribution = 0.0025f;
+
+	public int minPickups = 5;
+	public int maxPickups = 10;
 
 	void Awake()
 	{
@@ -21,7 +26,7 @@ public class WorldGenerator : MonoBehaviour {
 	{
 		float planetSize = planetWidth * planetHeight;
 
-		int total = Mathf.RoundToInt(((width * height) / (planetSize)) * distribution);
+		int total = Mathf.RoundToInt(((width * height) / (planetSize)) * planetDistribution);
 
 		for (int i = 0; i < total; i++) {
 			float x = UnityEngine.Random.Range (-width / 2, width / 2);
@@ -32,6 +37,19 @@ public class WorldGenerator : MonoBehaviour {
 
 			planet.transform.position = new Vector3 (x, y, 0);
 			planet.Randomize();
+		}
+
+		int pickups = UnityEngine.Random.Range (minPickups, maxPickups);
+
+		for (int i = 0; i < pickups; i++) {
+			float x = UnityEngine.Random.Range (-width / 2, width / 2);
+			float y = UnityEngine.Random.Range (-height / 2, height / 2);
+
+			var pickup = GameObject.Instantiate (pickupPrefab) as Pickup;
+			pickup.transform.SetParent (this.transform);
+
+			pickup.transform.position = new Vector3 (x, y, 0);
+			pickup.Randomize();
 		}
 	}
 

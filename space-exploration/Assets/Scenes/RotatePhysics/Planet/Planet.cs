@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Planet : MonoBehaviour {
+public class Planet : MonoBehaviour, Randomizable {
 
 	public Sprite[] planets;
 
