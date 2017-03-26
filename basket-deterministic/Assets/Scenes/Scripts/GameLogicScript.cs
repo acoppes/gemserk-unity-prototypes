@@ -6,10 +6,11 @@ public class GameLogicScript : MonoBehaviour, GameLogic
 {
 	readonly List<GameLogic> gameLogics = new List<GameLogic>();
 
-	public CommandQueue commandsQueue;
+	CommandsScript commandsScript;
 
 	void Awake()
 	{
+		commandsScript = GetComponent<CommandsScript> ();
 		GetComponentsInChildren<GameLogic> (true, gameLogics);
 		gameLogics.Remove (this);
 	}
@@ -18,13 +19,12 @@ public class GameLogicScript : MonoBehaviour, GameLogic
 
 	public void GameUpdate (float dt, int frame)
 	{
-		if (commandsQueue.IsReady ())
-			commandsQueue.SendCommands ();
-
 		for (int i = 0; i < gameLogics.Count; i++) {
 			var gameLogic = gameLogics [i];
 			gameLogic.GameUpdate (dt, frame);
 		}
+
+		commandsScript.Commands.RemoveCommands (frame);
 	}
 
 	#endregion

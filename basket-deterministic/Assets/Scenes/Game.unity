@@ -309,6 +309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 755822677}
   - component: {fileID: 755822678}
+  - component: {fileID: 755822679}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -340,7 +341,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37c0c8d9c7fedd4398f3d935e30e63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &755822679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 755822676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f62951cd361d6444ba3cde5e478ee48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   model: {fileID: 2108521802}
+  speed: 1
 --- !u!1 &781504764
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,8 +929,9 @@ GameObject:
   - component: {fileID: 1589514707}
   - component: {fileID: 1589514709}
   - component: {fileID: 1589514708}
+  - component: {fileID: 1589514710}
   m_Layer: 0
-  m_Name: LockstepEngine
+  m_Name: DeterministicEngine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -957,6 +971,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: debc39ea3b3061b409549737c1e8065f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1589514710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589514706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f758d84c684a14e976bd33597a61f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1760909825
