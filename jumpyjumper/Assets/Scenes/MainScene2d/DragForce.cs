@@ -15,6 +15,7 @@ public class DragForce : MonoBehaviour {
 	public AnimationCurve impulseCurveMultiplier;
 
 	public ChargeForceIndicator forceIndicator;
+	public ChargeForceIndicator touchForceIndicator;
 
 	public Camera mainCamera;
 
@@ -30,7 +31,12 @@ public class DragForce : MonoBehaviour {
 
 		if (chargingJump) {
 			startPosition = Input.mousePosition;
-			forceIndicator.Show (targetBody.position);
+			if (forceIndicator != null)
+				forceIndicator.Show (targetBody.position);
+
+			if (touchForceIndicator != null) {
+				touchForceIndicator.Show(mainCamera.ScreenToWorldPoint(startPosition));
+			}
 
 			Time.timeScale = 0.0f;
 		}
@@ -47,7 +53,13 @@ public class DragForce : MonoBehaviour {
 
 		Vector2 difference = mainCamera.ScreenToWorldPoint (startPosition) - mainCamera.ScreenToWorldPoint (Input.mousePosition);
 		Vector2 direction = difference.normalized;
-		forceIndicator.UpdateForce (direction, 1.0f);
+		if (forceIndicator != null)
+			forceIndicator.UpdateForce (direction, 1.0f);
+
+		if (touchForceIndicator != null) {
+			touchForceIndicator.UpdateForce(direction, 1.0f);
+		}
+
 	}
 
 	void PerformJump()
@@ -68,7 +80,12 @@ public class DragForce : MonoBehaviour {
 		targetBody.velocity = Vector2.zero;
 		targetBody.AddForce (direction * maxImpulse * multiplier, ForceMode2D.Impulse);
 
-		forceIndicator.Hide ();
+		if (forceIndicator != null)
+			forceIndicator.Hide ();
+
+		if (touchForceIndicator != null) {
+			touchForceIndicator.Hide ();
+		}
 	}
 
 	bool IsJumpPressed()
@@ -103,14 +120,6 @@ public class DragForce : MonoBehaviour {
 
 		wasJumpPressed = isJumpPresed;
 
-//		if (Input.GetMouseButtonDown (0)) {
-//			StartJumpingMode ();
-//		} else if (Input.GetMouseButton (0)) {
-//			UpdateJumpingMode ();
-//		} else if (Input.GetMouseButtonUp (0)) {
-//			PerformJump ();
-//		}
-//
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			targetBody.velocity = Vector2.zero;
 		}
