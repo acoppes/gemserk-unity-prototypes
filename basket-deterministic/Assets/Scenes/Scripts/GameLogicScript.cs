@@ -8,6 +8,12 @@ public class GameLogicScript : MonoBehaviour, GameLogic
 
 	CommandsScript commandsScript;
 
+	public List<GameLogic> GameLogics {
+		get {
+			return gameLogics;
+		}
+	}
+
 	void Awake()
 	{
 		commandsScript = GetComponent<CommandsScript> ();

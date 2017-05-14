@@ -1,27 +1,26 @@
-﻿using UnityEngine;
-using Gemserk.Lockstep;
+﻿using Gemserk.Lockstep;
 using System.Collections.Generic;
 
-public class Character : MonoBehaviour, GameLogic {
+public class Character : GameLogic {
 
-	CommandsScript commandsScript;
+	readonly Commands commands;
 
-	Movement movement;
+	readonly Movement movement;
 
-	readonly List<Command> commands = new List<Command>();
+	readonly List<Command> commandsList = new List<Command>();
 
-	void Awake()
+	public Character (Commands commands, Movement movement)
 	{
-		movement = GetComponent<Movement> ();
-		commandsScript = FindObjectOfType<CommandsScript> ();
+		this.commands = commands;
+		this.movement = movement;
 	}
 
 	public void GameUpdate (float dt, int frame)
 	{
-		commandsScript.Commands.GetCommands (frame, commands);
+		commands.GetCommands (frame, commandsList);
 
-		for (int i = 0; i < commands.Count; i++) {
-			var command = commands [i];
+		for (int i = 0; i < commandsList.Count; i++) {
+			var command = commandsList [i];
 
 			// TODO: check if moving this character...
 

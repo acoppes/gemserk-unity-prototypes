@@ -1,15 +1,20 @@
 using UnityEngine;
 using Gemserk.Lockstep;
 
-public class Movement : MonoBehaviour, GameLogic
+public class Movement : GameLogic
 {
-	public GameObject model;
-
 	Vector2 direction;
 
 	bool moving;
 
 	public float speed;
+
+	GameObject model;
+
+	public Movement (GameObject model)
+	{
+		this.model = model;
+	}
 
 	public void Move (Vector2 direction)
 	{

@@ -30,6 +30,16 @@ public class DeterministicEngine : MonoBehaviour {
 //		});
 
 //		gameLogic.Commands = commands;
+
+		Init ();
+	}
+
+	void Init()
+	{
+		var characterBuilders = GetComponentsInChildren<CharacterBuildScript> ();
+		foreach (var characterBuilder in characterBuilders) {
+			characterBuilder.CreateLogic (gameLogic);
+		}
 	}
 
 	void Update()
@@ -46,12 +56,12 @@ public class DeterministicEngine : MonoBehaviour {
 
 		if (Mathf.Abs (x) > 0.0f) {
 			commandsScript.Commands.AddCommand(new CommandMovement () {
-				ProcessFrame = deterministicUpdate.CurrentGameFrame,
+				ProcessFrame = deterministicUpdate.CurrentGameFrame + 1,
 				direction = new Vector2 (x, 0)
 			});
 		} else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) {
 			commandsScript.Commands.AddCommand(new CommandMovementStop () {
-				ProcessFrame = deterministicUpdate.CurrentGameFrame
+				ProcessFrame = deterministicUpdate.CurrentGameFrame + 1
 			});
 		}
 
