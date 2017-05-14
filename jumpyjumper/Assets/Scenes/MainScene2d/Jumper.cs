@@ -31,21 +31,23 @@ public class Jumper : MonoBehaviour
 		if (considerContactsToJump) {
 			int contactCount = targetBody.GetContacts (contacts);
 
+			int contactsWithCeil = 0;
+
 			for (int i = 0; i < contactCount; i++) {
 				var contact = contacts [i];
 				contactWithWall = Mathf.Abs (contact.normal.x) > 0.02f;
+
+				if (contact.normal.y < 0)
+					contactsWithCeil++;
 			}
 
-			canJump = contactCount > 0;
+			canJump = contactCount > 0 && contactsWithCeil == 0;
 
 			// Debug.Log (string.Format("contacts: {0}, onWall: {1}", contactCount, contactWithWall));
 		}
 
 		unitRenderer.color = canJump ? Color.white : Color.grey;
-	}
 
-	void LateUpdate()
-	{
 		if (contactWithWall) {
 
 			if (targetBody.velocity.y < 0 && fallSlowInWalls) {
@@ -55,4 +57,9 @@ public class Jumper : MonoBehaviour
 			}
 		} 
 	}
+
+//	void LateUpdate()
+//	{
+//
+//	}
 }
