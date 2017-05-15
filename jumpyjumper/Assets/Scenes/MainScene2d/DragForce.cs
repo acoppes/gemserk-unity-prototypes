@@ -30,7 +30,6 @@ public class DragForce : MonoBehaviour {
 		chargingJump = jumper.CanJump();
 
 		if (chargingJump) {
-			startPosition = Input.mousePosition;
 			if (forceIndicator != null)
 				forceIndicator.Show (targetBody.position);
 
@@ -111,6 +110,7 @@ public class DragForce : MonoBehaviour {
 		bool isJumpPresed = IsJumpPressed ();
 
 		if (isJumpPresed && !wasJumpPressed) {
+			startPosition = Input.mousePosition;
 			StartJumpingMode ();
 		} else if (!isJumpPresed && wasJumpPressed) {
 			PerformJump ();
