@@ -19,7 +19,7 @@ public class DragForce : MonoBehaviour {
 
 	public Camera mainCamera;
 
-	bool chargingJump = true;
+	bool canJump = true;
 
 	public bool chargeIfJumpingAndTouch = false;
 
@@ -27,9 +27,9 @@ public class DragForce : MonoBehaviour {
 
 	void StartJumpingMode()
 	{
-		chargingJump = jumper.CanJump();
+		canJump = jumper.CanJump();
 
-		if (chargingJump) {
+		if (canJump) {
 			if (forceIndicator != null)
 				forceIndicator.Show (targetBody.position);
 
@@ -43,11 +43,11 @@ public class DragForce : MonoBehaviour {
 
 	void UpdateJumpingMode()
 	{
-		if (!chargingJump && chargeIfJumpingAndTouch) {
+		if (!canJump && chargeIfJumpingAndTouch) {
 			StartJumpingMode ();
 		}
 
-		if (!chargingJump)
+		if (!canJump)
 			return;
 
 		Vector2 difference = mainCamera.ScreenToWorldPoint (startPosition) - mainCamera.ScreenToWorldPoint (Input.mousePosition);
@@ -63,7 +63,7 @@ public class DragForce : MonoBehaviour {
 
 	void PerformJump()
 	{
-		if (!chargingJump)
+		if (!canJump)
 			return;
 		
 		Time.timeScale = 1.0f;
@@ -114,7 +114,7 @@ public class DragForce : MonoBehaviour {
 			StartJumpingMode ();
 		} else if (!isJumpPresed && wasJumpPressed) {
 			PerformJump ();
-		} else {
+		} else if (isJumpPresed && wasJumpPressed) {
 			UpdateJumpingMode ();
 		}
 
