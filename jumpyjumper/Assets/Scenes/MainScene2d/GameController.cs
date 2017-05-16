@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 
 	void Update()
 	{
-		score.SetScore ((int) jumper.transform.position.y);		
+		score.SetScore (jumper.transform.position.y);		
 	}
 
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,13 +5,19 @@ public class Score : MonoBehaviour
 {
 	public Text text;
 
-	int _currentScore;
+	float _currentScore;
 
-	public void SetScore(int score)
+	public void SetScore(float score)
 	{
 		if (score < _currentScore)
 			return;
 		_currentScore = score;
-		text.text = score.ToString ();
+		text.text = Mathf.RoundToInt(score).ToString ();
 	}
+
+	public float GetScore()
+	{
+		return _currentScore;
+	}
+
 }
