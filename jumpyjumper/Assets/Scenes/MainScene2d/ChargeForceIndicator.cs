@@ -1,15 +1,9 @@
 using UnityEngine;
 
-public static class UnityExtensions
-{
-	public static Vector3 ToVector3(this Vector2 v, float z)
-	{
-		return new Vector3 (v.x, v.y, z);
-	}
-}
-
 public class ChargeForceIndicator: MonoBehaviour
 {
+	public Jumper jumper;
+
 	public LineRenderer lineRenderer;
 
 	Vector2 startPosition;
@@ -19,6 +13,11 @@ public class ChargeForceIndicator: MonoBehaviour
 	public bool inversedForce = true;
 
 	public float positionZ = 1;
+
+	public float maxContactAngle = 0.75f;
+
+	public Color jumpEnabledColor = Color.blue;
+	public Color jumpDisabledColor = Color.grey;
 
 	void Start()
 	{
@@ -41,6 +40,33 @@ public class ChargeForceIndicator: MonoBehaviour
 		lineRenderer.SetPosition (0, startPosition.ToVector3(positionZ));
 		var destination = startPosition + direction * forceFactor * maxLength * inversedFactor;
 		lineRenderer.SetPosition (1, destination.ToVector3(positionZ));
+
+		var contacts = jumper.GetContacts ();
+
+		bool limitedAngle = false;
+
+		for (int i = 0; i < contacts.GetContactsCount(); i++) {
+			var contact = contacts.GetContact (i);
+			var normal = contact.normal;
+
+			var dot = Vector2.Dot (normal, direction);
+
+			Debug.Log ("dot: " + dot);
+
+			if (dot < maxContactAngle) {
+				limitedAngle = true;
+				break;
+			}
+
+		}
+
+		if (limitedAngle) {
+			lineRenderer.startColor = jumpDisabledColor;
+			lineRenderer.endColor = jumpDisabledColor;
+		} else {
+			lineRenderer.startColor = jumpEnabledColor;
+			lineRenderer.endColor = jumpEnabledColor;		
+		}
 	}
 
 	public void Hide()

@@ -1,5 +1,27 @@
 using UnityEngine;
 
+public class JumperContacts 
+{
+	readonly ContactPoint2D[] contacts = new ContactPoint2D[5];
+
+	int contactsCount;
+
+	public void UpdateContacts(Rigidbody2D body)
+	{
+		contactsCount = body.GetContacts (contacts);
+	}
+
+	public int GetContactsCount()
+	{
+		return contactsCount;
+	}
+
+	public ContactPoint2D GetContact(int index)
+	{
+		return contacts [index];
+	}
+}
+
 public class Jumper : MonoBehaviour
 {
 	public Rigidbody2D targetBody;
@@ -9,13 +31,20 @@ public class Jumper : MonoBehaviour
 
 	public bool considerContactsToJump;
 
-	readonly ContactPoint2D[] contacts = new ContactPoint2D[5];
+
 
 	public float wallFallForceMultiplier = 1.0f;
 
 	bool contactWithWall;
 
 	public bool fallSlowInWalls = true;
+
+	readonly JumperContacts contacts = new JumperContacts();
+
+	public JumperContacts GetContacts ()
+	{
+		return contacts;
+	}
 
 	public bool CanJump()
 	{
@@ -29,19 +58,20 @@ public class Jumper : MonoBehaviour
 		contactWithWall = false;
 
 		if (considerContactsToJump) {
-			int contactCount = targetBody.GetContacts (contacts);
+			contacts.UpdateContacts (targetBody);
 
 			int contactsWithCeil = 0;
 
-			for (int i = 0; i < contactCount; i++) {
-				var contact = contacts [i];
+			for (int i = 0; i < contacts.GetContactsCount(); i++) {
+				var contact = contacts.GetContact (i);
+
 				contactWithWall = Mathf.Abs (contact.normal.x) > 0.02f;
 
 				if (contact.normal.y < 0)
 					contactsWithCeil++;
 			}
 
-			canJump = contactCount > 0 && contactsWithCeil == 0;
+			canJump = contacts.GetContactsCount() > 0 && contactsWithCeil == 0;
 
 			// Debug.Log (string.Format("contacts: {0}, onWall: {1}", contactCount, contactWithWall));
 		}
