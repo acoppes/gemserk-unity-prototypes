@@ -6,11 +6,10 @@ public class DragForce : MonoBehaviour {
 
 	public Vector3 startPosition;
 
-	public float maxImpulse = 50.0f;
-
+//	public float maxImpulse = 50.0f;
 //	public float minDistance;
 
-	public float maxDistance = 200.0f;
+//	public float maxDistance = 200.0f;
 
 	public AnimationCurve impulseCurveMultiplier;
 
@@ -52,6 +51,9 @@ public class DragForce : MonoBehaviour {
 
 		Vector2 difference = mainCamera.ScreenToWorldPoint (startPosition) - mainCamera.ScreenToWorldPoint (Input.mousePosition);
 		Vector2 direction = difference.normalized;
+
+		jumper.UpdateJumpDirection (direction);
+
 		if (forceIndicator != null)
 			forceIndicator.UpdateForce (direction, 1.0f);
 
@@ -73,11 +75,13 @@ public class DragForce : MonoBehaviour {
 		Vector2 difference = startPosition - endPosition;
 		Vector2 direction = difference.normalized;
 
-		float t = difference.magnitude / maxDistance;
-		float multiplier = impulseCurveMultiplier.Evaluate (t);
+//		float t = difference.magnitude / maxDistance;
+//		float multiplier = impulseCurveMultiplier.Evaluate (t);
 
-		targetBody.velocity = Vector2.zero;
-		targetBody.AddForce (direction * maxImpulse * multiplier, ForceMode2D.Impulse);
+		jumper.Jump(direction, 1.0f);
+
+//		targetBody.velocity = Vector2.zero;
+//		targetBody.AddForce (direction * maxImpulse * multiplier, ForceMode2D.Impulse);
 
 		if (forceIndicator != null)
 			forceIndicator.Hide ();

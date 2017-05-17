@@ -27,11 +27,9 @@ public class Jumper : MonoBehaviour
 	public Rigidbody2D targetBody;
 	public SpriteRenderer unitRenderer;
 
-	bool canJump = true;
+	bool notJumping = true;
 
 	public bool considerContactsToJump;
-
-
 
 	public float wallFallForceMultiplier = 1.0f;
 
@@ -41,19 +39,14 @@ public class Jumper : MonoBehaviour
 
 	readonly JumperContacts contacts = new JumperContacts();
 
-	public JumperContacts GetContacts ()
-	{
-		return contacts;
-	}
-
 	public bool CanJump()
 	{
-		return canJump;
+		return notJumping;
 	}
 
 	void FixedUpdate()
 	{
-		canJump = true;
+		notJumping = true;
 
 		contactWithWall = false;
 
@@ -71,12 +64,12 @@ public class Jumper : MonoBehaviour
 					contactsWithCeil++;
 			}
 
-			canJump = contacts.GetContactsCount() > 0 && contactsWithCeil == 0;
+			notJumping = contacts.GetContactsCount() > 0 && contactsWithCeil == 0;
 
 			// Debug.Log (string.Format("contacts: {0}, onWall: {1}", contactCount, contactWithWall));
 		}
 
-		unitRenderer.color = canJump ? Color.white : Color.grey;
+		unitRenderer.color = notJumping ? Color.white : Color.grey;
 
 		if (contactWithWall) {
 
@@ -88,8 +81,46 @@ public class Jumper : MonoBehaviour
 		} 
 	}
 
-//	void LateUpdate()
-//	{
-//
-//	}
+	public float maxImpulse;
+
+	public float maxContactAngle = 0.3f;
+
+	bool _isJumpBlocked;
+
+	public bool IsJumpBlocked()
+	{
+		return _isJumpBlocked;
+	}
+
+	public void UpdateJumpDirection(Vector2 direction)
+	{
+		_isJumpBlocked = false;
+
+		for (int i = 0; i < contacts.GetContactsCount(); i++) {
+			var contact = contacts.GetContact (i);
+			var normal = contact.normal;
+
+			var dot = Vector2.Dot (normal, direction);
+
+//			Debug.Log ("dot: " + dot);
+
+			if (dot < maxContactAngle) {
+				_isJumpBlocked = true;
+				return;
+			}
+
+		}
+	}
+
+	public void Jump(Vector2 direction, float charge)
+	{
+		// evaluate can jump based on angle
+
+		if (_isJumpBlocked)
+			return;
+
+		targetBody.velocity = Vector2.zero;
+		targetBody.AddForce (direction * maxImpulse, ForceMode2D.Impulse);
+	}
+
 }

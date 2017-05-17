@@ -14,8 +14,6 @@ public class ChargeForceIndicator: MonoBehaviour
 
 	public float positionZ = 1;
 
-	public float maxContactAngle = 0.75f;
-
 	public Color jumpEnabledColor = Color.blue;
 	public Color jumpDisabledColor = Color.grey;
 
@@ -41,26 +39,9 @@ public class ChargeForceIndicator: MonoBehaviour
 		var destination = startPosition + direction * forceFactor * maxLength * inversedFactor;
 		lineRenderer.SetPosition (1, destination.ToVector3(positionZ));
 
-		var contacts = jumper.GetContacts ();
+		bool isJumpBlocked = jumper.IsJumpBlocked ();
 
-		bool limitedAngle = false;
-
-		for (int i = 0; i < contacts.GetContactsCount(); i++) {
-			var contact = contacts.GetContact (i);
-			var normal = contact.normal;
-
-			var dot = Vector2.Dot (normal, direction);
-
-			Debug.Log ("dot: " + dot);
-
-			if (dot < maxContactAngle) {
-				limitedAngle = true;
-				break;
-			}
-
-		}
-
-		if (limitedAngle) {
+		if (isJumpBlocked) {
 			lineRenderer.startColor = jumpDisabledColor;
 			lineRenderer.endColor = jumpDisabledColor;
 		} else {
