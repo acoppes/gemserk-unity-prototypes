@@ -6,7 +6,7 @@ public class Harvestable : MonoBehaviour {
 	public float total;
 	public float current;
 
-	public GameObject positionReference;
+	public Transform positionReference;
 
 	public HarvestableModel harvestableModel;
 

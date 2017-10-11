@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class HarvestBehaviour : MonoBehaviour {
 
 	public float range;
-	public GameObject positionReference;
+	public Transform positionReference;
 
-	public HarvestRayBehaviour harvestRay;
+	public HarvesterWeapon harvestRay;
 
 	[NonSerialized]
 	public World world;
@@ -66,7 +66,7 @@ public class HarvestBehaviour : MonoBehaviour {
 
 	void Harvest ()
 	{
-		if (harvestRay.IsDone()) {
+		if (harvestRay.IsDone() || !IsInRange(targetedHarvestable)) {
 			StopHarvesting ();
 		}
 	}
