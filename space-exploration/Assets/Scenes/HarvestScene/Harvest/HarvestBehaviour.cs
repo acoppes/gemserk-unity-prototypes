@@ -31,33 +31,22 @@ public class HarvestBehaviour : MonoBehaviour {
 
 	public void ProcessHarvestables (List<Harvestable> harvestables)
 	{
-		if (targetedHarvestable != null) {
-			return;
-		}
-
 		harvestablesInRange.Clear ();
 
 		foreach (var harvestable in harvestables) {
 			if (IsInRange (harvestable))
 				harvestablesInRange.Add (harvestable);
 		}
-	}
 
-	void FixedUpdate()
-	{
 		if (targetedHarvestable == null) {
-//			var harvestables = world.GetComponent<Harvestables> ();
-//			if (harvestables == null)
-//				return;
-//			var harvestableList = harvestables.GetHarvestables ();
 			foreach (var harvestable in harvestablesInRange) {
 				if (harvestable.IsDepleted ())
 					continue;
-				StartHarvesting(harvestable);
+				StartHarvesting (harvestable);
 				break;
 			}
 		} else {
-			
+			Harvest ();
 		}
 	}
 
@@ -65,6 +54,21 @@ public class HarvestBehaviour : MonoBehaviour {
 	{
 		targetedHarvestable = harvestable;
 		// turn on ray..., configure...
+	}
+
+	void StopHarvesting()
+	{
+		targetedHarvestable = null;
+		// turn off ray...
+	}
+
+	void Harvest ()
+	{
+		// harverst logic...
+
+		if (targetedHarvestable.IsDepleted ()) {
+			StopHarvesting ();
+		}
 	}
 
 	bool IsInRange(Harvestable harvestable)

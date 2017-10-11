@@ -1,16 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HarvestSceneController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	public HarvestBehaviour harvester;
+	public World world;
+
+	void Awake () {
+		harvester.world = world;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }
