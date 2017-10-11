@@ -64,11 +64,30 @@ public class HarvestBehaviour : MonoBehaviour {
 		harvestRay.StopHarvesting();
 	}
 
+	bool IsBetter(Harvestable a, Harvestable b)
+	{
+		return Vector2.SqrMagnitude (a.transform.position - transform.position) > 
+			Vector2.SqrMagnitude (b.transform.position - transform.position);
+	}
+
 	void Harvest ()
 	{
-		if (harvestRay.IsDone() || !IsInRange(targetedHarvestable)) {
-			StopHarvesting ();
+		var betterHarvestable = targetedHarvestable;
+
+		foreach (var harvestable in harvestablesInRange) {
+			if (IsBetter (betterHarvestable, harvestable)) {
+				betterHarvestable = harvestable;
+			}
 		}
+
+		if (betterHarvestable != targetedHarvestable) {
+			StopHarvesting ();
+			StartHarvesting (betterHarvestable);
+		}
+
+		if (harvestRay.IsDone () || !IsInRange (targetedHarvestable)) {
+			StopHarvesting ();
+		} 
 	}
 
 	bool IsInRange(Harvestable harvestable)

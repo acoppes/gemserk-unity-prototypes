@@ -3,12 +3,15 @@
 public class HarvestSceneController : MonoBehaviour {
 
 	public HarvestBehaviour harvester;
-	public Harvestable harvestable;
 	public World world;
 
 	void Awake () {
 		harvester.world = world;
-		harvestable.world = world;
+
+		var harvestables = FindObjectsOfType<Harvestable> ();
+		foreach (var harvestable in harvestables) {
+			harvestable.world = world;
+		}
 	}
 
 }
