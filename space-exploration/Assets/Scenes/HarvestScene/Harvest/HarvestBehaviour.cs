@@ -7,6 +7,8 @@ public class HarvestBehaviour : MonoBehaviour {
 	public float range;
 	public GameObject positionReference;
 
+	public HarvestRayBehaviour harvestRay;
+
 	[NonSerialized]
 	public World world;
 
@@ -53,20 +55,18 @@ public class HarvestBehaviour : MonoBehaviour {
 	void StartHarvesting(Harvestable harvestable)
 	{
 		targetedHarvestable = harvestable;
-		// turn on ray..., configure...
+		harvestRay.StartHarvesting(this, targetedHarvestable);
 	}
 
 	void StopHarvesting()
 	{
 		targetedHarvestable = null;
-		// turn off ray...
+		harvestRay.StopHarvesting();
 	}
 
 	void Harvest ()
 	{
-		// harverst logic...
-
-		if (targetedHarvestable.IsDepleted ()) {
+		if (harvestRay.IsDone()) {
 			StopHarvesting ();
 		}
 	}
