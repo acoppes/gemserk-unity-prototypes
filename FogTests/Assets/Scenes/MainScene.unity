@@ -199,8 +199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 519409064}
-  width: 320
-  height: 240
+  width: 64
+  height: 48
+  vars: 2000000018000000050000000500000003000000
 --- !u!1 &1434269292
 GameObject:
   m_ObjectHideFlags: 0

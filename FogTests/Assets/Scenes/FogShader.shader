@@ -57,7 +57,7 @@
 			{
 				fixed4 c = tex2D (_MainTex, IN.texcoord) * IN.color;
 				c.a = 1.f - c.r;
-				c.rgb *= c.a;
+				c.rgb = fixed3(0, 0, 0);
 				return c;
 			}
 			ENDCG

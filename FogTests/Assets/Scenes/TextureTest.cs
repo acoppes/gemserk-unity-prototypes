@@ -11,56 +11,51 @@ public class TextureTest : MonoBehaviour {
 
 	Color32[] _colors;
 
+	public int[] vars = new int[5];
+
+	Texture2D _texture;
+
     void Start()
     {
-        // Renderer rend = GetComponent<Renderer>();
-
-        // // duplicate the original texture and assign to the material
-        // Texture2D texture = Instantiate(rend.material.mainTexture) as Texture2D;
-        // rend.material.mainTexture = texture;
-
-        // // colors used to tint the first 3 mip levels
-        // Color[] colors = new Color[3];
-        // colors[0] = Color.red;
-        // colors[1] = Color.green;
-        // colors[2] = Color.blue;
-        // int mipCount = Mathf.Min(3, texture.mipmapCount);
-
-        // // tint each mip level
-        // for (int mip = 0; mip < mipCount; ++mip)
-        // {
-        //     Color[] cols = texture.GetPixels(mip);
-        //     for (int i = 0; i < cols.Length; ++i)
-        //     {
-        //         cols[i] = Color.Lerp(cols[i], colors[mip], 0.33f);
-        //     }
-        //     texture.SetPixels(cols, mip);
-        // }
-        // // actually apply all SetPixels, don't recalculate mip levels
-        // texture.Apply(false);
-
+		_texture =  new Texture2D(width, height, TextureFormat.RGBA32, false, true);
 
 		_colors = new Color32[width * height];
+		RegenerateColors(vars[0], vars[1], vars[2], vars[3], vars[4]);
 
+		spriteRenderer.sprite = Sprite.Create(_texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 1);
+    }
+
+	void RegenerateColors(int x, int y, int w, int h, int border)
+	{
 		var blackColor = new Color32(0, 0, 0, 255);
+		var greyColor = new Color32(128, 0, 0, 0);
 		var whiteColor = new Color32(255, 255, 255, 255);
+
+		int minx = x - w;
+		int maxx = x + w;
+
+		int miny = y - h;
+		int maxy = y + h;
 
 		for (int i = 0; i < height; i++)
 		{
 			for (int j = 0; j < width; j++)
 			{
 				var color = blackColor;
-				if (i > 50 && i < 100 && j > 50 && j < 100)
+				if (i > miny && i < maxy && j > minx  && j < maxx)
+					color = greyColor;
+				if (i > miny + border && i < maxy - border && j > minx + border && j < maxx - border)
 					color = whiteColor;
 				_colors[(i * width) + j] = color;				
 			}
 		}
 
-		var texture =  new Texture2D(width, height, TextureFormat.RGBA32, false);
-		texture.SetPixels32(_colors);
-		texture.Apply();
+		_texture.SetPixels32(_colors);
+		_texture.Apply();
+	}
 
-		spriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 1);
-    }
+	void FixedUpdate() {
+		RegenerateColors(vars[0], vars[1], vars[2], vars[3], vars[4]);
+	}
 
 }
