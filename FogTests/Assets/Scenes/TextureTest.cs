@@ -9,6 +9,8 @@ public class TextureTest : MonoBehaviour {
 	public int width = 128;
 	public int height = 128;
 
+	Color32[] _colors;
+
     void Start()
     {
         // Renderer rend = GetComponent<Renderer>();
@@ -38,18 +40,27 @@ public class TextureTest : MonoBehaviour {
         // texture.Apply(false);
 
 
-		Color32[] colors = new Color32[width * height];
+		_colors = new Color32[width * height];
 
-		for (int i = 0; i < width * height; i++)
+		var blackColor = new Color32(0, 0, 0, 255);
+		var whiteColor = new Color32(255, 255, 255, 255);
+
+		for (int i = 0; i < height; i++)
 		{
-			colors[i] = new Color32(0, 0, 0, 255);
+			for (int j = 0; j < width; j++)
+			{
+				var color = blackColor;
+				if (i > 50 && i < 100 && j > 50 && j < 100)
+					color = whiteColor;
+				_colors[(i * width) + j] = color;				
+			}
 		}
 
-		var texture =  new Texture2D(width, height, TextureFormat.Alpha8, false);
-		texture.SetPixels32(colors);
+		var texture =  new Texture2D(width, height, TextureFormat.RGBA32, false);
+		texture.SetPixels32(_colors);
 		texture.Apply();
 
-		spriteRenderer.sprite =Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 1);
+		spriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 1);
     }
 
 }
