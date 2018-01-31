@@ -60,10 +60,13 @@ public class TextureTest : MonoBehaviour {
 		_texture.Apply();
 	}
 
-	Vector2 GetWorldPosition(int i, int j)
+	Vector2 GetWorldPosition(float i, float j)
 	{
-		float x = (i - width / 2) * transform.localScale.x;
-		float y = (j - height / 2) * transform.localScale.y;
+		var w = (float) width;
+		var h = (float) height;
+
+		float x = (i - w * 0.5f) * transform.localScale.x;
+		float y = (j - h * 0.5f) * transform.localScale.y;
 
 		// float x = j * transform.localScale.x - width * transform.localScale.x * 0.5f;
 		// float y = (i * width) * transform.localScale.y - height * transform.localScale.y * 0.5f;
@@ -80,15 +83,24 @@ public class TextureTest : MonoBehaviour {
 		{
 			for (int j = 0; j < width; j++)
 			{
+				var visionFound = false;
+
 				var position = GetWorldPosition(j, i);
 
 				foreach (var vision in _visions)
 				{
 					if (vision.InRange(position.x, position.y)) {
-						_colors[(i * width) + j] = whiteColor;				
+						_colors[(i * width) + j] = whiteColor;
+						visionFound = true;				
 						break;
-					}
-						
+					}	
+				}
+
+				if (!visionFound) {
+					var currentColor = _colors[(i * width) + j];
+
+					if (currentColor.Equals(whiteColor)) 
+						_colors[(i * width) + j] = greyColor;
 				}
 			}
 		}
