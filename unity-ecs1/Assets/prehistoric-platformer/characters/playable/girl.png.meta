@@ -1,0 +1,602 @@
+fileFormatVersion: 2
+guid: 476d875c30df4ce4086f68bc5363fe80
+timeCreated: 1484617686
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: girl_0
+    21300002: girl_1
+    21300004: girl_2
+    21300006: girl_3
+    21300008: girl_4
+    21300010: girl_5
+    21300012: girl_6
+    21300014: girl_7
+    21300016: girl_8
+    21300018: girl_9
+    21300020: girl_10
+    21300022: girl_11
+    21300024: girl_12
+    21300026: girl_13
+    21300028: girl_14
+    21300030: girl_15
+    21300032: girl_16
+    21300034: girl_17
+    21300036: girl_18
+    21300038: girl_19
+    21300040: girl_20
+    21300042: girl_21
+    21300044: girl_22
+    21300046: girl_23
+    21300048: girl_24
+    21300050: girl_25
+    21300052: girl_26
+    21300054: girl_27
+    21300056: girl_28
+    21300058: girl_29
+    21300060: girl_30
+    21300062: girl_31
+    21300064: girl_32
+    21300066: girl_33
+    21300068: girl_34
+    21300070: girl_35
+    21300072: girl_36
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: girl_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 450
+        width: 51
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_1
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 450
+        width: 52
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_2
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 450
+        width: 52
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_3
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 450
+        width: 51
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_4
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 450
+        width: 51
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_5
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 450
+        width: 60
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_6
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 377
+        width: 64
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_7
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 378
+        width: 66
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_8
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 376
+        width: 64
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_9
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 375
+        width: 61
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_10
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 376
+        width: 57
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_11
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 377
+        width: 52
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_12
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 303
+        width: 56
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_13
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 303
+        width: 61
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_14
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 304
+        width: 60
+        height: 57
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_15
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 304
+        width: 63
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_16
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 304
+        width: 63
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_17
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 302
+        width: 63
+        height: 51
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_18
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 228
+        width: 35
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_19
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 227
+        width: 36
+        height: 34
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_20
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 228
+        width: 41
+        height: 42
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_21
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 228
+        width: 63
+        height: 49
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_22
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 228
+        width: 51
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_23
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 228
+        width: 70
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_24
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 154
+        width: 72
+        height: 57
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_25
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 154
+        width: 72
+        height: 57
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_26
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 155
+        width: 70
+        height: 65
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_27
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 157
+        width: 69
+        height: 65
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_28
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 161
+        width: 69
+        height: 52
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_29
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 164
+        width: 70
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_30
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 82
+        width: 64
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_31
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 78
+        width: 63
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_32
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 80
+        width: 63
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_33
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 78
+        width: 43
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_34
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 74
+        width: 43
+        height: 67
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_35
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 78
+        width: 43
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: girl_36
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 0
+        width: 46
+        height: 67
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

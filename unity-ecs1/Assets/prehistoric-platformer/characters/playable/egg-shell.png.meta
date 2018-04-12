@@ -1,0 +1,602 @@
+fileFormatVersion: 2
+guid: 0b2c8a5b2df98814c83287c16aa5e319
+timeCreated: 1484617644
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: egg-shell_0
+    21300002: egg-shell_1
+    21300004: egg-shell_2
+    21300006: egg-shell_3
+    21300008: egg-shell_4
+    21300010: egg-shell_5
+    21300012: egg-shell_6
+    21300014: egg-shell_7
+    21300016: egg-shell_8
+    21300018: egg-shell_9
+    21300020: egg-shell_10
+    21300022: egg-shell_11
+    21300024: egg-shell_12
+    21300026: egg-shell_13
+    21300028: egg-shell_14
+    21300030: egg-shell_15
+    21300032: egg-shell_16
+    21300034: egg-shell_17
+    21300036: egg-shell_18
+    21300038: egg-shell_19
+    21300040: egg-shell_20
+    21300042: egg-shell_21
+    21300044: egg-shell_22
+    21300046: egg-shell_23
+    21300048: egg-shell_24
+    21300050: egg-shell_25
+    21300052: egg-shell_26
+    21300054: egg-shell_27
+    21300056: egg-shell_28
+    21300058: egg-shell_29
+    21300060: egg-shell_30
+    21300062: egg-shell_31
+    21300064: egg-shell_32
+    21300066: egg-shell_33
+    21300068: egg-shell_34
+    21300070: egg-shell_35
+    21300072: egg-shell_36
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: egg-shell_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 432
+        width: 52
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_1
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 432
+        width: 53
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_2
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 432
+        width: 53
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_3
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 432
+        width: 52
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_4
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 432
+        width: 52
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_5
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 432
+        width: 52
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_6
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 359
+        width: 52
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_7
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 360
+        width: 52
+        height: 65
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_8
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 361
+        width: 52
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_9
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 360
+        width: 52
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_10
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 361
+        width: 52
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_11
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 360
+        width: 51
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_12
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 289
+        width: 52
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_13
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 289
+        width: 49
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_14
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 289
+        width: 52
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_15
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 289
+        width: 53
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_16
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 289
+        width: 53
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_17
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 291
+        width: 56
+        height: 52
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_18
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 220
+        width: 45
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_19
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 220
+        width: 45
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_20
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 220
+        width: 47
+        height: 35
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_21
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 220
+        width: 52
+        height: 51
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_22
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 220
+        width: 54
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_23
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 220
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_24
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 149
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_25
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 149
+        width: 69
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_26
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 150
+        width: 51
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_27
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 151
+        width: 51
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_28
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 148
+        width: 60
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_29
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 154
+        width: 60
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_30
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 78
+        width: 64
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_31
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 71
+        width: 63
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_32
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 77
+        width: 68
+        height: 28
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_33
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 77
+        width: 46
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_34
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 72
+        width: 46
+        height: 65
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_35
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 77
+        width: 46
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: egg-shell_36
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 1
+        width: 46
+        height: 65
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
