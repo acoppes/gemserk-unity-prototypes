@@ -5,7 +5,7 @@ using Unity.Transforms;
 
 namespace VirtualVillagers
 {
-    public class MyComponentSystem : ComponentSystem
+    public class PlayerInputSystem : ComponentSystem
     {
         public struct Data
         {
