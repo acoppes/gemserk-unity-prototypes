@@ -24,6 +24,7 @@ namespace VirtualVillagers
                 return;
             btManager.SetContext(this);
             tree.Tick(new FluentBehaviourTree.TimeData(dt));
+            btManager.SetContext(null);
         }
     }
 }
