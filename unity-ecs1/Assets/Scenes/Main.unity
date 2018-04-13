@@ -346,7 +346,7 @@ MonoBehaviour:
   direction:
     x: 0
     y: 0
-  speed: 5
+  speed: 1
 --- !u!1 &1139621983
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +584,7 @@ MonoBehaviour:
   direction:
     x: 0
     y: 0
-  speed: 5
+  speed: 1
 --- !u!114 &1577388616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -618,7 +618,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1577388612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalPosition: {x: -1.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 857764952}
