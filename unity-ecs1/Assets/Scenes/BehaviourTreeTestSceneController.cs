@@ -25,37 +25,31 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		btManager.Add("MoveLeftTree", new BehaviourTreeBuilder()
 			.Selector("TestSequence")
 				.Sequence("SetWanderDestination")
-//					.Condition("NotHasDestination", delegate(TimeData time)
-//					{
-//						var context = btManager.GetContext();
-//						var gameObject = context.Get<GameObject>("gameObject");
-//						var movement = gameObject.GetComponent<MovementComponent>();
-//						return !movement.hasDestination;
-//					})
+					.Condition("NotHasDestination", delegate(TimeData time)
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var movement = gameObject.GetComponent<MovementComponent>();
+						return !movement.hasDestination;
+					})
 					.Do("SetDestination", delegate (TimeData time) {
 						var gameObject = btManager.GetContext() as GameObject;
 						var movement = gameObject.GetComponent<MovementComponent>();
-						if (movement.hasDestination)
-							return BehaviourTreeStatus.Failure;
 						movement.destination = UnityEngine.Random.insideUnitCircle * 10.0f;
 						movement.hasDestination = true;
 						return BehaviourTreeStatus.Success;
 					}) 
 				.End()
 				.Sequence("Wander")
-//					.Condition("HasDestinationAndNotNear", delegate(TimeData time)
-//					{
-//						var context = btManager.GetContext();
-//						var gameObject = context.Get<GameObject>("gameObject");
-//						var movement = gameObject.GetComponent<MovementComponent>();
-//						return movement.hasDestination && Vector2.Distance(transform.position, movement.destination) > 5.0f;
-//					})
-					.Do("MoveToDestination", delegate (TimeData time) {
+					.Condition("HasDestinationAndNotNear", delegate(TimeData time)
+					{
 						var gameObject = btManager.GetContext() as GameObject;
 						var movement = gameObject.GetComponent<MovementComponent>();
 						var distance = Vector2.Distance(gameObject.transform.position, movement.destination);
-						if (distance < movement.destinationDistance)
-							return BehaviourTreeStatus.Failure;
+						return movement.hasDestination && distance > movement.destinationDistance;
+					})
+					.Do("MoveToDestination", delegate (TimeData time) {
+						var gameObject = btManager.GetContext() as GameObject;
+						var movement = gameObject.GetComponent<MovementComponent>();
 						movement.direction.x = movement.destination.x - gameObject.transform.position.x;
 						movement.direction.y = movement.destination.y - gameObject.transform.position.y;
 						return BehaviourTreeStatus.Running;

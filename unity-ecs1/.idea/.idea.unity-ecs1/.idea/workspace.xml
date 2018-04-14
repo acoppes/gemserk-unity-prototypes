@@ -28,15 +28,13 @@
       <file leaf-file-name="BehaviourTreeTestSceneController.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="606">
+              <caret line="58" column="70" lean-forward="true" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
               <folding>
-                <marker date="1523721116184" expanded="true" signature="6:69" ph="..." />
-                <marker date="1523721116184" expanded="true" signature="133:3325" ph="{...}" />
-                <marker date="1523721116184" expanded="true" signature="240:3323" ph="{...}" />
-                <marker date="1523721116184" expanded="true" signature="923:1224" ph="/* .Condition(&quot;NotHasDestination&quot;, delegate(TimeData time) ... */" />
-                <marker date="1523721116184" expanded="true" signature="1683:2059" ph="/* .Condition(&quot;HasDestinationAndNotNear&quot;, delegate(TimeData time) ... */" />
-                <marker date="1523721116184" expanded="true" signature="3001:3317" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+                <marker date="1523728220513" expanded="true" signature="6:69" ph="..." />
+                <marker date="1523728220513" expanded="true" signature="133:3009" ph="{...}" />
+                <marker date="1523728220513" expanded="true" signature="240:3007" ph="{...}" />
+                <marker date="1523728220513" expanded="true" signature="2685:3001" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
               </folding>
             </state>
           </provider>
@@ -46,7 +44,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManagerScriptableObject.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+              <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
               <folding>
                 <marker date="1523721037623" expanded="false" signature="6:79" ph="..." />
                 <marker date="1523721037623" expanded="true" signature="231:789" ph="{...}" />
@@ -127,7 +125,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseActionNode.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <marker date="1523721067096" expanded="true" signature="30:744" ph="{...}" />
                 <marker date="1523721067096" expanded="true" signature="94:742" ph="{...}" />
@@ -292,12 +290,12 @@
       <option name="presentableId" value="Default" />
       <updated>1523584889224</updated>
       <workItem from="1523584893960" duration="1578000" />
-      <workItem from="1523664404567" duration="6508000" />
+      <workItem from="1523664404567" duration="7816000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8086000" />
+    <option name="totallyTimeSpent" value="9394000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -639,7 +637,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseActionNode.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <marker date="1523721067096" expanded="true" signature="30:744" ph="{...}" />
             <marker date="1523721067096" expanded="true" signature="94:742" ph="{...}" />
@@ -653,7 +651,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManagerScriptableObject.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+          <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
           <folding>
             <marker date="1523721037623" expanded="false" signature="6:79" ph="..." />
             <marker date="1523721037623" expanded="true" signature="231:789" ph="{...}" />
@@ -667,15 +665,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="606">
+          <caret line="58" column="70" lean-forward="true" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
           <folding>
-            <marker date="1523721116184" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523721116184" expanded="true" signature="133:3325" ph="{...}" />
-            <marker date="1523721116184" expanded="true" signature="240:3323" ph="{...}" />
-            <marker date="1523721116184" expanded="true" signature="923:1224" ph="/* .Condition(&quot;NotHasDestination&quot;, delegate(TimeData time) ... */" />
-            <marker date="1523721116184" expanded="true" signature="1683:2059" ph="/* .Condition(&quot;HasDestinationAndNotNear&quot;, delegate(TimeData time) ... */" />
-            <marker date="1523721116184" expanded="true" signature="3001:3317" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523728220513" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523728220513" expanded="true" signature="133:3009" ph="{...}" />
+            <marker date="1523728220513" expanded="true" signature="240:3007" ph="{...}" />
+            <marker date="1523728220513" expanded="true" signature="2685:3001" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
           </folding>
         </state>
       </provider>
