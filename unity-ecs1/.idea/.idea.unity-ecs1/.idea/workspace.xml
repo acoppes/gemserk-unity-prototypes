@@ -28,13 +28,14 @@
       <file leaf-file-name="BehaviourTreeTestSceneController.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="26" column="83" lean-forward="false" selection-start-line="26" selection-start-column="83" selection-end-line="26" selection-end-column="83" />
+            <state relative-caret-position="221">
+              <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
               <folding>
-                <marker date="1523743736075" expanded="true" signature="6:69" ph="..." />
-                <marker date="1523743736075" expanded="true" signature="133:4800" ph="{...}" />
-                <marker date="1523743736075" expanded="true" signature="273:4798" ph="{...}" />
-                <marker date="1523743736075" expanded="true" signature="4287:4792" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+                <marker date="1523744069221" expanded="true" signature="6:69" ph="..." />
+                <marker date="1523744069221" expanded="true" signature="133:5223" ph="{...}" />
+                <marker date="1523744069221" expanded="true" signature="308:5221" ph="{...}" />
+                <marker date="1523744069221" expanded="true" signature="493:856" ph="{...}" />
+                <marker date="1523744069221" expanded="true" signature="4710:5215" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
               </folding>
             </state>
           </provider>
@@ -86,11 +87,11 @@
       <file leaf-file-name="BehaviourTreeContextComponent.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+            <state relative-caret-position="102">
+              <caret line="6" column="35" lean-forward="false" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="35" />
               <folding>
-                <marker date="1523743566009" expanded="true" signature="46:209" ph="{...}" />
-                <marker date="1523743566009" expanded="true" signature="111:207" ph="{...}" />
+                <marker date="1523743952226" expanded="true" signature="46:246" ph="{...}" />
+                <marker date="1523743952226" expanded="true" signature="111:244" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -184,13 +185,11 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManagerScriptableObject.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/PandaBehaviour/Examples/01_Move/Assets/Move.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/SelectorNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/SequenceNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionCallbackNode.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/PandaBehaviour/Examples/00_ChangeColor/Assets/MyCube.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseActionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -221,6 +220,7 @@
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseActionNode.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs" />
       </list>
     </option>
@@ -375,12 +375,12 @@
       <updated>1523584889224</updated>
       <workItem from="1523584893960" duration="1578000" />
       <workItem from="1523664404567" duration="9869000" />
-      <workItem from="1523740432304" duration="3125000" />
+      <workItem from="1523740432304" duration="3426000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14572000" />
+    <option name="totallyTimeSpent" value="14873000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -628,10 +628,11 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1523743736075" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523743736075" expanded="true" signature="133:4800" ph="{...}" />
-            <marker date="1523743736075" expanded="true" signature="273:4798" ph="{...}" />
-            <marker date="1523743736075" expanded="true" signature="4287:4792" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523744069221" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523744069221" expanded="true" signature="133:5223" ph="{...}" />
+            <marker date="1523744069221" expanded="true" signature="308:5221" ph="{...}" />
+            <marker date="1523744069221" expanded="true" signature="493:856" ph="{...}" />
+            <marker date="1523744069221" expanded="true" signature="4710:5215" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
           </folding>
         </state>
       </provider>
@@ -888,21 +889,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
           <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding>
-            <marker date="1502909606000" expanded="false" signature="6:58" ph="..." />
-            <marker date="1502909606000" expanded="true" signature="88:3037" ph="{...}" />
-            <marker date="1502909606000" expanded="true" signature="128:3035" ph="{...}" />
-            <marker date="1502909606000" expanded="true" signature="191:265" ph="/* Move to the (x,y) position at the current speed. ... */" />
-            <marker date="1502909606000" expanded="true" signature="318:1082" ph="{...}" />
-            <marker date="1502909606000" expanded="true" signature="875:1071" ph="{...}" />
-            <marker date="1502909606000" expanded="true" signature="1181:1325" ph="{...}" />
-            <marker date="1502909606000" expanded="true" signature="1335:1414" ph="/* Rotate about the given angle for the given duration. ... */" />
-            <marker date="1502909606000" expanded="true" signature="1478:3027" ph="{...}" />
-            <marker date="1502909606000" expanded="true" signature="1600:1721" ph="/* The Task.isStarting property is true on the first tick of a task. ... */" />
-            <marker date="1502909606000" expanded="true" signature="1757:2287" ph="{...}" />
-            <marker date="1502909606000" expanded="true" signature="2042:2241" ph="/* Task.item is a placeholder attached to a Task. ... */" />
-            <marker date="1502909606000" expanded="true" signature="2912:3015" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -910,13 +897,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <marker date="1502909602000" expanded="false" signature="6:57" ph="..." />
-            <marker date="1502909602000" expanded="true" signature="95:583" ph="{...}" />
-            <marker date="1502909602000" expanded="true" signature="137:581" ph="{...}" />
-            <marker date="1502909602000" expanded="true" signature="152:231" ph="/* Set the color to the specified rgb value and succeed. ... */" />
-            <marker date="1502909602000" expanded="true" signature="365:575" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -954,17 +935,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-          <folding>
-            <marker date="1523743566009" expanded="true" signature="46:209" ph="{...}" />
-            <marker date="1523743566009" expanded="true" signature="111:207" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeSystem.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -980,15 +950,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="35" lean-forward="false" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="35" />
+          <folding>
+            <marker date="1523743952226" expanded="true" signature="46:246" ph="{...}" />
+            <marker date="1523743952226" expanded="true" signature="111:244" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="26" column="83" lean-forward="false" selection-start-line="26" selection-start-column="83" selection-end-line="26" selection-end-column="83" />
+        <state relative-caret-position="221">
+          <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
           <folding>
-            <marker date="1523743736075" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523743736075" expanded="true" signature="133:4800" ph="{...}" />
-            <marker date="1523743736075" expanded="true" signature="273:4798" ph="{...}" />
-            <marker date="1523743736075" expanded="true" signature="4287:4792" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523744069221" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523744069221" expanded="true" signature="133:5223" ph="{...}" />
+            <marker date="1523744069221" expanded="true" signature="308:5221" ph="{...}" />
+            <marker date="1523744069221" expanded="true" signature="493:856" ph="{...}" />
+            <marker date="1523744069221" expanded="true" signature="4710:5215" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
           </folding>
         </state>
       </provider>

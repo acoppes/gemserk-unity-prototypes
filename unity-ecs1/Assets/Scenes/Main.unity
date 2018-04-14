@@ -446,7 +446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &883095015
 Transform:
   m_ObjectHideFlags: 0
@@ -622,6 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
     type: 2}
+  SpawnMaxItemCount: 3
   spawnPrefab: {fileID: 1028647392421468, guid: 5639360e6e8bc0c4598390697af3ee62,
     type: 2}
 --- !u!4 &1154647730
@@ -812,6 +813,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1629513819}
+  - component: {fileID: 1629513820}
   - component: {fileID: 1629513818}
   - component: {fileID: 1629513817}
   m_Layer: 0
@@ -846,6 +848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnItemsTag: Food
   spawnIdleTotalTime: 3
   spawnIdleCurrentTime: 0
 --- !u!4 &1629513819
@@ -861,6 +864,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1629513820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1629513816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1707089007
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
     public UnityEngine.Object _behaviourTreeManager;
 
+	public int SpawnMaxItemCount = 3;
 	public GameObject spawnPrefab;
 
 	// Update is called once per frame
@@ -14,6 +15,15 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		
 		var spawnerTree = new BehaviourTreeBuilder()
 			.Sequence("Spawner")
+				.Condition("NotAtMaximum", time =>
+				{
+					var gameObject = btManager.GetContext() as GameObject;
+					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+					if (string.IsNullOrEmpty(btContext.spawnItemsTag))
+						return true;
+					var spawnedItems = GameObject.FindGameObjectsWithTag(btContext.spawnItemsTag);
+					return spawnedItems.Length < SpawnMaxItemCount;
+				})
 				.Do("WaitSomeTime", delegate(TimeData time)
 				{
 					var gameObject = btManager.GetContext() as GameObject;
@@ -21,7 +31,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					btContext.spawnIdleCurrentTime -= time.deltaTime;
 					return btContext.spawnIdleCurrentTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
 				})
-				.Do("SpawnAndRestart", delegate(TimeData time)
+				.Do("SpawnAndRestart", delegate
 				{
 					var gameObject = btManager.GetContext() as GameObject;
 					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
