@@ -1,8 +1,4 @@
 ﻿using UnityEngine;
-using Unity.Collections;
-using Unity.Jobs;
-using Unity.Mathematics;
-using Unity.Transforms2D;
 using FluentBehaviourTree;
 using VirtualVillagers;
 
@@ -13,6 +9,8 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 	// Update is called once per frame
 	void Awake() {
         var btManager = _behaviourTreeManager as BehaviourTreeManager;
+
+		var tree = new BehaviourTreeBuilder().Build();
 
 		btManager.Add("MoveRightTree", new BehaviourTreeBuilder()
             .Sequence("TestSequence")
@@ -82,5 +80,8 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		// Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto
         // Tener una accion separada para incrementar el cooldown? 
         // (o bien chequear por un dato general en el contexto, tipo el "frame" de ejecución)
+		
+		// testear condicion de nuevo
+		// se puede construir action custom?
     }
 }
