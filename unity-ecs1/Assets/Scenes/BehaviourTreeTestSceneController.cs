@@ -10,6 +10,28 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 	void Awake() {
         var btManager = _behaviourTreeManager as BehaviourTreeManager;
 
+		var idleTree = new BehaviourTreeBuilder()
+			.Sequence("IdleSequence")
+			.Do("WaitSomeTime", delegate(TimeData time)
+			{
+				var gameObject = btManager.GetContext() as GameObject;
+				var movement = gameObject.GetComponent<MovementComponent>();
+				movement.currentIdleTime -= time.deltaTime;
+				movement.direction.x = 0;
+				movement.direction.y = 0;
+				return movement.currentIdleTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
+			})
+			.Do("ResetLastDestination", delegate(TimeData time)
+			{
+				var gameObject = btManager.GetContext() as GameObject;
+				var movement = gameObject.GetComponent<MovementComponent>();
+				movement.hasDestination = false;
+				movement.currentIdleTime = movement.idleTime;
+				return BehaviourTreeStatus.Success;
+			})
+			.End()
+			.Build();
+
 		btManager.Add("MoveRightTree", new BehaviourTreeBuilder()
             .Sequence("TestSequence")
                 .Do("MyFirstAction", delegate (TimeData time) {
@@ -36,7 +58,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						var movement = gameObject.GetComponent<MovementComponent>();
 						movement.destination = UnityEngine.Random.insideUnitCircle * 10.0f;
 						movement.hasDestination = true;
-						movement.currentIdleTime = movement.idleTime;
+						// movement.currentIdleTime = movement.idleTime;
 						return BehaviourTreeStatus.Success;
 					}) 
 				.End()
@@ -56,23 +78,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						return BehaviourTreeStatus.Running;
 					})
 				.End()
-				.Sequence("Idle")
-					.Do("IdleTime", delegate (TimeData time) {
-						var gameObject = btManager.GetContext() as GameObject;
-						var movement = gameObject.GetComponent<MovementComponent>();
-						movement.currentIdleTime -= time.deltaTime;
-						movement.direction.x = 0;
-						movement.direction.y = 0;
-						return movement.currentIdleTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
-					})
-					.Do("ResetDestinationSet", delegate (TimeData time) {
-						var gameObject = btManager.GetContext() as GameObject;
-						var movement = gameObject.GetComponent<MovementComponent>();
-						movement.hasDestination = false;
-						// movement.currentIdleTime = movement.idleTime;
-						return BehaviourTreeStatus.Success;
-					})
-				.End()
+				.Node(idleTree)
 			.End()
 			.Build());
 		
