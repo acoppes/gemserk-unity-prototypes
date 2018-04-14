@@ -11,31 +11,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BehaviourTreeTestSceneController.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
+      <file leaf-file-name="BehaviourTreeComponent.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeComponent.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="38" column="52" lean-forward="false" selection-start-line="38" selection-start-column="52" selection-end-line="38" selection-end-column="52" />
+            <state relative-caret-position="187">
+              <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
               <folding>
-                <marker date="1523717219269" expanded="true" signature="6:69" ph="..." />
-                <marker date="1523717219269" expanded="true" signature="133:3566" ph="{...}" />
-                <marker date="1523717219269" expanded="true" signature="240:3564" ph="{...}" />
-                <marker date="1523717219269" expanded="true" signature="1032:1333" ph="/* .Condition(&quot;NotHasDestination&quot;, delegate(TimeData time) ... */" />
-                <marker date="1523717219269" expanded="true" signature="1837:2213" ph="/* .Condition(&quot;HasDestinationAndNotNear&quot;, delegate(TimeData time) ... */" />
-                <marker date="1523717219269" expanded="true" signature="3242:3558" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+                <marker date="1523720875404" expanded="true" signature="46:673" ph="{...}" />
+                <marker date="1523720875404" expanded="true" signature="104:671" ph="{...}" />
+                <marker date="1523720875404" expanded="true" signature="248:665" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BehaviourTreeManager.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManager.cs">
+      <file leaf-file-name="BehaviourTreeTestSceneController.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="39" lean-forward="false" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+            <state relative-caret-position="187">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
-                <marker date="1523583778651" expanded="true" signature="65:258" ph="{...}" />
-                <marker date="1523583778651" expanded="true" signature="298:345" ph="{...}" />
+                <marker date="1523721116184" expanded="true" signature="6:69" ph="..." />
+                <marker date="1523721116184" expanded="true" signature="133:3325" ph="{...}" />
+                <marker date="1523721116184" expanded="true" signature="240:3323" ph="{...}" />
+                <marker date="1523721116184" expanded="true" signature="923:1224" ph="/* .Condition(&quot;NotHasDestination&quot;, delegate(TimeData time) ... */" />
+                <marker date="1523721116184" expanded="true" signature="1683:2059" ph="/* .Condition(&quot;HasDestinationAndNotNear&quot;, delegate(TimeData time) ... */" />
+                <marker date="1523721116184" expanded="true" signature="3001:3317" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BehaviourTreeManagerScriptableObject.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManagerScriptableObject.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+              <folding>
+                <marker date="1523721037623" expanded="false" signature="6:79" ph="..." />
+                <marker date="1523721037623" expanded="true" signature="231:789" ph="{...}" />
+                <marker date="1523721037623" expanded="true" signature="434:472" ph="{...}" />
+                <marker date="1523721037623" expanded="true" signature="504:541" ph="{...}" />
+                <marker date="1523721037623" expanded="true" signature="593:703" ph="{...}" />
+                <marker date="1523721037623" expanded="true" signature="747:787" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -45,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/BehaviourTreeBuilder.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="20" column="78" lean-forward="true" selection-start-line="20" selection-start-column="78" selection-end-line="20" selection-end-column="78" />
+              <caret line="20" column="78" lean-forward="false" selection-start-line="20" selection-start-column="78" selection-end-line="20" selection-end-column="78" />
               <folding>
                 <marker date="1523718019387" expanded="false" signature="6:85" ph="..." />
                 <marker date="1523718019387" expanded="true" signature="116:4785" ph="{...}" />
@@ -105,17 +123,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseActionNode.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BaseActionNode.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseActionNode.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <marker date="1523720759373" expanded="true" signature="30:716" ph="{...}" />
-                <marker date="1523720759373" expanded="true" signature="94:714" ph="{...}" />
-                <marker date="1523720759373" expanded="true" signature="239:470" ph="{...}" />
-                <marker date="1523720759373" expanded="true" signature="517:550" ph="{...}" />
-                <marker date="1523720759373" expanded="true" signature="596:629" ph="{...}" />
+                <marker date="1523721067096" expanded="true" signature="30:744" ph="{...}" />
+                <marker date="1523721067096" expanded="true" signature="94:742" ph="{...}" />
+                <marker date="1523721067096" expanded="true" signature="239:498" ph="{...}" />
+                <marker date="1523721067096" expanded="true" signature="545:578" ph="{...}" />
+                <marker date="1523721067096" expanded="true" signature="624:657" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -135,43 +153,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseConditionCallbackNode.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionCallbackNode.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1523720402849" expanded="true" signature="44:475" ph="{...}" />
-                <marker date="1523720402849" expanded="true" signature="110:473" ph="{...}" />
-                <marker date="1523720402849" expanded="true" signature="251:293" ph="{...}" />
-                <marker date="1523720402849" expanded="true" signature="357:467" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IBehaviourTreeNode.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/IBehaviourTreeNode.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="10" column="39" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="39" />
-              <folding>
-                <marker date="1523717580064" expanded="false" signature="6:85" ph="..." />
-                <marker date="1523717580064" expanded="true" signature="116:398" ph="{...}" />
-                <marker date="1523717580064" expanded="true" signature="123:199" ph="/// Interface for behaviour tree nodes. ... " />
-                <marker date="1523717580064" expanded="true" signature="239:396" ph="{...}" />
-                <marker date="1523717580064" expanded="true" signature="254:341" ph="/// Update the time of the behaviour tree. ... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManagerScriptableObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionCallbackNode.cs" root0="FORCE_HIGHLIGHTING" />
@@ -196,12 +184,15 @@
         <option value="$PROJECT_DIR$/Assets/Scenes/PlayerInputSystem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/MovementSystem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/BehaviourTreeBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionCallbackNode.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionNode.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManagerScriptableObject.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseActionNode.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs" />
       </list>
     </option>
   </component>
@@ -269,7 +260,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="Behav&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="behaviourcom&#9;FILE&#9;file://D:/Documents/workspace/gemserk-prototypes/unity-ecs1/Assets/Scenes/BehaviourTreeComponent.cs&#10;Behav&#9;null&#9;null" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
@@ -301,12 +292,12 @@
       <option name="presentableId" value="Default" />
       <updated>1523584889224</updated>
       <workItem from="1523584893960" duration="1578000" />
-      <workItem from="1523664404567" duration="6155000" />
+      <workItem from="1523664404567" duration="6508000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7733000" />
+    <option name="totallyTimeSpent" value="8086000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -384,7 +375,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-          <folding />
+          <folding>
+            <marker date="1523720875404" expanded="true" signature="46:673" ph="{...}" />
+            <marker date="1523720875404" expanded="true" signature="104:671" ph="{...}" />
+            <marker date="1523720875404" expanded="true" signature="248:665" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -393,8 +388,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1523583778651" expanded="true" signature="65:258" ph="{...}" />
-            <marker date="1523583778651" expanded="true" signature="298:345" ph="{...}" />
+            <marker date="1523720815443" expanded="true" signature="65:228" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -439,14 +433,6 @@
             <marker date="1523661645652" expanded="true" signature="461:782" ph="{...}" />
             <marker date="1523661645652" expanded="true" signature="561:772" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeComponent.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -543,28 +529,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="52" lean-forward="false" selection-start-line="38" selection-start-column="52" selection-end-line="38" selection-end-column="52" />
+        <state relative-caret-position="119">
+          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
           <folding>
-            <marker date="1523717219269" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523717219269" expanded="true" signature="133:3566" ph="{...}" />
-            <marker date="1523717219269" expanded="true" signature="240:3564" ph="{...}" />
-            <marker date="1523717219269" expanded="true" signature="1032:1333" ph="/* .Condition(&quot;NotHasDestination&quot;, delegate(TimeData time) ... */" />
-            <marker date="1523717219269" expanded="true" signature="1837:2213" ph="/* .Condition(&quot;HasDestinationAndNotNear&quot;, delegate(TimeData time) ... */" />
-            <marker date="1523717219269" expanded="true" signature="3242:3558" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523720618245" expanded="false" signature="6:85" ph="..." />
+            <marker date="1523720618245" expanded="true" signature="116:811" ph="{...}" />
+            <marker date="1523720618245" expanded="true" signature="123:213" ph="/// A behaviour tree leaf node for running an action. ... " />
+            <marker date="1523720618245" expanded="true" signature="262:809" ph="{...}" />
+            <marker date="1523720618245" expanded="true" signature="277:347" ph="/// The name of the node. ... " />
+            <marker date="1523720618245" expanded="true" signature="386:469" ph="/// Function to invoke for the action. ... " />
+            <marker date="1523720618245" expanded="true" signature="622:698" ph="{...}" />
+            <marker date="1523720618245" expanded="true" signature="754:803" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManager.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeComponent.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="39" lean-forward="false" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+        <state relative-caret-position="187">
+          <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
           <folding>
-            <marker date="1523583778651" expanded="true" signature="65:258" ph="{...}" />
-            <marker date="1523583778651" expanded="true" signature="298:345" ph="{...}" />
+            <marker date="1523720875404" expanded="true" signature="46:673" ph="{...}" />
+            <marker date="1523720875404" expanded="true" signature="104:671" ph="{...}" />
+            <marker date="1523720875404" expanded="true" signature="248:665" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -594,19 +583,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManager.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
           <folding>
-            <marker date="1523720618245" expanded="false" signature="6:85" ph="..." />
-            <marker date="1523720618245" expanded="true" signature="116:811" ph="{...}" />
-            <marker date="1523720618245" expanded="true" signature="123:213" ph="/// A behaviour tree leaf node for running an action. ... " />
-            <marker date="1523720618245" expanded="true" signature="262:809" ph="{...}" />
-            <marker date="1523720618245" expanded="true" signature="277:347" ph="/// The name of the node. ... " />
-            <marker date="1523720618245" expanded="true" signature="386:469" ph="/// Function to invoke for the action. ... " />
-            <marker date="1523720618245" expanded="true" signature="622:698" ph="{...}" />
-            <marker date="1523720618245" expanded="true" signature="754:803" ph="{...}" />
+            <marker date="1523720815443" expanded="true" signature="65:228" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -614,7 +596,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/BehaviourTreeBuilder.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="20" column="78" lean-forward="true" selection-start-line="20" selection-start-column="78" selection-end-line="20" selection-end-column="78" />
+          <caret line="20" column="78" lean-forward="false" selection-start-line="20" selection-start-column="78" selection-end-line="20" selection-end-column="78" />
           <folding>
             <marker date="1523718019387" expanded="false" signature="6:85" ph="..." />
             <marker date="1523718019387" expanded="true" signature="116:4785" ph="{...}" />
@@ -656,14 +638,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseActionNode.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1523720759373" expanded="true" signature="30:716" ph="{...}" />
-            <marker date="1523720759373" expanded="true" signature="94:714" ph="{...}" />
-            <marker date="1523720759373" expanded="true" signature="239:470" ph="{...}" />
-            <marker date="1523720759373" expanded="true" signature="517:550" ph="{...}" />
-            <marker date="1523720759373" expanded="true" signature="596:629" ph="{...}" />
+            <marker date="1523721067096" expanded="true" signature="30:744" ph="{...}" />
+            <marker date="1523721067096" expanded="true" signature="94:742" ph="{...}" />
+            <marker date="1523721067096" expanded="true" signature="239:498" ph="{...}" />
+            <marker date="1523721067096" expanded="true" signature="545:578" ph="{...}" />
+            <marker date="1523721067096" expanded="true" signature="624:657" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManagerScriptableObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+          <folding>
+            <marker date="1523721037623" expanded="false" signature="6:79" ph="..." />
+            <marker date="1523721037623" expanded="true" signature="231:789" ph="{...}" />
+            <marker date="1523721037623" expanded="true" signature="434:472" ph="{...}" />
+            <marker date="1523721037623" expanded="true" signature="504:541" ph="{...}" />
+            <marker date="1523721037623" expanded="true" signature="593:703" ph="{...}" />
+            <marker date="1523721037623" expanded="true" signature="747:787" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <marker date="1523721116184" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523721116184" expanded="true" signature="133:3325" ph="{...}" />
+            <marker date="1523721116184" expanded="true" signature="240:3323" ph="{...}" />
+            <marker date="1523721116184" expanded="true" signature="923:1224" ph="/* .Condition(&quot;NotHasDestination&quot;, delegate(TimeData time) ... */" />
+            <marker date="1523721116184" expanded="true" signature="1683:2059" ph="/* .Condition(&quot;HasDestinationAndNotNear&quot;, delegate(TimeData time) ... */" />
+            <marker date="1523721116184" expanded="true" signature="3001:3317" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
           </folding>
         </state>
       </provider>

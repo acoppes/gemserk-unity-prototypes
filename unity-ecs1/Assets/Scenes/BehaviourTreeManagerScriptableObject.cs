@@ -5,28 +5,28 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Managers/BehaviourTreeManager")]
 public class BehaviourTreeManagerScriptableObject : ScriptableObject, BehaviourTreeManager
 {
-    Dictionary<string, IBehaviourTreeNode> _trees = new Dictionary<string, IBehaviourTreeNode>();
+    private readonly Dictionary<string, IBehaviourTreeNode> _trees = new Dictionary<string, IBehaviourTreeNode>();
 
-    IBehaviourTreeContext _context;
+    private object _context;
 
     public void Add(string name, IBehaviourTreeNode t)
     {
         _trees[name] = t;
     }
 
-    public IBehaviourTreeContext GetContext()
+    public object GetContext()
     {
         return _context;
     }
 
     public IBehaviourTreeNode GetTree(string name)
     {
-        IBehaviourTreeNode node = null;
+        IBehaviourTreeNode node;
         _trees.TryGetValue(name, out node);
         return node;
     }
 
-    public void SetContext(IBehaviourTreeContext context)
+    public void SetContext(object context)
     {
         _context = context;
     }

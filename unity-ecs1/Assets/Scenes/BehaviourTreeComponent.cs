@@ -2,17 +2,10 @@
 
 namespace VirtualVillagers
 {
-    public class BehaviourTreeComponent : MonoBehaviour, IBehaviourTreeContext
+    public class BehaviourTreeComponent : MonoBehaviour
     {
         public UnityEngine.Object _behaviourTreeManager;
         public string _behaviourTreeName;
-
-        public T Get<T>(string name) where T : class
-        {
-            if (name.Equals("gameObject"))
-                return gameObject as T;
-            return null;
-        }
 
         public void Process(float dt)
         {
@@ -22,7 +15,7 @@ namespace VirtualVillagers
             var tree = btManager.GetTree(_behaviourTreeName);
             if (tree == null)
                 return;
-            btManager.SetContext(this);
+            btManager.SetContext(gameObject);
             tree.Tick(new FluentBehaviourTree.TimeData(dt));
             btManager.SetContext(null);
         }

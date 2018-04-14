@@ -10,13 +10,10 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 	void Awake() {
         var btManager = _behaviourTreeManager as BehaviourTreeManager;
 
-		var tree = new BehaviourTreeBuilder().Build();
-
 		btManager.Add("MoveRightTree", new BehaviourTreeBuilder()
             .Sequence("TestSequence")
                 .Do("MyFirstAction", delegate (TimeData time) {
-                    var context = btManager.GetContext();
-                    var gameObject = context.Get<GameObject>("gameObject");
+                    var gameObject = btManager.GetContext() as GameObject;
                     var movement = gameObject.GetComponent<MovementComponent>();
                     movement.direction.x = 1;
                     return BehaviourTreeStatus.Success;
@@ -36,8 +33,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 //						return !movement.hasDestination;
 //					})
 					.Do("SetDestination", delegate (TimeData time) {
-						var context = btManager.GetContext();
-						var gameObject = context.Get<GameObject>("gameObject");
+						var gameObject = btManager.GetContext() as GameObject;
 						var movement = gameObject.GetComponent<MovementComponent>();
 						if (movement.hasDestination)
 							return BehaviourTreeStatus.Failure;
@@ -55,8 +51,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 //						return movement.hasDestination && Vector2.Distance(transform.position, movement.destination) > 5.0f;
 //					})
 					.Do("MoveToDestination", delegate (TimeData time) {
-						var context = btManager.GetContext();
-						var gameObject = context.Get<GameObject>("gameObject");
+						var gameObject = btManager.GetContext() as GameObject;
 						var movement = gameObject.GetComponent<MovementComponent>();
 						var distance = Vector2.Distance(gameObject.transform.position, movement.destination);
 						if (distance < movement.destinationDistance)
@@ -68,8 +63,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				.End()
 				.Sequence("Idle")
 					.Do("ClearDestination", delegate (TimeData time) {
-						var context = btManager.GetContext();
-						var gameObject = context.Get<GameObject>("gameObject");
+						var gameObject = btManager.GetContext() as GameObject;
 						var movement = gameObject.GetComponent<MovementComponent>();
 						movement.hasDestination = false;
 						return BehaviourTreeStatus.Success;
@@ -77,6 +71,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				.End()
 			.End()
 			.Build());
+		
 		// Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto
         // Tener una accion separada para incrementar el cooldown? 
         // (o bien chequear por un dato general en el contexto, tipo el "frame" de ejecución)

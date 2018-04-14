@@ -12,6 +12,7 @@ namespace FluentBehaviourTree
             _status = Update(time);
             if (_status != BehaviourTreeStatus.Running)
                 OnTerminate();
+            return _status;
         }
 
         protected virtual void OnInitialize()
