@@ -6,9 +6,35 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
     public UnityEngine.Object _behaviourTreeManager;
 
+	public GameObject spawnPrefab;
+
 	// Update is called once per frame
 	void Awake() {
         var btManager = _behaviourTreeManager as BehaviourTreeManager;
+		
+		var spawnerTree = new BehaviourTreeBuilder()
+			.Sequence("Spawner")
+				.Do("WaitSomeTime", delegate(TimeData time)
+				{
+					var gameObject = btManager.GetContext() as GameObject;
+					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+					btContext.spawnIdleCurrentTime -= time.deltaTime;
+					return btContext.spawnIdleCurrentTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
+				})
+				.Do("SpawnAndRestart", delegate(TimeData time)
+				{
+					var gameObject = btManager.GetContext() as GameObject;
+					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+					var spawnPosition = UnityEngine.Random.insideUnitCircle * 10.0f;
+					var spawnItem = GameObject.Instantiate(spawnPrefab);
+					spawnItem.transform.position = spawnPosition;
+					btContext.spawnIdleCurrentTime = btContext.spawnIdleTotalTime;
+					return BehaviourTreeStatus.Success;
+				})
+			.End()
+			.Build();
+		
+		btManager.Add("Spawner", spawnerTree);
 
 		var idleTree = new BehaviourTreeBuilder()
 			.Sequence("IdleSequence")
@@ -87,6 +113,9 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
         // (o bien chequear por un dato general en el contexto, tipo el "frame" de ejecución)
 		
 		// se puede construir action custom? No -> construir propias
+		
+		// lugar de datos comun para usar en los behaviour (actions)
+		// lugar propio (contexto local, independiente del tree, pertenece a la unidad)
 		
 		// tener un buen debug de esto es escencial
     }

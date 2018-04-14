@@ -4,6 +4,7 @@
     <e p="C:\Users\Ariel\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_unity-ecs1.-93884919.00" t="ExcludeRecursive" />
     <e p="D:\Documents\workspace\gemserk-prototypes\unity-ecs1" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="FluentBehaviourTree" t="Include">
@@ -23,6 +24,65 @@
           </e>
           <e p="TimeData.cs" t="Include" />
         </e>
+        <e p="PandaBehaviour" t="Include">
+          <e p="ChangeLog.txt" t="Include" />
+          <e p="Core" t="Include">
+            <e p="Editor" t="Include">
+              <e p="CreatePandaScriptMenu.cs" t="Include" />
+              <e p="PandaBehaviourEditor.cs" t="Include" />
+            </e>
+            <e p="PandaBehaviour.cs" t="Include" />
+            <e p="PandaBehaviour.xml" t="Include" />
+          </e>
+          <e p="Examples" t="Include">
+            <e p="00_ChangeColor" t="Include">
+              <e p="Assets" t="Include">
+                <e p="ChangeColor.BT.txt" t="Include" />
+                <e p="MyCube.cs" t="Include" />
+              </e>
+            </e>
+            <e p="01_Move" t="Include">
+              <e p="Assets" t="Include">
+                <e p="Move.BT.txt" t="Include" />
+                <e p="Move.cs" t="Include" />
+              </e>
+            </e>
+            <e p="02_PlayTag" t="Include">
+              <e p="Assets" t="Include">
+                <e p="Computer.BT.txt" t="Include" />
+                <e p="Computer.cs" t="Include" />
+                <e p="Dialogue.cs" t="Include" />
+                <e p="Player.cs" t="Include" />
+                <e p="PlayTag.BT.txt" t="Include" />
+                <e p="PlayTag.commented.BT.txt" t="Include" />
+                <e p="TagDialogue.BT.txt" t="Include" />
+              </e>
+            </e>
+            <e p="03_Shooter" t="Include">
+              <e p="Assets" t="Include">
+                <e p="AI.BT.lib.txt" t="Include" />
+                <e p="AI.cs" t="Include" />
+                <e p="AIVision.cs" t="Include" />
+                <e p="Bullet.cs" t="Include" />
+                <e p="BulletImpact.cs" t="Include" />
+                <e p="FollowCamera.cs" t="Include" />
+                <e p="GameController.BT.txt" t="Include" />
+                <e p="HUD.cs" t="Include" />
+                <e p="Hunter.BT.txt" t="Include" />
+                <e p="Patroller.BT.txt" t="Include" />
+                <e p="Patroller.cs" t="Include" />
+                <e p="Player.BT.txt" t="Include" />
+                <e p="ShooterGameController.cs" t="Include" />
+                <e p="Sniper.BT.txt" t="Include" />
+                <e p="TriggerType.cs" t="Include" />
+                <e p="Unit.cs" t="Include" />
+                <e p="UnitExplosion.cs" t="Include" />
+                <e p="WaypointPath.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="readme.txt" t="Include" />
+        </e>
         <e p="Plugins" t="Include">
           <e p="Editor" t="Include">
             <e p="JetBrains" t="Include">
@@ -32,6 +92,7 @@
         </e>
         <e p="Scenes" t="Include">
           <e p="BehaviourTreeComponent.cs" t="Include" />
+          <e p="BehaviourTreeContextComponent.cs" t="Include" />
           <e p="BehaviourTreeManager.cs" t="Include" />
           <e p="BehaviourTreeManagerScriptableObject.cs" t="Include" />
           <e p="BehaviourTreeSystem.cs" t="Include" />

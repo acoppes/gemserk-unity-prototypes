@@ -6,6 +6,8 @@ namespace VirtualVillagers
     {
         public UnityEngine.Object _behaviourTreeManager;
         public string _behaviourTreeName;
+        
+        // entity context
 
         public void Process(float dt)
         {
