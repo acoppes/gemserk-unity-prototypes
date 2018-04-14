@@ -7,5 +7,8 @@ namespace VirtualVillagers
         public string spawnItemsTag;
         public float spawnIdleTotalTime;
         public float spawnIdleCurrentTime;
+
+        public GameObject foodSelection;
+        public int foodConsumed;
     }
 }

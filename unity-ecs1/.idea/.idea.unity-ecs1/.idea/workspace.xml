@@ -25,17 +25,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BehaviourTreeTestSceneController.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BehaviourTreeTestSceneController.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+            <state relative-caret-position="368">
+              <caret line="94" column="16" lean-forward="false" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
               <folding>
-                <marker date="1523744069221" expanded="true" signature="6:69" ph="..." />
-                <marker date="1523744069221" expanded="true" signature="133:5223" ph="{...}" />
-                <marker date="1523744069221" expanded="true" signature="308:5221" ph="{...}" />
-                <marker date="1523744069221" expanded="true" signature="493:856" ph="{...}" />
-                <marker date="1523744069221" expanded="true" signature="4710:5215" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+                <marker date="1523745083150" expanded="true" signature="6:69" ph="..." />
+                <marker date="1523745083150" expanded="true" signature="133:7950" ph="{...}" />
+                <marker date="1523745083150" expanded="true" signature="308:7948" ph="{...}" />
+                <marker date="1523745083150" expanded="true" signature="493:856" ph="{...}" />
+                <marker date="1523745083150" expanded="true" signature="3729:3903" ph="{...}" />
+                <marker date="1523745083150" expanded="true" signature="7437:7942" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
               </folding>
             </state>
           </provider>
@@ -87,11 +88,11 @@
       <file leaf-file-name="BehaviourTreeContextComponent.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="35" lean-forward="false" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="35" />
+            <state relative-caret-position="187">
+              <caret line="11" column="32" lean-forward="false" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
               <folding>
-                <marker date="1523743952226" expanded="true" signature="46:246" ph="{...}" />
-                <marker date="1523743952226" expanded="true" signature="111:244" ph="{...}" />
+                <marker date="1523745075910" expanded="true" signature="46:321" ph="{...}" />
+                <marker date="1523745075910" expanded="true" signature="111:319" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -113,7 +114,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActionNode.cs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ActionNode.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
@@ -375,12 +376,12 @@
       <updated>1523584889224</updated>
       <workItem from="1523584893960" duration="1578000" />
       <workItem from="1523664404567" duration="9869000" />
-      <workItem from="1523740432304" duration="3426000" />
+      <workItem from="1523740432304" duration="4747000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14873000" />
+    <option name="totallyTimeSpent" value="16194000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -406,7 +407,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2553305" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -426,15 +427,15 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2553305" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2553305" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -628,11 +629,12 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1523744069221" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523744069221" expanded="true" signature="133:5223" ph="{...}" />
-            <marker date="1523744069221" expanded="true" signature="308:5221" ph="{...}" />
-            <marker date="1523744069221" expanded="true" signature="493:856" ph="{...}" />
-            <marker date="1523744069221" expanded="true" signature="4710:5215" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523745083150" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523745083150" expanded="true" signature="133:7950" ph="{...}" />
+            <marker date="1523745083150" expanded="true" signature="308:7948" ph="{...}" />
+            <marker date="1523745083150" expanded="true" signature="493:856" ph="{...}" />
+            <marker date="1523745083150" expanded="true" signature="3729:3903" ph="{...}" />
+            <marker date="1523745083150" expanded="true" signature="7437:7942" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
           </folding>
         </state>
       </provider>
@@ -818,23 +820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
-          <folding>
-            <marker date="1523720618245" expanded="false" signature="6:85" ph="..." />
-            <marker date="1523720618245" expanded="true" signature="116:811" ph="{...}" />
-            <marker date="1523720618245" expanded="true" signature="123:213" ph="/// A behaviour tree leaf node for running an action. ... " />
-            <marker date="1523720618245" expanded="true" signature="262:809" ph="{...}" />
-            <marker date="1523720618245" expanded="true" signature="277:347" ph="/// The name of the node. ... " />
-            <marker date="1523720618245" expanded="true" signature="386:469" ph="/// Function to invoke for the action. ... " />
-            <marker date="1523720618245" expanded="true" signature="622:698" ph="{...}" />
-            <marker date="1523720618245" expanded="true" signature="754:803" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/SequenceNode.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -952,25 +937,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="35" lean-forward="false" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="35" />
+        <state relative-caret-position="187">
+          <caret line="11" column="32" lean-forward="false" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
           <folding>
-            <marker date="1523743952226" expanded="true" signature="46:246" ph="{...}" />
-            <marker date="1523743952226" expanded="true" signature="111:244" ph="{...}" />
+            <marker date="1523745075910" expanded="true" signature="46:321" ph="{...}" />
+            <marker date="1523745075910" expanded="true" signature="111:319" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+        <state relative-caret-position="368">
+          <caret line="94" column="16" lean-forward="false" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
           <folding>
-            <marker date="1523744069221" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523744069221" expanded="true" signature="133:5223" ph="{...}" />
-            <marker date="1523744069221" expanded="true" signature="308:5221" ph="{...}" />
-            <marker date="1523744069221" expanded="true" signature="493:856" ph="{...}" />
-            <marker date="1523744069221" expanded="true" signature="4710:5215" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523745083150" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523745083150" expanded="true" signature="133:7950" ph="{...}" />
+            <marker date="1523745083150" expanded="true" signature="308:7948" ph="{...}" />
+            <marker date="1523745083150" expanded="true" signature="493:856" ph="{...}" />
+            <marker date="1523745083150" expanded="true" signature="3729:3903" ph="{...}" />
+            <marker date="1523745083150" expanded="true" signature="7437:7942" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+          <folding>
+            <marker date="1523720618245" expanded="false" signature="6:85" ph="..." />
+            <marker date="1523720618245" expanded="true" signature="116:811" ph="{...}" />
+            <marker date="1523720618245" expanded="true" signature="123:213" ph="/// A behaviour tree leaf node for running an action. ... " />
+            <marker date="1523720618245" expanded="true" signature="262:809" ph="{...}" />
+            <marker date="1523720618245" expanded="true" signature="277:347" ph="/// The name of the node. ... " />
+            <marker date="1523720618245" expanded="true" signature="386:469" ph="/// Function to invoke for the action. ... " />
+            <marker date="1523720618245" expanded="true" signature="622:698" ph="{...}" />
+            <marker date="1523720618245" expanded="true" signature="754:803" ph="{...}" />
           </folding>
         </state>
       </provider>

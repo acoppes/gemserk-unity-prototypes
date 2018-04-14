@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 377323495}
   - component: {fileID: 377323496}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,8 +199,9 @@ GameObject:
   - component: {fileID: 811575552}
   - component: {fileID: 811575551}
   - component: {fileID: 811575550}
+  - component: {fileID: 811575555}
   m_Layer: 0
-  m_Name: GameObject (3)
+  m_Name: Verde
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
     type: 2}
-  _behaviourTreeName: MoveLeftTree
+  _behaviourTreeName: WandererAndEater
 --- !u!114 &811575551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,11 +235,11 @@ MonoBehaviour:
   direction:
     x: 0
     y: 0
-  speed: 3
+  speed: 4
   hasDestination: 0
   destination: {x: 0, y: 0}
-  destinationDistance: 1
-  idleTime: 2
+  destinationDistance: 0.5
+  idleTime: 6
   currentIdleTime: 0
 --- !u!114 &811575552
 MonoBehaviour:
@@ -280,6 +281,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &811575555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811575549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnItemsTag: 
+  spawnIdleTotalTime: 0
+  spawnIdleCurrentTime: 0
+  foodSelection: {fileID: 0}
+  foodConsumed: 0
 --- !u!1 &828930775
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +381,7 @@ GameObject:
   - component: {fileID: 857764952}
   - component: {fileID: 857764953}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -724,8 +741,9 @@ GameObject:
   - component: {fileID: 1577388616}
   - component: {fileID: 1577388614}
   - component: {fileID: 1577388613}
+  - component: {fileID: 1577388615}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: Rojo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -744,7 +762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
     type: 2}
-  _behaviourTreeName: MoveLeftTree
+  _behaviourTreeName: WandererAndEater
 --- !u!114 &1577388614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -759,12 +777,28 @@ MonoBehaviour:
   direction:
     x: 0
     y: 0
-  speed: 1
+  speed: 3
   hasDestination: 0
   destination: {x: 0, y: 0}
-  destinationDistance: 1
-  idleTime: 5
+  destinationDistance: 0.5
+  idleTime: 3
   currentIdleTime: 0
+--- !u!114 &1577388615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1577388612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnItemsTag: 
+  spawnIdleTotalTime: 0
+  spawnIdleCurrentTime: 0
+  foodSelection: {fileID: 0}
+  foodConsumed: 0
 --- !u!114 &1577388616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,8 +883,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnItemsTag: Food
-  spawnIdleTotalTime: 3
+  spawnIdleTotalTime: 1
   spawnIdleCurrentTime: 0
+  foodSelection: {fileID: 0}
+  foodConsumed: 0
 --- !u!4 &1629513819
 Transform:
   m_ObjectHideFlags: 0

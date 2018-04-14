@@ -67,20 +67,91 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			})
 			.End()
 			.Build();
+		
+		var foodConsumerTree = new BehaviourTreeBuilder()
+			.Sequence("SearchFood")
+			.Condition("IsThereAnyFood", delegate(TimeData data)
+			{
+				var foodItems = GameObject.FindGameObjectsWithTag("Food");
+				return foodItems.Length > 0;
+			})
+			.Do("SelectRandomFood", delegate(TimeData time)
+			{
+				var gameObject = btManager.GetContext() as GameObject;
+				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+				if (btContext.foodSelection != null)
+					return BehaviourTreeStatus.Success;
+				var foodItems = GameObject.FindGameObjectsWithTag("Food");
+				btContext.foodSelection = foodItems[UnityEngine.Random.Range(0, foodItems.Length)];
+				return BehaviourTreeStatus.Success;
+			})
+			.Do("MoveToFood", delegate(TimeData time)
+			{
+				var gameObject = btManager.GetContext() as GameObject;
+				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+				var movement = gameObject.GetComponent<MovementComponent>();
+				
+				var food = btContext.foodSelection;
+				
+				var distance = Vector2.Distance(gameObject.transform.position, food.transform.position);
+				if (distance < movement.destinationDistance)
+				{
+					btContext.foodSelection = null;
+					// consumes food
+					GameObject.Destroy(food);
+					btContext.foodConsumed++;
+					return BehaviourTreeStatus.Success;
+				}
+				
+				movement.direction.x = food.transform.position.x - gameObject.transform.position.x;
+				movement.direction.y = food.transform.position.y - gameObject.transform.position.y;
+				
+				return BehaviourTreeStatus.Running;
+			})
+			.End()
+			.Build();
 
-		btManager.Add("MoveRightTree", new BehaviourTreeBuilder()
-            .Sequence("TestSequence")
-                .Do("MyFirstAction", delegate (TimeData time) {
-                    var gameObject = btManager.GetContext() as GameObject;
-                    var movement = gameObject.GetComponent<MovementComponent>();
-                    movement.direction.x = 1;
-                    return BehaviourTreeStatus.Success;
-                })
-            .End()
-            .Build());
+		btManager.Add("WandererAndEater", new BehaviourTreeBuilder()
+			.Selector("TestSequence")
+			.Node(foodConsumerTree)
+			.Sequence("SetWanderDestination")
+			.Condition("NotHasDestination", delegate(TimeData time)
+			{
+				var gameObject = btManager.GetContext() as GameObject;
+				var movement = gameObject.GetComponent<MovementComponent>();
+				return !movement.hasDestination;
+			})
+			.Do("SetDestination", delegate (TimeData time) {
+				var gameObject = btManager.GetContext() as GameObject;
+				var movement = gameObject.GetComponent<MovementComponent>();
+				movement.destination = UnityEngine.Random.insideUnitCircle * 10.0f;
+				movement.hasDestination = true;
+				// movement.currentIdleTime = movement.idleTime;
+				return BehaviourTreeStatus.Success;
+			}) 
+			.End()
+			.Sequence("Wander")
+			.Condition("HasDestinationAndNotNear", delegate(TimeData time)
+			{
+				var gameObject = btManager.GetContext() as GameObject;
+				var movement = gameObject.GetComponent<MovementComponent>();
+				var distance = Vector2.Distance(gameObject.transform.position, movement.destination);
+				return movement.hasDestination && distance > movement.destinationDistance;
+			})
+			.Do("MoveToDestination", delegate (TimeData time) {
+				var gameObject = btManager.GetContext() as GameObject;
+				var movement = gameObject.GetComponent<MovementComponent>();
+				movement.direction.x = movement.destination.x - gameObject.transform.position.x;
+				movement.direction.y = movement.destination.y - gameObject.transform.position.y;
+				return BehaviourTreeStatus.Running;
+			})
+			.End()
+			.Node(idleTree)
+			.End()
+			.Build());
 
 
-		btManager.Add("MoveLeftTree", new BehaviourTreeBuilder()
+		btManager.Add("Wanderer", new BehaviourTreeBuilder()
 			.Selector("TestSequence")
 				.Sequence("SetWanderDestination")
 					.Condition("NotHasDestination", delegate(TimeData time)
