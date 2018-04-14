@@ -234,7 +234,12 @@ MonoBehaviour:
   direction:
     x: 0
     y: 0
-  speed: 1
+  speed: 3
+  hasDestination: 0
+  destination: {x: 0, y: 0}
+  destinationDistance: 1
+  idleTime: 2
+  currentIdleTime: 0
 --- !u!114 &811575552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +514,11 @@ MonoBehaviour:
     x: 0
     y: 0
   speed: 1
+  hasDestination: 0
+  destination: {x: 0, y: 0}
+  destinationDistance: 1
+  idleTime: 0
+  currentIdleTime: 0
 --- !u!1 &1139621983
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
     type: 2}
-  _behaviourTreeName: MoveRightTree
+  _behaviourTreeName: MoveLeftTree
 --- !u!114 &1577388614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +757,11 @@ MonoBehaviour:
     x: 0
     y: 0
   speed: 1
+  hasDestination: 0
+  destination: {x: 0, y: 0}
+  destinationDistance: 1
+  idleTime: 5
+  currentIdleTime: 0
 --- !u!114 &1577388616
 MonoBehaviour:
   m_ObjectHideFlags: 0

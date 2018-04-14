@@ -36,6 +36,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						var movement = gameObject.GetComponent<MovementComponent>();
 						movement.destination = UnityEngine.Random.insideUnitCircle * 10.0f;
 						movement.hasDestination = true;
+						movement.currentIdleTime = movement.idleTime;
 						return BehaviourTreeStatus.Success;
 					}) 
 				.End()
@@ -56,10 +57,19 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					})
 				.End()
 				.Sequence("Idle")
-					.Do("ClearDestination", delegate (TimeData time) {
+					.Do("IdleTime", delegate (TimeData time) {
+						var gameObject = btManager.GetContext() as GameObject;
+						var movement = gameObject.GetComponent<MovementComponent>();
+						movement.currentIdleTime -= time.deltaTime;
+						movement.direction.x = 0;
+						movement.direction.y = 0;
+						return movement.currentIdleTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
+					})
+					.Do("ResetDestinationSet", delegate (TimeData time) {
 						var gameObject = btManager.GetContext() as GameObject;
 						var movement = gameObject.GetComponent<MovementComponent>();
 						movement.hasDestination = false;
+						// movement.currentIdleTime = movement.idleTime;
 						return BehaviourTreeStatus.Success;
 					})
 				.End()
@@ -70,7 +80,8 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
         // Tener una accion separada para incrementar el cooldown? 
         // (o bien chequear por un dato general en el contexto, tipo el "frame" de ejecución)
 		
-		// testear condicion de nuevo
-		// se puede construir action custom?
+		// se puede construir action custom? No -> construir propias
+		
+		// tener un buen debug de esto es escencial
     }
 }

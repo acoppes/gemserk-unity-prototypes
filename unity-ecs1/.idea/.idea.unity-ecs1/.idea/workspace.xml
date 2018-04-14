@@ -28,13 +28,27 @@
       <file leaf-file-name="BehaviourTreeTestSceneController.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="606">
-              <caret line="58" column="70" lean-forward="true" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
+            <state relative-caret-position="408">
+              <caret line="72" column="24" lean-forward="false" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="24" />
               <folding>
-                <marker date="1523728220513" expanded="true" signature="6:69" ph="..." />
-                <marker date="1523728220513" expanded="true" signature="133:3009" ph="{...}" />
-                <marker date="1523728220513" expanded="true" signature="240:3007" ph="{...}" />
-                <marker date="1523728220513" expanded="true" signature="2685:3001" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+                <marker date="1523729442583" expanded="true" signature="6:69" ph="..." />
+                <marker date="1523729442583" expanded="true" signature="133:3561" ph="{...}" />
+                <marker date="1523729442583" expanded="true" signature="240:3559" ph="{...}" />
+                <marker date="1523729442583" expanded="true" signature="3196:3553" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MovementComponent.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="16" column="37" lean-forward="false" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+              <folding>
+                <marker date="1523728752943" expanded="false" signature="6:43" ph="..." />
+                <marker date="1523728752943" expanded="true" signature="71:399" ph="{...}" />
+                <marker date="1523728752943" expanded="true" signature="124:397" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -105,8 +119,8 @@
       <file leaf-file-name="ActionNode.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+            <state relative-caret-position="476">
+              <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
               <folding>
                 <marker date="1523720618245" expanded="false" signature="6:85" ph="..." />
                 <marker date="1523720618245" expanded="true" signature="116:811" ph="{...}" />
@@ -116,6 +130,52 @@
                 <marker date="1523720618245" expanded="true" signature="386:469" ph="/// Function to invoke for the action. ... " />
                 <marker date="1523720618245" expanded="true" signature="622:698" ph="{...}" />
                 <marker date="1523720618245" expanded="true" signature="754:803" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SequenceNode.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/SequenceNode.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="39" column="8" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
+              <folding>
+                <marker date="1523717580071" expanded="false" signature="6:85" ph="..." />
+                <marker date="1523717580071" expanded="true" signature="116:1274" ph="{...}" />
+                <marker date="1523717580071" expanded="true" signature="123:210" ph="/// Runs child nodes in sequence, until one fails. ... " />
+                <marker date="1523717580071" expanded="true" signature="267:1272" ph="{...}" />
+                <marker date="1523717580071" expanded="true" signature="282:348" ph="/// Name of the node. ... " />
+                <marker date="1523717580071" expanded="true" signature="387:456" ph="/// List of child nodes. ... " />
+                <marker date="1523717580071" expanded="true" signature="632:682" ph="{...}" />
+                <marker date="1523717580071" expanded="true" signature="738:1071" ph="{...}" />
+                <marker date="1523717580071" expanded="true" signature="792:1012" ph="{...}" />
+                <marker date="1523717580071" expanded="true" signature="922:998" ph="{...}" />
+                <marker date="1523717580071" expanded="true" signature="1081:1158" ph="/// Add a child to the sequence. ... " />
+                <marker date="1523717580071" expanded="true" signature="1213:1266" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SelectorNode.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/SelectorNode.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+              <folding>
+                <marker date="1523717580070" expanded="false" signature="6:85" ph="..." />
+                <marker date="1523717580070" expanded="true" signature="116:1330" ph="{...}" />
+                <marker date="1523717580070" expanded="true" signature="123:262" ph="/// Selects the first node that succeeds. Tries successive nodes until it finds one that doesn't fail. ... " />
+                <marker date="1523717580070" expanded="true" signature="319:1328" ph="{...}" />
+                <marker date="1523717580070" expanded="true" signature="334:404" ph="/// The name of the node. ... " />
+                <marker date="1523717580070" expanded="true" signature="443:512" ph="/// List of child nodes. ... " />
+                <marker date="1523717580070" expanded="true" signature="683:733" ph="{...}" />
+                <marker date="1523717580070" expanded="true" signature="789:1122" ph="{...}" />
+                <marker date="1523717580070" expanded="true" signature="843:1063" ph="{...}" />
+                <marker date="1523717580070" expanded="true" signature="973:1049" ph="{...}" />
+                <marker date="1523717580070" expanded="true" signature="1132:1214" ph="/// Add a child node to the selector. ... " />
+                <marker date="1523717580070" expanded="true" signature="1269:1322" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -160,6 +220,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManagerScriptableObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionNode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/SelectorNode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/SequenceNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionCallbackNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseActionNode.cs" root0="FORCE_HIGHLIGHTING" />
@@ -181,7 +243,6 @@
         <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeSystem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/PlayerInputSystem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/MovementSystem.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/BehaviourTreeBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionCallbackNode.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionNode.cs" />
@@ -190,6 +251,7 @@
         <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManagerScriptableObject.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseActionNode.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs" />
       </list>
     </option>
@@ -290,12 +352,12 @@
       <option name="presentableId" value="Default" />
       <updated>1523584889224</updated>
       <workItem from="1523584893960" duration="1578000" />
-      <workItem from="1523664404567" duration="7816000" />
+      <workItem from="1523664404567" duration="9076000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9394000" />
+    <option name="totallyTimeSpent" value="10654000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -323,7 +385,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -364,7 +426,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -477,18 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="13" column="48" lean-forward="false" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
-          <folding>
-            <marker date="1523666598552" expanded="false" signature="6:43" ph="..." />
-            <marker date="1523666598552" expanded="true" signature="71:329" ph="{...}" />
-            <marker date="1523666598552" expanded="true" signature="124:327" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8B8AAE6D-F35C-455B-8F99-097C87BBB15C/a6/7319e800/IBehaviourTreeNode.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -523,23 +573,6 @@
             <marker date="1523717580064" expanded="true" signature="123:199" ph="/// Interface for behaviour tree nodes. ... " />
             <marker date="1523717580064" expanded="true" signature="239:396" ph="{...}" />
             <marker date="1523717580064" expanded="true" signature="254:341" ph="/// Update the time of the behaviour tree. ... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding>
-            <marker date="1523720618245" expanded="false" signature="6:85" ph="..." />
-            <marker date="1523720618245" expanded="true" signature="116:811" ph="{...}" />
-            <marker date="1523720618245" expanded="true" signature="123:213" ph="/// A behaviour tree leaf node for running an action. ... " />
-            <marker date="1523720618245" expanded="true" signature="262:809" ph="{...}" />
-            <marker date="1523720618245" expanded="true" signature="277:347" ph="/// The name of the node. ... " />
-            <marker date="1523720618245" expanded="true" signature="386:469" ph="/// Function to invoke for the action. ... " />
-            <marker date="1523720618245" expanded="true" signature="622:698" ph="{...}" />
-            <marker date="1523720618245" expanded="true" signature="754:803" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -663,15 +696,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" column="37" lean-forward="false" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+          <folding>
+            <marker date="1523728752943" expanded="false" signature="6:43" ph="..." />
+            <marker date="1523728752943" expanded="true" signature="71:399" ph="{...}" />
+            <marker date="1523728752943" expanded="true" signature="124:397" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+          <folding>
+            <marker date="1523720618245" expanded="false" signature="6:85" ph="..." />
+            <marker date="1523720618245" expanded="true" signature="116:811" ph="{...}" />
+            <marker date="1523720618245" expanded="true" signature="123:213" ph="/// A behaviour tree leaf node for running an action. ... " />
+            <marker date="1523720618245" expanded="true" signature="262:809" ph="{...}" />
+            <marker date="1523720618245" expanded="true" signature="277:347" ph="/// The name of the node. ... " />
+            <marker date="1523720618245" expanded="true" signature="386:469" ph="/// Function to invoke for the action. ... " />
+            <marker date="1523720618245" expanded="true" signature="622:698" ph="{...}" />
+            <marker date="1523720618245" expanded="true" signature="754:803" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/SequenceNode.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="39" column="8" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
+          <folding>
+            <marker date="1523717580071" expanded="false" signature="6:85" ph="..." />
+            <marker date="1523717580071" expanded="true" signature="116:1274" ph="{...}" />
+            <marker date="1523717580071" expanded="true" signature="123:210" ph="/// Runs child nodes in sequence, until one fails. ... " />
+            <marker date="1523717580071" expanded="true" signature="267:1272" ph="{...}" />
+            <marker date="1523717580071" expanded="true" signature="282:348" ph="/// Name of the node. ... " />
+            <marker date="1523717580071" expanded="true" signature="387:456" ph="/// List of child nodes. ... " />
+            <marker date="1523717580071" expanded="true" signature="632:682" ph="{...}" />
+            <marker date="1523717580071" expanded="true" signature="738:1071" ph="{...}" />
+            <marker date="1523717580071" expanded="true" signature="792:1012" ph="{...}" />
+            <marker date="1523717580071" expanded="true" signature="922:998" ph="{...}" />
+            <marker date="1523717580071" expanded="true" signature="1081:1158" ph="/// Add a child to the sequence. ... " />
+            <marker date="1523717580071" expanded="true" signature="1213:1266" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/SelectorNode.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+          <folding>
+            <marker date="1523717580070" expanded="false" signature="6:85" ph="..." />
+            <marker date="1523717580070" expanded="true" signature="116:1330" ph="{...}" />
+            <marker date="1523717580070" expanded="true" signature="123:262" ph="/// Selects the first node that succeeds. Tries successive nodes until it finds one that doesn't fail. ... " />
+            <marker date="1523717580070" expanded="true" signature="319:1328" ph="{...}" />
+            <marker date="1523717580070" expanded="true" signature="334:404" ph="/// The name of the node. ... " />
+            <marker date="1523717580070" expanded="true" signature="443:512" ph="/// List of child nodes. ... " />
+            <marker date="1523717580070" expanded="true" signature="683:733" ph="{...}" />
+            <marker date="1523717580070" expanded="true" signature="789:1122" ph="{...}" />
+            <marker date="1523717580070" expanded="true" signature="843:1063" ph="{...}" />
+            <marker date="1523717580070" expanded="true" signature="973:1049" ph="{...}" />
+            <marker date="1523717580070" expanded="true" signature="1132:1214" ph="/// Add a child node to the selector. ... " />
+            <marker date="1523717580070" expanded="true" signature="1269:1322" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="58" column="70" lean-forward="true" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
+        <state relative-caret-position="408">
+          <caret line="72" column="24" lean-forward="false" selection-start-line="72" selection-start-column="24" selection-end-line="72" selection-end-column="24" />
           <folding>
-            <marker date="1523728220513" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523728220513" expanded="true" signature="133:3009" ph="{...}" />
-            <marker date="1523728220513" expanded="true" signature="240:3007" ph="{...}" />
-            <marker date="1523728220513" expanded="true" signature="2685:3001" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523729442583" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523729442583" expanded="true" signature="133:3561" ph="{...}" />
+            <marker date="1523729442583" expanded="true" signature="240:3559" ph="{...}" />
+            <marker date="1523729442583" expanded="true" signature="3196:3553" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
           </folding>
         </state>
       </provider>
