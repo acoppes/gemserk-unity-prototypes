@@ -179,6 +179,15 @@ MonoBehaviour:
   treeMaxSize: 3
   treeMinSpawnDistance: 1.75
   treeMaxSpawnDistance: 2.5
+  treeSeeds: 1
+  treeLumberPerSize: 5
+  treeCurrentLumber: 15
+  harvestLumberCurrent: 0
+  harvestLumberTotal: 10
+  harvestLumberSpeed: 1
+  harvestLumberMaxDistance: 10
+  harvestLumberMinDistance: 1.5
+  harvestLumberCurrentTree: {fileID: 0}
 --- !u!114 &114692036028976824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,8 +199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911fcd4ef786ed24d927d8d8b1cf1f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
-    type: 2}
   _behaviourTreeName: Tree
 --- !u!212 &212047340400917544
 SpriteRenderer:

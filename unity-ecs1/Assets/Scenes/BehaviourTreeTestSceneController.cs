@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using FluentBehaviourTree;
 using VirtualVillagers;
 
@@ -47,9 +48,6 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
 	private void Start() {
         var btManager = _behaviourTreeManager as BehaviourTreeManager;
-
-//		var btSystem = _world.GetExistingManager<BehaviourTreeSystem>();
-//		btSystem.SetBehaviourTreeManager(btManager);
 		
 		var moveTo = new BehaviourTreeBuilder()
 			.Sequence("MoveSequence")
@@ -209,6 +207,101 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				.End()
 			.End()
 			.Build();
+		
+		var harvestLumber = new BehaviourTreeBuilder()
+			.Selector("All")
+				.Sequence("SelectTree")
+					.Condition("NotAtMaximumLumber", delegate(TimeData time)
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+						return btContext.harvestLumberCurrent < btContext.harvestLumberTotal;
+					})
+					.Condition("IsSelectedTreaAtHarvestDistance", delegate(TimeData time)
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+
+						if (btContext.harvestLumberCurrentTree == null)
+							return false;
+						
+						return Vector2.Distance(gameObject.transform.position, btContext.harvestLumberCurrentTree.transform.position) < 
+						       btContext.harvestLumberMinDistance;
+					})
+					.Do("HarvestTree", time =>
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+						
+						var currentTree = btContext.harvestLumberCurrentTree;
+
+						var currentTreeBtContext =currentTree.GetComponent<BehaviourTreeContextComponent>();
+
+						var lumber = btContext.harvestLumberSpeed * time.deltaTime;
+
+						lumber = Mathf.Min(lumber, currentTreeBtContext.treeCurrentLumber);
+						
+						currentTreeBtContext.treeCurrentLumber -= lumber;
+						btContext.harvestLumberCurrent += lumber;
+
+						if (currentTreeBtContext.treeCurrentLumber <= 0.0f)
+						{
+							GameObject.Destroy(currentTree);
+							btContext.harvestLumberCurrentTree = null;
+						}
+
+						if (btContext.harvestLumberCurrent > btContext.harvestLumberTotal)
+						{
+							btContext.harvestLumberCurrent = btContext.harvestLumberTotal;
+							btContext.harvestLumberCurrentTree = null;
+						}
+
+						return btContext.harvestLumberCurrentTree == null ? BehaviourTreeStatus.Success : BehaviourTreeStatus.Running;
+					})
+				.End()
+				.Sequence("MoveToTree")
+					.Condition("NotAtMaximumLumber", delegate(TimeData time)
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+						return btContext.harvestLumberCurrent < btContext.harvestLumberTotal;
+					})
+					.Do("SelectTree", delegate(TimeData time)
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+		
+						if (btContext.harvestLumberCurrentTree != null)
+						{
+							return BehaviourTreeStatus.Success;
+						}
+
+						var trees = GameObject.FindGameObjectsWithTag("Tree");
+						if (trees.Length == 0)
+							return BehaviourTreeStatus.Failure;
+						
+						var nearByTrees = trees.Where(tree => Vector2.Distance(gameObject.transform.position, tree.transform.position) <
+															  btContext.harvestLumberMaxDistance).ToList();
+						if (nearByTrees.Count == 0)
+							return BehaviourTreeStatus.Failure;
+								
+						// TODO: select best tree? or random at least?
+								
+						btContext.harvestLumberCurrentTree = nearByTrees[0];
+		
+						return BehaviourTreeStatus.Success;
+					})
+					.Do("MoveToTree", delegate (TimeData time) {
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+						var movement = gameObject.GetComponent<MovementComponent>();
+						movement.SetDestination(btContext.harvestLumberCurrentTree.transform.position);
+						return BehaviourTreeStatus.Success;
+					}) 
+					.SubTree(moveTo)
+				.End()
+				.End()
+			.Build();
 
 		btManager.Add("WandererAndEater", new BehaviourTreeBuilder()
 			.Selector("Selector")
@@ -224,6 +317,17 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
 		btManager.Add("Wanderer", new BehaviourTreeBuilder()
 			.Selector("Selector")
+				.Sequence("Idle")
+					.SubTree(notMovingCondition)
+					.SubTree(idle)
+				.End()
+				.SubTree(wander)
+			.End()
+			.Build());
+		
+		btManager.Add("LumberHarvester", new BehaviourTreeBuilder()
+			.Selector("Selector")
+				.SubTree(harvestLumber)
 				.Sequence("Idle")
 					.SubTree(notMovingCondition)
 					.SubTree(idle)

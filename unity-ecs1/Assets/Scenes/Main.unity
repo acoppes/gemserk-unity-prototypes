@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0.3333335, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -218,8 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911fcd4ef786ed24d927d8d8b1cf1f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
-    type: 2}
   _behaviourTreeName: Wanderer
 --- !u!114 &811575551
 MonoBehaviour:
@@ -304,6 +302,14 @@ MonoBehaviour:
   treeMinSpawnDistance: 1
   treeMaxSpawnDistance: 3
   treeSeeds: 1
+  treeLumberPerSize: 5
+  treeCurrentLumber: 0
+  harvestLumberCurrent: 0
+  harvestLumberTotal: 10
+  harvestLumberSpeed: 1
+  harvestLumberMaxDistance: 10
+  harvestLumberMinDistance: 1.5
+  harvestLumberCurrentTree: {fileID: 0}
 --- !u!1 &828930775
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,8 +867,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911fcd4ef786ed24d927d8d8b1cf1f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
-    type: 2}
   _behaviourTreeName: WandererAndEater
 --- !u!114 &1577388614
 MonoBehaviour:
@@ -907,6 +911,14 @@ MonoBehaviour:
   treeMinSpawnDistance: 1
   treeMaxSpawnDistance: 3
   treeSeeds: 1
+  treeLumberPerSize: 5
+  treeCurrentLumber: 0
+  harvestLumberCurrent: 0
+  harvestLumberTotal: 10
+  harvestLumberSpeed: 1
+  harvestLumberMaxDistance: 10
+  harvestLumberMinDistance: 1.5
+  harvestLumberCurrentTree: {fileID: 0}
 --- !u!114 &1577388616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,8 +988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911fcd4ef786ed24d927d8d8b1cf1f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
-    type: 2}
   _behaviourTreeName: Spawner
 --- !u!114 &1629513818
 MonoBehaviour:
@@ -1005,6 +1015,14 @@ MonoBehaviour:
   treeMinSpawnDistance: 1
   treeMaxSpawnDistance: 3
   treeSeeds: 1
+  treeLumberPerSize: 5
+  treeCurrentLumber: 0
+  harvestLumberCurrent: 0
+  harvestLumberTotal: 10
+  harvestLumberSpeed: 1
+  harvestLumberMaxDistance: 10
+  harvestLumberMinDistance: 1.5
+  harvestLumberCurrentTree: {fileID: 0}
 --- !u!4 &1629513819
 Transform:
   m_ObjectHideFlags: 0
@@ -1103,6 +1121,129 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1765288696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1765288702}
+  - component: {fileID: 1765288701}
+  - component: {fileID: 1765288700}
+  - component: {fileID: 1765288699}
+  - component: {fileID: 1765288698}
+  - component: {fileID: 1765288697}
+  m_Layer: 0
+  m_Name: Harvester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1765288697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1765288696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnIdleTotalTime: 0
+  spawnIdleCurrentTime: 0
+  spawnItemsMax: 0
+  spawnPrefab: {fileID: 0}
+  foodSelection: {fileID: 0}
+  foodConsumed: 0
+  idleTotalTime: 2
+  idleCurrentTime: 0
+  treeGrowTime: 0
+  treeCurrentSize: 0
+  treeMaxSize: 3
+  treeMinSpawnDistance: 1
+  treeMaxSpawnDistance: 3
+  treeSeeds: 1
+  treeLumberPerSize: 5
+  treeCurrentLumber: 0
+  harvestLumberCurrent: 0
+  harvestLumberTotal: 10
+  harvestLumberSpeed: 0.5
+  harvestLumberMaxDistance: 10
+  harvestLumberMinDistance: 1.5
+  harvestLumberCurrentTree: {fileID: 0}
+--- !u!114 &1765288698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1765288696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911fcd4ef786ed24d927d8d8b1cf1f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _behaviourTreeName: LumberHarvester
+--- !u!114 &1765288699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1765288696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05811c16ca6aec47bef89139dbb8b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction:
+    x: 0
+    y: 0
+  speed: 4
+  destinationDistance: 0.5
+  hasDestination: 0
+  destination: {x: 0, y: 0}
+--- !u!114 &1765288700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1765288696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927e7f75370854243a5ed8aa73d2ab03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedData:
+    Value:
+      x: 2
+      y: 0
+--- !u!114 &1765288701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1765288696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1765288702
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1765288696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1861220628}
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790446321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,7 +1285,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.23362406, g: 0.3962264, b: 0.24379648, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1184,6 +1325,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1861220627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1861220628}
+  - component: {fileID: 1861220629}
+  m_Layer: 0
+  m_Name: model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1861220628
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1861220627}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1765288702}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1861220629
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1861220627}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 3641b5e93e9f83440bdc71d6040aa05b, type: 3}
+  m_Color: {r: 1, g: 0.6544963, b: 0, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 45, y: 57}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1928344248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,8 +1428,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911fcd4ef786ed24d927d8d8b1cf1f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
-    type: 2}
   _behaviourTreeName: Spawner
 --- !u!114 &1928344250
 MonoBehaviour:
@@ -1242,6 +1455,14 @@ MonoBehaviour:
   treeMinSpawnDistance: 1
   treeMaxSpawnDistance: 3
   treeSeeds: 1
+  treeLumberPerSize: 5
+  treeCurrentLumber: 0
+  harvestLumberCurrent: 0
+  harvestLumberTotal: 10
+  harvestLumberSpeed: 1
+  harvestLumberMaxDistance: 10
+  harvestLumberMinDistance: 1.5
+  harvestLumberCurrentTree: {fileID: 0}
 --- !u!114 &1928344251
 MonoBehaviour:
   m_ObjectHideFlags: 0
