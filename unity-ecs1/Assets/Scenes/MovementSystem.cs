@@ -1,4 +1,5 @@
 ﻿using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms2D;
 using UnityEngine;
 
@@ -22,8 +23,6 @@ namespace VirtualVillagers
 
             for (var i = 0; i < m_Data.Length; i++)
             {
-                // m_Data.myComponent[i].superValue++;
-
                 var p = m_Data.position[i];
                 var movement = m_Data.movement[i];
 
@@ -36,6 +35,9 @@ namespace VirtualVillagers
                 m_Data.position[i] = p;
 
                 movement.transform.position = new Vector2(p.Value.x, p.Value.y);
+
+                // resets movement direction after processing
+                movement.direction = new float2(0, 0);
             }
         }
     }

@@ -13,7 +13,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 	void Awake() {
         var btManager = _behaviourTreeManager as BehaviourTreeManager;
 		
-		var spawnerTree = new BehaviourTreeBuilder()
+		var spawner = new BehaviourTreeBuilder()
 			.Sequence("Spawner")
 				.Condition("NotAtMaximum", time =>
 				{
@@ -44,31 +44,37 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			.End()
 			.Build();
 		
-		btManager.Add("Spawner", spawnerTree);
+		btManager.Add("Spawner", spawner);
 
-		var idleTree = new BehaviourTreeBuilder()
+		var idle = new BehaviourTreeBuilder()
 			.Sequence("IdleSequence")
 			.Do("WaitSomeTime", delegate(TimeData time)
 			{
 				var gameObject = btManager.GetContext() as GameObject;
+				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
 				var movement = gameObject.GetComponent<MovementComponent>();
-				movement.currentIdleTime -= time.deltaTime;
+				
+				btContext.idleCurrentTime -= time.deltaTime;
+				
 				movement.direction.x = 0;
 				movement.direction.y = 0;
-				return movement.currentIdleTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
+				
+				return btContext.idleCurrentTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
 			})
 			.Do("ResetLastDestination", delegate(TimeData time)
 			{
 				var gameObject = btManager.GetContext() as GameObject;
-				var movement = gameObject.GetComponent<MovementComponent>();
-				movement.hasDestination = false;
-				movement.currentIdleTime = movement.idleTime;
+				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+				
+				btContext.hasWanderDestination = false;
+				btContext.idleCurrentTime = btContext.idleTotalTime;
+				
 				return BehaviourTreeStatus.Success;
 			})
 			.End()
 			.Build();
 		
-		var foodConsumerTree = new BehaviourTreeBuilder()
+		var searchFood = new BehaviourTreeBuilder()
 			.Sequence("SearchFood")
 			.Condition("IsThereAnyFood", delegate(TimeData data)
 			{
@@ -111,21 +117,19 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			.End()
 			.Build();
 
-		btManager.Add("WandererAndEater", new BehaviourTreeBuilder()
-			.Selector("TestSequence")
-			.Node(foodConsumerTree)
+		var wander = new BehaviourTreeBuilder()
 			.Sequence("SetWanderDestination")
 			.Condition("NotHasDestination", delegate(TimeData time)
 			{
 				var gameObject = btManager.GetContext() as GameObject;
-				var movement = gameObject.GetComponent<MovementComponent>();
-				return !movement.hasDestination;
+				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+				return !btContext.hasWanderDestination;
 			})
 			.Do("SetDestination", delegate (TimeData time) {
 				var gameObject = btManager.GetContext() as GameObject;
-				var movement = gameObject.GetComponent<MovementComponent>();
-				movement.destination = UnityEngine.Random.insideUnitCircle * 10.0f;
-				movement.hasDestination = true;
+				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+				btContext.wanderDestination = UnityEngine.Random.insideUnitCircle * 10.0f;
+				btContext.hasWanderDestination = true;
 				// movement.currentIdleTime = movement.idleTime;
 				return BehaviourTreeStatus.Success;
 			}) 
@@ -134,58 +138,36 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			.Condition("HasDestinationAndNotNear", delegate(TimeData time)
 			{
 				var gameObject = btManager.GetContext() as GameObject;
+				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
 				var movement = gameObject.GetComponent<MovementComponent>();
-				var distance = Vector2.Distance(gameObject.transform.position, movement.destination);
-				return movement.hasDestination && distance > movement.destinationDistance;
+				var distance = Vector2.Distance(gameObject.transform.position, btContext.wanderDestination);
+				return btContext.hasWanderDestination && distance > movement.destinationDistance;
 			})
 			.Do("MoveToDestination", delegate (TimeData time) {
 				var gameObject = btManager.GetContext() as GameObject;
 				var movement = gameObject.GetComponent<MovementComponent>();
-				movement.direction.x = movement.destination.x - gameObject.transform.position.x;
-				movement.direction.y = movement.destination.y - gameObject.transform.position.y;
+				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+				
+				movement.direction.x = btContext.wanderDestination.x - gameObject.transform.position.x;
+				movement.direction.y = btContext.wanderDestination.y - gameObject.transform.position.y;
+				
 				return BehaviourTreeStatus.Running;
 			})
-			.End()
-			.Node(idleTree)
+			.Build();
+
+		btManager.Add("WandererAndEater", new BehaviourTreeBuilder()
+			.Selector("Selector")
+				.Node(searchFood)
+				.Node(wander)
+				.Node(idle)
 			.End()
 			.Build());
 
 
 		btManager.Add("Wanderer", new BehaviourTreeBuilder()
-			.Selector("TestSequence")
-				.Sequence("SetWanderDestination")
-					.Condition("NotHasDestination", delegate(TimeData time)
-					{
-						var gameObject = btManager.GetContext() as GameObject;
-						var movement = gameObject.GetComponent<MovementComponent>();
-						return !movement.hasDestination;
-					})
-					.Do("SetDestination", delegate (TimeData time) {
-						var gameObject = btManager.GetContext() as GameObject;
-						var movement = gameObject.GetComponent<MovementComponent>();
-						movement.destination = UnityEngine.Random.insideUnitCircle * 10.0f;
-						movement.hasDestination = true;
-						// movement.currentIdleTime = movement.idleTime;
-						return BehaviourTreeStatus.Success;
-					}) 
-				.End()
-				.Sequence("Wander")
-					.Condition("HasDestinationAndNotNear", delegate(TimeData time)
-					{
-						var gameObject = btManager.GetContext() as GameObject;
-						var movement = gameObject.GetComponent<MovementComponent>();
-						var distance = Vector2.Distance(gameObject.transform.position, movement.destination);
-						return movement.hasDestination && distance > movement.destinationDistance;
-					})
-					.Do("MoveToDestination", delegate (TimeData time) {
-						var gameObject = btManager.GetContext() as GameObject;
-						var movement = gameObject.GetComponent<MovementComponent>();
-						movement.direction.x = movement.destination.x - gameObject.transform.position.x;
-						movement.direction.y = movement.destination.y - gameObject.transform.position.y;
-						return BehaviourTreeStatus.Running;
-					})
-				.End()
-				.Node(idleTree)
+			.Selector("Selector")
+				.Node(wander)
+				.Node(idle)
 			.End()
 			.Build());
 		
