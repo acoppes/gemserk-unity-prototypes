@@ -38,6 +38,9 @@
           <e p="BehaviourTreeSystem.cs" t="Include" />
           <e p="BehaviourTreeTestSceneController.cs" t="Include" />
           <e p="InputComponent.cs" t="Include" />
+          <e p="Items" t="Include">
+            <e p="Tree.cs" t="Include" />
+          </e>
           <e p="MovementComponent.cs" t="Include" />
           <e p="MovementSystem.cs" t="Include" />
           <e p="PlayerInputSystem.cs" t="Include" />

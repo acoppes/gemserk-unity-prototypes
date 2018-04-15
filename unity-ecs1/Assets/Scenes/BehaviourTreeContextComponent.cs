@@ -14,13 +14,13 @@ namespace VirtualVillagers
         // for food consumer behaviour
         public GameObject foodSelection;
         public int foodConsumed;
-
-        // for wander behaviour
-//        public bool hasWanderDestination;
-//        public Vector2 wanderDestination;
-
+        
         // for idle behaviour
         public float idleTotalTime;
         public float idleCurrentTime;
+
+        public float treeGrowTime;
+        public int currentTreeSize;
+        public int maxTreeSize;
     }
 }

@@ -296,8 +296,11 @@ MonoBehaviour:
   spawnPrefab: {fileID: 0}
   foodSelection: {fileID: 0}
   foodConsumed: 0
-  idleTotalTime: 6
+  idleTotalTime: 2
   idleCurrentTime: 0
+  treeGrowTime: 0
+  currentTreeSize: 0
+  maxTreeSize: 0
 --- !u!1 &828930775
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,6 +799,9 @@ MonoBehaviour:
   foodConsumed: 0
   idleTotalTime: 3
   idleCurrentTime: 0
+  treeGrowTime: 0
+  currentTreeSize: 0
+  maxTreeSize: 0
 --- !u!114 &1577388616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,6 +894,9 @@ MonoBehaviour:
   foodConsumed: 0
   idleTotalTime: 0
   idleCurrentTime: 0
+  treeGrowTime: 0
+  currentTreeSize: 0
+  maxTreeSize: 0
 --- !u!4 &1629513819
 Transform:
   m_ObjectHideFlags: 0
@@ -1119,6 +1128,9 @@ MonoBehaviour:
   foodConsumed: 0
   idleTotalTime: 0
   idleCurrentTime: 0
+  treeGrowTime: 0
+  currentTreeSize: 0
+  maxTreeSize: 0
 --- !u!114 &1928344251
 MonoBehaviour:
   m_ObjectHideFlags: 0

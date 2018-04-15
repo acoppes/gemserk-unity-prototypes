@@ -70,16 +70,26 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		
 		btManager.Add("Spawner", spawner);
 
+		var notMovingCondition = new BehaviourTreeBuilder()
+			.Sequence("NotMoving")
+				.Condition("NotMoving", time => {
+					var gameObject = btManager.GetContext() as GameObject;
+					var movement = gameObject.GetComponent<MovementComponent>();
+
+					if (movement == null) 
+						return true;
+				
+					return !movement.hasDestination;
+				})
+			.End()
+			.Build();
+		
 		var idle = new BehaviourTreeBuilder()
 			.Sequence("IdleSequence")
 				.Do("WaitSomeTime", delegate(TimeData time)
 				{
 					var gameObject = btManager.GetContext() as GameObject;
 					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-					var movement = gameObject.GetComponent<MovementComponent>();
-					
-					if (movement.hasDestination)
-						return BehaviourTreeStatus.Failure;
 					
 					btContext.idleCurrentTime -= time.deltaTime;
 	
@@ -121,7 +131,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				movement.destination = btContext.foodSelection.transform.position;
 				return BehaviourTreeStatus.Success;
 			})
-			.Node(moveTo)
+			.SubTree(moveTo)
 			.Do("Consumefood", delegate(TimeData time)
 			{
 				var gameObject = btManager.GetContext() as GameObject;
@@ -157,24 +167,43 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					}) 
 				.End()
 				.Sequence("Wander")
-					.Node(moveTo)
+					.SubTree(moveTo)
 				.End()
 			.End()
 			.Build();
 
 		btManager.Add("WandererAndEater", new BehaviourTreeBuilder()
 			.Selector("Selector")
-				.Node(searchFood)
-				.Node(idle)
-				.Node(wander)
+				.SubTree(searchFood)
+				.Sequence("Idle")
+					.SubTree(notMovingCondition)
+					.SubTree(idle)
+				.End()
+				.SubTree(wander)
 			.End()
 			.Build());
 
 
 		btManager.Add("Wanderer", new BehaviourTreeBuilder()
 			.Selector("Selector")
-				.Node(idle)
-				.Node(wander)
+				.Sequence("Idle")
+					.SubTree(notMovingCondition)
+					.SubTree(idle)
+				.End()
+				.SubTree(wander)
+			.End()
+			.Build());
+		
+		btManager.Add("Tree", new BehaviourTreeBuilder()
+			.Selector("Selector")
+				.SubTree(idle)
+			// if tree not at maximum
+//				.Node(treeGrow)
+			// if tree at maximum	
+				// if tree seeds > 0
+				// wait some time
+				// spawn trees nearby
+				// reduce seeds
 			.End()
 			.Build());
 		
@@ -196,9 +225,14 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		// harvestear lleva tiempo, es decir, el árbol tiene cierta resistencia para bajar de un nivel a otro
 		
 		// arboles crecen en tiempo
-		// cuando son grandes, ponen otros arboles al rededor (si no hay arboles ya)
+		// cuando son grandes, ponen otros arboles al rededor (si no hay arboles ya)		
 		
-		// moveto parece comun entre distintos comportamientos (chop, food, wander)
-		// como extraerlo?
+		// me rechina un poco el configurar el manager de behaviour trees, debería estar en el system y setearlo o 
+		// pasarlo de parámetro? De paso, debería ser el system el que hace toda la lógica que hace el bt component
+		
+		
+		// Feedback al fluent
+		// no se puede hacer un árbol de una leaf sola? (un subarbol)
+		// no se pueden agregar subarboles con al builder (yo agregue un Node(), podría llamarse subtree)
     }
 }

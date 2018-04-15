@@ -35,7 +35,7 @@ namespace FluentBehaviourTree
             return this;
         }
 
-        public BehaviourTreeBuilder Node(IBehaviourTreeNode node)
+        public BehaviourTreeBuilder SubTree(IBehaviourTreeNode node)
         {
             if (parentNodeStack.Count <= 0)
             {

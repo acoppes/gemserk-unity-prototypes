@@ -14,17 +14,35 @@
       <file leaf-file-name="BehaviourTreeTestSceneController.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="168" column="29" lean-forward="true" selection-start-line="168" selection-start-column="29" selection-end-line="168" selection-end-column="29" />
+            <state relative-caret-position="-1627">
+              <caret line="92" column="20" lean-forward="false" selection-start-line="92" selection-start-column="20" selection-end-line="92" selection-end-column="20" />
               <folding>
-                <marker date="1523801712946" expanded="true" signature="6:69" ph="..." />
-                <marker date="1523801712946" expanded="true" signature="133:7044" ph="{...}" />
-                <marker date="1523801712946" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
-                <marker date="1523801712946" expanded="true" signature="312:7042" ph="{...}" />
-                <marker date="1523801712946" expanded="true" signature="779:874" ph="{...}" />
-                <marker date="1523801712946" expanded="true" signature="1238:1668" ph="{...}" />
-                <marker date="1523801712946" expanded="true" signature="4004:4169" ph="{...}" />
-                <marker date="1523801712946" expanded="true" signature="5990:7036" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+                <marker date="1523803610340" expanded="true" signature="6:69" ph="..." />
+                <marker date="1523803610340" expanded="true" signature="133:8030" ph="{...}" />
+                <marker date="1523803610340" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
+                <marker date="1523803610340" expanded="true" signature="312:8028" ph="{...}" />
+                <marker date="1523803610340" expanded="true" signature="779:874" ph="{...}" />
+                <marker date="1523803610340" expanded="true" signature="1238:1668" ph="{...}" />
+                <marker date="1523803610340" expanded="true" signature="2689:2913" ph="{...}" />
+                <marker date="1523803610340" expanded="true" signature="4224:4389" ph="{...}" />
+                <marker date="1523803610340" expanded="true" signature="6463:6629" ph="/* if tree not at maximum ... */" />
+                <marker date="1523803610340" expanded="true" signature="6659:7828" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+                <marker date="1523803610340" expanded="true" signature="7837:8022" ph="/* Feedback al fluent ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tree.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scenes/Items/Tree.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding>
+                <marker date="1523802232823" expanded="true" signature="46:485" ph="{...}" />
+                <marker date="1523802232823" expanded="true" signature="83:482" ph="{...}" />
+                <marker date="1523802232823" expanded="true" signature="189:476" ph="{...}" />
+                <marker date="1523802232823" expanded="true" signature="218:332" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -62,16 +80,60 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="BehaviourTreeBuilder.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/BehaviourTreeBuilder.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="37" column="42" lean-forward="false" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
+              <folding>
+                <marker date="1523803078003" expanded="false" signature="6:85" ph="..." />
+                <marker date="1523803078003" expanded="true" signature="116:4788" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="123:205" ph="/// Fluent API for building a behaviour tree. ... " />
+                <marker date="1523803078003" expanded="true" signature="243:4786" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="258:325" ph="/// Last node created. ... " />
+                <marker date="1523803078003" expanded="true" signature="386:489" ph="/// Stack node nodes that we are build via the fluent API. ... " />
+                <marker date="1523803078003" expanded="true" signature="604:675" ph="/// Create an action node. ... " />
+                <marker date="1523803078003" expanded="true" signature="767:1109" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="821:961" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="1179:1459" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="1233:1373" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="1469:1613" ph="/// Like an action node... but the function can return true/false and is mapped to success/failure. ... " />
+                <marker date="1523803078003" expanded="true" signature="1697:1818" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="1828:1950" ph="/// Create an inverter node that inverts the success/failure of its children. ... " />
+                <marker date="1523803078003" expanded="true" signature="2008:2292" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="2117:2208" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="2302:2374" ph="/// Create a sequence node. ... " />
+                <marker date="1523803078003" expanded="true" signature="2432:2716" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="2541:2632" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="2726:2798" ph="/// Create a parallel node. ... " />
+                <marker date="1523803078003" expanded="true" signature="2905:3230" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="3055:3146" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="3240:3312" ph="/// Create a selector node. ... " />
+                <marker date="1523803078003" expanded="true" signature="3370:3654" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="3479:3570" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="3664:3752" ph="/// Splice a sub tree into the parent tree. ... " />
+                <marker date="1523803078003" expanded="true" signature="3823:4232" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="3866:3954" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="3999:4142" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="4242:4313" ph="/// Build the actual tree. ... " />
+                <marker date="1523803078003" expanded="true" signature="4355:4561" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="4398:4523" ph="{...}" />
+                <marker date="1523803078003" expanded="true" signature="4571:4648" ph="/// Ends a sequence of children. ... " />
+                <marker date="1523803078003" expanded="true" signature="4690:4780" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="BehaviourTreeContextComponent.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="43" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="43" />
+            <state relative-caret-position="374">
+              <caret line="22" column="35" lean-forward="false" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
               <folding>
-                <marker date="1523800504248" expanded="true" signature="46:695" ph="{...}" />
-                <marker date="1523800504248" expanded="true" signature="111:693" ph="{...}" />
-                <marker date="1523800504248" expanded="true" signature="126:190" ph="/* for spawner behaviour ... */" />
-                <marker date="1523800504248" expanded="true" signature="471:613" ph="/* for wander behaviour ... */" />
+                <marker date="1523801933222" expanded="true" signature="46:686" ph="{...}" />
+                <marker date="1523801933222" expanded="true" signature="111:684" ph="{...}" />
+                <marker date="1523801933222" expanded="true" signature="126:190" ph="/* for spawner behaviour ... */" />
               </folding>
             </state>
           </provider>
@@ -84,6 +146,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeManagerScriptableObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scenes/Items/Tree.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/SelectorNode.cs" root0="FORCE_HIGHLIGHTING" />
@@ -110,7 +173,6 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeSystem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/PlayerInputSystem.cs" />
-        <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/BehaviourTreeBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionCallbackNode.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseConditionNode.cs" />
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/ActionNode.cs" />
@@ -119,8 +181,10 @@
         <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/Nodes/BaseActionNode.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/MovementSystem.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/Items/Tree.cs" />
+        <option value="$PROJECT_DIR$/Assets/FluentBehaviourTree/BehaviourTreeBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs" />
       </list>
     </option>
@@ -190,7 +254,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="SearchEverywhereHistoryKey" value="behaviourcom&#9;FILE&#9;file://D:/Documents/workspace/gemserk-prototypes/unity-ecs1/Assets/Scenes/BehaviourTreeComponent.cs&#10;Behav&#9;null&#9;null" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -222,12 +286,12 @@
       <updated>1523584889224</updated>
       <workItem from="1523584893960" duration="1578000" />
       <workItem from="1523664404567" duration="9869000" />
-      <workItem from="1523740432304" duration="11305000" />
+      <workItem from="1523740432304" duration="13203000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22752000" />
+    <option name="totallyTimeSpent" value="24650000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -301,7 +365,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="20" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -350,40 +414,40 @@
         <state relative-caret-position="289">
           <caret line="20" column="78" lean-forward="false" selection-start-line="20" selection-start-column="78" selection-end-line="20" selection-end-column="78" />
           <folding>
-            <marker date="1523718019387" expanded="false" signature="6:85" ph="..." />
-            <marker date="1523718019387" expanded="true" signature="116:4785" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="123:205" ph="/// Fluent API for building a behaviour tree. ... " />
-            <marker date="1523718019387" expanded="true" signature="243:4783" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="258:325" ph="/// Last node created. ... " />
-            <marker date="1523718019387" expanded="true" signature="386:489" ph="/// Stack node nodes that we are build via the fluent API. ... " />
-            <marker date="1523718019387" expanded="true" signature="604:675" ph="/// Create an action node. ... " />
-            <marker date="1523718019387" expanded="true" signature="767:1109" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="821:961" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="1176:1456" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="1230:1370" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="1466:1610" ph="/// Like an action node... but the function can return true/false and is mapped to success/failure. ... " />
-            <marker date="1523718019387" expanded="true" signature="1694:1815" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="1825:1947" ph="/// Create an inverter node that inverts the success/failure of its children. ... " />
-            <marker date="1523718019387" expanded="true" signature="2005:2289" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="2114:2205" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="2299:2371" ph="/// Create a sequence node. ... " />
-            <marker date="1523718019387" expanded="true" signature="2429:2713" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="2538:2629" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="2723:2795" ph="/// Create a parallel node. ... " />
-            <marker date="1523718019387" expanded="true" signature="2902:3227" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3052:3143" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3237:3309" ph="/// Create a selector node. ... " />
-            <marker date="1523718019387" expanded="true" signature="3367:3651" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3476:3567" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3661:3749" ph="/// Splice a sub tree into the parent tree. ... " />
-            <marker date="1523718019387" expanded="true" signature="3820:4229" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3863:3951" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3996:4139" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="4239:4310" ph="/// Build the actual tree. ... " />
-            <marker date="1523718019387" expanded="true" signature="4352:4558" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="4395:4520" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="4568:4645" ph="/// Ends a sequence of children. ... " />
-            <marker date="1523718019387" expanded="true" signature="4687:4777" ph="{...}" />
+            <marker date="1523803078003" expanded="false" signature="6:85" ph="..." />
+            <marker date="1523803078003" expanded="true" signature="116:4788" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="123:205" ph="/// Fluent API for building a behaviour tree. ... " />
+            <marker date="1523803078003" expanded="true" signature="243:4786" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="258:325" ph="/// Last node created. ... " />
+            <marker date="1523803078003" expanded="true" signature="386:489" ph="/// Stack node nodes that we are build via the fluent API. ... " />
+            <marker date="1523803078003" expanded="true" signature="604:675" ph="/// Create an action node. ... " />
+            <marker date="1523803078003" expanded="true" signature="767:1109" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="821:961" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="1179:1459" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="1233:1373" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="1469:1613" ph="/// Like an action node... but the function can return true/false and is mapped to success/failure. ... " />
+            <marker date="1523803078003" expanded="true" signature="1697:1818" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="1828:1950" ph="/// Create an inverter node that inverts the success/failure of its children. ... " />
+            <marker date="1523803078003" expanded="true" signature="2008:2292" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="2117:2208" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="2302:2374" ph="/// Create a sequence node. ... " />
+            <marker date="1523803078003" expanded="true" signature="2432:2716" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="2541:2632" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="2726:2798" ph="/// Create a parallel node. ... " />
+            <marker date="1523803078003" expanded="true" signature="2905:3230" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3055:3146" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3240:3312" ph="/// Create a selector node. ... " />
+            <marker date="1523803078003" expanded="true" signature="3370:3654" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3479:3570" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3664:3752" ph="/// Splice a sub tree into the parent tree. ... " />
+            <marker date="1523803078003" expanded="true" signature="3823:4232" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3866:3954" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3999:4142" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="4242:4313" ph="/// Build the actual tree. ... " />
+            <marker date="1523803078003" expanded="true" signature="4355:4561" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="4398:4523" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="4571:4648" ph="/// Ends a sequence of children. ... " />
+            <marker date="1523803078003" expanded="true" signature="4690:4780" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -476,14 +540,17 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1523801712946" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523801712946" expanded="true" signature="133:7044" ph="{...}" />
-            <marker date="1523801712946" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
-            <marker date="1523801712946" expanded="true" signature="312:7042" ph="{...}" />
-            <marker date="1523801712946" expanded="true" signature="779:874" ph="{...}" />
-            <marker date="1523801712946" expanded="true" signature="1238:1668" ph="{...}" />
-            <marker date="1523801712946" expanded="true" signature="4004:4169" ph="{...}" />
-            <marker date="1523801712946" expanded="true" signature="5990:7036" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523803610340" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523803610340" expanded="true" signature="133:8030" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
+            <marker date="1523803610340" expanded="true" signature="312:8028" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="779:874" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="1238:1668" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="2689:2913" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="4224:4389" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="6463:6629" ph="/* if tree not at maximum ... */" />
+            <marker date="1523803610340" expanded="true" signature="6659:7828" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523803610340" expanded="true" signature="7837:8022" ph="/* Feedback al fluent ... */" />
           </folding>
         </state>
       </provider>
@@ -596,49 +663,6 @@
           <folding>
             <marker date="1523720574876" expanded="true" signature="96:331" ph="{...}" />
             <marker date="1523720574876" expanded="true" signature="157:274" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/BehaviourTreeBuilder.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="78" lean-forward="false" selection-start-line="20" selection-start-column="78" selection-end-line="20" selection-end-column="78" />
-          <folding>
-            <marker date="1523718019387" expanded="false" signature="6:85" ph="..." />
-            <marker date="1523718019387" expanded="true" signature="116:4785" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="123:205" ph="/// Fluent API for building a behaviour tree. ... " />
-            <marker date="1523718019387" expanded="true" signature="243:4783" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="258:325" ph="/// Last node created. ... " />
-            <marker date="1523718019387" expanded="true" signature="386:489" ph="/// Stack node nodes that we are build via the fluent API. ... " />
-            <marker date="1523718019387" expanded="true" signature="604:675" ph="/// Create an action node. ... " />
-            <marker date="1523718019387" expanded="true" signature="767:1109" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="821:961" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="1176:1456" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="1230:1370" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="1466:1610" ph="/// Like an action node... but the function can return true/false and is mapped to success/failure. ... " />
-            <marker date="1523718019387" expanded="true" signature="1694:1815" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="1825:1947" ph="/// Create an inverter node that inverts the success/failure of its children. ... " />
-            <marker date="1523718019387" expanded="true" signature="2005:2289" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="2114:2205" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="2299:2371" ph="/// Create a sequence node. ... " />
-            <marker date="1523718019387" expanded="true" signature="2429:2713" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="2538:2629" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="2723:2795" ph="/// Create a parallel node. ... " />
-            <marker date="1523718019387" expanded="true" signature="2902:3227" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3052:3143" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3237:3309" ph="/// Create a selector node. ... " />
-            <marker date="1523718019387" expanded="true" signature="3367:3651" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3476:3567" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3661:3749" ph="/// Splice a sub tree into the parent tree. ... " />
-            <marker date="1523718019387" expanded="true" signature="3820:4229" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3863:3951" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="3996:4139" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="4239:4310" ph="/// Build the actual tree. ... " />
-            <marker date="1523718019387" expanded="true" signature="4352:4558" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="4395:4520" ph="{...}" />
-            <marker date="1523718019387" expanded="true" signature="4568:4645" ph="/// Ends a sequence of children. ... " />
-            <marker date="1523718019387" expanded="true" signature="4687:4777" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -813,19 +837,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="43" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="43" />
-          <folding>
-            <marker date="1523800504248" expanded="true" signature="46:695" ph="{...}" />
-            <marker date="1523800504248" expanded="true" signature="111:693" ph="{...}" />
-            <marker date="1523800504248" expanded="true" signature="126:190" ph="/* for spawner behaviour ... */" />
-            <marker date="1523800504248" expanded="true" signature="471:613" ph="/* for wander behaviour ... */" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -839,19 +850,90 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/Items/Tree.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <marker date="1523802232823" expanded="true" signature="46:485" ph="{...}" />
+            <marker date="1523802232823" expanded="true" signature="83:482" ph="{...}" />
+            <marker date="1523802232823" expanded="true" signature="189:476" ph="{...}" />
+            <marker date="1523802232823" expanded="true" signature="218:332" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="35" lean-forward="false" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+          <folding>
+            <marker date="1523801933222" expanded="true" signature="46:686" ph="{...}" />
+            <marker date="1523801933222" expanded="true" signature="111:684" ph="{...}" />
+            <marker date="1523801933222" expanded="true" signature="126:190" ph="/* for spawner behaviour ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/FluentBehaviourTree/BehaviourTreeBuilder.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="37" column="42" lean-forward="false" selection-start-line="37" selection-start-column="42" selection-end-line="37" selection-end-column="42" />
+          <folding>
+            <marker date="1523803078003" expanded="false" signature="6:85" ph="..." />
+            <marker date="1523803078003" expanded="true" signature="116:4788" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="123:205" ph="/// Fluent API for building a behaviour tree. ... " />
+            <marker date="1523803078003" expanded="true" signature="243:4786" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="258:325" ph="/// Last node created. ... " />
+            <marker date="1523803078003" expanded="true" signature="386:489" ph="/// Stack node nodes that we are build via the fluent API. ... " />
+            <marker date="1523803078003" expanded="true" signature="604:675" ph="/// Create an action node. ... " />
+            <marker date="1523803078003" expanded="true" signature="767:1109" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="821:961" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="1179:1459" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="1233:1373" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="1469:1613" ph="/// Like an action node... but the function can return true/false and is mapped to success/failure. ... " />
+            <marker date="1523803078003" expanded="true" signature="1697:1818" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="1828:1950" ph="/// Create an inverter node that inverts the success/failure of its children. ... " />
+            <marker date="1523803078003" expanded="true" signature="2008:2292" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="2117:2208" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="2302:2374" ph="/// Create a sequence node. ... " />
+            <marker date="1523803078003" expanded="true" signature="2432:2716" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="2541:2632" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="2726:2798" ph="/// Create a parallel node. ... " />
+            <marker date="1523803078003" expanded="true" signature="2905:3230" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3055:3146" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3240:3312" ph="/// Create a selector node. ... " />
+            <marker date="1523803078003" expanded="true" signature="3370:3654" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3479:3570" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3664:3752" ph="/// Splice a sub tree into the parent tree. ... " />
+            <marker date="1523803078003" expanded="true" signature="3823:4232" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3866:3954" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="3999:4142" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="4242:4313" ph="/// Build the actual tree. ... " />
+            <marker date="1523803078003" expanded="true" signature="4355:4561" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="4398:4523" ph="{...}" />
+            <marker date="1523803078003" expanded="true" signature="4571:4648" ph="/// Ends a sequence of children. ... " />
+            <marker date="1523803078003" expanded="true" signature="4690:4780" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="168" column="29" lean-forward="true" selection-start-line="168" selection-start-column="29" selection-end-line="168" selection-end-column="29" />
+        <state relative-caret-position="-1627">
+          <caret line="92" column="20" lean-forward="false" selection-start-line="92" selection-start-column="20" selection-end-line="92" selection-end-column="20" />
           <folding>
-            <marker date="1523801712946" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523801712946" expanded="true" signature="133:7044" ph="{...}" />
-            <marker date="1523801712946" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
-            <marker date="1523801712946" expanded="true" signature="312:7042" ph="{...}" />
-            <marker date="1523801712946" expanded="true" signature="779:874" ph="{...}" />
-            <marker date="1523801712946" expanded="true" signature="1238:1668" ph="{...}" />
-            <marker date="1523801712946" expanded="true" signature="4004:4169" ph="{...}" />
-            <marker date="1523801712946" expanded="true" signature="5990:7036" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523803610340" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523803610340" expanded="true" signature="133:8030" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
+            <marker date="1523803610340" expanded="true" signature="312:8028" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="779:874" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="1238:1668" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="2689:2913" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="4224:4389" ph="{...}" />
+            <marker date="1523803610340" expanded="true" signature="6463:6629" ph="/* if tree not at maximum ... */" />
+            <marker date="1523803610340" expanded="true" signature="6659:7828" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523803610340" expanded="true" signature="7837:8022" ph="/* Feedback al fluent ... */" />
           </folding>
         </state>
       </provider>
