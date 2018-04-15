@@ -20,6 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4984155810848310}
   - component: {fileID: 114471175498229646}
+  - component: {fileID: 114257485424645210}
+  - component: {fileID: 114575294843948470}
+  - component: {fileID: 114692036028976824}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Tree
@@ -129,6 +132,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114257485424645210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1028647392421468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114471175498229646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,6 +155,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _modelTransform: {fileID: 4268844174682710}
+--- !u!114 &114575294843948470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1028647392421468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnIdleTotalTime: 0
+  spawnIdleCurrentTime: 0
+  spawnItemsMax: 0
+  spawnPrefab: {fileID: 0}
+  foodSelection: {fileID: 0}
+  foodConsumed: 0
+  idleTotalTime: 0
+  idleCurrentTime: 0
+  treeGrowTime: 0
+  currentTreeSize: 0
+  maxTreeSize: 0
+--- !u!114 &114692036028976824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1028647392421468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911fcd4ef786ed24d927d8d8b1cf1f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
+    type: 2}
+  _behaviourTreeName: Tree
 --- !u!212 &212047340400917544
 SpriteRenderer:
   m_ObjectHideFlags: 1

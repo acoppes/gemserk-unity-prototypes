@@ -9,8 +9,34 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 //	public int SpawnMaxItemCount = 3;
 //	public GameObject spawnPrefab;
 
+	public GameObject treePrefab;
+	
+	public int minTrees;
+	public int maxTrees;
+
+	public BoxCollider2D treeSpawnerBounds;
+
+	private void SpawnTrees()
+	{
+		var treesCount = UnityEngine.Random.Range(minTrees, maxTrees);
+		var spawnBounds = treeSpawnerBounds.bounds;
+		
+		for (var i = 0; i < treesCount; i++)
+		{
+			var treeObject = GameObject.Instantiate(treePrefab);
+			treeObject.transform.position = new Vector2(
+				spawnBounds.center.x + UnityEngine.Random.RandomRange(spawnBounds.min.x, spawnBounds.max.x), 
+				spawnBounds.center.y + UnityEngine.Random.RandomRange(spawnBounds.min.y, spawnBounds.max.y)
+			);
+			var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
+			tree.SetSize(UnityEngine.Random.RandomRange(0, 3));
+		}
+		
+		treeSpawnerBounds.gameObject.SetActive(false);
+	}
+
 	// Update is called once per frame
-	void Awake() {
+	private void Awake() {
         var btManager = _behaviourTreeManager as BehaviourTreeManager;
 		
 		var moveTo = new BehaviourTreeBuilder()
@@ -206,33 +232,35 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				// reduce seeds
 			.End()
 			.Build());
-		
+
+		SpawnTrees();
+
 		// Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto
-        // Tener una accion separada para incrementar el cooldown? 
-        // (o bien chequear por un dato general en el contexto, tipo el "frame" de ejecución)
-		
+		// Tener una accion separada para incrementar el cooldown? 
+		// (o bien chequear por un dato general en el contexto, tipo el "frame" de ejecución)
+
 		// se puede construir action custom? No -> construir propias
-		
+
 		// lugar de datos comun para usar en los behaviour (actions)
 		// lugar propio (contexto local, independiente del tree, pertenece a la unidad)
-		
+
 		// tener un buen debug de esto es escencial
-		
+
 		// Siguiente paso, ir a cortar leña y juntarla en unapila.
 		// Los arboles crecen con el tiempo de min a max, y cada tamañno tiene un determinado cantidad de leña.
 		// Solo crecen si no fueron harvesteados nunca.
-		
+
 		// harvestear lleva tiempo, es decir, el árbol tiene cierta resistencia para bajar de un nivel a otro
-		
+
 		// arboles crecen en tiempo
 		// cuando son grandes, ponen otros arboles al rededor (si no hay arboles ya)		
-		
+
 		// me rechina un poco el configurar el manager de behaviour trees, debería estar en el system y setearlo o 
 		// pasarlo de parámetro? De paso, debería ser el system el que hace toda la lógica que hace el bt component
-		
-		
+
+
 		// Feedback al fluent
 		// no se puede hacer un árbol de una leaf sola? (un subarbol)
 		// no se pueden agregar subarboles con al builder (yo agregue un Node(), podría llamarse subtree)
-    }
+	}
 }

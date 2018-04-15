@@ -14,20 +14,22 @@
       <file leaf-file-name="BehaviourTreeTestSceneController.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1627">
-              <caret line="92" column="20" lean-forward="false" selection-start-line="92" selection-start-column="20" selection-end-line="92" selection-end-column="20" />
+            <state relative-caret-position="510">
+              <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
               <folding>
-                <marker date="1523803610340" expanded="true" signature="6:69" ph="..." />
-                <marker date="1523803610340" expanded="true" signature="133:8030" ph="{...}" />
-                <marker date="1523803610340" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
-                <marker date="1523803610340" expanded="true" signature="312:8028" ph="{...}" />
-                <marker date="1523803610340" expanded="true" signature="779:874" ph="{...}" />
-                <marker date="1523803610340" expanded="true" signature="1238:1668" ph="{...}" />
-                <marker date="1523803610340" expanded="true" signature="2689:2913" ph="{...}" />
-                <marker date="1523803610340" expanded="true" signature="4224:4389" ph="{...}" />
-                <marker date="1523803610340" expanded="true" signature="6463:6629" ph="/* if tree not at maximum ... */" />
-                <marker date="1523803610340" expanded="true" signature="6659:7828" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
-                <marker date="1523803610340" expanded="true" signature="7837:8022" ph="/* Feedback al fluent ... */" />
+                <marker date="1523804039576" expanded="true" signature="6:69" ph="..." />
+                <marker date="1523804039576" expanded="true" signature="133:8810" ph="{...}" />
+                <marker date="1523804039576" expanded="true" signature="190:260" ph="/* public int SpawnMaxItemCount = 3; ... */" />
+                <marker date="1523804039576" expanded="true" signature="408:1050" ph="{...}" />
+                <marker date="1523804039576" expanded="true" signature="564:995" ph="{...}" />
+                <marker date="1523804039576" expanded="true" signature="1110:8808" ph="{...}" />
+                <marker date="1523804039576" expanded="true" signature="1577:1672" ph="{...}" />
+                <marker date="1523804039576" expanded="true" signature="2036:2466" ph="{...}" />
+                <marker date="1523804039576" expanded="true" signature="3487:3711" ph="{...}" />
+                <marker date="1523804039576" expanded="true" signature="5022:5187" ph="{...}" />
+                <marker date="1523804039576" expanded="true" signature="7261:7427" ph="/* if tree not at maximum ... */" />
+                <marker date="1523804039576" expanded="true" signature="7472:8615" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+                <marker date="1523804039576" expanded="true" signature="8620:8805" ph="/* Feedback al fluent ... */" />
               </folding>
             </state>
           </provider>
@@ -286,12 +288,12 @@
       <updated>1523584889224</updated>
       <workItem from="1523584893960" duration="1578000" />
       <workItem from="1523664404567" duration="9869000" />
-      <workItem from="1523740432304" duration="13203000" />
+      <workItem from="1523740432304" duration="13631000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24650000" />
+    <option name="totallyTimeSpent" value="25078000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -540,17 +542,19 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1523803610340" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523803610340" expanded="true" signature="133:8030" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
-            <marker date="1523803610340" expanded="true" signature="312:8028" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="779:874" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="1238:1668" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="2689:2913" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="4224:4389" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="6463:6629" ph="/* if tree not at maximum ... */" />
-            <marker date="1523803610340" expanded="true" signature="6659:7828" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
-            <marker date="1523803610340" expanded="true" signature="7837:8022" ph="/* Feedback al fluent ... */" />
+            <marker date="1523804039576" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523804039576" expanded="true" signature="133:8810" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="190:260" ph="/* public int SpawnMaxItemCount = 3; ... */" />
+            <marker date="1523804039576" expanded="true" signature="408:1050" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="564:995" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="1110:8808" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="1577:1672" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="2036:2466" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="3487:3711" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="5022:5187" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="7261:7427" ph="/* if tree not at maximum ... */" />
+            <marker date="1523804039576" expanded="true" signature="7472:8615" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523804039576" expanded="true" signature="8620:8805" ph="/* Feedback al fluent ... */" />
           </folding>
         </state>
       </provider>
@@ -920,20 +924,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1627">
-          <caret line="92" column="20" lean-forward="false" selection-start-line="92" selection-start-column="20" selection-end-line="92" selection-end-column="20" />
+        <state relative-caret-position="510">
+          <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
           <folding>
-            <marker date="1523803610340" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523803610340" expanded="true" signature="133:8030" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
-            <marker date="1523803610340" expanded="true" signature="312:8028" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="779:874" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="1238:1668" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="2689:2913" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="4224:4389" ph="{...}" />
-            <marker date="1523803610340" expanded="true" signature="6463:6629" ph="/* if tree not at maximum ... */" />
-            <marker date="1523803610340" expanded="true" signature="6659:7828" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
-            <marker date="1523803610340" expanded="true" signature="7837:8022" ph="/* Feedback al fluent ... */" />
+            <marker date="1523804039576" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523804039576" expanded="true" signature="133:8810" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="190:260" ph="/* public int SpawnMaxItemCount = 3; ... */" />
+            <marker date="1523804039576" expanded="true" signature="408:1050" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="564:995" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="1110:8808" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="1577:1672" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="2036:2466" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="3487:3711" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="5022:5187" ph="{...}" />
+            <marker date="1523804039576" expanded="true" signature="7261:7427" ph="/* if tree not at maximum ... */" />
+            <marker date="1523804039576" expanded="true" signature="7472:8615" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523804039576" expanded="true" signature="8620:8805" ph="/* Feedback al fluent ... */" />
           </folding>
         </state>
       </provider>
