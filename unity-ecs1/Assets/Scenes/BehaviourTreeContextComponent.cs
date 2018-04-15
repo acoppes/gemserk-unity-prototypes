@@ -19,7 +19,7 @@ namespace VirtualVillagers
         public float idleTotalTime;
         public float idleCurrentTime;
 
-        public float treeGrowTime;
+//        public float treeGrowTime;
         public int treeCurrentSize;
         public int treeMaxSize = 3;
         public float treeMinSpawnDistance = 1.0f;

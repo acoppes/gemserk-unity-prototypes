@@ -34,11 +34,14 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
 			var size = UnityEngine.Random.RandomRange(0, 3);
 			
-			var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
-			tree.SetSize(size);
 
 			var btContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
 			btContext.treeCurrentSize = size;
+			btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
+			
+			var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
+			tree.SetTreeData(btContext);
+//			tree.SetSize(size);
 
 			btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
 		}
@@ -343,6 +346,12 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				// en algunas implementaciones vi lo del pending para animaciones/transiciones.
 				.SubTree(idle)
 				.Sequence("Grow")
+					.Condition("NotHarvested", time =>
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+						return btContext.treeCurrentLumber < btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
+					})
 					.Condition("NotMaxSize", time =>
 					{
 						var gameObject = btManager.GetContext() as GameObject;
@@ -354,13 +363,20 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						var gameObject = btManager.GetContext() as GameObject;
 						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
 						btContext.treeCurrentSize++;
+
 						// dudas de como y donde reflejar cambios visuales
-						var tree = gameObject.GetComponent<VirtualVillagers.Tree>();
-						tree.SetSize(btContext.treeCurrentSize);
+
+						btContext.treeCurrentLumber = btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
 						return BehaviourTreeStatus.Success;
 					})
 				.End()
 				.Sequence("SpawnSeeds")
+					.Condition("NotHarvested", time =>
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+						return btContext.treeCurrentLumber < btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
+					})
 					.Condition("HasSeeds", time =>
 					{
 						var gameObject = btManager.GetContext() as GameObject;
@@ -387,15 +403,16 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						
 						treeObject.transform.position = gameObject.transform.position 
 														+ (Vector3) randomPosition;
-						
-						var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
-						tree.SetSize(0);
-	
+					
 						var treeBtContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
 						
 						treeBtContext.treeCurrentSize = 0;
 						treeBtContext.idleCurrentTime = treeBtContext.idleTotalTime;
+						treeBtContext.treeCurrentLumber = treeBtContext.treeLumberPerSize * (treeBtContext.treeCurrentSize + 1);
 	
+						var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
+						tree.SetTreeData(treeBtContext);
+						
 						btContext.treeSeeds--;
 						
 						// dudas de como y donde reflejar cambios visuales

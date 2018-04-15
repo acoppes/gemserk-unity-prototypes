@@ -7,8 +7,36 @@ namespace VirtualVillagers
 		[UnityEngine.SerializeField]
 		protected Transform _modelTransform;
 
-		public void SetSize(int size)
+		private BehaviourTreeContextComponent _treeData;
+
+		private int _size = -1;
+		
+		public void SetTreeData(BehaviourTreeContextComponent treeData)
 		{
+			_treeData = treeData;
+		}
+
+		private void LateUpdate()
+		{
+			if (_treeData == null)
+				return;
+			
+			if (_size != _treeData.treeCurrentSize)
+			{
+				SetSize(_treeData.treeCurrentSize);
+			}
+			
+			var maxLumber = (_treeData.treeCurrentSize + 1) * _treeData.treeLumberPerSize;
+			var harvestPercentage = _treeData.treeCurrentLumber / maxLumber;
+
+			_modelTransform.localEulerAngles = new Vector3(0, 0, 
+				Mathf.Lerp(0, 90, 1 - harvestPercentage));
+		}
+
+		private void SetSize(int size)
+		{
+			_size = size;
+			
 			Vector3[] sizes =
 			{
 				new Vector3(0.25f, 0.25f, 0.25f),

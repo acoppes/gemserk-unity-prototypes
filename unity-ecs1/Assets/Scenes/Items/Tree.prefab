@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4573366407827496}
   - component: {fileID: 212134620405362894}
   m_Layer: 0
-  m_Name: model
+  m_Name: trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +174,6 @@ MonoBehaviour:
   foodConsumed: 0
   idleTotalTime: 20
   idleCurrentTime: 5
-  treeGrowTime: 0
   treeCurrentSize: 0
   treeMaxSize: 3
   treeMinSpawnDistance: 1.75
