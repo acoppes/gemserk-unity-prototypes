@@ -13,5 +13,11 @@ namespace VirtualVillagers
         // for wander behaviour
         public bool hasDestination;
         public Vector2 destination;
+
+        public void SetDestination(Vector2 destination)
+        {
+            this.destination = destination;
+            this.hasDestination = true;
+        }
     }
 }

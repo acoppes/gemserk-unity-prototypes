@@ -14,18 +14,17 @@
       <file leaf-file-name="BehaviourTreeTestSceneController.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="72" lean-forward="true" selection-start-line="22" selection-start-column="72" selection-end-line="22" selection-end-column="72" />
+            <state relative-caret-position="459">
+              <caret line="168" column="29" lean-forward="true" selection-start-line="168" selection-start-column="29" selection-end-line="168" selection-end-column="29" />
               <folding>
-                <marker date="1523800404935" expanded="true" signature="6:69" ph="..." />
-                <marker date="1523800404935" expanded="true" signature="133:8643" ph="{...}" />
-                <marker date="1523800404935" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
-                <marker date="1523800404935" expanded="true" signature="312:8641" ph="{...}" />
-                <marker date="1523800404935" expanded="true" signature="779:874" ph="{...}" />
-                <marker date="1523800404935" expanded="true" signature="1238:1668" ph="{...}" />
-                <marker date="1523800404935" expanded="true" signature="4249:4414" ph="{...}" />
-                <marker date="1523800404935" expanded="true" signature="4929:5498" ph="/* var distance = Vector2.Distance(gameObject.transform.position, food.transform.position); ... */" />
-                <marker date="1523800404935" expanded="true" signature="7589:8635" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+                <marker date="1523801712946" expanded="true" signature="6:69" ph="..." />
+                <marker date="1523801712946" expanded="true" signature="133:7044" ph="{...}" />
+                <marker date="1523801712946" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
+                <marker date="1523801712946" expanded="true" signature="312:7042" ph="{...}" />
+                <marker date="1523801712946" expanded="true" signature="779:874" ph="{...}" />
+                <marker date="1523801712946" expanded="true" signature="1238:1668" ph="{...}" />
+                <marker date="1523801712946" expanded="true" signature="4004:4169" ph="{...}" />
+                <marker date="1523801712946" expanded="true" signature="5990:7036" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
               </folding>
             </state>
           </provider>
@@ -34,12 +33,13 @@
       <file leaf-file-name="MovementComponent.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+            <state relative-caret-position="170">
+              <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
               <folding>
-                <marker date="1523799333523" expanded="false" signature="6:43" ph="..." />
-                <marker date="1523799333523" expanded="true" signature="71:369" ph="{...}" />
-                <marker date="1523799333523" expanded="true" signature="124:367" ph="{...}" />
+                <marker date="1523801029399" expanded="false" signature="6:43" ph="..." />
+                <marker date="1523801029399" expanded="true" signature="71:530" ph="{...}" />
+                <marker date="1523801029399" expanded="true" signature="124:528" ph="{...}" />
+                <marker date="1523801029399" expanded="true" signature="418:522" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -65,12 +65,13 @@
       <file leaf-file-name="BehaviourTreeContextComponent.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="40" lean-forward="false" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+            <state relative-caret-position="323">
+              <caret line="19" column="43" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="43" />
               <folding>
-                <marker date="1523751887413" expanded="true" signature="46:691" ph="{...}" />
-                <marker date="1523751887413" expanded="true" signature="111:689" ph="{...}" />
-                <marker date="1523751887413" expanded="true" signature="126:190" ph="/* for spawner behaviour ... */" />
+                <marker date="1523800504248" expanded="true" signature="46:695" ph="{...}" />
+                <marker date="1523800504248" expanded="true" signature="111:693" ph="{...}" />
+                <marker date="1523800504248" expanded="true" signature="126:190" ph="/* for spawner behaviour ... */" />
+                <marker date="1523800504248" expanded="true" signature="471:613" ph="/* for wander behaviour ... */" />
               </folding>
             </state>
           </provider>
@@ -204,7 +205,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" />
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" pid="1632" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -221,12 +222,12 @@
       <updated>1523584889224</updated>
       <workItem from="1523584893960" duration="1578000" />
       <workItem from="1523664404567" duration="9869000" />
-      <workItem from="1523740432304" duration="10035000" />
+      <workItem from="1523740432304" duration="11305000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21482000" />
+    <option name="totallyTimeSpent" value="22752000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -276,7 +277,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2553305" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2553305" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -284,7 +285,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,7 +301,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="20" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -322,9 +323,10 @@
         <state relative-caret-position="255">
           <caret line="16" column="37" lean-forward="false" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
           <folding>
-            <marker date="1523799333523" expanded="false" signature="6:43" ph="..." />
-            <marker date="1523799333523" expanded="true" signature="71:369" ph="{...}" />
-            <marker date="1523799333523" expanded="true" signature="124:367" ph="{...}" />
+            <marker date="1523801029399" expanded="false" signature="6:43" ph="..." />
+            <marker date="1523801029399" expanded="true" signature="71:530" ph="{...}" />
+            <marker date="1523801029399" expanded="true" signature="124:528" ph="{...}" />
+            <marker date="1523801029399" expanded="true" signature="418:522" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -474,15 +476,14 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1523800404935" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523800404935" expanded="true" signature="133:8643" ph="{...}" />
-            <marker date="1523800404935" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
-            <marker date="1523800404935" expanded="true" signature="312:8641" ph="{...}" />
-            <marker date="1523800404935" expanded="true" signature="779:874" ph="{...}" />
-            <marker date="1523800404935" expanded="true" signature="1238:1668" ph="{...}" />
-            <marker date="1523800404935" expanded="true" signature="4249:4414" ph="{...}" />
-            <marker date="1523800404935" expanded="true" signature="4929:5498" ph="/* var distance = Vector2.Distance(gameObject.transform.position, food.transform.position); ... */" />
-            <marker date="1523800404935" expanded="true" signature="7589:8635" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523801712946" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523801712946" expanded="true" signature="133:7044" ph="{...}" />
+            <marker date="1523801712946" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
+            <marker date="1523801712946" expanded="true" signature="312:7042" ph="{...}" />
+            <marker date="1523801712946" expanded="true" signature="779:874" ph="{...}" />
+            <marker date="1523801712946" expanded="true" signature="1238:1668" ph="{...}" />
+            <marker date="1523801712946" expanded="true" signature="4004:4169" ph="{...}" />
+            <marker date="1523801712946" expanded="true" signature="5990:7036" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
           </folding>
         </state>
       </provider>
@@ -797,18 +798,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="40" lean-forward="false" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
-          <folding>
-            <marker date="1523751887413" expanded="true" signature="46:691" ph="{...}" />
-            <marker date="1523751887413" expanded="true" signature="111:689" ph="{...}" />
-            <marker date="1523751887413" expanded="true" signature="126:190" ph="/* for spawner behaviour ... */" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/MovementSystem.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
@@ -824,32 +813,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeContextComponent.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="43" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="43" />
+          <folding>
+            <marker date="1523800504248" expanded="true" signature="46:695" ph="{...}" />
+            <marker date="1523800504248" expanded="true" signature="111:693" ph="{...}" />
+            <marker date="1523800504248" expanded="true" signature="126:190" ph="/* for spawner behaviour ... */" />
+            <marker date="1523800504248" expanded="true" signature="471:613" ph="/* for wander behaviour ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/MovementComponent.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+        <state relative-caret-position="170">
+          <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
           <folding>
-            <marker date="1523799333523" expanded="false" signature="6:43" ph="..." />
-            <marker date="1523799333523" expanded="true" signature="71:369" ph="{...}" />
-            <marker date="1523799333523" expanded="true" signature="124:367" ph="{...}" />
+            <marker date="1523801029399" expanded="false" signature="6:43" ph="..." />
+            <marker date="1523801029399" expanded="true" signature="71:530" ph="{...}" />
+            <marker date="1523801029399" expanded="true" signature="124:528" ph="{...}" />
+            <marker date="1523801029399" expanded="true" signature="418:522" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scenes/BehaviourTreeTestSceneController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="72" lean-forward="true" selection-start-line="22" selection-start-column="72" selection-end-line="22" selection-end-column="72" />
+        <state relative-caret-position="459">
+          <caret line="168" column="29" lean-forward="true" selection-start-line="168" selection-start-column="29" selection-end-line="168" selection-end-column="29" />
           <folding>
-            <marker date="1523800404935" expanded="true" signature="6:69" ph="..." />
-            <marker date="1523800404935" expanded="true" signature="133:8643" ph="{...}" />
-            <marker date="1523800404935" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
-            <marker date="1523800404935" expanded="true" signature="312:8641" ph="{...}" />
-            <marker date="1523800404935" expanded="true" signature="779:874" ph="{...}" />
-            <marker date="1523800404935" expanded="true" signature="1238:1668" ph="{...}" />
-            <marker date="1523800404935" expanded="true" signature="4249:4414" ph="{...}" />
-            <marker date="1523800404935" expanded="true" signature="4929:5498" ph="/* var distance = Vector2.Distance(gameObject.transform.position, food.transform.position); ... */" />
-            <marker date="1523800404935" expanded="true" signature="7589:8635" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
+            <marker date="1523801712946" expanded="true" signature="6:69" ph="..." />
+            <marker date="1523801712946" expanded="true" signature="133:7044" ph="{...}" />
+            <marker date="1523801712946" expanded="true" signature="190:297" ph="/* public int SpawnMaxItemCount = 3; ... */" />
+            <marker date="1523801712946" expanded="true" signature="312:7042" ph="{...}" />
+            <marker date="1523801712946" expanded="true" signature="779:874" ph="{...}" />
+            <marker date="1523801712946" expanded="true" signature="1238:1668" ph="{...}" />
+            <marker date="1523801712946" expanded="true" signature="4004:4169" ph="{...}" />
+            <marker date="1523801712946" expanded="true" signature="5990:7036" ph="/* Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto ... */" />
           </folding>
         </state>
       </provider>

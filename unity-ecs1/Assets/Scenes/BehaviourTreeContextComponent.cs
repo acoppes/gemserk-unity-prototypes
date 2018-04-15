@@ -16,8 +16,8 @@ namespace VirtualVillagers
         public int foodConsumed;
 
         // for wander behaviour
-        public bool hasWanderDestination;
-        public Vector2 wanderDestination;
+//        public bool hasWanderDestination;
+//        public Vector2 wanderDestination;
 
         // for idle behaviour
         public float idleTotalTime;

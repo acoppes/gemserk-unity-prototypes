@@ -220,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
     type: 2}
-  _behaviourTreeName: WandererAndEater
+  _behaviourTreeName: Wanderer
 --- !u!114 &811575551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +237,8 @@ MonoBehaviour:
     y: 0
   speed: 4
   destinationDistance: 0.5
+  hasDestination: 0
+  destination: {x: 0, y: 0}
 --- !u!114 &811575552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,8 +296,6 @@ MonoBehaviour:
   spawnPrefab: {fileID: 0}
   foodSelection: {fileID: 0}
   foodConsumed: 0
-  hasWanderDestination: 0
-  wanderDestination: {x: 0, y: 0}
   idleTotalTime: 6
   idleCurrentTime: 0
 --- !u!1 &828930775
@@ -533,6 +533,8 @@ MonoBehaviour:
     y: 0
   speed: 1
   destinationDistance: 1
+  hasDestination: 0
+  destination: {x: 0, y: 0}
 --- !u!1 &1139621983
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,6 +775,8 @@ MonoBehaviour:
     y: 0
   speed: 3
   destinationDistance: 0.5
+  hasDestination: 0
+  destination: {x: 0, y: 0}
 --- !u!114 &1577388615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,8 +794,6 @@ MonoBehaviour:
   spawnPrefab: {fileID: 0}
   foodSelection: {fileID: 0}
   foodConsumed: 0
-  hasWanderDestination: 0
-  wanderDestination: {x: 0, y: 0}
   idleTotalTime: 3
   idleCurrentTime: 0
 --- !u!114 &1577388616
@@ -851,7 +853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1629513817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,8 +886,6 @@ MonoBehaviour:
     type: 2}
   foodSelection: {fileID: 0}
   foodConsumed: 0
-  hasWanderDestination: 0
-  wanderDestination: {x: 0, y: 0}
   idleTotalTime: 0
   idleCurrentTime: 0
 --- !u!4 &1629513819
@@ -1117,8 +1117,6 @@ MonoBehaviour:
     type: 2}
   foodSelection: {fileID: 0}
   foodConsumed: 0
-  hasWanderDestination: 0
-  wanderDestination: {x: 0, y: 0}
   idleTotalTime: 0
   idleCurrentTime: 0
 --- !u!114 &1928344251
