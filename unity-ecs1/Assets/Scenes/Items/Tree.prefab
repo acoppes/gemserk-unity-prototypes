@@ -169,14 +169,16 @@ MonoBehaviour:
   spawnIdleTotalTime: 0
   spawnIdleCurrentTime: 0
   spawnItemsMax: 0
-  spawnPrefab: {fileID: 0}
+  spawnPrefab: {fileID: 1028647392421468}
   foodSelection: {fileID: 0}
   foodConsumed: 0
-  idleTotalTime: 5
+  idleTotalTime: 20
   idleCurrentTime: 5
   treeGrowTime: 0
-  currentTreeSize: 0
-  maxTreeSize: 3
+  treeCurrentSize: 0
+  treeMaxSize: 3
+  treeMinSpawnDistance: 1.75
+  treeMaxSpawnDistance: 2.5
 --- !u!114 &114692036028976824
 MonoBehaviour:
   m_ObjectHideFlags: 1

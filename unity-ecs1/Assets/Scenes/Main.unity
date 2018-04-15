@@ -299,8 +299,10 @@ MonoBehaviour:
   idleTotalTime: 2
   idleCurrentTime: 0
   treeGrowTime: 0
-  currentTreeSize: 0
-  maxTreeSize: 0
+  treeCurrentSize: 0
+  treeMaxSize: 3
+  treeMinSpawnDistance: 1
+  treeMaxSpawnDistance: 3
 --- !u!1 &828930775
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,8 +861,10 @@ MonoBehaviour:
   idleTotalTime: 3
   idleCurrentTime: 0
   treeGrowTime: 0
-  currentTreeSize: 0
-  maxTreeSize: 0
+  treeCurrentSize: 0
+  treeMaxSize: 3
+  treeMinSpawnDistance: 1
+  treeMaxSpawnDistance: 3
 --- !u!114 &1577388616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,8 +958,10 @@ MonoBehaviour:
   idleTotalTime: 0
   idleCurrentTime: 0
   treeGrowTime: 0
-  currentTreeSize: 0
-  maxTreeSize: 0
+  treeCurrentSize: 0
+  treeMaxSize: 3
+  treeMinSpawnDistance: 1
+  treeMaxSpawnDistance: 3
 --- !u!4 &1629513819
 Transform:
   m_ObjectHideFlags: 0
@@ -1188,8 +1194,10 @@ MonoBehaviour:
   idleTotalTime: 0
   idleCurrentTime: 0
   treeGrowTime: 0
-  currentTreeSize: 0
-  maxTreeSize: 0
+  treeCurrentSize: 0
+  treeMaxSize: 3
+  treeMinSpawnDistance: 1
+  treeMaxSpawnDistance: 3
 --- !u!114 &1928344251
 MonoBehaviour:
   m_ObjectHideFlags: 0

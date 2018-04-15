@@ -35,7 +35,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			tree.SetSize(size);
 
 			var btContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
-			btContext.currentTreeSize = size;
+			btContext.treeCurrentSize = size;
 
 			btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
 		}
@@ -239,21 +239,57 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					{
 						var gameObject = btManager.GetContext() as GameObject;
 						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-						return btContext.currentTreeSize < btContext.maxTreeSize;
+						return btContext.treeCurrentSize < btContext.treeMaxSize;
 					})
 					.Do("Grow", time =>
 					{
 						var gameObject = btManager.GetContext() as GameObject;
 						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-						btContext.currentTreeSize++;
+						btContext.treeCurrentSize++;
 						// dudas de como y donde reflejar cambios visuales
 						var tree = gameObject.GetComponent<VirtualVillagers.Tree>();
-						tree.SetSize(btContext.currentTreeSize);
+						tree.SetSize(btContext.treeCurrentSize);
 						return BehaviourTreeStatus.Success;
 					})
 				.End()
-			// if tree not at maximum
-//				.Node(treeGrow)
+			.Sequence("SpawnSeeds")
+				.Condition("HasSeeds", time =>
+				{
+					var gameObject = btManager.GetContext() as GameObject;
+					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+					return btContext.treeSeeds > 0;
+				})
+				.Do("SpawnTree", time =>
+				{
+					var gameObject = btManager.GetContext() as GameObject;
+					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+
+					if (btContext.spawnPrefab == null)
+						return BehaviourTreeStatus.Failure;
+					
+					var treeObject = GameObject.Instantiate(btContext.spawnPrefab);
+
+					// TODO: consider there is already a tree in that location, use a grid for better locations also
+					var randomPosition = UnityEngine.Random.insideUnitCircle * 
+						UnityEngine.Random.RandomRange(btContext.treeMinSpawnDistance, btContext.treeMaxSpawnDistance);
+					
+					treeObject.transform.position = gameObject.transform.position 
+					                                + (Vector3) randomPosition;
+					
+					var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
+					tree.SetSize(0);
+
+					var treeBtContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
+					
+					treeBtContext.treeCurrentSize = 0;
+					treeBtContext.idleCurrentTime = treeBtContext.idleTotalTime;
+
+					btContext.treeSeeds--;
+					
+					// dudas de como y donde reflejar cambios visuales
+					return BehaviourTreeStatus.Success;
+				})
+			.End()
 			// if tree at maximum	
 				// if tree seeds > 0
 				// wait some time
