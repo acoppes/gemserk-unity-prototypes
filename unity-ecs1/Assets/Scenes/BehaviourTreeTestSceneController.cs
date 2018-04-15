@@ -6,12 +6,34 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
     public UnityEngine.Object _behaviourTreeManager;
 
-	public int SpawnMaxItemCount = 3;
-	public GameObject spawnPrefab;
+//	public int SpawnMaxItemCount = 3;
+//	public GameObject spawnPrefab;
 
 	// Update is called once per frame
 	void Awake() {
         var btManager = _behaviourTreeManager as BehaviourTreeManager;
+		
+		var moveTo = new BehaviourTreeBuilder()
+			.Sequence("MoveSequence")
+				.Do("Moveto", delegate(TimeData time)
+				{
+					var gameObject = btManager.GetContext() as GameObject;
+					var movement = gameObject.GetComponent<MovementComponent>();
+					
+					var distance = Vector2.Distance(gameObject.transform.position, movement.destination);
+					if (distance < movement.destinationDistance)
+					{
+						movement.hasDestination = false;
+						return BehaviourTreeStatus.Success;
+					}
+					
+					movement.direction.x = movement.destination.x - gameObject.transform.position.x;
+					movement.direction.y = movement.destination.y - gameObject.transform.position.y;
+					
+					return BehaviourTreeStatus.Running;
+				})
+			.End()
+			.Build();
 		
 		var spawner = new BehaviourTreeBuilder()
 			.Sequence("Spawner")
@@ -19,10 +41,12 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				{
 					var gameObject = btManager.GetContext() as GameObject;
 					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-					if (string.IsNullOrEmpty(btContext.spawnItemsTag))
+					if (btContext.spawnItemsMax < 0)
 						return true;
-					var spawnedItems = GameObject.FindGameObjectsWithTag(btContext.spawnItemsTag);
-					return spawnedItems.Length < SpawnMaxItemCount;
+					if (string.IsNullOrEmpty(btContext.spawnPrefab.tag))
+						return true;
+					var spawnedItems = GameObject.FindGameObjectsWithTag(btContext.spawnPrefab.tag);
+					return spawnedItems.Length < btContext.spawnItemsMax;
 				})
 				.Do("WaitSomeTime", delegate(TimeData time)
 				{
@@ -31,12 +55,12 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					btContext.spawnIdleCurrentTime -= time.deltaTime;
 					return btContext.spawnIdleCurrentTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
 				})
-				.Do("SpawnAndRestart", delegate
+				.Do("Spawn", delegate
 				{
 					var gameObject = btManager.GetContext() as GameObject;
 					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
 					var spawnPosition = UnityEngine.Random.insideUnitCircle * 10.0f;
-					var spawnItem = GameObject.Instantiate(spawnPrefab);
+					var spawnItem = GameObject.Instantiate(btContext.spawnPrefab);
 					spawnItem.transform.position = spawnPosition;
 					btContext.spawnIdleCurrentTime = btContext.spawnIdleTotalTime;
 					return BehaviourTreeStatus.Success;
@@ -78,6 +102,12 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			.Sequence("SearchFood")
 			.Condition("IsThereAnyFood", delegate(TimeData data)
 			{
+				var gameObject = btManager.GetContext() as GameObject;
+				
+				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+				if (btContext.foodSelection != null)
+					return true;
+				
 				var foodItems = GameObject.FindGameObjectsWithTag("Food");
 				return foodItems.Length > 0;
 			})
@@ -85,34 +115,44 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			{
 				var gameObject = btManager.GetContext() as GameObject;
 				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-				if (btContext.foodSelection != null)
-					return BehaviourTreeStatus.Success;
-				var foodItems = GameObject.FindGameObjectsWithTag("Food");
-				btContext.foodSelection = foodItems[UnityEngine.Random.Range(0, foodItems.Length)];
+				var movement = gameObject.GetComponent<MovementComponent>();
+
+				if (btContext.foodSelection == null)
+				{
+					var foodItems = GameObject.FindGameObjectsWithTag("Food");
+					btContext.foodSelection = foodItems[UnityEngine.Random.Range(0, foodItems.Length)];
+				}
+
+				movement.destination = btContext.foodSelection.transform.position;
 				return BehaviourTreeStatus.Success;
 			})
-			.Do("MoveToFood", delegate(TimeData time)
+			.Node(moveTo)
+			.Do("Consumefood", delegate(TimeData time)
 			{
 				var gameObject = btManager.GetContext() as GameObject;
 				var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-				var movement = gameObject.GetComponent<MovementComponent>();
 				
-				var food = btContext.foodSelection;
+				// consumes food
+				GameObject.Destroy(btContext.foodSelection);
+				btContext.foodSelection = null;
+				btContext.foodConsumed++;
 				
-				var distance = Vector2.Distance(gameObject.transform.position, food.transform.position);
-				if (distance < movement.destinationDistance)
-				{
-					btContext.foodSelection = null;
-					// consumes food
-					GameObject.Destroy(food);
-					btContext.foodConsumed++;
-					return BehaviourTreeStatus.Success;
-				}
+				return BehaviourTreeStatus.Success;
 				
-				movement.direction.x = food.transform.position.x - gameObject.transform.position.x;
-				movement.direction.y = food.transform.position.y - gameObject.transform.position.y;
-				
-				return BehaviourTreeStatus.Running;
+//				var distance = Vector2.Distance(gameObject.transform.position, food.transform.position);
+//				if (distance < movement.destinationDistance)
+//				{
+//					btContext.foodSelection = null;
+//					// consumes food
+//					GameObject.Destroy(food);
+//					btContext.foodConsumed++;
+//					return BehaviourTreeStatus.Success;
+//				}
+//				
+//				movement.direction.x = food.transform.position.x - gameObject.transform.position.x;
+//				movement.direction.y = food.transform.position.y - gameObject.transform.position.y;
+//				
+//				return BehaviourTreeStatus.Running;
 			})
 			.End()
 			.Build();
@@ -181,5 +221,17 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		// lugar propio (contexto local, independiente del tree, pertenece a la unidad)
 		
 		// tener un buen debug de esto es escencial
+		
+		// Siguiente paso, ir a cortar leña y juntarla en unapila.
+		// Los arboles crecen con el tiempo de min a max, y cada tamañno tiene un determinado cantidad de leña.
+		// Solo crecen si no fueron harvesteados nunca.
+		
+		// harvestear lleva tiempo, es decir, el árbol tiene cierta resistencia para bajar de un nivel a otro
+		
+		// arboles crecen en tiempo
+		// cuando son grandes, ponen otros arboles al rededor (si no hay arboles ya)
+		
+		// moveto parece comun entre distintos comportamientos (chop, food, wander)
+		// como extraerlo?
     }
 }

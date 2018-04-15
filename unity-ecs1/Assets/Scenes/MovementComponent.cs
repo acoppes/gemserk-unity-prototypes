@@ -9,5 +9,9 @@ namespace VirtualVillagers
         public float speed = 1.0f;
 
         public float destinationDistance = 1.0f;
+        
+        // for wander behaviour
+        public bool hasDestination;
+        public Vector2 destination;
     }
 }

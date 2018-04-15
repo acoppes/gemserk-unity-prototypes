@@ -236,11 +236,7 @@ MonoBehaviour:
     x: 0
     y: 0
   speed: 4
-  hasDestination: 0
-  destination: {x: 0, y: 0}
   destinationDistance: 0.5
-  idleTime: 6
-  currentIdleTime: 0
 --- !u!114 &811575552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,11 +288,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnItemsTag: 
   spawnIdleTotalTime: 0
   spawnIdleCurrentTime: 0
+  spawnItemsMax: 0
+  spawnPrefab: {fileID: 0}
   foodSelection: {fileID: 0}
   foodConsumed: 0
+  hasWanderDestination: 0
+  wanderDestination: {x: 0, y: 0}
+  idleTotalTime: 6
+  idleCurrentTime: 0
 --- !u!1 &828930775
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,11 +532,7 @@ MonoBehaviour:
     x: 0
     y: 0
   speed: 1
-  hasDestination: 0
-  destination: {x: 0, y: 0}
   destinationDistance: 1
-  idleTime: 0
-  currentIdleTime: 0
 --- !u!1 &1139621983
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,9 +635,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
-    type: 2}
-  SpawnMaxItemCount: 3
-  spawnPrefab: {fileID: 1028647392421468, guid: 5639360e6e8bc0c4598390697af3ee62,
     type: 2}
 --- !u!4 &1154647730
 Transform:
@@ -778,11 +772,7 @@ MonoBehaviour:
     x: 0
     y: 0
   speed: 3
-  hasDestination: 0
-  destination: {x: 0, y: 0}
   destinationDistance: 0.5
-  idleTime: 3
-  currentIdleTime: 0
 --- !u!114 &1577388615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,11 +784,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnItemsTag: 
   spawnIdleTotalTime: 0
   spawnIdleCurrentTime: 0
+  spawnItemsMax: 0
+  spawnPrefab: {fileID: 0}
   foodSelection: {fileID: 0}
   foodConsumed: 0
+  hasWanderDestination: 0
+  wanderDestination: {x: 0, y: 0}
+  idleTotalTime: 3
+  idleCurrentTime: 0
 --- !u!114 &1577388616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -882,11 +877,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnItemsTag: Food
   spawnIdleTotalTime: 1
   spawnIdleCurrentTime: 0
+  spawnItemsMax: 3
+  spawnPrefab: {fileID: 1028647392421468, guid: 5639360e6e8bc0c4598390697af3ee62,
+    type: 2}
   foodSelection: {fileID: 0}
   foodConsumed: 0
+  hasWanderDestination: 0
+  wanderDestination: {x: 0, y: 0}
+  idleTotalTime: 0
+  idleCurrentTime: 0
 --- !u!4 &1629513819
 Transform:
   m_ObjectHideFlags: 0
@@ -1065,4 +1066,82 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1928344248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1928344252}
+  - component: {fileID: 1928344251}
+  - component: {fileID: 1928344250}
+  - component: {fileID: 1928344249}
+  m_Layer: 0
+  m_Name: TreeSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1928344249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1928344248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911fcd4ef786ed24d927d8d8b1cf1f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _behaviourTreeManager: {fileID: 11400000, guid: c0167ad6e463b2f458725e20ae9c7089,
+    type: 2}
+  _behaviourTreeName: Spawner
+--- !u!114 &1928344250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1928344248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnIdleTotalTime: 10
+  spawnIdleCurrentTime: 1
+  spawnItemsMax: -1
+  spawnPrefab: {fileID: 1028647392421468, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  foodSelection: {fileID: 0}
+  foodConsumed: 0
+  hasWanderDestination: 0
+  wanderDestination: {x: 0, y: 0}
+  idleTotalTime: 0
+  idleCurrentTime: 0
+--- !u!114 &1928344251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1928344248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1928344252
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1928344248}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
