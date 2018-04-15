@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4268844174682710}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,11 +172,11 @@ MonoBehaviour:
   spawnPrefab: {fileID: 0}
   foodSelection: {fileID: 0}
   foodConsumed: 0
-  idleTotalTime: 0
-  idleCurrentTime: 0
+  idleTotalTime: 5
+  idleCurrentTime: 5
   treeGrowTime: 0
   currentTreeSize: 0
-  maxTreeSize: 0
+  maxTreeSize: 3
 --- !u!114 &114692036028976824
 MonoBehaviour:
   m_ObjectHideFlags: 1

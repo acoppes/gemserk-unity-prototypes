@@ -28,8 +28,16 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				spawnBounds.center.x + UnityEngine.Random.RandomRange(spawnBounds.min.x, spawnBounds.max.x), 
 				spawnBounds.center.y + UnityEngine.Random.RandomRange(spawnBounds.min.y, spawnBounds.max.y)
 			);
+
+			var size = UnityEngine.Random.RandomRange(0, 3);
+			
 			var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
-			tree.SetSize(UnityEngine.Random.RandomRange(0, 3));
+			tree.SetSize(size);
+
+			var btContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
+			btContext.currentTreeSize = size;
+
+			btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
 		}
 		
 		treeSpawnerBounds.gameObject.SetActive(false);
@@ -222,7 +230,28 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		
 		btManager.Add("Tree", new BehaviourTreeBuilder()
 			.Selector("Selector")
+				// duda de como evitar que corra un comportamiento si estoy ejecutando otro
+				// podría poner condiciones extra, tipo "not growing" && "not spawning seeds"
+				// en algunas implementaciones vi lo del pending para animaciones/transiciones.
 				.SubTree(idle)
+				.Sequence("Grow")
+					.Condition("NotMaxSize", time =>
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+						return btContext.currentTreeSize < btContext.maxTreeSize;
+					})
+					.Do("Grow", time =>
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+						btContext.currentTreeSize++;
+						// dudas de como y donde reflejar cambios visuales
+						var tree = gameObject.GetComponent<VirtualVillagers.Tree>();
+						tree.SetSize(btContext.currentTreeSize);
+						return BehaviourTreeStatus.Success;
+					})
+				.End()
 			// if tree not at maximum
 //				.Node(treeGrow)
 			// if tree at maximum	
@@ -258,6 +287,11 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		// me rechina un poco el configurar el manager de behaviour trees, debería estar en el system y setearlo o 
 		// pasarlo de parámetro? De paso, debería ser el system el que hace toda la lógica que hace el bt component
 
+		// que pasa si quiero tener varios templates de arboles, o sea, el behaviour es el mismo pero 
+		// quiero distintas configuraciones (variaciones de grow time, spawn child, etc)
+		//		* podria tener distintos prefabs (wakale) y meter ahi un random de esos
+		// 		* podría mover la config inicial a un scriptable object y usar un random de esos
+		// 		* si fuera dato de entidad de ecs, podrían ser como templates/blueprints de esa entidad
 
 		// Feedback al fluent
 		// no se puede hacer un árbol de una leaf sola? (un subarbol)

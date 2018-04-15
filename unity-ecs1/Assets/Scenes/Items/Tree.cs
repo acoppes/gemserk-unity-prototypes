@@ -11,8 +11,8 @@ namespace VirtualVillagers
 		{
 			Vector3[] sizes =
 			{
-				new Vector3(0.5f, 0.5f, 0.5f),
-				new Vector3(0.75f, 0.75f, 0.75f),
+				new Vector3(0.25f, 0.25f, 0.25f),
+				new Vector3(0.65f, 0.65f, 0.65f),
 				new Vector3(1.0f, 1.0f, 1.0f),
 			};
 
