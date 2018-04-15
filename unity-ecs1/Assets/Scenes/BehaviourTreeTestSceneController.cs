@@ -10,43 +10,47 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 //	public int SpawnMaxItemCount = 3;
 //	public GameObject spawnPrefab;
 
-	public GameObject treePrefab;
+//	public GameObject treePrefab;
 	
 	public int minTrees;
 	public int maxTrees;
 
-	public BoxCollider2D treeSpawnerBounds;
+//	public BoxCollider2D treeSpawnerBounds;
 
 //	[Inject] private World _world;
+
+	public DebugTools debugTools;
 	
 	private void SpawnTrees()
 	{
 		var treesCount = UnityEngine.Random.Range(minTrees, maxTrees);
-		var spawnBounds = treeSpawnerBounds.bounds;
+//		var spawnBounds = treeSpawnerBounds.bounds;
 		
 		for (var i = 0; i < treesCount; i++)
 		{
-			var treeObject = GameObject.Instantiate(treePrefab);
-			treeObject.transform.position = new Vector2(
-				spawnBounds.center.x + UnityEngine.Random.RandomRange(spawnBounds.min.x, spawnBounds.max.x), 
-				spawnBounds.center.y + UnityEngine.Random.RandomRange(spawnBounds.min.y, spawnBounds.max.y)
-			);
-
-			var size = UnityEngine.Random.RandomRange(0, 3);
+			debugTools.SpawnTree();
 			
-
-			var btContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
-			btContext.treeCurrentSize = size;
-			btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
-			
-			var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
-			tree.SetTreeData(btContext);
-//			tree.SetSize(size);
-
-			btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
+//			var treeObject = GameObject.Instantiate(treePrefab);
+//			treeObject.transform.position = new Vector2(
+//				spawnBounds.center.x + UnityEngine.Random.RandomRange(spawnBounds.min.x, spawnBounds.max.x), 
+//				spawnBounds.center.y + UnityEngine.Random.RandomRange(spawnBounds.min.y, spawnBounds.max.y)
+//			);
+//
+//			var size = UnityEngine.Random.RandomRange(0, 3);
+//			
+//
+//			var btContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
+//			btContext.treeCurrentSize = size;
+//			btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
+//			
+//			var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
+//			tree.SetTreeData(btContext);
+////			tree.SetSize(size);
+//
+//			btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
 		}
 		
-		treeSpawnerBounds.gameObject.SetActive(false);
+//		treeSpawnerBounds.gameObject.SetActive(false);
 	}
 
 	private void Start() {
