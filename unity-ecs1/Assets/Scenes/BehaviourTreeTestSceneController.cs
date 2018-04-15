@@ -16,6 +16,8 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
 	public BoxCollider2D treeSpawnerBounds;
 
+//	[Inject] private World _world;
+	
 	private void SpawnTrees()
 	{
 		var treesCount = UnityEngine.Random.Range(minTrees, maxTrees);
@@ -43,9 +45,11 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		treeSpawnerBounds.gameObject.SetActive(false);
 	}
 
-	// Update is called once per frame
-	private void Awake() {
+	private void Start() {
         var btManager = _behaviourTreeManager as BehaviourTreeManager;
+
+//		var btSystem = _world.GetExistingManager<BehaviourTreeSystem>();
+//		btSystem.SetBehaviourTreeManager(btManager);
 		
 		var moveTo = new BehaviourTreeBuilder()
 			.Sequence("MoveSequence")
@@ -252,49 +256,48 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						return BehaviourTreeStatus.Success;
 					})
 				.End()
-			.Sequence("SpawnSeeds")
-				.Condition("HasSeeds", time =>
-				{
-					var gameObject = btManager.GetContext() as GameObject;
-					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-					return btContext.treeSeeds > 0;
-				})
-				.Do("SpawnTree", time =>
-				{
-					var gameObject = btManager.GetContext() as GameObject;
-					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-
-					if (btContext.spawnPrefab == null)
-						return BehaviourTreeStatus.Failure;
-					
-					var treeObject = GameObject.Instantiate(btContext.spawnPrefab);
-
-					// TODO: consider there is already a tree in that location, use a grid for better locations also
-					var randomPosition = UnityEngine.Random.insideUnitCircle * 
-						UnityEngine.Random.RandomRange(btContext.treeMinSpawnDistance, btContext.treeMaxSpawnDistance);
-					
-					treeObject.transform.position = gameObject.transform.position 
-					                                + (Vector3) randomPosition;
-					
-					var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
-					tree.SetSize(0);
-
-					var treeBtContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
-					
-					treeBtContext.treeCurrentSize = 0;
-					treeBtContext.idleCurrentTime = treeBtContext.idleTotalTime;
-
-					btContext.treeSeeds--;
-					
-					// dudas de como y donde reflejar cambios visuales
-					return BehaviourTreeStatus.Success;
-				})
-			.End()
-			// if tree at maximum	
-				// if tree seeds > 0
-				// wait some time
-				// spawn trees nearby
-				// reduce seeds
+				.Sequence("SpawnSeeds")
+					.Condition("HasSeeds", time =>
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+						
+						// what about checking global values like max Trees in game
+						//  * static value probably? who is in charge of increasing/decreasing it?
+						
+						return btContext.treeSeeds > 0;
+					})
+					.Do("SpawnTree", time =>
+					{
+						var gameObject = btManager.GetContext() as GameObject;
+						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+	
+						if (btContext.spawnPrefab == null)
+							return BehaviourTreeStatus.Failure;
+						
+						var treeObject = GameObject.Instantiate(btContext.spawnPrefab);
+	
+						// TODO: consider there is already a tree in that location, use a grid for better locations also
+						var randomPosition = UnityEngine.Random.insideUnitCircle * 
+							UnityEngine.Random.RandomRange(btContext.treeMinSpawnDistance, btContext.treeMaxSpawnDistance);
+						
+						treeObject.transform.position = gameObject.transform.position 
+														+ (Vector3) randomPosition;
+						
+						var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
+						tree.SetSize(0);
+	
+						var treeBtContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
+						
+						treeBtContext.treeCurrentSize = 0;
+						treeBtContext.idleCurrentTime = treeBtContext.idleTotalTime;
+	
+						btContext.treeSeeds--;
+						
+						// dudas de como y donde reflejar cambios visuales
+						return BehaviourTreeStatus.Success;
+					})
+				.End()
 			.End()
 			.Build());
 
