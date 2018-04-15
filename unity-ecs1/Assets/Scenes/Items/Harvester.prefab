@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4467612578370230}
   - component: {fileID: 114392767208889912}
-  - component: {fileID: 114173564183136142}
   - component: {fileID: 114535349855634538}
   - component: {fileID: 114906645562060682}
   - component: {fileID: 114365406833515416}
+  - component: {fileID: 114819800225577426}
   m_Layer: 0
   m_Name: Harvester
   m_TagString: Untagged
@@ -74,21 +74,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114173564183136142
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1546914794214884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927e7f75370854243a5ed8aa73d2ab03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SerializedData:
-    Value:
-      x: 5
-      y: 5
 --- !u!114 &114365406833515416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,6 +135,22 @@ MonoBehaviour:
   destinationDistance: 0.5
   hasDestination: 0
   destination: {x: 0, y: 0}
+--- !u!114 &114819800225577426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1546914794214884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168b0e3756704251859c57ee75912ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedData:
+    Value:
+      x: 0
+      y: 0
+      z: 0
 --- !u!114 &114906645562060682
 MonoBehaviour:
   m_ObjectHideFlags: 1

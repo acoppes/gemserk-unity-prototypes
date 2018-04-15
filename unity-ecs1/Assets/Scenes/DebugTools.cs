@@ -1,4 +1,6 @@
-﻿using Unity.Mathematics;
+﻿using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
 using Unity.Transforms2D;
 using UnityEngine;
 using VirtualVillagers;
@@ -7,6 +9,7 @@ public class DebugTools : MonoBehaviour
 {
 	public GameObject treePrefab;
 	public GameObject harvesterPrefab;
+	public GameObject foodPrefab;
 	
 	public BoxCollider2D spawnBounds;
 
@@ -30,6 +33,12 @@ public class DebugTools : MonoBehaviour
 		tree.SetTreeData(btContext);
 
 		btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
+		
+		var entity = treeObject.GetComponent<GameObjectEntity>();
+		entity.EntityManager.SetComponentData(entity.Entity, new Position
+		{
+			Value = treeObject.transform.position
+		});
 	}
 
 	public void SpawnHarvester()
@@ -42,11 +51,27 @@ public class DebugTools : MonoBehaviour
 			spawnBounds.center.y + UnityEngine.Random.RandomRange(spawnBounds.min.y, spawnBounds.max.y)
 		);
 
-		var position2d = harvesterObject.GetComponent<Position2DComponent>();
-		position2d.Value = new Position2D
+		var entity = harvesterObject.GetComponent<GameObjectEntity>();
+		entity.EntityManager.SetComponentData(entity.Entity, new Position
 		{
-			Value = new float2(harvesterObject.transform.position.x, harvesterObject.transform.position.y)
-		};
+			Value = harvesterObject.transform.position
+		});
 	}
 
+	public void SpawnFood()
+	{
+		var spawnBounds = this.spawnBounds.bounds;
+		
+		var foodObject = GameObject.Instantiate(foodPrefab);
+		foodObject.transform.position = new Vector2(
+			spawnBounds.center.x + UnityEngine.Random.RandomRange(spawnBounds.min.x, spawnBounds.max.x), 
+			spawnBounds.center.y + UnityEngine.Random.RandomRange(spawnBounds.min.y, spawnBounds.max.y)
+		);
+
+		var entity = foodObject.GetComponent<GameObjectEntity>();
+		entity.EntityManager.SetComponentData(entity.Entity, new Position
+		{
+			Value = foodObject.transform.position
+		});
+	}
 }
