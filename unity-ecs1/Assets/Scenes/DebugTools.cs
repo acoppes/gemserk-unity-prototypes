@@ -74,4 +74,13 @@ public class DebugTools : MonoBehaviour
 			Value = foodObject.transform.position
 		});
 	}
+
+	public void KillEveryone()
+	{
+		var entities = GameObject.FindObjectsOfType<GameObjectEntity>();
+		foreach (var entity in entities)
+		{
+			GameObject.Destroy(entity.gameObject);
+		}
+	}
 }

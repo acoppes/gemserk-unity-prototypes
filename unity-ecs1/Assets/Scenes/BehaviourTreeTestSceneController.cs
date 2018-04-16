@@ -6,51 +6,20 @@ using VirtualVillagers;
 public class BehaviourTreeTestSceneController : MonoBehaviour {
 
     public UnityEngine.Object _behaviourTreeManager;
-
-//	public int SpawnMaxItemCount = 3;
-//	public GameObject spawnPrefab;
-
-//	public GameObject treePrefab;
 	
 	public int minTrees;
 	public int maxTrees;
-
-//	public BoxCollider2D treeSpawnerBounds;
-
-//	[Inject] private World _world;
 
 	public DebugTools debugTools;
 	
 	private void SpawnTrees()
 	{
 		var treesCount = UnityEngine.Random.Range(minTrees, maxTrees);
-//		var spawnBounds = treeSpawnerBounds.bounds;
 		
 		for (var i = 0; i < treesCount; i++)
 		{
 			debugTools.SpawnTree();
-			
-//			var treeObject = GameObject.Instantiate(treePrefab);
-//			treeObject.transform.position = new Vector2(
-//				spawnBounds.center.x + UnityEngine.Random.RandomRange(spawnBounds.min.x, spawnBounds.max.x), 
-//				spawnBounds.center.y + UnityEngine.Random.RandomRange(spawnBounds.min.y, spawnBounds.max.y)
-//			);
-//
-//			var size = UnityEngine.Random.RandomRange(0, 3);
-//			
-//
-//			var btContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
-//			btContext.treeCurrentSize = size;
-//			btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
-//			
-//			var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
-//			tree.SetTreeData(btContext);
-////			tree.SetSize(size);
-//
-//			btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
 		}
-		
-//		treeSpawnerBounds.gameObject.SetActive(false);
 	}
 
 	private void Start() {
@@ -217,7 +186,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		
 		var harvestLumber = new BehaviourTreeBuilder()
 			.Selector("All")
-				.Sequence("SelectTree")
+				.Sequence("Harvest")
 					.Condition("NotAtMaximumLumber", delegate(TimeData time)
 					{
 						var gameObject = btManager.GetContext() as GameObject;
@@ -292,9 +261,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						if (nearByTrees.Count == 0)
 							return BehaviourTreeStatus.Failure;
 								
-						// TODO: select best tree? or random at least?
-								
-						btContext.harvestLumberCurrentTree = nearByTrees[0];
+						btContext.harvestLumberCurrentTree = nearByTrees[UnityEngine.Random.Range(0, nearByTrees.Count)];
 		
 						return BehaviourTreeStatus.Success;
 					})
@@ -307,6 +274,42 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					}) 
 					.SubTree(moveTo)
 				.End()
+					.Sequence("MoveToLumberMill")
+						.Condition("MaximumLumber", delegate(TimeData time)
+						{
+							var gameObject = btManager.GetContext() as GameObject;
+							var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+							return btContext.harvestLumberCurrent >= btContext.harvestLumberTotal;
+						})
+						// if at distance of lumber mill deposit lumber and reset
+						.Do("FindLumberMill", delegate(TimeData time)
+						{
+							var gameObject = btManager.GetContext() as GameObject;
+							var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+							var movement = gameObject.GetComponent<MovementComponent>();
+					
+							var lumberMills = GameObject.FindGameObjectsWithTag("LumberMill");
+							if (lumberMills.Length == 0)
+								return BehaviourTreeStatus.Failure;
+
+							var lumberMill = lumberMills[0];
+
+							if (Vector2.Distance(gameObject.transform.position, lumberMill.transform.position) <
+							    movement.destinationDistance)
+							{
+								var lumberBtContext = lumberMill.GetComponent<BehaviourTreeContextComponent>();
+								lumberBtContext.lumberMillLumberCurrent += btContext.harvestLumberCurrent;
+								
+								btContext.harvestLumberCurrent = 0;
+								return BehaviourTreeStatus.Success;
+							}
+							
+							movement.SetDestination(lumberMill.transform.position);
+					
+							return BehaviourTreeStatus.Success;
+						})
+						.SubTree(moveTo)
+					.End()
 				.End()
 			.Build();
 
@@ -448,14 +451,14 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		// arboles crecen en tiempo
 		// cuando son grandes, ponen otros arboles al rededor (si no hay arboles ya)		
 
-		// me rechina un poco el configurar el manager de behaviour trees, debería estar en el system y setearlo o 
-		// pasarlo de parámetro? De paso, debería ser el system el que hace toda la lógica que hace el bt component
-
 		// que pasa si quiero tener varios templates de arboles, o sea, el behaviour es el mismo pero 
 		// quiero distintas configuraciones (variaciones de grow time, spawn child, etc)
 		//		* podria tener distintos prefabs (wakale) y meter ahi un random de esos
 		// 		* podría mover la config inicial a un scriptable object y usar un random de esos
 		// 		* si fuera dato de entidad de ecs, podrían ser como templates/blueprints de esa entidad
+		
+		// los harvesters ahora se llenan y no hacen más nada, estaría bueno tener una lumber mill o algo
+		// y un hud en pantalla, cuando estan llenos de leña que vayan ahi y la dejen.
 
 		// Feedback al fluent
 		// no se puede hacer un árbol de una leaf sola? (un subarbol)

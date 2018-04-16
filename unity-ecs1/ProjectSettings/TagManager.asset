@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Food
   - Tree
+  - LumberMill
   layers:
   - Default
   - TransparentFX
