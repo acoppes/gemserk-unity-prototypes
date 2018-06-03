@@ -2,8 +2,10 @@
 using UnityEngine;
 using FluentBehaviourTree;
 using Gemserk.BehaviourTree;
+using Unity.Entities;
 using VirtualVillagers;
 using VirtualVillagers.Components;
+using VirtualVillagers.Systems;
 
 public class BehaviourTreeTestSceneController : MonoBehaviour {
 
@@ -439,6 +441,8 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			.Build());
 
 		CreateWorld();
+		
+		World.Active.GetExistingManager<BehaviourTreeSystem>().SetBehaviourTreeManager(btManager);
 
 		// Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto
 		// Tener una accion separada para incrementar el cooldown? 

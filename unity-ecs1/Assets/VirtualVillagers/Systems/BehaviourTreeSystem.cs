@@ -19,11 +19,16 @@ namespace VirtualVillagers.Systems
 
         private BehaviourTreeManager _btManager;
 
-        protected override void OnCreateManager(int capacity)
+        public void SetBehaviourTreeManager(BehaviourTreeManager btManager)
         {
-            base.OnCreateManager(capacity);
-            _btManager = GameObject.FindObjectOfType<BehaviourTreeManagerBehaviour>();
+            _btManager = btManager;
         }
+
+//        protected override void OnCreateManager(int capacity)
+//        {
+//            base.OnCreateManager(capacity);
+//            _btManager = GameObject.FindObjectOfType<BehaviourTreeManagerBehaviour>();
+//        }
 
         protected override void OnUpdate()
         {
