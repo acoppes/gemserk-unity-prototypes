@@ -2,6 +2,7 @@
 using UnityEngine;
 using FluentBehaviourTree;
 using VirtualVillagers;
+using VirtualVillagers.Components;
 
 public class BehaviourTreeTestSceneController : MonoBehaviour {
 

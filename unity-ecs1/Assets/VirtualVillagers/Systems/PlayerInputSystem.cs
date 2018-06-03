@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using Unity.Entities;
+using VirtualVillagers.Components;
 
-namespace VirtualVillagers
+namespace VirtualVillagers.Systems
 {
     // ReSharper disable once UnusedMember.Global
     public class PlayerInputSystem : ComponentSystem

@@ -1,7 +1,7 @@
 ﻿using Unity.Mathematics;
 using UnityEngine;
 
-namespace VirtualVillagers
+namespace VirtualVillagers.Components
 {
     public class MovementComponent : MonoBehaviour
     {

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using VirtualVillagers.Components;
 
 namespace VirtualVillagers
 {

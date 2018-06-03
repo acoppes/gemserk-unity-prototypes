@@ -1,7 +1,8 @@
 ﻿using Unity.Entities;
 using UnityEngine;
+using VirtualVillagers.Components;
 
-namespace VirtualVillagers
+namespace VirtualVillagers.Systems
 {
     // ReSharper disable once UnusedMember.Global
     public class BehaviourTreeSystem : ComponentSystem

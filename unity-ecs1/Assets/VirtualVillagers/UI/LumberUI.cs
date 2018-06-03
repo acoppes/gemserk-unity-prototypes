@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using VirtualVillagers;
+using VirtualVillagers.Components;
 
 public class LumberUI : MonoBehaviour
 {

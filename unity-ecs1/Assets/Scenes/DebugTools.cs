@@ -4,6 +4,7 @@ using Unity.Transforms;
 using Unity.Transforms2D;
 using UnityEngine;
 using VirtualVillagers;
+using VirtualVillagers.Components;
 
 public class DebugTools : MonoBehaviour
 {

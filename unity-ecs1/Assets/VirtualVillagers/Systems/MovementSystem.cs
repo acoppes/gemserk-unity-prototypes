@@ -3,8 +3,9 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using Unity.Transforms2D;
 using UnityEngine;
+using VirtualVillagers.Components;
 
-namespace VirtualVillagers
+namespace VirtualVillagers.Systems
 {
     // ReSharper disable once UnusedMember.Global
     public class MovementSystem : ComponentSystem
