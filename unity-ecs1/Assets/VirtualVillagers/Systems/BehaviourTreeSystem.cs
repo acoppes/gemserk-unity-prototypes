@@ -41,6 +41,9 @@ namespace VirtualVillagers.Systems
                 var tree = _btManager.GetTree(bt._behaviourTreeName);
                 if (tree == null)
                     return;
+
+                ActionNode.DebugCurrentNode = "None";
+                
                 _btManager.SetContext(bt.gameObject);
                 tree.Tick(new FluentBehaviourTree.TimeData(dt));
                 _btManager.SetContext(null);

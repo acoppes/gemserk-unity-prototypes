@@ -573,6 +573,8 @@ MonoBehaviour:
   harvesterPrefab: {fileID: 1546914794214884, guid: a3e10a6058c167a45836f6f6bc2f81f3,
     type: 2}
   foodPrefab: {fileID: 1028647392421468, guid: 5639360e6e8bc0c4598390697af3ee62, type: 2}
+  _debugBTPrefab: {fileID: 1586305625094496, guid: db643f9bcc01dc943860412459906dab,
+    type: 2}
   spawnBounds: {fileID: 1198826635}
 --- !u!1 &611987078
 GameObject:
@@ -899,6 +901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _behaviourTreeName: Wanderer
+  _debugCurrentAction: 
 --- !u!114 &811575551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2160,6 +2163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _behaviourTreeName: WandererAndEater
+  _debugCurrentAction: 
 --- !u!114 &1577388614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2317,6 +2321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _behaviourTreeName: Spawner
+  _debugCurrentAction: 
 --- !u!114 &1629513818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2813,6 +2818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _behaviourTreeName: Spawner
+  _debugCurrentAction: 
 --- !u!114 &1928344250
 MonoBehaviour:
   m_ObjectHideFlags: 0

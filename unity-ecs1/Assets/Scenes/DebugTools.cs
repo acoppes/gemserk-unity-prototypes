@@ -11,6 +11,9 @@ public class DebugTools : MonoBehaviour
 	public GameObject treePrefab;
 	public GameObject harvesterPrefab;
 	public GameObject foodPrefab;
+
+	[SerializeField]
+	protected GameObject _debugBTPrefab;
 	
 	public BoxCollider2D spawnBounds;
 
@@ -18,62 +21,71 @@ public class DebugTools : MonoBehaviour
 	{
 		var spawnBounds = this.spawnBounds.bounds;
 		
-		var treeObject = GameObject.Instantiate(treePrefab);
-		treeObject.transform.position = new Vector2(
+		var gameObject = GameObject.Instantiate(treePrefab);
+		gameObject.transform.position = new Vector2(
 			spawnBounds.center.x + UnityEngine.Random.RandomRange(spawnBounds.min.x, spawnBounds.max.x), 
 			spawnBounds.center.y + UnityEngine.Random.RandomRange(spawnBounds.min.y, spawnBounds.max.y)
 		);
 
 		var size = UnityEngine.Random.RandomRange(0, 3);
 			
-		var btContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
+		var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
 		btContext.treeCurrentSize = size;
 		btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
 			
-		var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
+		var tree = gameObject.GetComponent<VirtualVillagers.Tree>();
 		tree.SetTreeData(btContext);
 
 		btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
 		
-		var entity = treeObject.GetComponent<GameObjectEntity>();
+		var entity = gameObject.GetComponent<GameObjectEntity>();
 		entity.EntityManager.SetComponentData(entity.Entity, new Position
 		{
-			Value = treeObject.transform.position
+			Value = gameObject.transform.position
 		});
+		
+		var debugBT = GameObject.Instantiate(_debugBTPrefab, gameObject.transform);
+		debugBT.GetComponent<DebugBT>()._btComponent = gameObject.GetComponent<BehaviourTreeComponent>();
 	}
 
 	public void SpawnHarvester()
 	{
 		var spawnBounds = this.spawnBounds.bounds;
 		
-		var harvesterObject = GameObject.Instantiate(harvesterPrefab);
-		harvesterObject.transform.position = new Vector2(
+		var gameObject = GameObject.Instantiate(harvesterPrefab);
+		gameObject.transform.position = new Vector2(
 			spawnBounds.center.x + UnityEngine.Random.RandomRange(spawnBounds.min.x, spawnBounds.max.x), 
 			spawnBounds.center.y + UnityEngine.Random.RandomRange(spawnBounds.min.y, spawnBounds.max.y)
 		);
 
-		var entity = harvesterObject.GetComponent<GameObjectEntity>();
+		var entity = gameObject.GetComponent<GameObjectEntity>();
 		entity.EntityManager.SetComponentData(entity.Entity, new Position
 		{
-			Value = harvesterObject.transform.position
+			Value = gameObject.transform.position
 		});
+
+		var debugBT = GameObject.Instantiate(_debugBTPrefab, gameObject.transform);
+		debugBT.GetComponent<DebugBT>()._btComponent = gameObject.GetComponent<BehaviourTreeComponent>();
 	}
 
 	public void SpawnFood()
 	{
 		var spawnBounds = this.spawnBounds.bounds;
 		
-		var foodObject = GameObject.Instantiate(foodPrefab);
-		foodObject.transform.position = new Vector2(
+		var gameObject = GameObject.Instantiate(foodPrefab);
+		gameObject.transform.position = new Vector2(
 			spawnBounds.center.x + UnityEngine.Random.RandomRange(spawnBounds.min.x, spawnBounds.max.x), 
 			spawnBounds.center.y + UnityEngine.Random.RandomRange(spawnBounds.min.y, spawnBounds.max.y)
 		);
 
-		var entity = foodObject.GetComponent<GameObjectEntity>();
+		var entity = gameObject.GetComponent<GameObjectEntity>();
 		entity.EntityManager.SetComponentData(entity.Entity, new Position
 		{
-			Value = foodObject.transform.position
+			Value = gameObject.transform.position
 		});
+		
+		var debugBT = GameObject.Instantiate(_debugBTPrefab, gameObject.transform);
+		debugBT.GetComponent<DebugBT>()._btComponent = gameObject.GetComponent<BehaviourTreeComponent>();
 	}
 
 	public void KillEveryone()

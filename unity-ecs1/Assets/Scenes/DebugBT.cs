@@ -8,8 +8,7 @@ public class DebugBT : MonoBehaviour
 	[SerializeField]
 	protected Text _text;
 
-	[SerializeField]
-	protected BehaviourTreeComponent _btComponent;
+	public BehaviourTreeComponent _btComponent;
 
 	private void LateUpdate()
 	{
