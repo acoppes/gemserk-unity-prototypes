@@ -233,7 +233,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
 						if (currentTreeBtContext.treeCurrentLumber <= 0.0f)
 						{
-							GameObject.Destroy(currentTree);
+//							GameObject.Destroy(currentTree);
 							btContext.harvestLumberCurrentTree = null;
 						}
 
@@ -268,7 +268,8 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 							return BehaviourTreeStatus.Failure;
 						
 						var nearByTrees = trees.Where(tree => Vector2.Distance(gameObject.transform.position, tree.transform.position) <
-															  btContext.harvestLumberMaxDistance).ToList();
+															  btContext.harvestLumberMaxDistance && 
+						                                      tree.GetComponent<BehaviourTreeContextComponent>().treeCurrentLumber > 0).ToList();
 						if (nearByTrees.Count == 0)
 							return BehaviourTreeStatus.Failure;
 								
@@ -359,6 +360,11 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		
 		btManager.Add("Tree", new BehaviourTreeBuilder()
 			.Selector("Selector")
+				.Do("DoNothing", time => {
+					var gameObject = btManager.GetContext() as GameObject;
+					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();	
+					return btContext.treeCurrentLumber <= 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Failure;
+				})
 				// duda de como evitar que corra un comportamiento si estoy ejecutando otro
 				// podría poner condiciones extra, tipo "not growing" && "not spawning seeds"
 				// en algunas implementaciones vi lo del pending para animaciones/transiciones.
