@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FluentBehaviourTree;
+using UnityEngine;
 using UnityEngine.UI;
 using VirtualVillagers.Components;
 
@@ -13,6 +14,8 @@ public class DebugBT : MonoBehaviour
 	private void LateUpdate()
 	{
 		if (_text != null && _btComponent != null)
-			_text.text = _btComponent._behaviourTreeName;
+		{
+			_text.text = string.Format("{0}.{1}", _btComponent._behaviourTreeName, _btComponent._debugCurrentAction);
+		}
 	}
 }

@@ -19,6 +19,8 @@ namespace FluentBehaviourTree
         /// Function to invoke for the action.
         /// </summary>
         private readonly Func<TimeData, BehaviourTreeStatus> fn;
+
+        public static string DebugCurrentNode;
         
         public ActionNode(string name, Func<TimeData, BehaviourTreeStatus> fn)
         {
@@ -28,6 +30,7 @@ namespace FluentBehaviourTree
 
         public BehaviourTreeStatus Tick(TimeData time)
         {
+            DebugCurrentNode = name;
             return fn(time);
         }
     }

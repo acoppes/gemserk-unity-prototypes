@@ -1,4 +1,5 @@
-﻿using Gemserk.BehaviourTree;
+﻿using FluentBehaviourTree;
+using Gemserk.BehaviourTree;
 using Unity.Entities;
 using UnityEngine;
 using VirtualVillagers.Components;
@@ -44,7 +45,8 @@ namespace VirtualVillagers.Systems
                 tree.Tick(new FluentBehaviourTree.TimeData(dt));
                 _btManager.SetContext(null);
                 
-                // bt.Process(dt);
+                // just for debug!
+                bt._debugCurrentAction = ActionNode.DebugCurrentNode;
             }
         }
     }
