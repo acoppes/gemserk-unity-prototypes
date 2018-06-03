@@ -13,8 +13,10 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 	public int maxTrees;
 
 	public DebugTools debugTools;
+
+	public LumberUI _lumberUI;
 	
-	private void SpawnTrees()
+	private void CreateWorld()
 	{
 		var treesCount = UnityEngine.Random.Range(minTrees, maxTrees);
 		
@@ -22,6 +24,11 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		{
 			debugTools.SpawnTree();
 		}
+		
+		var lumbermill = debugTools.SpawnLumbermill();
+		debugTools.SpawnEater();
+
+		_lumberUI.lumberMill = lumbermill;
 	}
 
 	private void Start() {
@@ -431,7 +438,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			.End()
 			.Build());
 
-		SpawnTrees();
+		CreateWorld();
 
 		// Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto
 		// Tener una accion separada para incrementar el cooldown? 
