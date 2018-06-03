@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 using FluentBehaviourTree;
+using Gemserk.BehaviourTree;
 using VirtualVillagers;
 using VirtualVillagers.Components;
 

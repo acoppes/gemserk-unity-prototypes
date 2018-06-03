@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using Gemserk.BehaviourTree;
+using Unity.Entities;
 using UnityEngine;
 using VirtualVillagers.Components;
 
