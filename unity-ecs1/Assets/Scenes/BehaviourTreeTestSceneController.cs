@@ -362,8 +362,19 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			.Selector("Selector")
 				.Do("DoNothing", time => {
 					var gameObject = btManager.GetContext() as GameObject;
-					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();	
-					return btContext.treeCurrentLumber <= 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Failure;
+					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+					
+					var result = btContext.treeCurrentLumber <= 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Failure;
+
+					if (result == BehaviourTreeStatus.Running)
+					{
+						var destroyableComponent = gameObject.GetComponent<DestroyableComponent>();
+						if (destroyableComponent != null)
+							destroyableComponent.shouldDestroy = true;
+						return BehaviourTreeStatus.Success;
+					}
+					
+					return result;
 				})
 				// duda de como evitar que corra un comportamiento si estoy ejecutando otro
 				// podría poner condiciones extra, tipo "not growing" && "not spawning seeds"

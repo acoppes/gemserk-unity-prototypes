@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114575294843948470}
   - component: {fileID: 114692036028976824}
   - component: {fileID: 114766093863061418}
+  - component: {fileID: 114194520413448628}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Tree
@@ -133,6 +134,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114194520413448628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1028647392421468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2428657b8bfc420487e0e70684d1437f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldDestroy: 0
 --- !u!114 &114257485424645210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _behaviourTreeName: Tree
+  _debugCurrentAction: 
 --- !u!114 &114766093863061418
 MonoBehaviour:
   m_ObjectHideFlags: 1
