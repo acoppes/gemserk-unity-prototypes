@@ -143,7 +143,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				movement.destination = btContext.foodSelection.transform.position;
 				return BehaviourTreeStatus.Success;
 			})
-			.SubTree(moveTo)
+			.Splice(moveTo)
 			.Do("Consumefood", delegate(TimeData time)
 			{
 				var gameObject = btManager.GetContext() as GameObject;
@@ -179,7 +179,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					}) 
 				.End()
 				.Sequence("Wander")
-					.SubTree(moveTo)
+					.Splice(moveTo)
 				.End()
 			.End()
 			.Build();
@@ -272,7 +272,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						movement.SetDestination(btContext.harvestLumberCurrentTree.transform.position);
 						return BehaviourTreeStatus.Success;
 					}) 
-					.SubTree(moveTo)
+					.Splice(moveTo)
 				.End()
 					.Sequence("MoveToLumberMill")
 						.Condition("MaximumLumber", delegate(TimeData time)
@@ -308,19 +308,19 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					
 							return BehaviourTreeStatus.Success;
 						})
-						.SubTree(moveTo)
+						.Splice(moveTo)
 					.End()
 				.End()
 			.Build();
 
 		btManager.Add("WandererAndEater", new BehaviourTreeBuilder()
 			.Selector("Selector")
-				.SubTree(searchFood)
+				.Splice(searchFood)
 				.Sequence("Idle")
-					.SubTree(notMovingCondition)
-					.SubTree(idle)
+					.Splice(notMovingCondition)
+					.Splice(idle)
 				.End()
-				.SubTree(wander)
+				.Splice(wander)
 			.End()
 			.Build());
 
@@ -328,21 +328,21 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		btManager.Add("Wanderer", new BehaviourTreeBuilder()
 			.Selector("Selector")
 				.Sequence("Idle")
-					.SubTree(notMovingCondition)
-					.SubTree(idle)
+					.Splice(notMovingCondition)
+					.Splice(idle)
 				.End()
-				.SubTree(wander)
+				.Splice(wander)
 			.End()
 			.Build());
 		
 		btManager.Add("LumberHarvester", new BehaviourTreeBuilder()
 			.Selector("Selector")
-				.SubTree(harvestLumber)
+				.Splice(harvestLumber)
 				.Sequence("Idle")
-					.SubTree(notMovingCondition)
-					.SubTree(idle)
+					.Splice(notMovingCondition)
+					.Splice(idle)
 				.End()
-				.SubTree(wander)
+				.Splice(wander)
 			.End()
 			.Build());
 		
@@ -351,7 +351,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				// duda de como evitar que corra un comportamiento si estoy ejecutando otro
 				// podría poner condiciones extra, tipo "not growing" && "not spawning seeds"
 				// en algunas implementaciones vi lo del pending para animaciones/transiciones.
-				.SubTree(idle)
+				.Splice(idle)
 				.Sequence("Grow")
 					.Condition("NotHarvested", time =>
 					{
@@ -457,8 +457,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		// 		* podría mover la config inicial a un scriptable object y usar un random de esos
 		// 		* si fuera dato de entidad de ecs, podrían ser como templates/blueprints de esa entidad
 		
-		// los harvesters ahora se llenan y no hacen más nada, estaría bueno tener una lumber mill o algo
-		// y un hud en pantalla, cuando estan llenos de leña que vayan ahi y la dejen.
+		// si hay algun arbol harvesteado, le dan prioridad a ese a la hora de elegir
 
 		// Feedback al fluent
 		// no se puede hacer un árbol de una leaf sola? (un subarbol)
