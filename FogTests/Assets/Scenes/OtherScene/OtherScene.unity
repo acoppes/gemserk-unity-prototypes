@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1434269293
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 2087082873}
   - component: {fileID: 2087082872}
   - component: {fileID: 2087082876}
+  - component: {fileID: 2087082877}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -275,8 +276,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2087082871}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baa9c685089726f40beebb628ab67016, type: 3}
+  m_Script: {fileID: 11500000, guid: effbab0c31c4d104ab5da6b6d4e4fc3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensity: 0
-  shader: {fileID: 4800000, guid: 3cd5de6f08fb218418ef7bd1e7bfe895, type: 3}
+  fogTexture: {fileID: 2800000, guid: 7518244b83ba9fa47a66f2a3fa95337e, type: 3}
+  shader: {fileID: 4800000, guid: d7c9bdba98495dd4b9d46d3ca922113b, type: 3}
+--- !u!114 &2087082877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2087082871}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: d00d6a8bb5ada4b438a693bbcb978929, type: 2}
