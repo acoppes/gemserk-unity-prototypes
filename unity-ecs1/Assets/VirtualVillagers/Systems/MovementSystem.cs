@@ -6,7 +6,6 @@ using VirtualVillagers.Components;
 
 namespace VirtualVillagers.Systems
 {
-    // ReSharper disable once UnusedMember.Global
     public class MovementSystem : ComponentSystem
     {
         private struct Data

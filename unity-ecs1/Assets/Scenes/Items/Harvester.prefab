@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114906645562060682}
   - component: {fileID: 114365406833515416}
   - component: {fileID: 114819800225577426}
+  - component: {fileID: 114870933692483252}
   m_Layer: 0
   m_Name: Harvester
   m_TagString: Untagged
@@ -152,6 +153,20 @@ MonoBehaviour:
       x: 0
       y: 0
       z: 0
+--- !u!114 &114870933692483252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1546914794214884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681a5b1bd74b4a22abe364074b4cf81d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lumberPerSecond: 5
+  maxLumber: 25
+  currentLumber: 0
 --- !u!114 &114906645562060682
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -242,6 +242,9 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 							btContext.harvestLumberCurrent = btContext.harvestLumberTotal;
 							btContext.harvestLumberCurrentTree = null;
 						}
+						
+						gameObject.GetComponent<Harvester>().currentLumberTarget =
+							btContext.harvestLumberCurrentTree.GetComponent<GameObjectEntity>().Entity;
 
 						return btContext.harvestLumberCurrentTree == null ? BehaviourTreeStatus.Success : BehaviourTreeStatus.Running;
 					})
@@ -260,6 +263,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		
 						if (btContext.harvestLumberCurrentTree != null)
 						{
+
 							return BehaviourTreeStatus.Success;
 						}
 
@@ -274,7 +278,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 							return BehaviourTreeStatus.Failure;
 								
 						btContext.harvestLumberCurrentTree = nearByTrees[UnityEngine.Random.Range(0, nearByTrees.Count)];
-		
+
 						return BehaviourTreeStatus.Success;
 					})
 					.Do("MoveToTree", delegate (TimeData time) {
