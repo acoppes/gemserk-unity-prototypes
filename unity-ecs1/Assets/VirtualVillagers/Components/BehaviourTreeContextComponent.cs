@@ -31,7 +31,5 @@ namespace VirtualVillagers.Components
         public float harvestLumberMaxDistance = 10.0f;
         public float harvestLumberMinDistance = 1.5f;
         public GameObject harvestLumberCurrentTree = null;
-
-        public float lumberMillLumberCurrent = 0.0f;
     }
 }

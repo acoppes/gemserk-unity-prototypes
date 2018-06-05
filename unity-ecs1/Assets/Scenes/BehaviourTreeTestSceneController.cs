@@ -205,18 +205,6 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					var harvester = gameObject.GetComponent<Harvester>();
 					return harvester.currentLumber > 0;
 				})
-//				.Condition("LumberMillIsNear", delegate(TimeData time)
-//				{
-//					// at distance to deploy lumber
-//					var gameObject = btManager.GetContext() as GameObject;
-//					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-//	
-//					if (btContext.harvestLumberCurrentTree == null)
-//						return false;
-//							
-//					return Vector2.Distance(gameObject.transform.position, btContext.harvestLumberCurrentTree.transform.position) < 
-//						   btContext.harvestLumberMinDistance;
-//				})
 				.Do("DeployLumber", time =>
 				{
 					// deploy lumber 
@@ -326,7 +314,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 							return harvester.currentLumber >= harvester.maxLumber;
 						})
 						// if at distance of lumber mill deposit lumber and reset
-						.Do("FindLumberMill", delegate(TimeData time)
+						.Do("Move", delegate(TimeData time)
 						{
 							var gameObject = btManager.GetContext() as GameObject;
 							var movement = gameObject.GetComponent<MovementComponent>();
@@ -336,24 +324,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 								return BehaviourTreeStatus.Failure;
 
 							var lumberMill = lumberMills[0];
-							
-							// move to lumber mill
 
-//							if (Vector2.Distance(gameObject.transform.position, lumberMill.transform.position) <
-//							    movement.destinationDistance)
-//							{
-//								var harvester = gameObject.GetComponent<Harvester>();
-//								harvester.currentLumberMill = lumberMill.GetComponent<GameObjectEntity>().Entity;
-//								
-//								// this should be another action when near a lumbermill
-//								
-////								var lumberBtContext = lumberMill.GetComponent<BehaviourTreeContextComponent>();
-////								lumberBtContext.lumberMillLumberCurrent += btContext.harvestLumberCurrent;
-////								btContext.harvestLumberCurrent = 0;
-//								
-//								return BehaviourTreeStatus.Running;
-//							}
-							
 							movement.SetDestination(lumberMill.transform.position);
 					
 							return BehaviourTreeStatus.Success;
