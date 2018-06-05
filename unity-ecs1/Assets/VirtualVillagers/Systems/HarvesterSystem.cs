@@ -23,22 +23,39 @@ namespace VirtualVillagers.Systems
                 // for each harvester with this lumber...
                 var harvester = _data.harvester[i];
 
-                if (!EntityManager.Exists(harvester.currentLumberTarget))
-                    continue;
+                if (EntityManager.Exists(harvester.currentLumberTarget))
+                {
+                    if (EntityManager.HasComponent<Lumber>(harvester.currentLumberTarget))
+                    {
+                        var lumber = EntityManager.GetComponentObject<Lumber>(harvester.currentLumberTarget);
 
-                if (!EntityManager.HasComponent<Lumber>(harvester.currentLumberTarget)) 
-                    continue;
-                
-                var lumber = EntityManager.GetComponentObject<Lumber>(harvester.currentLumberTarget);
+                        var harvestedLumber = Mathf.Min(harvester.lumberPerSecond * dt, lumber.current);
+                        harvestedLumber = Mathf.Min(harvestedLumber, harvester.maxLumber - harvester.currentLumber);
 
-                var harvestedLumber = Mathf.Min(harvester.lumberPerSecond * dt, lumber.current);
-                    
-                lumber.current -= harvestedLumber;
-                harvester.currentLumber += harvestedLumber;
-                    
-                lumber.harvesters++;
+                        // consider harvester total too?
 
-                harvester.currentLumberTarget = Entity.Null;
+                        lumber.current -= harvestedLumber;
+                        harvester.currentLumber += harvestedLumber;
+
+                        lumber.harvesters++;
+
+                        harvester.currentLumberTarget = Entity.Null;
+                    }
+                }
+
+                if (EntityManager.Exists(harvester.currentLumberMill))
+                {
+                    if (EntityManager.HasComponent<LumberMill>(harvester.currentLumberMill))
+                    {
+                        var lumberMill = EntityManager.GetComponentObject<LumberMill>(harvester.currentLumberMill);
+                        
+                        var returnedLumber = Mathf.Min(harvester.lumberPerSecond * dt, harvester.currentLumber);
+                        lumberMill.currentLumber += returnedLumber;
+                        harvester.currentLumber -= returnedLumber;
+
+                        harvester.currentLumberMill = Entity.Null;
+                    }
+                }
             }
            
         }

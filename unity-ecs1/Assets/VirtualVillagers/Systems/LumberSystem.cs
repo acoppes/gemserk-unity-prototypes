@@ -12,19 +12,23 @@ namespace VirtualVillagers.Systems
             public ComponentArray<Lumber> lumbers;
         }
 
-        [Inject] private Data m_Data;
+        [Inject] private Data _data;
         
         protected override void OnUpdate()
         {
             var dt = Time.deltaTime;
 
-            for (var i = 0; i < m_Data.Length; i++)
+            for (var i = 0; i < _data.Length; i++)
             {
                 // for each harvester with this lumber...
-                var lumber = m_Data.lumbers[i];
+                var lumber = _data.lumbers[i];
 
-                lumber.current += lumber.regenerationPerSecond * dt;
-                lumber.current = Mathf.Min(lumber.current, lumber.total);
+                // lumber can only be regenerated while no harvesters harvesting
+                if (lumber.harvesters == 0)
+                {
+                    lumber.current += lumber.regenerationPerSecond * dt;
+                    lumber.current = Mathf.Min(lumber.current, lumber.total);
+                }
 
                 // resets harvesters count
                 lumber.harvesters = 0;

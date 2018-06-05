@@ -9,12 +9,14 @@ namespace VirtualVillagers
 		protected Transform _modelTransform;
 
 		private BehaviourTreeContextComponent _treeData;
+		private Lumber _lumber;
 
 		private int _size = -1;
 		
 		public void SetTreeData(BehaviourTreeContextComponent treeData)
 		{
 			_treeData = treeData;
+			_lumber = treeData.GetComponent<Lumber>();
 		}
 
 		private void LateUpdate()
@@ -28,7 +30,7 @@ namespace VirtualVillagers
 			}
 			
 			var maxLumber = (_treeData.treeCurrentSize + 1) * _treeData.treeLumberPerSize;
-			var harvestPercentage = _treeData.treeCurrentLumber / maxLumber;
+			var harvestPercentage = _lumber.current / maxLumber;
 
 			_modelTransform.localEulerAngles = new Vector3(0, 0, 
 				Mathf.Lerp(0, 90, 1 - harvestPercentage));

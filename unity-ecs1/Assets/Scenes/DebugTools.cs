@@ -33,7 +33,8 @@ public class DebugTools : MonoBehaviour
 			
 		var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
 		btContext.treeCurrentSize = size;
-		btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
+		gameObject.GetComponent<Lumber>().current = (size + 1) * btContext.treeLumberPerSize;
+//		btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
 			
 		var tree = gameObject.GetComponent<VirtualVillagers.Tree>();
 		tree.SetTreeData(btContext);
