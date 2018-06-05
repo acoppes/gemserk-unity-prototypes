@@ -19,16 +19,13 @@ namespace VirtualVillagers.Components
         public float idleTotalTime;
         public float idleCurrentTime;
 
-//        public float treeGrowTime;
         public int treeCurrentSize;
         public int treeMaxSize = 3;
         public float treeMinSpawnDistance = 1.0f;
         public float treeMaxSpawnDistance = 3.0f;
         public int treeSeeds = 1;
         public float treeLumberPerSize = 5.0f;
-//        public float treeCurrentLumber;
 
-//        public float harvestLumberCurrent = 0.0f;
         public float harvestLumberTotal = 10.0f;
         public float harvestLumberSpeed = 1.0f;
         public float harvestLumberMaxDistance = 10.0f;

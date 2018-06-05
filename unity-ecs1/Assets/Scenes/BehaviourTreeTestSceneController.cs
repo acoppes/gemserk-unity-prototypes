@@ -197,14 +197,55 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		
 		var harvestLumber = new BehaviourTreeBuilder()
 			.Selector("All")
+				.Sequence("DeployLumber")
+				.Condition("HasLumber", delegate(TimeData time)
+				{
+					// has at least 1 of lumber
+					var gameObject = btManager.GetContext() as GameObject;
+					var harvester = gameObject.GetComponent<Harvester>();
+					return harvester.currentLumber > 0;
+				})
+//				.Condition("LumberMillIsNear", delegate(TimeData time)
+//				{
+//					// at distance to deploy lumber
+//					var gameObject = btManager.GetContext() as GameObject;
+//					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+//	
+//					if (btContext.harvestLumberCurrentTree == null)
+//						return false;
+//							
+//					return Vector2.Distance(gameObject.transform.position, btContext.harvestLumberCurrentTree.transform.position) < 
+//						   btContext.harvestLumberMinDistance;
+//				})
+				.Do("DeployLumber", time =>
+				{
+					// deploy lumber 
+					var gameObject = btManager.GetContext() as GameObject;
+					var movement = gameObject.GetComponent<MovementComponent>();
+					
+					var lumberMills = GameObject.FindGameObjectsWithTag("LumberMill");
+					if (lumberMills.Length == 0)
+						return BehaviourTreeStatus.Failure;
+
+					var lumberMill = lumberMills[0];
+
+					// if not near numbermill
+					if (Vector2.Distance(gameObject.transform.position, lumberMill.transform.position) >
+					    movement.destinationDistance) 
+						return BehaviourTreeStatus.Failure;
+					
+					var harvester = gameObject.GetComponent<Harvester>();
+					harvester.currentLumberMill = lumberMill.GetComponent<GameObjectEntity>().Entity;
+					return BehaviourTreeStatus.Running;
+
+				})
+				.End()
 				.Sequence("Harvest")
 					.Condition("NotAtMaximumLumber", delegate(TimeData time)
 					{
 						var gameObject = btManager.GetContext() as GameObject;
 						var harvester = gameObject.GetComponent<Harvester>();
 						return harvester.currentLumber < harvester.maxLumber;
-//						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-//						return btContext.harvestLumberCurrent < btContext.harvestLumberTotal;
 					})
 					.Condition("IsSelectedTreaAtHarvestDistance", delegate(TimeData time)
 					{
@@ -223,27 +264,6 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
 						
 						var currentTree = btContext.harvestLumberCurrentTree;
-
-						var currentTreeBtContext =currentTree.GetComponent<BehaviourTreeContextComponent>();
-
-//						var lumber = btContext.harvestLumberSpeed * time.deltaTime;
-//
-//						lumber = Mathf.Min(lumber, currentTreeBtContext.treeCurrentLumber);
-//						
-//						currentTreeBtContext.treeCurrentLumber -= lumber;
-//						btContext.harvestLumberCurrent += lumber;
-//
-//						if (currentTreeBtContext.treeCurrentLumber <= 0.0f)
-//						{
-////							GameObject.Destroy(currentTree);
-//							btContext.harvestLumberCurrentTree = null;
-//						}
-//
-//						if (btContext.harvestLumberCurrent > btContext.harvestLumberTotal)
-//						{
-//							btContext.harvestLumberCurrent = btContext.harvestLumberTotal;
-//							btContext.harvestLumberCurrentTree = null;
-//						}
 
 						var harvester = gameObject.GetComponent<Harvester>();
 						if (harvester != null && btContext.harvestLumberCurrentTree != null)
@@ -302,16 +322,13 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						.Condition("MaximumLumber", delegate(TimeData time)
 						{
 							var gameObject = btManager.GetContext() as GameObject;
-//							var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
 							var harvester = gameObject.GetComponent<Harvester>();
 							return harvester.currentLumber >= harvester.maxLumber;
-//							return btContext.harvestLumberCurrent >= btContext.harvestLumberTotal;
 						})
 						// if at distance of lumber mill deposit lumber and reset
 						.Do("FindLumberMill", delegate(TimeData time)
 						{
 							var gameObject = btManager.GetContext() as GameObject;
-							var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
 							var movement = gameObject.GetComponent<MovementComponent>();
 					
 							var lumberMills = GameObject.FindGameObjectsWithTag("LumberMill");
@@ -319,21 +336,23 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 								return BehaviourTreeStatus.Failure;
 
 							var lumberMill = lumberMills[0];
+							
+							// move to lumber mill
 
-							if (Vector2.Distance(gameObject.transform.position, lumberMill.transform.position) <
-							    movement.destinationDistance)
-							{
-								var harvester = gameObject.GetComponent<Harvester>();
-								harvester.currentLumberMill = lumberMill.GetComponent<GameObjectEntity>().Entity;
-								
-								// this should be another action when near a lumbermill
-								
-//								var lumberBtContext = lumberMill.GetComponent<BehaviourTreeContextComponent>();
-//								lumberBtContext.lumberMillLumberCurrent += btContext.harvestLumberCurrent;
-//								btContext.harvestLumberCurrent = 0;
-								
-								return BehaviourTreeStatus.Running;
-							}
+//							if (Vector2.Distance(gameObject.transform.position, lumberMill.transform.position) <
+//							    movement.destinationDistance)
+//							{
+//								var harvester = gameObject.GetComponent<Harvester>();
+//								harvester.currentLumberMill = lumberMill.GetComponent<GameObjectEntity>().Entity;
+//								
+//								// this should be another action when near a lumbermill
+//								
+////								var lumberBtContext = lumberMill.GetComponent<BehaviourTreeContextComponent>();
+////								lumberBtContext.lumberMillLumberCurrent += btContext.harvestLumberCurrent;
+////								btContext.harvestLumberCurrent = 0;
+//								
+//								return BehaviourTreeStatus.Running;
+//							}
 							
 							movement.SetDestination(lumberMill.transform.position);
 					
