@@ -25,19 +25,19 @@ namespace VirtualVillagers.Systems
 
                 if (EntityManager.Exists(harvester.currentLumberTarget))
                 {
-                    if (EntityManager.HasComponent<Lumber>(harvester.currentLumberTarget))
+                    if (EntityManager.HasComponent<LumberHolder>(harvester.currentLumberTarget))
                     {
-                        var lumber = EntityManager.GetComponentObject<Lumber>(harvester.currentLumberTarget);
+                        var lumberHolder = EntityManager.GetComponentObject<LumberHolder>(harvester.currentLumberTarget);
 
-                        var harvestedLumber = Mathf.Min(harvester.lumberPerSecond * dt, lumber.current);
+                        var harvestedLumber = Mathf.Min(harvester.lumberPerSecond * dt, lumberHolder.current);
                         harvestedLumber = Mathf.Min(harvestedLumber, harvester.maxLumber - harvester.currentLumber);
 
                         // consider harvester total too?
 
-                        lumber.current -= harvestedLumber;
+                        lumberHolder.current -= harvestedLumber;
                         harvester.currentLumber += harvestedLumber;
 
-                        lumber.harvesters++;
+                        lumberHolder.harvesters++;
 
                         harvester.currentLumberTarget = Entity.Null;
                     }
@@ -47,11 +47,14 @@ namespace VirtualVillagers.Systems
                 {
                     if (EntityManager.HasComponent<LumberMill>(harvester.currentLumberMill))
                     {
-                        var lumberMill = EntityManager.GetComponentObject<LumberMill>(harvester.currentLumberMill);
+                        var lumberHolder = EntityManager.GetComponentObject<LumberHolder>(harvester.currentLumberMill);
                         
                         var returnedLumber = Mathf.Min(harvester.lumberPerSecond * dt, harvester.currentLumber);
-                        lumberMill.currentLumber += returnedLumber;
+                        lumberHolder.current += returnedLumber;
                         harvester.currentLumber -= returnedLumber;
+
+                        if (lumberHolder.total < lumberHolder.current)
+                            lumberHolder.total = lumberHolder.current;
 
                         harvester.currentLumberMill = Entity.Null;
                     }

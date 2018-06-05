@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 114195733536269768}
   - component: {fileID: 114821775567122748}
   - component: {fileID: 114901051393172958}
+  - component: {fileID: 114538284091026270}
+  - component: {fileID: 114061716184108622}
   m_Layer: 0
   m_Name: LumberMill
   m_TagString: LumberMill
@@ -139,6 +141,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Lumber mill
+--- !u!114 &114061716184108622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1500401482982804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86727b971c8404db8732dc8c5286dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  current: 0
+  total: 0
+  harvesters: 0
 --- !u!114 &114195733536269768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,6 +164,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114538284091026270
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1500401482982804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b9e4ae05a9467183465eba89d4f386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114821775567122748
@@ -191,14 +218,11 @@ MonoBehaviour:
   treeMaxSpawnDistance: 3
   treeSeeds: 1
   treeLumberPerSize: 5
-  treeCurrentLumber: 0
-  harvestLumberCurrent: 0
   harvestLumberTotal: 10
   harvestLumberSpeed: 1
   harvestLumberMaxDistance: 10
   harvestLumberMinDistance: 1.5
   harvestLumberCurrentTree: {fileID: 0}
-  lumberMillLumberCurrent: 0
 --- !u!212 &212536457387974118
 SpriteRenderer:
   m_ObjectHideFlags: 1

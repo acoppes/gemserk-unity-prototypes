@@ -289,7 +289,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						
 						var nearByTrees = trees.Where(tree => Vector2.Distance(gameObject.transform.position, tree.transform.position) <
 															  btContext.harvestLumberMaxDistance && 
-						                                      tree.GetComponent<Lumber>().current > 0).ToList();
+						                                      tree.GetComponent<LumberHolder>().current > 0).ToList();
 						if (nearByTrees.Count == 0)
 							return BehaviourTreeStatus.Failure;
 								
@@ -372,7 +372,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				.Do("DoNothing", time => {
 					var gameObject = btManager.GetContext() as GameObject;
 					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-					var lumber = gameObject.GetComponent<Lumber>();
+					var lumber = gameObject.GetComponent<LumberHolder>();
 					var result = lumber.current <= 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Failure;
 //					var result = btContext.treeCurrentLumber <= 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Failure;
 
@@ -395,7 +395,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					{
 						var gameObject = btManager.GetContext() as GameObject;
 //						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-						var lumber = gameObject.GetComponent<Lumber>();
+						var lumber = gameObject.GetComponent<LumberHolder>();
 						return lumber.harvesters == 0;
 //						return btContext.treeCurrentLumber < btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
 					})
@@ -412,7 +412,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						btContext.treeCurrentSize++;
 
 						// dudas de como y donde reflejar cambios visuales
-						var lumber = gameObject.GetComponent<Lumber>();
+						var lumber = gameObject.GetComponent<LumberHolder>();
 						lumber.current = btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
 //						btContext.treeCurrentLumber = btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
 						return BehaviourTreeStatus.Success;
@@ -423,7 +423,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					{
 						var gameObject = btManager.GetContext() as GameObject;
 //						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-						var lumber = gameObject.GetComponent<Lumber>();
+						var lumber = gameObject.GetComponent<LumberHolder>();
 						return lumber.harvesters == 0;
 //						return btContext.treeCurrentLumber < btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
 					})
@@ -458,11 +458,11 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						
 						treeBtContext.treeCurrentSize = 0;
 						treeBtContext.idleCurrentTime = treeBtContext.idleTotalTime;
-						var lumber = treeBtContext.GetComponent<Lumber>();
+						var lumber = treeBtContext.GetComponent<LumberHolder>();
 						lumber.current = treeBtContext.treeLumberPerSize * (treeBtContext.treeCurrentSize + 1);
 //						treeBtContext.treeCurrentLumber = treeBtContext.treeLumberPerSize * (treeBtContext.treeCurrentSize + 1);
 	
-						var tree = treeObject.GetComponent<VirtualVillagers.Tree>();
+						var tree = treeObject.GetComponent<VirtualVillagers.TreeView>();
 						tree.SetTreeData(treeBtContext);
 						
 						btContext.treeSeeds--;

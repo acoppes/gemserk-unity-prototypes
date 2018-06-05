@@ -13,8 +13,8 @@ public class LumberUI : MonoBehaviour
 		if (lumberMill == null)
 			return;
 		
-		var lumber = lumberMill.GetComponent<LumberMill>();
-		text.text = string.Format("Lumber: {0}", lumber.currentLumber);
+		var lumber = lumberMill.GetComponent<LumberHolder>();
+		text.text = string.Format("Lumber: {0}", lumber.current);
 	}
 	
 	// TODO: separate lumber concept between tree and lumber mill 

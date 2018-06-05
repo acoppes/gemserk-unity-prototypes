@@ -4,12 +4,13 @@ using VirtualVillagers.Components;
 
 namespace VirtualVillagers.Systems
 {
-    public class LumberSystem : ComponentSystem
+    public class TreeSystem : ComponentSystem
     {
         private struct Data
         {
             public int Length;
-            public ComponentArray<Lumber> lumbers;
+            public ComponentArray<LumberHolder> lumbers;
+            public ComponentArray<Components.Tree> trees;
         }
 
         [Inject] private Data _data;
@@ -26,7 +27,7 @@ namespace VirtualVillagers.Systems
                 // lumber can only be regenerated while no harvesters harvesting
                 if (lumber.harvesters == 0)
                 {
-                    lumber.current += lumber.regenerationPerSecond * dt;
+                    lumber.current += _data.trees[i].regenerationPerSecond * dt;
                     lumber.current = Mathf.Min(lumber.current, lumber.total);
                 }
 
