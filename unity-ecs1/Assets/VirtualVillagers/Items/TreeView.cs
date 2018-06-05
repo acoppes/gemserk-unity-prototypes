@@ -10,6 +10,7 @@ namespace VirtualVillagers
 
 		private BehaviourTreeContextComponent _treeData;
 		private LumberHolder _lumberHolder;
+		private Components.Tree _tree;
 
 		private int _size = -1;
 		
@@ -17,6 +18,7 @@ namespace VirtualVillagers
 		{
 			_treeData = treeData;
 			_lumberHolder = treeData.GetComponent<LumberHolder>();
+			_tree = treeData.GetComponent<Components.Tree>();
 		}
 
 		private void LateUpdate()
@@ -24,12 +26,12 @@ namespace VirtualVillagers
 			if (_treeData == null)
 				return;
 			
-			if (_size != _treeData.treeCurrentSize)
+			if (_size != _tree.currentSize)
 			{
-				SetSize(_treeData.treeCurrentSize);
+				SetSize(_tree.currentSize);
 			}
 			
-			var maxLumber = (_treeData.treeCurrentSize + 1) * _treeData.treeLumberPerSize;
+			var maxLumber = (_tree.currentSize + 1) * _tree.lumberPerSize;
 			var harvestPercentage = _lumberHolder.current / maxLumber;
 
 			_modelTransform.localEulerAngles = new Vector3(0, 0, 

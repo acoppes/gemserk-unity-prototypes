@@ -23,16 +23,46 @@ namespace VirtualVillagers.Systems
             {
                 // for each harvester with this lumber...
                 var lumber = _data.lumbers[i];
-
+                var tree = _data.trees[i];
+                
                 // lumber can only be regenerated while no harvesters harvesting
                 if (lumber.harvesters == 0)
                 {
                     lumber.current += _data.trees[i].regenerationPerSecond * dt;
                     lumber.current = Mathf.Min(lumber.current, lumber.total);
+                    
+                    // if tree at maximum
+                    // then grow
+                    if (tree.currentSize < tree.maxSize && lumber.current >= lumber.total)
+                    {
+                        tree.currentSize++;
+                        lumber.total = lumber.total + tree.lumberPerSize;
+                    }
                 }
 
                 // resets harvesters count
                 lumber.harvesters = 0;
+
+                if (tree.seeds > 0 && tree.currentSize == tree.maxSize && lumber.current >= lumber.total)
+                {
+                    // it is spawning itself! 
+                    var spawnedTreeObject = GameObject.Instantiate(tree.seedPrefab);
+                    
+                    var randomPosition = Random.insideUnitCircle * 
+                                         Random.Range(tree.minSpawnDistance, tree.maxSpawnDistance);
+						
+                    spawnedTreeObject.transform.position = tree.transform.position 
+                                                    + (Vector3) randomPosition;
+
+                    var spawnedTree = spawnedTreeObject.GetComponent<Components.Tree>();
+                    spawnedTree.currentSize = 1;
+
+                    var spawnedTreeLumber = spawnedTreeObject.GetComponent<LumberHolder>();
+                    spawnedTreeLumber.total = spawnedTree.lumberPerSize;
+                    spawnedTreeLumber.current = spawnedTreeLumber.total;
+                    
+                    tree.seeds--;
+                }
             }
            
         }

@@ -32,12 +32,14 @@ public class DebugTools : MonoBehaviour
 		var size = UnityEngine.Random.RandomRange(0, 3);
 			
 		var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-		btContext.treeCurrentSize = size;
-		gameObject.GetComponent<LumberHolder>().current = (size + 1) * btContext.treeLumberPerSize;
+		var tree = gameObject.GetComponent<VirtualVillagers.Components.Tree>();
+		
+		tree.currentSize = size;
+		gameObject.GetComponent<LumberHolder>().current = (size + 1) * tree.lumberPerSize;
 //		btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
 			
-		var tree = gameObject.GetComponent<VirtualVillagers.TreeView>();
-		tree.SetTreeData(btContext);
+		var treeView = gameObject.GetComponent<VirtualVillagers.TreeView>();
+		treeView.SetTreeData(btContext);
 
 		btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
 		

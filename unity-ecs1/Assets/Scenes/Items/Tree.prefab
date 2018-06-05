@@ -184,6 +184,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3627638789fc465d82cb3e8fa02faf5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSize: 0
+  maxSize: 3
+  minSpawnDistance: 1
+  maxSpawnDistance: 3
+  seedPrefab: {fileID: 1028647392421468}
+  seeds: 1
+  lumberPerSize: 30
   regenerationPerSecond: 1
 --- !u!114 &114471175498229646
 MonoBehaviour:
@@ -216,14 +223,6 @@ MonoBehaviour:
   foodConsumed: 0
   idleTotalTime: 20
   idleCurrentTime: 5
-  treeCurrentSize: 0
-  treeMaxSize: 3
-  treeMinSpawnDistance: 1.75
-  treeMaxSpawnDistance: 2.5
-  treeSeeds: 1
-  treeLumberPerSize: 5
-  harvestLumberTotal: 10
-  harvestLumberSpeed: 1
   harvestLumberMaxDistance: 10
   harvestLumberMinDistance: 1.5
   harvestLumberCurrentTree: {fileID: 0}

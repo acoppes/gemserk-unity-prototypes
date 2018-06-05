@@ -390,87 +390,87 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				// podría poner condiciones extra, tipo "not growing" && "not spawning seeds"
 				// en algunas implementaciones vi lo del pending para animaciones/transiciones.
 				.Splice(idle)
-				.Sequence("Grow")
-					.Condition("NotHarvested", time =>
-					{
-						var gameObject = btManager.GetContext() as GameObject;
+//				.Sequence("Grow")
+//					.Condition("NotHarvested", time =>
+//					{
+//						var gameObject = btManager.GetContext() as GameObject;
+////						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+//						var lumber = gameObject.GetComponent<LumberHolder>();
+//						return lumber.harvesters == 0;
+////						return btContext.treeCurrentLumber < btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
+//					})
+//					.Condition("NotMaxSize", time =>
+//					{
+//						var gameObject = btManager.GetContext() as GameObject;
 //						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-						var lumber = gameObject.GetComponent<LumberHolder>();
-						return lumber.harvesters == 0;
-//						return btContext.treeCurrentLumber < btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
-					})
-					.Condition("NotMaxSize", time =>
-					{
-						var gameObject = btManager.GetContext() as GameObject;
-						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-						return btContext.treeCurrentSize < btContext.treeMaxSize;
-					})
-					.Do("Grow", time =>
-					{
-						var gameObject = btManager.GetContext() as GameObject;
-						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-						btContext.treeCurrentSize++;
-
-						// dudas de como y donde reflejar cambios visuales
-						var lumber = gameObject.GetComponent<LumberHolder>();
-						lumber.current = btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
-//						btContext.treeCurrentLumber = btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
-						return BehaviourTreeStatus.Success;
-					})
-				.End()
-				.Sequence("SpawnSeeds")
-					.Condition("NotHarvested", time =>
-					{
-						var gameObject = btManager.GetContext() as GameObject;
+//						return btContext.treeCurrentSize < btContext.treeMaxSize;
+//					})
+//					.Do("Grow", time =>
+//					{
+//						var gameObject = btManager.GetContext() as GameObject;
 //						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-						var lumber = gameObject.GetComponent<LumberHolder>();
-						return lumber.harvesters == 0;
-//						return btContext.treeCurrentLumber < btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
-					})
-					.Condition("HasSeeds", time =>
-					{
-						var gameObject = btManager.GetContext() as GameObject;
-						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-						
-						// what about checking global values like max Trees in game
-						//  * static value probably? who is in charge of increasing/decreasing it?
-						
-						return btContext.treeSeeds > 0;
-					})
-					.Do("SpawnTree", time =>
-					{
-						var gameObject = btManager.GetContext() as GameObject;
-						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-	
-						if (btContext.spawnPrefab == null)
-							return BehaviourTreeStatus.Failure;
-						
-						var treeObject = GameObject.Instantiate(btContext.spawnPrefab);
-	
-						// TODO: consider there is already a tree in that location, use a grid for better locations also
-						var randomPosition = UnityEngine.Random.insideUnitCircle * 
-							UnityEngine.Random.RandomRange(btContext.treeMinSpawnDistance, btContext.treeMaxSpawnDistance);
-						
-						treeObject.transform.position = gameObject.transform.position 
-														+ (Vector3) randomPosition;
-					
-						var treeBtContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
-						
-						treeBtContext.treeCurrentSize = 0;
-						treeBtContext.idleCurrentTime = treeBtContext.idleTotalTime;
-						var lumber = treeBtContext.GetComponent<LumberHolder>();
-						lumber.current = treeBtContext.treeLumberPerSize * (treeBtContext.treeCurrentSize + 1);
-//						treeBtContext.treeCurrentLumber = treeBtContext.treeLumberPerSize * (treeBtContext.treeCurrentSize + 1);
-	
-						var tree = treeObject.GetComponent<VirtualVillagers.TreeView>();
-						tree.SetTreeData(treeBtContext);
-						
-						btContext.treeSeeds--;
-						
-						// dudas de como y donde reflejar cambios visuales
-						return BehaviourTreeStatus.Success;
-					})
-				.End()
+//						btContext.treeCurrentSize++;
+//
+//						// dudas de como y donde reflejar cambios visuales
+//						var lumber = gameObject.GetComponent<LumberHolder>();
+//						lumber.current = btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
+////						btContext.treeCurrentLumber = btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
+//						return BehaviourTreeStatus.Success;
+//					})
+//				.End()
+//				.Sequence("SpawnSeeds")
+//					.Condition("NotHarvested", time =>
+//					{
+//						var gameObject = btManager.GetContext() as GameObject;
+////						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+//						var lumber = gameObject.GetComponent<LumberHolder>();
+//						return lumber.harvesters == 0;
+////						return btContext.treeCurrentLumber < btContext.treeLumberPerSize * (btContext.treeCurrentSize + 1);
+//					})
+//					.Condition("HasSeeds", time =>
+//					{
+//						var gameObject = btManager.GetContext() as GameObject;
+//						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+//						
+//						// what about checking global values like max Trees in game
+//						//  * static value probably? who is in charge of increasing/decreasing it?
+//						
+//						return btContext.treeSeeds > 0;
+//					})
+//					.Do("SpawnTree", time =>
+//					{
+//						var gameObject = btManager.GetContext() as GameObject;
+//						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+//	
+//						if (btContext.spawnPrefab == null)
+//							return BehaviourTreeStatus.Failure;
+//						
+//						var treeObject = GameObject.Instantiate(btContext.spawnPrefab);
+//	
+//						// TODO: consider there is already a tree in that location, use a grid for better locations also
+//						var randomPosition = UnityEngine.Random.insideUnitCircle * 
+//							UnityEngine.Random.RandomRange(btContext.treeMinSpawnDistance, btContext.treeMaxSpawnDistance);
+//						
+//						treeObject.transform.position = gameObject.transform.position 
+//														+ (Vector3) randomPosition;
+//					
+//						var treeBtContext = treeObject.GetComponent<BehaviourTreeContextComponent>();
+//						
+//						treeBtContext.treeCurrentSize = 0;
+//						treeBtContext.idleCurrentTime = treeBtContext.idleTotalTime;
+//						var lumber = treeBtContext.GetComponent<LumberHolder>();
+//						lumber.current = treeBtContext.treeLumberPerSize * (treeBtContext.treeCurrentSize + 1);
+////						treeBtContext.treeCurrentLumber = treeBtContext.treeLumberPerSize * (treeBtContext.treeCurrentSize + 1);
+//	
+//						var tree = treeObject.GetComponent<VirtualVillagers.TreeView>();
+//						tree.SetTreeData(treeBtContext);
+//						
+//						btContext.treeSeeds--;
+//						
+//						// dudas de como y donde reflejar cambios visuales
+//						return BehaviourTreeStatus.Success;
+//					})
+//				.End()
 			.End()
 			.Build());
 
