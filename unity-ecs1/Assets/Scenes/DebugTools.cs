@@ -81,6 +81,11 @@ public class DebugTools : MonoBehaviour
 		}
 	}
 
+	public void SpawnLumbermillNoReturn()
+	{
+		SpawnLumbermill();
+	}
+
 	public GameObject SpawnLumbermill()
 	{
 		var spawnBounds = this.spawnBounds.bounds;
