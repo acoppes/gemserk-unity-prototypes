@@ -27,10 +27,10 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			debugTools.SpawnTree();
 		}
 		
-		var lumbermill = debugTools.SpawnLumbermill();
+		debugTools.SpawnLumbermill();
 		debugTools.SpawnEater();
 
-		_lumberUI.lumberMill = lumbermill;
+//		_lumberUI.lumberMill = lumbermill;
 	}
 
 	private void Start() {

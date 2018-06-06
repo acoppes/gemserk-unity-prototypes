@@ -4,19 +4,16 @@ using VirtualVillagers.Components;
 
 public class LumberUI : MonoBehaviour
 {
-	public GameObject lumberMill;
+	[SerializeField]
+	protected Text text;
 
-	public Text text;
+	[SerializeField]
+	protected LumberMillUI _ui;
 
 	private void LateUpdate()
 	{
-		if (lumberMill == null)
+		if (_ui == null)
 			return;
-		
-		var lumber = lumberMill.GetComponent<LumberHolder>();
-		text.text = string.Format("Lumber: {0}", lumber.current);
+		text.text = string.Format("Lumber: {0}", _ui.currentLumber);
 	}
-	
-	// TODO: separate lumber concept between tree and lumber mill 
-	// maybe call them lumber provider and consumer
 }

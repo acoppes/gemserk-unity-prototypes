@@ -166,6 +166,8 @@ public class DebugTools : MonoBehaviour
 		var entities = GameObject.FindObjectsOfType<GameObjectEntity>();
 		foreach (var entity in entities)
 		{
+			if (entity.GetComponent<LumberMillUI>() != null)
+				continue;
 			GameObject.Destroy(entity.gameObject);
 		}
 	}
