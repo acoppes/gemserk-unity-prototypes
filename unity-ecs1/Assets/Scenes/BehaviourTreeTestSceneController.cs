@@ -1,11 +1,14 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using FluentBehaviourTree;
 using Gemserk.BehaviourTree;
 using Unity.Entities;
+using UnityScript.Lang;
 using VirtualVillagers;
 using VirtualVillagers.Components;
 using VirtualVillagers.Systems;
+using Array = System.Array;
 
 public class BehaviourTreeTestSceneController : MonoBehaviour {
 
@@ -210,11 +213,19 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					// deploy lumber 
 					var gameObject = btManager.GetContext() as GameObject;
 					var movement = gameObject.GetComponent<MovementComponent>();
-					
+						
 					var lumberMills = GameObject.FindGameObjectsWithTag("LumberMill");
+					
 					if (lumberMills.Length == 0)
 						return BehaviourTreeStatus.Failure;
 
+					Array.Sort(lumberMills, (x1, x2) =>
+					{
+						var d1 = Mathf.RoundToInt(Vector2.Distance(gameObject.transform.position, x1.transform.position));
+						var d2 = Mathf.RoundToInt(Vector2.Distance(gameObject.transform.position, x2.transform.position));
+						return d1 - d2;
+					});
+					
 					var lumberMill = lumberMills[0];
 
 					// if not near numbermill
@@ -322,6 +333,13 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 							var lumberMills = GameObject.FindGameObjectsWithTag("LumberMill");
 							if (lumberMills.Length == 0)
 								return BehaviourTreeStatus.Failure;
+							
+							Array.Sort(lumberMills, (x1, x2) =>
+							{
+								var d1 = Mathf.RoundToInt(Vector2.Distance(gameObject.transform.position, x1.transform.position));
+								var d2 = Mathf.RoundToInt(Vector2.Distance(gameObject.transform.position, x2.transform.position));
+								return d1 - d2;
+							});
 
 							var lumberMill = lumberMills[0];
 
