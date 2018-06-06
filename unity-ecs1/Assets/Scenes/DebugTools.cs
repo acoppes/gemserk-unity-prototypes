@@ -33,6 +33,11 @@ public class DebugTools : MonoBehaviour
 			
 		var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
 		var tree = gameObject.GetComponent<VirtualVillagers.Components.Tree>();
+
+		if (treePrefab.GetComponent<VirtualVillagers.Components.Tree>().seedPrefab == treePrefab)
+		{
+			tree.seedPrefab = treePrefab;
+		}
 		
 		tree.currentSize = size;
 		gameObject.GetComponent<LumberHolder>().current = (size + 1) * tree.lumberPerSize;

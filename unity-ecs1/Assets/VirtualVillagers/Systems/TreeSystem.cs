@@ -44,8 +44,7 @@ namespace VirtualVillagers.Systems
                 lumber.harvesters = 0;
 
                 if (tree.seeds > 0 && tree.currentSize == tree.maxSize && lumber.current >= lumber.total)
-                {
-                    // it is spawning itself! 
+                { 
                     var spawnedTreeObject = GameObject.Instantiate(tree.seedPrefab);
                     
                     var randomPosition = Random.insideUnitCircle * 
@@ -56,6 +55,7 @@ namespace VirtualVillagers.Systems
 
                     var spawnedTree = spawnedTreeObject.GetComponent<Components.Tree>();
                     spawnedTree.currentSize = 1;
+                    spawnedTree.seedPrefab = tree.seedPrefab; // copy here to avoid referencing to itself.
 
                     var spawnedTreeLumber = spawnedTreeObject.GetComponent<LumberHolder>();
                     spawnedTreeLumber.total = spawnedTree.lumberPerSize;
