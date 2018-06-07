@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   current: 0
-  total: 0
+  total: 50
   harvesters: 0
 --- !u!114 &114195733536269768
 MonoBehaviour:
@@ -212,14 +212,6 @@ MonoBehaviour:
   foodConsumed: 0
   idleTotalTime: 0
   idleCurrentTime: 0
-  treeCurrentSize: 0
-  treeMaxSize: 3
-  treeMinSpawnDistance: 1
-  treeMaxSpawnDistance: 3
-  treeSeeds: 1
-  treeLumberPerSize: 5
-  harvestLumberTotal: 10
-  harvestLumberSpeed: 1
   harvestLumberMaxDistance: 10
   harvestLumberMinDistance: 1.5
   harvestLumberCurrentTree: {fileID: 0}

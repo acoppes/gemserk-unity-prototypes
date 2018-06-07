@@ -216,19 +216,25 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						
 					var lumberMills = GameObject.FindGameObjectsWithTag("LumberMill");
 					
-					if (lumberMills.Length == 0)
+					var validLumberMills = lumberMills.Where(lm =>
+					{
+						var lumberHolder = lm.GetComponent<LumberHolder>();
+						return lumberHolder.current < lumberHolder.total;
+					}).ToList();
+							
+					if (validLumberMills.Count == 0)
 						return BehaviourTreeStatus.Failure;
-
-					Array.Sort(lumberMills, (x1, x2) =>
+							
+					validLumberMills.Sort((x1, x2) =>
 					{
 						var d1 = Mathf.RoundToInt(Vector2.Distance(gameObject.transform.position, x1.transform.position));
 						var d2 = Mathf.RoundToInt(Vector2.Distance(gameObject.transform.position, x2.transform.position));
 						return d1 - d2;
 					});
-					
-					var lumberMill = lumberMills[0];
+							
+					var lumberMill = validLumberMills[0];
 
-					// if not near numbermill
+					// if not near enough to nearest lumbermill
 					if (Vector2.Distance(gameObject.transform.position, lumberMill.transform.position) >
 					    movement.destinationDistance) 
 						return BehaviourTreeStatus.Failure;
@@ -331,17 +337,24 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 							var movement = gameObject.GetComponent<MovementComponent>();
 					
 							var lumberMills = GameObject.FindGameObjectsWithTag("LumberMill");
-							if (lumberMills.Length == 0)
+
+							var validLumberMills = lumberMills.Where(lm =>
+							{
+								var lumberHolder = lm.GetComponent<LumberHolder>();
+								return lumberHolder.current < lumberHolder.total;
+							}).ToList();
+							
+							if (validLumberMills.Count == 0)
 								return BehaviourTreeStatus.Failure;
 							
-							Array.Sort(lumberMills, (x1, x2) =>
+							validLumberMills.Sort((x1, x2) =>
 							{
 								var d1 = Mathf.RoundToInt(Vector2.Distance(gameObject.transform.position, x1.transform.position));
 								var d2 = Mathf.RoundToInt(Vector2.Distance(gameObject.transform.position, x2.transform.position));
 								return d1 - d2;
 							});
-
-							var lumberMill = lumberMills[0];
+							
+							var lumberMill = validLumberMills[0];
 
 							movement.SetDestination(lumberMill.transform.position);
 					

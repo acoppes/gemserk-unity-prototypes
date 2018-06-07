@@ -50,11 +50,13 @@ namespace VirtualVillagers.Systems
                         var lumberHolder = EntityManager.GetComponentObject<LumberHolder>(harvester.currentLumberMill);
                         
                         var returnedLumber = Mathf.Min(harvester.lumberPerSecond * dt, harvester.currentLumber);
+                        returnedLumber = Mathf.Min(returnedLumber, lumberHolder.total - lumberHolder.current);
+                        
                         lumberHolder.current += returnedLumber;
                         harvester.currentLumber -= returnedLumber;
 
-                        if (lumberHolder.total < lumberHolder.current)
-                            lumberHolder.total = lumberHolder.current;
+//                        if (lumberHolder.total < lumberHolder.current)
+//                            lumberHolder.total = lumberHolder.current;
 
                         harvester.currentLumberMill = Entity.Null;
                     }
