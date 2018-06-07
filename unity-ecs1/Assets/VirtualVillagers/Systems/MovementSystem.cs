@@ -15,20 +15,22 @@ namespace VirtualVillagers.Systems
             public ComponentArray<Transform> transform;
         }
         
-        private struct SimulationData
-        {
-            public int Length;
-            public ComponentArray<SimulationTime> simulationTime;
-        }
+//        public struct SimulationData
+//        {
+////            public int Length;
+//            public SimulationTime simulationTime;
+//        }
 
         [Inject] private Data m_Data;
-        [Inject] private SimulationData _simulationData;
+        // [Inject] private SimulationData _simulationData;
         
         protected override void OnUpdate()
         {
 //            var dt = Time.deltaTime;
-            var _simulation = _simulationData.simulationTime[0];
+            var _simulation = GetEntities<SimulationComponentData>()[0].simulationTime;
 
+            // GetEntities<SimulationData>();
+            
             if (_simulation.frames == 0)
                 return;
             
