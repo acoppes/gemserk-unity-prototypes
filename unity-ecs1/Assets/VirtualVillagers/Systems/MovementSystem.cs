@@ -12,29 +12,43 @@ namespace VirtualVillagers.Systems
         {
             public int Length;
             public ComponentArray<MovementComponent> movement;
-            public ComponentDataArray<Position> position;
+            public ComponentArray<Transform> transform;
+        }
+        
+        private struct SimulationData
+        {
+            public int Length;
+            public ComponentArray<SimulationTime> simulationTime;
         }
 
         [Inject] private Data m_Data;
-
+        [Inject] private SimulationData _simulationData;
+        
         protected override void OnUpdate()
         {
-            var dt = Time.deltaTime;
+//            var dt = Time.deltaTime;
+            var _simulation = _simulationData.simulationTime[0];
 
+            if (_simulation.frames == 0)
+                return;
+            
+            var dt = _simulation.dt;
+            
             for (var i = 0; i < m_Data.Length; i++)
             {
-                var p = m_Data.position[i];
+//                var p = m_Data.position[i];
+                var p = m_Data.transform[i].position;
                 var movement = m_Data.movement[i];
 
                 var direction = new Vector2(movement.direction.x, movement.direction.y);
                 direction.Normalize();
               
-                p.Value.x += direction.x * movement.speed * dt;
-                p.Value.y += direction.y * movement.speed * dt;
+                p.x += direction.x * movement.speed * dt;
+                p.y += direction.y * movement.speed * dt;
 
-                m_Data.position[i] = p;
+                m_Data.transform[i].position = p;
 
-                movement.transform.position = p.Value;
+                // movement.transform.position = p.Value;
 
                 // resets movement direction after processing
                 movement.direction = new float2(0, 0);

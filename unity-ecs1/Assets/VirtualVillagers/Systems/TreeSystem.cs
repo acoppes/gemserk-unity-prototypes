@@ -18,7 +18,7 @@ namespace VirtualVillagers.Systems
         protected override void OnUpdate()
         {
             var dt = Time.deltaTime;
-
+            
             for (var i = 0; i < _data.Length; i++)
             {
                 // for each harvester with this lumber...
