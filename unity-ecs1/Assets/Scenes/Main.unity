@@ -1007,6 +1007,7 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 35, y: 20, z: 0}
   prefab: {fileID: 1028647392421468, guid: db1fb71257b47d04f9397ef8e828286d, type: 2}
+  _debugCurrentSpawned: 0
 --- !u!114 &810224083
 MonoBehaviour:
   m_ObjectHideFlags: 0

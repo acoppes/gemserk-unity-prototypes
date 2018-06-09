@@ -429,6 +429,13 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		
 		World.Active.GetExistingManager<BehaviourTreeSystem>().SetBehaviourTreeManager(btManager);
 		
+		// TODO: barras de vida para saber cuanto lumber queda o que tan lleno esta un lumbermill
+		
+		// TODO: podría ser un sistema que si detecta un lumber holder que no tiene ui, crea ui y asocia al mismo, 
+		// y si muere, mata el ui. Lo unico si es que va a tener que definir donde poner el ui, un offset o algo
+		// el componente de lumber, lo cual puede ser raro. Capaz que si tiene componente de lumber ui, ahi si
+		// define el offset, pero cualquier entidad con componente lumber ui y lumber, se autocrea y destruye el ui.
+		
 		// Siguiente prueba: agregar una condicion de cooldown y escribir en el contexto
 		// Tener una accion separada para incrementar el cooldown? 
 		// (o bien chequear por un dato general en el contexto, tipo el "frame" de ejecución)
