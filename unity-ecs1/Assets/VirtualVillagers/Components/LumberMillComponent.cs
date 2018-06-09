@@ -2,7 +2,7 @@
 
 namespace VirtualVillagers.Components
 {
-    public class LumberMill : MonoBehaviour
+    public class LumberMillComponent : MonoBehaviour
     {
         
     }

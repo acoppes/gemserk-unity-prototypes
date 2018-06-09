@@ -2,7 +2,7 @@
 
 namespace VirtualVillagers.Components
 {
-    public class LumberHolder : MonoBehaviour
+    public class LumberComponent : MonoBehaviour
     {
 //        public float regenerationPerSecond;
 

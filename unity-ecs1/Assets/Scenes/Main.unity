@@ -2640,7 +2640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1248422588}
-  _ui: {fileID: 1771900890}
+  _uiComponent: {fileID: 1771900890}
 --- !u!114 &1771900892
 MonoBehaviour:
   m_ObjectHideFlags: 0

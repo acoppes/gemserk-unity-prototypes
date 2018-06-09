@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace VirtualVillagers.Components
 {
-    public class Harvester : MonoBehaviour
+    public class HarvesterComponent : MonoBehaviour
     {
         public Entity currentLumberTarget;
         public Entity currentLumberMill;

@@ -205,7 +205,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				{
 					// has at least 1 of lumber
 					var gameObject = btManager.GetContext() as GameObject;
-					var harvester = gameObject.GetComponent<Harvester>();
+					var harvester = gameObject.GetComponent<HarvesterComponent>();
 					return harvester.currentLumber > 0;
 				})
 				.Do("DeployLumber", time =>
@@ -218,7 +218,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					
 					var validLumberMills = lumberMills.Where(lm =>
 					{
-						var lumberHolder = lm.GetComponent<LumberHolder>();
+						var lumberHolder = lm.GetComponent<LumberComponent>();
 						return lumberHolder.current < lumberHolder.total;
 					}).ToList();
 							
@@ -239,7 +239,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					    movement.destinationDistance) 
 						return BehaviourTreeStatus.Failure;
 					
-					var harvester = gameObject.GetComponent<Harvester>();
+					var harvester = gameObject.GetComponent<HarvesterComponent>();
 					harvester.currentLumberMill = lumberMill.GetComponent<GameObjectEntity>().Entity;
 					return BehaviourTreeStatus.Running;
 
@@ -249,7 +249,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					.Condition("NotAtMaximumLumber", delegate(TimeData time)
 					{
 						var gameObject = btManager.GetContext() as GameObject;
-						var harvester = gameObject.GetComponent<Harvester>();
+						var harvester = gameObject.GetComponent<HarvesterComponent>();
 						return harvester.currentLumber < harvester.maxLumber;
 					})
 					.Condition("IsSelectedTreaAtHarvestDistance", delegate(TimeData time)
@@ -270,7 +270,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						
 						var currentTree = btContext.harvestLumberCurrentTree;
 
-						var harvester = gameObject.GetComponent<Harvester>();
+						var harvester = gameObject.GetComponent<HarvesterComponent>();
 						if (harvester != null && btContext.harvestLumberCurrentTree != null)
 						{
 							harvester.currentLumberTarget =
@@ -285,7 +285,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 					{
 						var gameObject = btManager.GetContext() as GameObject;
 //						var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-						var harvester = gameObject.GetComponent<Harvester>();
+						var harvester = gameObject.GetComponent<HarvesterComponent>();
 						return harvester.currentLumber < harvester.maxLumber;
 //						return btContext.harvestLumberCurrent < btContext.harvestLumberTotal;
 					})
@@ -306,7 +306,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						
 						var nearByTrees = trees.Where(tree => Vector2.Distance(gameObject.transform.position, tree.transform.position) <
 															  btContext.harvestLumberMaxDistance && 
-						                                      tree.GetComponent<LumberHolder>().current > 0).ToList();
+						                                      tree.GetComponent<LumberComponent>().current > 0).ToList();
 						if (nearByTrees.Count == 0)
 							return BehaviourTreeStatus.Failure;
 								
@@ -327,7 +327,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 						.Condition("MaximumLumber", delegate(TimeData time)
 						{
 							var gameObject = btManager.GetContext() as GameObject;
-							var harvester = gameObject.GetComponent<Harvester>();
+							var harvester = gameObject.GetComponent<HarvesterComponent>();
 							return harvester.currentLumber >= harvester.maxLumber;
 						})
 						// if at distance of lumber mill deposit lumber and reset
@@ -340,7 +340,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
 							var validLumberMills = lumberMills.Where(lm =>
 							{
-								var lumberHolder = lm.GetComponent<LumberHolder>();
+								var lumberHolder = lm.GetComponent<LumberComponent>();
 								return lumberHolder.current < lumberHolder.total;
 							}).ToList();
 							
@@ -403,7 +403,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 				.Do("DoNothing", time => {
 					var gameObject = btManager.GetContext() as GameObject;
 					var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-					var lumber = gameObject.GetComponent<LumberHolder>();
+					var lumber = gameObject.GetComponent<LumberComponent>();
 					var result = lumber.current <= 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Failure;
 //					var result = btContext.treeCurrentLumber <= 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Failure;
 

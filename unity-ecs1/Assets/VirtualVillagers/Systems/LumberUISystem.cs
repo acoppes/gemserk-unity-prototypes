@@ -8,14 +8,14 @@ namespace VirtualVillagers.Systems
         private struct Data
         {
             public int Length;
-            public ComponentArray<LumberMillUI> lumberUI;
+            public ComponentArray<LumberMillUIComponent> lumberUI;
         }
         
         private struct LumberMillData
         {
             public int Length;
-            public ComponentArray<LumberMill> lumberMill;
-            public ComponentArray<LumberHolder> lumber;
+            public ComponentArray<LumberMillComponent> lumberMill;
+            public ComponentArray<LumberComponent> lumber;
         }
         
         [Inject] private Data _data;

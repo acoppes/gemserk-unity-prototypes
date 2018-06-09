@@ -2,7 +2,7 @@
 
 namespace VirtualVillagers.Components
 {
-    public class Tree : MonoBehaviour
+    public class TreeComponent : MonoBehaviour
     {
         public int currentSize;
         public int maxSize = 3;

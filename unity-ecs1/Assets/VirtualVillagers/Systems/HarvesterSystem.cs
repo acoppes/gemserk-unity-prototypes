@@ -9,7 +9,7 @@ namespace VirtualVillagers.Systems
         private struct Data
         {
             public int Length;
-            public ComponentArray<Harvester> harvester;
+            public ComponentArray<HarvesterComponent> harvester;
         }
         
         [Inject] private Data _data;
@@ -25,9 +25,9 @@ namespace VirtualVillagers.Systems
 
                 if (EntityManager.Exists(harvester.currentLumberTarget))
                 {
-                    if (EntityManager.HasComponent<LumberHolder>(harvester.currentLumberTarget))
+                    if (EntityManager.HasComponent<LumberComponent>(harvester.currentLumberTarget))
                     {
-                        var lumberHolder = EntityManager.GetComponentObject<LumberHolder>(harvester.currentLumberTarget);
+                        var lumberHolder = EntityManager.GetComponentObject<LumberComponent>(harvester.currentLumberTarget);
 
                         var harvestedLumber = Mathf.Min(harvester.lumberPerSecond * dt, lumberHolder.current);
                         harvestedLumber = Mathf.Min(harvestedLumber, harvester.maxLumber - harvester.currentLumber);
@@ -45,9 +45,9 @@ namespace VirtualVillagers.Systems
 
                 if (EntityManager.Exists(harvester.currentLumberMill))
                 {
-                    if (EntityManager.HasComponent<LumberMill>(harvester.currentLumberMill))
+                    if (EntityManager.HasComponent<LumberMillComponent>(harvester.currentLumberMill))
                     {
-                        var lumberHolder = EntityManager.GetComponentObject<LumberHolder>(harvester.currentLumberMill);
+                        var lumberHolder = EntityManager.GetComponentObject<LumberComponent>(harvester.currentLumberMill);
                         
                         var returnedLumber = Mathf.Min(harvester.lumberPerSecond * dt, harvester.currentLumber);
                         returnedLumber = Mathf.Min(returnedLumber, lumberHolder.total - lumberHolder.current);

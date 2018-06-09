@@ -9,8 +9,8 @@ namespace VirtualVillagers.Systems
         private struct Data
         {
             public int Length;
-            public ComponentArray<LumberHolder> lumbers;
-            public ComponentArray<Components.Tree> trees;
+            public ComponentArray<LumberComponent> lumbers;
+            public ComponentArray<Components.TreeComponent> trees;
         }
 
         [Inject] private Data _data;
@@ -53,11 +53,11 @@ namespace VirtualVillagers.Systems
                     spawnedTreeObject.transform.position = tree.transform.position 
                                                     + (Vector3) randomPosition;
 
-                    var spawnedTree = spawnedTreeObject.GetComponent<Components.Tree>();
+                    var spawnedTree = spawnedTreeObject.GetComponent<Components.TreeComponent>();
                     spawnedTree.currentSize = 1;
                     spawnedTree.seedPrefab = tree.seedPrefab; // copy here to avoid referencing to itself.
 
-                    var spawnedTreeLumber = spawnedTreeObject.GetComponent<LumberHolder>();
+                    var spawnedTreeLumber = spawnedTreeObject.GetComponent<LumberComponent>();
                     spawnedTreeLumber.total = spawnedTree.lumberPerSize;
                     spawnedTreeLumber.current = spawnedTreeLumber.total;
                     

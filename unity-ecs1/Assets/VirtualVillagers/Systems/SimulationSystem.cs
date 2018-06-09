@@ -9,7 +9,7 @@ namespace VirtualVillagers.Systems
         private struct Data
         {
             public int Length;
-            public ComponentArray<SimulationTime> _simulation;
+            public ComponentArray<SimulationTimeComponent> _simulation;
         }
 
         [Inject] private Data _data;

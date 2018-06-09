@@ -5,10 +5,10 @@ namespace VirtualVillagers.Components
     public struct SimulationComponentData
     {
 //            public int Length;
-        public SimulationTime simulationTime;
+        public SimulationTimeComponent simulationTime;
     }
     
-    public class SimulationTime : MonoBehaviour
+    public class SimulationTimeComponent : MonoBehaviour
     {
         public int totalFrames;
         public int frames;

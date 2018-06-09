@@ -32,15 +32,15 @@ public class DebugTools : MonoBehaviour
 		var size = UnityEngine.Random.RandomRange(0, 3);
 			
 		var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
-		var tree = gameObject.GetComponent<VirtualVillagers.Components.Tree>();
+		var tree = gameObject.GetComponent<VirtualVillagers.Components.TreeComponent>();
 
-		if (treePrefab.GetComponent<VirtualVillagers.Components.Tree>().seedPrefab == treePrefab)
+		if (treePrefab.GetComponent<VirtualVillagers.Components.TreeComponent>().seedPrefab == treePrefab)
 		{
 			tree.seedPrefab = treePrefab;
 		}
 		
 		tree.currentSize = size;
-		gameObject.GetComponent<LumberHolder>().current = (size + 1) * tree.lumberPerSize;
+		gameObject.GetComponent<LumberComponent>().current = (size + 1) * tree.lumberPerSize;
 //		btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
 			
 		var treeView = gameObject.GetComponent<VirtualVillagers.TreeView>();
@@ -171,7 +171,7 @@ public class DebugTools : MonoBehaviour
 		var entities = GameObject.FindObjectsOfType<GameObjectEntity>();
 		foreach (var entity in entities)
 		{
-			if (entity.GetComponent<LumberMillUI>() != null)
+			if (entity.GetComponent<LumberMillUIComponent>() != null)
 				continue;
 			GameObject.Destroy(entity.gameObject);
 		}

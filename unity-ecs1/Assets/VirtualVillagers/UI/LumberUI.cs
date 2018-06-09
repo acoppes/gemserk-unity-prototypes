@@ -8,12 +8,12 @@ public class LumberUI : MonoBehaviour
 	protected Text text;
 
 	[SerializeField]
-	protected LumberMillUI _ui;
+	protected LumberMillUIComponent _uiComponent;
 
 	private void LateUpdate()
 	{
-		if (_ui == null)
+		if (_uiComponent == null)
 			return;
-		text.text = string.Format("Lumber: {0}", _ui.currentLumber);
+		text.text = string.Format("Lumber: {0}", _uiComponent.currentLumber);
 	}
 }
