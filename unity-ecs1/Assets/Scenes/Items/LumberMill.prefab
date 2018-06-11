@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   current: 0
-  total: 50
+  total: 300
   harvesters: 0
 --- !u!114 &114195733536269768
 MonoBehaviour:

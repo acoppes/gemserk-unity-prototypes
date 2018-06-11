@@ -6,6 +6,10 @@ namespace VirtualVillagers.Components
     public class MovementComponent : MonoBehaviour
     {
         public float2 direction;
+        
+        // readonly
+        public float2 velocity;
+        
         public float speed = 1.0f;
 
         public float destinationDistance = 1.0f;

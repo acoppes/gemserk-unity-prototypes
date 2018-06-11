@@ -14,15 +14,8 @@ namespace VirtualVillagers.Systems
             public ComponentArray<MovementComponent> movement;
             public ComponentArray<Transform> transform;
         }
-        
-//        public struct SimulationData
-//        {
-////            public int Length;
-//            public SimulationTime simulationTime;
-//        }
 
         [Inject] private Data m_Data;
-        // [Inject] private SimulationData _simulationData;
         
         protected override void OnUpdate()
         {
@@ -44,9 +37,11 @@ namespace VirtualVillagers.Systems
 
                 var direction = new Vector2(movement.direction.x, movement.direction.y);
                 direction.Normalize();
+
+                movement.velocity = direction * movement.speed * dt;
               
-                p.x += direction.x * movement.speed * dt;
-                p.y += direction.y * movement.speed * dt;
+                p.x += movement.velocity.x;
+                p.y += movement.velocity.y;
 
                 m_Data.transform[i].position = p;
 
