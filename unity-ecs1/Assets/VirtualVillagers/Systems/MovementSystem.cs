@@ -19,15 +19,15 @@ namespace VirtualVillagers.Systems
         
         protected override void OnUpdate()
         {
-//            var dt = Time.deltaTime;
-            var _simulation = GetEntities<SimulationComponentData>()[0].simulationTime;
-
-            // GetEntities<SimulationData>();
-            
-            if (_simulation.frames == 0)
-                return;
-            
-            var dt = _simulation.dt;
+            var dt = Time.deltaTime;
+//            var _simulation = GetEntities<SimulationComponentData>()[0].simulationTime;
+//
+//            // GetEntities<SimulationData>();
+//            
+//            if (_simulation.frames == 0)
+//                return;
+//            
+//            var dt = _simulation.dt;
             
             for (var i = 0; i < m_Data.Length; i++)
             {

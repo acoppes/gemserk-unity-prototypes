@@ -22,6 +22,9 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 	[SerializeField]
 	protected GameObject _lumberBarPrefab;
 	
+	[SerializeField]
+	protected GameObject _modelPrefab;
+	
 	private void CreateWorld()
 	{
 		var treesCount = UnityEngine.Random.Range(minTrees, maxTrees);
@@ -31,8 +34,8 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 			debugTools.SpawnTree();
 		}
 		
-		debugTools.SpawnLumbermill();
-		debugTools.SpawnEater();
+//		debugTools.SpawnLumbermill();
+//		debugTools.SpawnEater();
 	}
 
 	private void Start() {
@@ -428,6 +431,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		
 		World.Active.GetExistingManager<BehaviourTreeSystem>().SetBehaviourTreeManager(btManager);
 		World.Active.GetExistingManager<LumberCanvasSystem>().SetLumberBarPrefab(_lumberBarPrefab);
+		World.Active.GetExistingManager<ModelSystem>().SetModelPrefab(_modelPrefab);
 		
 		// TODO: barras de vida para saber cuanto lumber queda o que tan lleno esta un lumbermill
 		
