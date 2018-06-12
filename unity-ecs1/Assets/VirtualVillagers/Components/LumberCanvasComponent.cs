@@ -11,11 +11,19 @@ namespace VirtualVillagers.Components
         // custom prefab (or archetype)
         
         // current instance (if not created already)
-        public GameObject prefab;
         public Entity canvas;
 
         public int size;
         public Vector3 offset;
+        
+#if UNITY_EDITOR
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(transform.position + offset, 0.1f);
+        }
+
+#endif
     }
 
     // this is the component for the ui
@@ -32,6 +40,12 @@ namespace VirtualVillagers.Components
         
         [Inject] private Data _data;
 
+        private GameObject _lumberBarPrefab;
+
+        public void SetLumberBarPrefab(GameObject lumberBarPrefab)
+        {
+            _lumberBarPrefab = lumberBarPrefab;
+        }
 
         protected override void OnUpdate()
         {
@@ -43,7 +57,7 @@ namespace VirtualVillagers.Components
                 if (EntityManager.Exists(lumberCanvas.canvas))
                     continue;
 
-                var instanceObject = GameObject.Instantiate(lumberCanvas.prefab);
+                var instanceObject = GameObject.Instantiate(_lumberBarPrefab);
                 var lumberUIComponent = instanceObject.GetComponent<LumberUIComponent>();
 
                 lumberUIComponent.lumberEntity = lumberCanvas.GetComponent<GameObjectEntity>().Entity;

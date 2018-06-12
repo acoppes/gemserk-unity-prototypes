@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c90e702383b486e850f4f93e4181978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1959483394812100, guid: 7742e80557d1817459367b8e26021fd0, type: 2}
+  size: 0
+  offset: {x: 0, y: 4.4, z: 0}
 --- !u!114 &114194520413448628
 MonoBehaviour:
   m_ObjectHideFlags: 1
