@@ -1,4 +1,5 @@
 ﻿using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace VirtualVillagers.Components
@@ -12,6 +13,9 @@ namespace VirtualVillagers.Components
         // current instance (if not created already)
         public GameObject prefab;
         public Entity canvas;
+
+        public int size;
+        public Vector3 offset;
     }
 
     // this is the component for the ui

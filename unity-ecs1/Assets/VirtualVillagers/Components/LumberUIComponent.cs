@@ -12,6 +12,8 @@ namespace VirtualVillagers.Components
         public float total;
 
         public bool visible;
+
+        public int size;
     }
     
     public class LumberCanvasUISystem : ComponentSystem
@@ -45,16 +47,25 @@ namespace VirtualVillagers.Components
                     _toDestroy.Add(lumberUI.gameObject);
                     continue;
                 }
+                
+                if (!EntityManager.HasComponent<LumberCanvasComponent>(lumberUI.lumberEntity))
+                {
+                    _toDestroy.Add(lumberUI.gameObject);
+                    continue;
+                }
 
                 var lumber = EntityManager.GetComponentObject<LumberComponent>(lumberUI.lumberEntity);
                 
                 var lumberTransform = EntityManager.GetComponentObject<Transform>(lumberUI.lumberEntity);
-
+                var lumberCanvas = EntityManager.GetComponentObject<LumberCanvasComponent>(lumberUI.lumberEntity);
+                
                 // TODO: + offset
-                lumberUI.transform.position = lumberTransform.position;
+                lumberUI.transform.position = lumberTransform.position + lumberCanvas.offset;
 
                 lumberUI.current = lumber.current;
                 lumberUI.total = lumber.total;
+
+                lumberUI.size = lumberCanvas.size;
 
                 lumberUI.visible = true;
             }
