@@ -2,7 +2,7 @@
 
 namespace VirtualVillagers.Components
 {
-    public struct SimulationTimeComponent : IComponentData
+    public struct SimulationTime : IComponentData
     {
         public int totalFrames;
         public int frames;
@@ -14,24 +14,24 @@ namespace VirtualVillagers.Components
 //        public float maxDeltaTime;
     }
 
-    public static class SimulationTime
+    public static class SimulationTimeSingleton
     {
         private static Entity _simulationTimeInstance;
         
-        public static SimulationTimeComponent GetTime()
+        public static SimulationTime GetInstance()
         {
             var entityManager = World.Active.GetExistingManager<EntityManager>();
             
             if (!entityManager.Exists(_simulationTimeInstance))
             {
                 _simulationTimeInstance = entityManager.CreateEntity();
-                entityManager.AddComponentData(_simulationTimeInstance, new SimulationTimeComponent()
+                entityManager.AddComponentData(_simulationTimeInstance, new SimulationTime()
                 {
                     fixedDeltaTime = 0.01f
                 });
             }
             
-            return entityManager.GetComponentData<SimulationTimeComponent>(_simulationTimeInstance);
+            return entityManager.GetComponentData<SimulationTime>(_simulationTimeInstance);
         }
     }
 }

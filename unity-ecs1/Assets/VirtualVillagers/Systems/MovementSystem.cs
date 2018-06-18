@@ -20,7 +20,7 @@ namespace VirtualVillagers.Systems
         protected override void OnUpdate()
         {
 //            var dt = Time.deltaTime;
-            var simulation = SimulationTime.GetTime();
+            var simulation = SimulationTimeSingleton.GetInstance();
             
 //            var _simulation = GetEntities<SimulationComponentData>()[0].simulationTime;
 //
