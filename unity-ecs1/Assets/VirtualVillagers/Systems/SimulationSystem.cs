@@ -9,7 +9,7 @@ namespace VirtualVillagers.Systems
         private struct Data
         {
             public int Length;
-            public ComponentArray<SimulationTimeComponent> _simulation;
+            public ComponentDataArray<SimulationTimeComponent> _simulation;
         }
 
         [Inject] private Data _data;
@@ -21,14 +21,14 @@ namespace VirtualVillagers.Systems
             for (var i = 0; i < _data.Length; i++)
             {
                 var simulation = _data._simulation[i];
-                
+
+                if (simulation.fixedDeltaTime < 0.001f)
+                    continue;
+
                 simulation.accumulator += dt;
                 simulation.dt = 0;
                 simulation.frames = 0;
 
-                if (simulation.fixedDeltaTime <= 0.001f)
-                    continue;
-                
                 while (simulation.accumulator > simulation.fixedDeltaTime)
                 {
                     simulation.totalFrames++;
@@ -36,6 +36,8 @@ namespace VirtualVillagers.Systems
                     simulation.accumulator -= simulation.fixedDeltaTime;
                     simulation.dt += simulation.fixedDeltaTime;
                 }
+                
+                _data._simulation[i] = simulation;
             }
         }
     }
