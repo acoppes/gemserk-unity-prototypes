@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114577336788475162}
   - component: {fileID: 114237394110127334}
   - component: {fileID: 114159822254385638}
+  - component: {fileID: 114167734477058168}
   m_Layer: 0
   m_Name: LumberMillEntity
   m_TagString: LumberMill
@@ -80,6 +81,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 0
   offset: {x: 0, y: 2, z: 0}
+--- !u!114 &114167734477058168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1228572486629976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d282ea7a674828b82e3084e9f28d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114237394110127334
 MonoBehaviour:
   m_ObjectHideFlags: 1

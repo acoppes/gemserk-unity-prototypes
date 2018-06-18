@@ -574,7 +574,7 @@ MonoBehaviour:
   harvesterPrefab: {fileID: 1546914794214884, guid: a3e10a6058c167a45836f6f6bc2f81f3,
     type: 2}
   foodPrefab: {fileID: 1028647392421468, guid: 5639360e6e8bc0c4598390697af3ee62, type: 2}
-  lumbermillPrefab: {fileID: 1500401482982804, guid: da7e6ab3267db2a40a91fef5bc3ed4ee,
+  lumbermillPrefab: {fileID: 1228572486629976, guid: 18aceb26cbfb02942a70898756a7cd6d,
     type: 2}
   eaterPrefab: {fileID: 1173541388511970, guid: 93ee2e78ef9a40f4f8c3e2e45ab8ba07,
     type: 2}
@@ -914,63 +914,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 639074311}
   m_CullTransparentMesh: 0
---- !u!1 &672373999
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 672374002}
-  - component: {fileID: 672374001}
-  - component: {fileID: 672374000}
-  m_Layer: 0
-  m_Name: ~Simulation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &672374000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 672373999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36ec5b5084744c4a88b19818035d5afb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalFrames: 0
-  frames: 0
-  dt: 0
-  fixedDeltaTime: 0.02
-  accumulator: 0
---- !u!114 &672374001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 672373999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &672374002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 672373999}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &810224081
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,7 +997,7 @@ Transform:
   m_Children:
   - {fileID: 537419741}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &811575549
 GameObject:
@@ -2015,6 +1958,8 @@ MonoBehaviour:
   maxTrees: 3
   debugTools: {fileID: 478774595}
   _lumberBarPrefab: {fileID: 1959483394812100, guid: 7742e80557d1817459367b8e26021fd0,
+    type: 2}
+  _modelPrefab: {fileID: 1502761551683872, guid: 5db9b6f656661304c8aded93c6caaa96,
     type: 2}
 --- !u!4 &1154647730
 Transform:
