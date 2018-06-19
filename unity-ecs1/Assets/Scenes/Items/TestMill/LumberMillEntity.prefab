@@ -81,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 0
   offset: {x: 0, y: 2, z: 0}
+  modelAsset: Models/LumberBar
 --- !u!114 &114167734477058168
 MonoBehaviour:
   m_ObjectHideFlags: 1

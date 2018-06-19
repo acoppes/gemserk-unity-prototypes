@@ -1,5 +1,5 @@
-﻿using Unity.Entities;
-using Unity.Mathematics;
+﻿using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
 namespace VirtualVillagers.Components
@@ -7,14 +7,12 @@ namespace VirtualVillagers.Components
     // this is the component to say "I want to have a canvas"
     public class LumberCanvasComponent : MonoBehaviour
     {
-        // offset
-        // custom prefab (or archetype)
-        
-        // current instance (if not created already)
         public Entity canvas;
 
         public int size;
         public Vector3 offset;
+
+        public string modelAsset;
         
 #if UNITY_EDITOR
 
@@ -40,24 +38,23 @@ namespace VirtualVillagers.Components
         
         [Inject] private Data _data;
 
-        private GameObject _lumberBarPrefab;
-
-        public void SetLumberBarPrefab(GameObject lumberBarPrefab)
-        {
-            _lumberBarPrefab = lumberBarPrefab;
-        }
+        private Dictionary<string, GameObject> cachedPrefabs = new Dictionary<string, GameObject>();
 
         protected override void OnUpdate()
         {
             for (var i = 0; i < _data.Length; i++)
             {
                 var lumberCanvas = _data.lumberCanvas[i];
-//                var entity = _data.entities[i];
-
+                
                 if (EntityManager.Exists(lumberCanvas.canvas))
                     continue;
 
-                var instanceObject = GameObject.Instantiate(_lumberBarPrefab);
+                if (string.IsNullOrEmpty(lumberCanvas.modelAsset))
+                    continue;
+
+                var lumberBarPrefab = Resources.Load<GameObject>(lumberCanvas.modelAsset);
+                
+                var instanceObject = GameObject.Instantiate(lumberBarPrefab);
                 var lumberUIComponent = instanceObject.GetComponent<LumberUIComponent>();
 
                 lumberUIComponent.lumberEntity = lumberCanvas.GetComponent<GameObjectEntity>().Entity;

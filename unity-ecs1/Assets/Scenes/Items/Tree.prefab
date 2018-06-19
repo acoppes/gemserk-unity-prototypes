@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 0
   offset: {x: 0, y: 4.4, z: 0}
+  modelAsset: Models/LumberBar
 --- !u!114 &114194520413448628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,6 +219,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _modelTransform: {fileID: 4268844174682710}
+  _rotateOnLumber: 0
+  sizes:
+  - {x: 0.3, y: 0.3, z: 0.3}
+  - {x: 0.5, y: 0.5, z: 0.5}
+  - {x: 0.75, y: 0.75, z: 0.75}
+  - {x: 1, y: 1, z: 1}
 --- !u!114 &114575294843948470
 MonoBehaviour:
   m_ObjectHideFlags: 1

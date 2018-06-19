@@ -13,6 +13,17 @@ namespace VirtualVillagers
 		private Components.TreeComponent _treeComponent;
 
 		private int _size = -1;
+
+		[SerializeField]
+		protected bool _rotateOnLumber = false;
+		
+		[SerializeField]
+		protected Vector3[] sizes = new Vector3[]
+		{
+			new Vector3(0.25f, 0.25f, 0.25f),
+			new Vector3(0.65f, 0.65f, 0.65f),
+			new Vector3(1.0f, 1.0f, 1.0f),
+		};
 		
 		public void SetTreeData(BehaviourTreeContextComponent treeData)
 		{
@@ -30,10 +41,13 @@ namespace VirtualVillagers
 			{
 				SetSize(_treeComponent.currentSize);
 			}
+
+			if (!_rotateOnLumber) 
+				return;
 			
 			var maxLumber = (_treeComponent.currentSize + 1) * _treeComponent.lumberPerSize;
 			var harvestPercentage = _lumberComponent.current / maxLumber;
-
+	
 			_modelTransform.localEulerAngles = new Vector3(0, 0, 
 				Mathf.Lerp(0, 90, 1 - harvestPercentage));
 		}
@@ -41,16 +55,10 @@ namespace VirtualVillagers
 		private void SetSize(int size)
 		{
 			_size = size;
-			
-			Vector3[] sizes =
-			{
-				new Vector3(0.25f, 0.25f, 0.25f),
-				new Vector3(0.65f, 0.65f, 0.65f),
-				new Vector3(1.0f, 1.0f, 1.0f),
-			};
 
 			if (size < 0)
 				size = 0;
+			
 			if (size >= sizes.Length)
 				size = sizes.Length - 1;
 			

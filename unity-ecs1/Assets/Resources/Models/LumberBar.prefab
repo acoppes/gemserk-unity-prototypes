@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 114205742877534586}
   - component: {fileID: 114674610453548614}
   m_Layer: 0
-  m_Name: LumberCanvas
+  m_Name: LumberBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -430,7 +430,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		CreateWorld();
 		
 		World.Active.GetExistingManager<BehaviourTreeSystem>().SetBehaviourTreeManager(btManager);
-		World.Active.GetExistingManager<LumberCanvasSystem>().SetLumberBarPrefab(_lumberBarPrefab);
+		// World.Active.GetExistingManager<LumberCanvasSystem>().SetLumberBarPrefab(_lumberBarPrefab);
 		World.Active.GetExistingManager<ModelSystem>().SetModelPrefab(_modelPrefab);
 		
 		// TODO: barras de vida para saber cuanto lumber queda o que tan lleno esta un lumbermill
