@@ -73,7 +73,19 @@ public class VisionSystem : MonoBehaviour {
 		_texture.Apply();
 	}
 
-	private Vector2 GetWorldPosition(float i, float j)
+	private void GetMatrixPosition(Vector2 p, int[] position)
+	{
+		var w = (float) width;
+		var h = (float) height;
+
+//		var x = (i - w * 0.5f) * _localScale.x;
+//		var y = (j - h * 0.5f) * _localScale.y;
+
+		position[0] = Mathf.RoundToInt(p.x / _localScale.x + w * 0.5f);
+		position[1] = Mathf.RoundToInt(p.y / _localScale.y + h * 0.5f);
+	}
+
+	private Vector2 GetWorldPosition(int i, int j)
 	{
 		var w = (float) width;
 		var h = (float) height;
@@ -87,9 +99,11 @@ public class VisionSystem : MonoBehaviour {
 		return new Vector2(x, y);
 	}
 
-	private void UpdateVision(Vector2 visionPosition, float visionRange, int visionValue)
+	private void UpdateVision(int[] matrixPosition, float visionRange, int visionValue)
 	{
 		// TODO: iterate only in range pixels (now it is iterating in all the matrix)
+
+		var visionPosition = GetWorldPosition(matrixPosition[0], matrixPosition[1]);
 		
 		for (var i = 0; i < height; i++)
 		{
@@ -129,14 +143,19 @@ public class VisionSystem : MonoBehaviour {
 
 		foreach (var vision in _visions)
 		{
-			var visionPosition = vision.position;
-			var visionCachedPosition = vision.cachedPosition;
 			
-			if (Vector2.Distance(visionPosition, visionCachedPosition) < Mathf.Epsilon) 
+			GetMatrixPosition(vision.position, vision.matrixPosition);
+			// var visionCachedPosition = vision.cachedPosition;
+
+			if (vision.matrixPosition[0] == vision.cachedPosition[0] &&
+			    vision.matrixPosition[1] == vision.cachedPosition[1])
 				continue;
 			
-			UpdateVision(visionCachedPosition, vision.range, -1);
-			UpdateVision(visionPosition, vision.range, 1);
+//			if (Vector2.Distance(visionPosition, visionCachedPosition) < Mathf.Epsilon) 
+//				continue;
+			
+			UpdateVision(vision.cachedPosition, vision.range, -1);
+			UpdateVision(vision.matrixPosition, vision.range, 1);
 			
 			vision.UpdateCachedPosition();
 //			dirty = true;
@@ -153,7 +172,9 @@ public class VisionSystem : MonoBehaviour {
 		foreach (var vision in _addedVisions)
 		{
 			_visions.Add(vision);
-			UpdateVision(vision.position, vision.range, 1);
+			
+			GetMatrixPosition(vision.position, vision.matrixPosition);
+			UpdateVision(vision.matrixPosition, vision.range, 1);
 			vision.UpdateCachedPosition();
 		}
 
@@ -162,7 +183,8 @@ public class VisionSystem : MonoBehaviour {
 		foreach (var vision in _removedVisions)
 		{
 			_visions.Remove(vision);
-			UpdateVision(vision.position, vision.range, -1);
+//			GetMatrixPosition(vision.position, vision.matrixPosition);
+			UpdateVision(vision.cachedPosition, vision.range, -1);
 		}
 
 		_removedVisions.Clear();

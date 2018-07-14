@@ -6,7 +6,10 @@ public class Vision : MonoBehaviour {
 	public float range = 100;
 
 	[NonSerialized]
-	public Vector2 cachedPosition;
+	public int[] matrixPosition = new int[2];
+	
+	[NonSerialized]
+	public int[] cachedPosition = new int[2];
 
 	public Vector2 position
 	{
@@ -34,7 +37,8 @@ public class Vision : MonoBehaviour {
 
 	public void UpdateCachedPosition()
 	{
-		cachedPosition = position;
+		cachedPosition[0] = matrixPosition[0];
+		cachedPosition[1] = matrixPosition[1];
 	}
 
 	void OnDrawGizmos() {
