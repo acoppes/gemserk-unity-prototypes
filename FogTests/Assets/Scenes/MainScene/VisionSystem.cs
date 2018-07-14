@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class TextureTest : MonoBehaviour {
+public class VisionSystem : MonoBehaviour {
 
 	public SpriteRenderer spriteRenderer;
 
@@ -30,6 +30,14 @@ public class TextureTest : MonoBehaviour {
 	private readonly List<Vision> _removedVisions = new List<Vision>();
 
 	private Vector2 _localScale;
+	
+	[SerializeField]
+	protected Color _greyColor = new Color(0.5f, 0, 0, 1.0f);
+	[SerializeField]
+	protected Color _whiteColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+	[SerializeField]
+	protected Color _errorColor = new Color(0.0f, 0.5f, 0.0f, 1.0f);
+
 	
 	private void Start()
     {
@@ -117,7 +125,7 @@ public class TextureTest : MonoBehaviour {
 		// UpdateVision();
 		
 		// foreach vision check if it was modified (position and range)
-		var dirty = false;
+//		var dirty = false;
 
 		foreach (var vision in _visions)
 		{
@@ -130,12 +138,12 @@ public class TextureTest : MonoBehaviour {
 			UpdateVision(visionCachedPosition, vision.range, -1);
 			UpdateVision(visionPosition, vision.range, 1);
 			
-			vision.cachedPosition = visionPosition;
-			dirty = true;
+			vision.UpdateCachedPosition();
+//			dirty = true;
 		}
 
-		if (!dirty) 
-			return;
+//		if (!dirty) 
+//			return;
 
 		UpdateTexture();
 	}
@@ -146,6 +154,7 @@ public class TextureTest : MonoBehaviour {
 		{
 			_visions.Add(vision);
 			UpdateVision(vision.position, vision.range, 1);
+			vision.UpdateCachedPosition();
 		}
 
 		_addedVisions.Clear();
@@ -161,23 +170,26 @@ public class TextureTest : MonoBehaviour {
 
 	private void UpdateTexture()
 	{
-		var greyColor = new Color(0.5f, 0, 0, 1.0f);
-		var whiteColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-
 		for (var i = 0; i < width * height; i++)
 		{
 			if (_visionMatrix[i] > 0)
 			{
-				_colors[i] = whiteColor;
+				_colors[i] = _whiteColor;
 				continue;
 			}
 
 			var currentColor = _colors[i];
 
-			if (currentColor == whiteColor)
-				_colors[i] = greyColor;
+			if (currentColor == _whiteColor)
+				_colors[i] = _greyColor;
+			
+			// this is just for debug reasons
+			if (_visionMatrix[i] < 0)
+			{
+				_colors[i] = _errorColor;
+			}
 		}
-
+		
 		_texture.SetPixels(_colors);
 		_texture.Apply();
 	}

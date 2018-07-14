@@ -13,23 +13,28 @@ public class Vision : MonoBehaviour {
 		get { return transform.position; }
 	}
 
-	private TextureTest _visionSystem;
-	
-	public bool InRange(float x, float y) {
-		return Vector2.Distance(new Vector2(x, y), transform.position) < range;
-	}
+	private VisionSystem _visionSystem;
 
-	private void Start()
+	private void Awake()
 	{
-		_visionSystem = FindObjectOfType<TextureTest>();
-		if (_visionSystem != null)
-			_visionSystem.Register(this);
+		_visionSystem = FindObjectOfType<VisionSystem>();
 	}
 
-	private void OnDestroy()
+	private void OnEnable()
+	{
+		if (_visionSystem != null)
+			_visionSystem.Register(this);	
+	}
+
+	private void OnDisable()
 	{
 		if (_visionSystem != null)
 			_visionSystem.Unregister(this);
+	}
+
+	public void UpdateCachedPosition()
+	{
+		cachedPosition = position;
 	}
 
 	void OnDrawGizmos() {
