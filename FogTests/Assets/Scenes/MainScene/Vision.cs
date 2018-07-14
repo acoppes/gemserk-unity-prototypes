@@ -1,13 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public interface IVision
-{
-	bool InRange(float x, float y);
-}
-
-public class Vision : MonoBehaviour, IVision {
+public class Vision : MonoBehaviour {
 
 	public float range = 100;
+
+	[NonSerialized]
+	public Vector2 cachedPosition;
+
+	public Vector2 position
+	{
+		get { return transform.position; }
+	}
 
 	private TextureTest _visionSystem;
 	
@@ -15,7 +19,7 @@ public class Vision : MonoBehaviour, IVision {
 		return Vector2.Distance(new Vector2(x, y), transform.position) < range;
 	}
 
-	private void Awake()
+	private void Start()
 	{
 		_visionSystem = FindObjectOfType<TextureTest>();
 		if (_visionSystem != null)

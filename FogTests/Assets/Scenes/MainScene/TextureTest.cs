@@ -10,11 +10,9 @@ public class TextureTest : MonoBehaviour {
 
 	Color[] _colors;
 
-	// public int[] vars = new int[5];
+	private int[] _visionMatrix;
 
 	Texture2D _texture;
-
-	// Vision[] _visions;
 
 	public bool testVision = false;
 
@@ -26,9 +24,14 @@ public class TextureTest : MonoBehaviour {
 	[SerializeField]
 	protected TextureFormat _textureFormat;
 	
-	private readonly List<IVision> _visions = new List<IVision>();
+	private readonly List<Vision> _visions = new List<Vision>();
 
-    void Start()
+	private readonly List<Vision> _addedVisions = new List<Vision>();
+	private readonly List<Vision> _removedVisions = new List<Vision>();
+
+	private Vector2 _localScale;
+	
+	private void Start()
     {
 	    _updateCurrent = 0;
 	    
@@ -39,35 +42,36 @@ public class TextureTest : MonoBehaviour {
 		_texture.wrapMode = TextureWrapMode.Clamp;
 
 		_colors = new Color[width * height];
-		RegenerateColors();
+	    _visionMatrix = new int[width * height];
+	    
+		ResetVision();
 
 		spriteRenderer.sprite = Sprite.Create(_texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 1);
+
+	    _localScale = transform.localScale;
     }
 
-	void RegenerateColors()
+	private void ResetVision()
 	{
 		var blackColor = new Color(0, 0, 0, 1.0f);
 
-		for (int i = 0; i < height; i++)
+		for (var i = 0; i < width * height; i++)
 		{
-			for (int j = 0; j < width; j++)
-			{
-				var color = blackColor;
-				_colors[(i * width) + j] = blackColor;				
-			}
+			_colors[i] = blackColor;
+			_visionMatrix[i] = 0;
 		}
 
 		_texture.SetPixels(_colors);
 		_texture.Apply();
 	}
 
-	Vector2 GetWorldPosition(float i, float j)
+	private Vector2 GetWorldPosition(float i, float j)
 	{
 		var w = (float) width;
 		var h = (float) height;
 
-		float x = (i - w * 0.5f) * transform.localScale.x;
-		float y = (j - h * 0.5f) * transform.localScale.y;
+		var x = (i - w * 0.5f) * _localScale.x;
+		var y = (j - h * 0.5f) * _localScale.y;
 
 		// float x = j * transform.localScale.x - width * transform.localScale.x * 0.5f;
 		// float y = (i * width) * transform.localScale.y - height * transform.localScale.y * 0.5f;
@@ -75,39 +79,22 @@ public class TextureTest : MonoBehaviour {
 		return new Vector2(x, y);
 	}
 
-	private void UpdateVision()
+	private void UpdateVision(Vector2 visionPosition, float visionRange, int visionValue)
 	{
-		var greyColor = new Color(0.5f, 0, 0, 1.0f);
-		var whiteColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-
-		for (int i = 0; i < height; i++)
+		// TODO: iterate only in range pixels (now it is iterating in all the matrix)
+		
+		for (var i = 0; i < height; i++)
 		{
-			for (int j = 0; j < width; j++)
+			for (var j = 0; j < width; j++)
 			{
-				var visionFound = false;
-
 				var position = GetWorldPosition(j, i);
 
-				foreach (var vision in _visions)
+				if (Vector2.Distance(position, visionPosition) < visionRange)
 				{
-					if (vision.InRange(position.x, position.y)) {
-						_colors[(i * width) + j] = whiteColor;
-						visionFound = true;				
-						break;
-					}	
-				}
-
-				if (!visionFound) {
-					var currentColor = _colors[(i * width) + j];
-
-					if (currentColor == whiteColor) 
-						_colors[(i * width) + j] = greyColor;
+					_visionMatrix[(i * width) + j] += visionValue;
 				}
 			}
 		}
-
-		_texture.SetPixels(_colors);
-		_texture.Apply();
 	}
 
 	private void Update()
@@ -115,6 +102,10 @@ public class TextureTest : MonoBehaviour {
 		// RegenerateColors(vars[0], vars[1], vars[2], vars[3], vars[4]);
 		if (!testVision) 
 			return;
+		
+		_localScale = transform.localScale;
+
+		ProcessPendingVisions();
 
 		_updateCurrent += Time.deltaTime;
 
@@ -123,20 +114,82 @@ public class TextureTest : MonoBehaviour {
 
 		_updateCurrent = 0;
 		
-		UpdateVision();
+		// UpdateVision();
 		
 		// foreach vision check if it was modified (position and range)
+		var dirty = false;
+
+		foreach (var vision in _visions)
+		{
+			var visionPosition = vision.position;
+			var visionCachedPosition = vision.cachedPosition;
+			
+			if (Vector2.Distance(visionPosition, visionCachedPosition) < Mathf.Epsilon) 
+				continue;
+			
+			UpdateVision(visionCachedPosition, vision.range, -1);
+			UpdateVision(visionPosition, vision.range, 1);
+			
+			vision.cachedPosition = visionPosition;
+			dirty = true;
+		}
+
+		if (!dirty) 
+			return;
+
+		UpdateTexture();
 	}
 
-	public void Register(IVision vision)
+	private void ProcessPendingVisions()
 	{
-		_visions.Add(vision);
-		// update vision matrix
+		foreach (var vision in _addedVisions)
+		{
+			_visions.Add(vision);
+			UpdateVision(vision.position, vision.range, 1);
+		}
+
+		_addedVisions.Clear();
+
+		foreach (var vision in _removedVisions)
+		{
+			_visions.Remove(vision);
+			UpdateVision(vision.position, vision.range, -1);
+		}
+
+		_removedVisions.Clear();
 	}
 
-	public void Unregister(IVision vision)
+	private void UpdateTexture()
 	{
-		_visions.Remove(vision);
+		var greyColor = new Color(0.5f, 0, 0, 1.0f);
+		var whiteColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		for (var i = 0; i < width * height; i++)
+		{
+			if (_visionMatrix[i] > 0)
+			{
+				_colors[i] = whiteColor;
+				continue;
+			}
+
+			var currentColor = _colors[i];
+
+			if (currentColor == whiteColor)
+				_colors[i] = greyColor;
+		}
+
+		_texture.SetPixels(_colors);
+		_texture.Apply();
+	}
+
+	public void Register(Vision vision)
+	{
+		_addedVisions.Add(vision);
+	}
+
+	public void Unregister(Vision vision)
+	{
+		_removedVisions.Add(vision);
 	}
 
 }
