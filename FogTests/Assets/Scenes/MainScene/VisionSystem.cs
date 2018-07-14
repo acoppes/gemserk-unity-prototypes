@@ -63,6 +63,8 @@ public class VisionSystem : MonoBehaviour {
 		spriteRenderer.sprite = Sprite.Create(_texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 1);
 
 	    _localScale = transform.localScale;
+
+	    // gameObject.hideFlags = HideFlags.NotEditable;
     }
 
 	private void ResetVision()
