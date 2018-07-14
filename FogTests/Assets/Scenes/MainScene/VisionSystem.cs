@@ -107,14 +107,27 @@ public class VisionSystem : MonoBehaviour {
 		// TODO: iterate only in range pixels (now it is iterating in all the matrix)
 
 		var visionPosition = GetWorldPosition(matrixPosition[0], matrixPosition[1]);
+
+		var visionHeight = Mathf.RoundToInt(visionRange / _localScale.y);
+		var visionWidth = Mathf.RoundToInt(visionRange / _localScale.x);
+
+		var rowStart = Mathf.Max(matrixPosition[1] - visionHeight, 0);
+		var rowEnd = Mathf.Min(matrixPosition[1] + visionHeight, height);
+
+		var columnStart = Mathf.Max(matrixPosition[0] - visionWidth, 0);
+		var columnEnd = Mathf.Min(matrixPosition[0] + visionWidth, width);
+
+		var rangeSqr = visionRange * visionRange;
 		
-		for (var i = 0; i < height; i++)
+		for (var i = rowStart; i < rowEnd; i++)
 		{
-			for (var j = 0; j < width; j++)
+			for (var j = columnStart; j < columnEnd; j++)
 			{
 				var position = GetWorldPosition(j, i);
 
-				if (Vector2.Distance(position, visionPosition) < visionRange)
+				var diff = position - visionPosition;
+				
+				if (diff.sqrMagnitude < rangeSqr)
 				{
 					var index = (i * width) + j;
 
