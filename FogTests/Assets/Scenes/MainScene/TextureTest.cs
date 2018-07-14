@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class TextureTest : MonoBehaviour {
@@ -15,15 +14,27 @@ public class TextureTest : MonoBehaviour {
 
 	Texture2D _texture;
 
-	Vision[] _visions;
+	// Vision[] _visions;
 
 	public bool testVision = false;
 
+	[SerializeField]
+	protected float _updateTotal;
+
+	private float _updateCurrent;
+	
+	[SerializeField]
+	protected TextureFormat _textureFormat;
+	
+	private readonly List<IVision> _visions = new List<IVision>();
+
     void Start()
     {
-		_visions = FindObjectsOfType<Vision>();
+	    _updateCurrent = 0;
+	    
+		// _visions = FindObjectsOfType<Vision>();
 
-		_texture =  new Texture2D(width, height, TextureFormat.RGBA32, false, false);
+		_texture =  new Texture2D(width, height, _textureFormat, false, false);
 		_texture.filterMode = FilterMode.Point;
 		_texture.wrapMode = TextureWrapMode.Clamp;
 
@@ -64,7 +75,7 @@ public class TextureTest : MonoBehaviour {
 		return new Vector2(x, y);
 	}
 
-	void UpdateVision()
+	private void UpdateVision()
 	{
 		var greyColor = new Color(0.5f, 0, 0, 1.0f);
 		var whiteColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -99,10 +110,33 @@ public class TextureTest : MonoBehaviour {
 		_texture.Apply();
 	}
 
-	void FixedUpdate() {
+	private void Update()
+	{
 		// RegenerateColors(vars[0], vars[1], vars[2], vars[3], vars[4]);
-		if (testVision)
-			UpdateVision();
+		if (!testVision) 
+			return;
+
+		_updateCurrent += Time.deltaTime;
+
+		if (_updateCurrent < _updateTotal)
+			return;
+
+		_updateCurrent = 0;
+		
+		UpdateVision();
+		
+		// foreach vision check if it was modified (position and range)
+	}
+
+	public void Register(IVision vision)
+	{
+		_visions.Add(vision);
+		// update vision matrix
+	}
+
+	public void Unregister(IVision vision)
+	{
+		_visions.Remove(vision);
 	}
 
 }
