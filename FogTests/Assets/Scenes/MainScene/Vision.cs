@@ -14,6 +14,10 @@ public class Vision : MonoBehaviour {
 	[NonSerialized]
 	public float previousRange;
 	
+	#if UNITY_EDITOR
+	public Color _debugColor;
+	#endif
+	
 	public Vector2 worldPosition
 	{
 		get { return transform.position; }
@@ -46,8 +50,11 @@ public class Vision : MonoBehaviour {
 		previousRange = currentRange;
 	}
 
+	#if UNITY_EDITOR
 	void OnDrawGizmos() {
+		Gizmos.color = _debugColor;
 		Gizmos.DrawWireSphere(worldPosition, currentRange);	
 	}
+	#endif
 	
 }

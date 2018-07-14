@@ -39,7 +39,10 @@ public class VisionSystem : MonoBehaviour {
 	[SerializeField]
 	protected Color _errorColor = new Color(0.0f, 0.5f, 0.0f, 1.0f);
 
-	protected bool _dirty;
+	[SerializeField]
+	protected bool _alwaysUpdate;
+
+	private bool _dirty;
 	
 	private void Start()
     {
@@ -112,16 +115,16 @@ public class VisionSystem : MonoBehaviour {
 		var visionWidth = Mathf.RoundToInt(visionRange / _localScale.x);
 
 		var rowStart = Mathf.Max(matrixPosition[1] - visionHeight, 0);
-		var rowEnd = Mathf.Min(matrixPosition[1] + visionHeight, height);
+		var rowEnd = Mathf.Min(matrixPosition[1] + visionHeight + 2, height - 1);
 
-		var columnStart = Mathf.Max(matrixPosition[0] - visionWidth, 0);
-		var columnEnd = Mathf.Min(matrixPosition[0] + visionWidth, width);
+		var columnStart = Mathf.Max(matrixPosition[0] - visionWidth - 1, 0);
+		var columnEnd = Mathf.Min(matrixPosition[0] + visionWidth + 1, width - 1);
 
 		var rangeSqr = visionRange * visionRange;
 		
-		for (var i = rowStart; i < rowEnd; i++)
+		for (var i = rowStart; i <= rowEnd; i++)
 		{
-			for (var j = columnStart; j < columnEnd; j++)
+			for (var j = columnStart; j <= columnEnd; j++)
 			{
 				var position = GetWorldPosition(j, i);
 
@@ -175,7 +178,7 @@ public class VisionSystem : MonoBehaviour {
 			}
 		}
 
-		if (_dirty)
+		if (_dirty || _alwaysUpdate)
 			UpdateTexture();
 	}
 
