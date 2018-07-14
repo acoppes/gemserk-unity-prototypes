@@ -113,7 +113,13 @@ public class VisionSystem : MonoBehaviour {
 
 				if (Vector2.Distance(position, visionPosition) < visionRange)
 				{
-					_visionMatrix[(i * width) + j] += visionValue;
+					var index = (i * width) + j;
+
+					// init to +1 first time to mark it as previously visited
+					if (_visionMatrix[index] == 0)
+						_visionMatrix[index]++;
+					
+					_visionMatrix[index] += visionValue;
 				}
 			}
 		}
@@ -195,16 +201,22 @@ public class VisionSystem : MonoBehaviour {
 	{
 		for (var i = 0; i < width * height; i++)
 		{
-			if (_visionMatrix[i] > 0)
+			if (_visionMatrix[i] > 1)
 			{
 				_colors[i] = _whiteColor;
 				continue;
 			}
 
-			var currentColor = _colors[i];
-
-			if (currentColor == _whiteColor)
+			if (_visionMatrix[i] == 1)
+			{
 				_colors[i] = _greyColor;
+				continue;
+			}
+
+//			var currentColor = _colors[i];
+
+//			if (currentColor == _whiteColor)
+//				_colors[i] = _greyColor;
 			
 			// this is just for debug reasons
 			if (_visionMatrix[i] < 0)
