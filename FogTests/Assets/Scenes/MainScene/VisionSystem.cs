@@ -14,7 +14,8 @@ public class VisionSystem : MonoBehaviour {
 
 	Texture2D _texture;
 
-	public bool testVision = false;
+	[SerializeField]
+	protected bool _updateDisabled;
 
 	[SerializeField]
 	protected float _updateTotal;
@@ -38,10 +39,12 @@ public class VisionSystem : MonoBehaviour {
 	[SerializeField]
 	protected Color _errorColor = new Color(0.0f, 0.5f, 0.0f, 1.0f);
 
+	protected bool _dirty;
 	
 	private void Start()
     {
-	    _updateCurrent = 0;
+	    // update on first frame
+	    _updateCurrent = _updateTotal;
 	    
 		// _visions = FindObjectsOfType<Vision>();
 
@@ -127,9 +130,10 @@ public class VisionSystem : MonoBehaviour {
 
 	private void Update()
 	{
-		// RegenerateColors(vars[0], vars[1], vars[2], vars[3], vars[4]);
-		if (!testVision) 
+		if (_updateDisabled) 
 			return;
+
+		_dirty = false;
 		
 		_localScale = transform.localScale;
 
@@ -137,41 +141,29 @@ public class VisionSystem : MonoBehaviour {
 
 		_updateCurrent += Time.deltaTime;
 
-		if (_updateCurrent < _updateTotal)
-			return;
-
-		_updateCurrent = 0;
-		
-		// UpdateVision();
-		
-		// foreach vision check if it was modified (position and range)
-//		var dirty = false;
-
-		foreach (var vision in _visions)
+		if (_updateCurrent >= _updateTotal)
 		{
+			_updateCurrent = 0;
 			
-			GetMatrixPosition(vision.worldPosition, vision.currentPosition);
-			// var visionCachedPosition = vision.cachedPosition;
-
-			if (vision.currentPosition[0] == vision.previousPosition[0] &&
-			    vision.currentPosition[1] == vision.previousPosition[1] &&
-			    vision.currentRange == vision.previousRange)
-				continue;
+			foreach (var vision in _visions)
+			{	
+				GetMatrixPosition(vision.worldPosition, vision.currentPosition);
+				
+				if (vision.currentPosition[0] == vision.previousPosition[0] &&
+				    vision.currentPosition[1] == vision.previousPosition[1] &&
+				    vision.currentRange == vision.previousRange)
+					continue;
 			
-//			if (Vector2.Distance(visionPosition, visionCachedPosition) < Mathf.Epsilon) 
-//				continue;
+				UpdateVision(vision.previousPosition, vision.previousRange, -1);
+				UpdateVision(vision.currentPosition, vision.currentRange, 1);
 			
-			UpdateVision(vision.previousPosition, vision.previousRange, -1);
-			UpdateVision(vision.currentPosition, vision.currentRange, 1);
-			
-			vision.UpdateCachedPosition();
-//			dirty = true;
+				vision.UpdateCachedPosition();
+				_dirty = true;
+			}
 		}
 
-//		if (!dirty) 
-//			return;
-
-		UpdateTexture();
+		if (_dirty)
+			UpdateTexture();
 	}
 
 	private void ProcessPendingVisions()
@@ -183,6 +175,8 @@ public class VisionSystem : MonoBehaviour {
 			GetMatrixPosition(vision.worldPosition, vision.currentPosition);
 			UpdateVision(vision.currentPosition, vision.currentRange, 1);
 			vision.UpdateCachedPosition();
+			
+			_dirty = true;
 		}
 
 		_addedVisions.Clear();
@@ -192,6 +186,8 @@ public class VisionSystem : MonoBehaviour {
 			_visions.Remove(vision);
 //			GetMatrixPosition(vision.position, vision.matrixPosition);
 			UpdateVision(vision.previousPosition, vision.previousRange, -1);
+
+			_dirty = true;
 		}
 
 		_removedVisions.Clear();
@@ -212,11 +208,6 @@ public class VisionSystem : MonoBehaviour {
 				_colors[i] = _greyColor;
 				continue;
 			}
-
-//			var currentColor = _colors[i];
-
-//			if (currentColor == _whiteColor)
-//				_colors[i] = _greyColor;
 			
 			// this is just for debug reasons
 			if (_visionMatrix[i] < 0)
