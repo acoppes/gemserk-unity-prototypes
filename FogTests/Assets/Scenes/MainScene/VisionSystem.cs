@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class VisionSystem : MonoBehaviour {
 
-	public SpriteRenderer spriteRenderer;
+	[SerializeField]
+	protected SpriteRenderer spriteRenderer;
 
 	public int width = 128;
 	public int height = 128;
 
-	Color[] _colors;
+	private Color[] _colors;
 
 	private int[] _visionMatrix;
 
-	Texture2D _texture;
+	private Texture2D _texture;
 
 	[SerializeField]
 	protected bool _updateDisabled;
@@ -31,6 +32,8 @@ public class VisionSystem : MonoBehaviour {
 	private readonly List<Vision> _addedVisions = new List<Vision>();
 	private readonly List<Vision> _removedVisions = new List<Vision>();
 
+	private readonly List<Visible> _visibles = new List<Visible>();
+	
 	private Vector2 _localScale;
 	
 	[SerializeField]
@@ -44,13 +47,14 @@ public class VisionSystem : MonoBehaviour {
 	protected bool _alwaysUpdate;
 
 	private bool _dirty;
+
+	private int _layerVisible;
+	private int _layerHidden;
 	
 	private void Start()
     {
 	    // update on first frame
 	    _updateCurrent = _updateTotal;
-	    
-		// _visions = FindObjectsOfType<Vision>();
 
 		_texture =  new Texture2D(width, height, _textureFormat, false, false);
 		_texture.filterMode = FilterMode.Point;
@@ -65,7 +69,8 @@ public class VisionSystem : MonoBehaviour {
 
 	    _localScale = transform.localScale;
 
-	    // gameObject.hideFlags = HideFlags.NotEditable;
+	    _layerVisible = LayerMask.NameToLayer("Default");
+	    _layerHidden = LayerMask.NameToLayer("Hidden");
     }
 
 	private void ResetVision()
@@ -87,9 +92,6 @@ public class VisionSystem : MonoBehaviour {
 		var w = (float) width;
 		var h = (float) height;
 
-//		var x = (i - w * 0.5f) * _localScale.x;
-//		var y = (j - h * 0.5f) * _localScale.y;
-
 		var i = Mathf.RoundToInt(p.x / _localScale.x + w * 0.5f);
 		var j = Mathf.RoundToInt(p.y / _localScale.y + h * 0.5f);
 
@@ -105,16 +107,11 @@ public class VisionSystem : MonoBehaviour {
 		var x = (i - w * 0.5f) * _localScale.x;
 		var y = (j - h * 0.5f) * _localScale.y;
 
-		// float x = j * transform.localScale.x - width * transform.localScale.x * 0.5f;
-		// float y = (i * width) * transform.localScale.y - height * transform.localScale.y * 0.5f;
-
 		return new Vector2(x, y);
 	}
 
 	private void UpdateVision(int[] matrixPosition, float visionRange, int visionValue)
 	{
-		// TODO: iterate only in range pixels (now it is iterating in all the matrix)
-
 		var visionPosition = GetWorldPosition(matrixPosition[0], matrixPosition[1]);
 
 		var visionHeight = Mathf.RoundToInt(visionRange / _localScale.y);
@@ -186,6 +183,16 @@ public class VisionSystem : MonoBehaviour {
 
 		if (_dirty || _alwaysUpdate)
 			UpdateTexture();
+		
+		// update visibles...
+
+		for (var i = 0; i < _visibles.Count; i++)
+		{
+			var visible = _visibles[i];
+			GetMatrixPosition(visible.worldPosition, visible.matrixPosition);
+			visible.visible = _visionMatrix[visible.matrixPosition[0] + visible.matrixPosition[1] * width] > 1;
+			visible.gameObject.layer = visible.visible ? _layerVisible : _layerHidden;
+		}
 	}
 
 	private void ProcessPendingVisions()
@@ -252,11 +259,13 @@ public class VisionSystem : MonoBehaviour {
 		_removedVisions.Add(vision);
 	}
 
-	private readonly int[] _tempCoordinate = new int[2];
-	
-	public bool IsVisible(Vector2 p)
+	public void AddVisible(Visible visible)
 	{
-		GetMatrixPosition(p, _tempCoordinate);
-		return _visionMatrix[_tempCoordinate[0] + _tempCoordinate[1] * width] > 1;
+		_visibles.Add(visible);
+	}
+
+	public void RemoveVisible(Visible visible)
+	{
+		_visibles.Remove(visible);
 	}
 }
