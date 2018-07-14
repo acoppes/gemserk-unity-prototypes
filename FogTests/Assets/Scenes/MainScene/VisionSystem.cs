@@ -144,18 +144,19 @@ public class VisionSystem : MonoBehaviour {
 		foreach (var vision in _visions)
 		{
 			
-			GetMatrixPosition(vision.position, vision.matrixPosition);
+			GetMatrixPosition(vision.worldPosition, vision.currentPosition);
 			// var visionCachedPosition = vision.cachedPosition;
 
-			if (vision.matrixPosition[0] == vision.cachedPosition[0] &&
-			    vision.matrixPosition[1] == vision.cachedPosition[1])
+			if (vision.currentPosition[0] == vision.previousPosition[0] &&
+			    vision.currentPosition[1] == vision.previousPosition[1] &&
+			    vision.currentRange == vision.previousRange)
 				continue;
 			
 //			if (Vector2.Distance(visionPosition, visionCachedPosition) < Mathf.Epsilon) 
 //				continue;
 			
-			UpdateVision(vision.cachedPosition, vision.range, -1);
-			UpdateVision(vision.matrixPosition, vision.range, 1);
+			UpdateVision(vision.previousPosition, vision.previousRange, -1);
+			UpdateVision(vision.currentPosition, vision.currentRange, 1);
 			
 			vision.UpdateCachedPosition();
 //			dirty = true;
@@ -173,8 +174,8 @@ public class VisionSystem : MonoBehaviour {
 		{
 			_visions.Add(vision);
 			
-			GetMatrixPosition(vision.position, vision.matrixPosition);
-			UpdateVision(vision.matrixPosition, vision.range, 1);
+			GetMatrixPosition(vision.worldPosition, vision.currentPosition);
+			UpdateVision(vision.currentPosition, vision.currentRange, 1);
 			vision.UpdateCachedPosition();
 		}
 
@@ -184,7 +185,7 @@ public class VisionSystem : MonoBehaviour {
 		{
 			_visions.Remove(vision);
 //			GetMatrixPosition(vision.position, vision.matrixPosition);
-			UpdateVision(vision.cachedPosition, vision.range, -1);
+			UpdateVision(vision.previousPosition, vision.previousRange, -1);
 		}
 
 		_removedVisions.Clear();

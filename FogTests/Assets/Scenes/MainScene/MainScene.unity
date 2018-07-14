@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b60b266ffbd7f841b8cf106f876bcd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 150
+  currentRange: 100
 --- !u!4 &325533077
 Transform:
   m_ObjectHideFlags: 0
@@ -247,6 +247,9 @@ MonoBehaviour:
   testVision: 1
   _updateTotal: 0
   _textureFormat: 4
+  _greyColor: {r: 0.5, g: 0, b: 0, a: 1}
+  _whiteColor: {r: 1, g: 1, b: 1, a: 1}
+  _errorColor: {r: 0, g: 0.5, b: 0, a: 1}
 --- !u!1 &1434269292
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b60b266ffbd7f841b8cf106f876bcd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 200
+  currentRange: 100
 --- !u!4 &1873066419
 Transform:
   m_ObjectHideFlags: 0

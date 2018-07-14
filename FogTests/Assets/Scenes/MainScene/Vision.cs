@@ -3,15 +3,18 @@ using UnityEngine;
 
 public class Vision : MonoBehaviour {
 
-	public float range = 100;
+	public float currentRange = 100;
 
 	[NonSerialized]
-	public int[] matrixPosition = new int[2];
+	public int[] currentPosition = new int[2];
 	
 	[NonSerialized]
-	public int[] cachedPosition = new int[2];
+	public int[] previousPosition = new int[2];
 
-	public Vector2 position
+	[NonSerialized]
+	public float previousRange;
+	
+	public Vector2 worldPosition
 	{
 		get { return transform.position; }
 	}
@@ -37,12 +40,14 @@ public class Vision : MonoBehaviour {
 
 	public void UpdateCachedPosition()
 	{
-		cachedPosition[0] = matrixPosition[0];
-		cachedPosition[1] = matrixPosition[1];
+		previousPosition[0] = currentPosition[0];
+		previousPosition[1] = currentPosition[1];
+
+		previousRange = currentRange;
 	}
 
 	void OnDrawGizmos() {
-		Gizmos.DrawWireSphere(transform.position, range);	
+		Gizmos.DrawWireSphere(worldPosition, currentRange);	
 	}
 	
 }
