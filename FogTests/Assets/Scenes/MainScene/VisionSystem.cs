@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class VisionSystem : MonoBehaviour {
@@ -89,8 +90,11 @@ public class VisionSystem : MonoBehaviour {
 //		var x = (i - w * 0.5f) * _localScale.x;
 //		var y = (j - h * 0.5f) * _localScale.y;
 
-		position[0] = Mathf.RoundToInt(p.x / _localScale.x + w * 0.5f);
-		position[1] = Mathf.RoundToInt(p.y / _localScale.y + h * 0.5f);
+		var i = Mathf.RoundToInt(p.x / _localScale.x + w * 0.5f);
+		var j = Mathf.RoundToInt(p.y / _localScale.y + h * 0.5f);
+
+		position[0] = Math.Max(0, Math.Min(i, width - 1));
+		position[1] = Math.Max(0, Math.Min(j, height - 1));
 	}
 
 	private Vector2 GetWorldPosition(int i, int j)
@@ -248,4 +252,11 @@ public class VisionSystem : MonoBehaviour {
 		_removedVisions.Add(vision);
 	}
 
+	private readonly int[] _tempCoordinate = new int[2];
+	
+	public bool IsVisible(Vector2 p)
+	{
+		GetMatrixPosition(p, _tempCoordinate);
+		return _visionMatrix[_tempCoordinate[0] + _tempCoordinate[1] * width] > 1;
+	}
 }
