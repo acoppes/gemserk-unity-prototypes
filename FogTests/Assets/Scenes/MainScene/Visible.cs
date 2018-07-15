@@ -11,6 +11,8 @@ public class Visible : MonoBehaviour
 
 	[NonSerialized]
 	public bool visible;
+
+	public Bounds bounds;
 	
 	public Vector2 worldPosition => transform.position;
 
@@ -19,6 +21,13 @@ public class Visible : MonoBehaviour
 	private void Awake()
 	{
 		_visionSystem = FindObjectOfType<VisionSystem>();
+
+		var collider = GetComponent<BoxCollider2D>();
+		if (collider != null)
+		{
+			bounds.size = GetComponent<BoxCollider2D>().bounds.size;
+			collider.enabled = false;
+		}
 	}
 	
 	private void OnEnable()

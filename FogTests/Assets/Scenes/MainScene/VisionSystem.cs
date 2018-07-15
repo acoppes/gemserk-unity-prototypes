@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class VisionSystem : MonoBehaviour {
 
+	// TODO: since this is the vision of one player, we could extract part of the structure that represents 
+	// the player vision and update each one depending on that, and the texture only updates if it is the 
+	// selected players, so the final color depends on the list of current selected players.
+	
 	[SerializeField]
 	protected SpriteRenderer spriteRenderer;
 
