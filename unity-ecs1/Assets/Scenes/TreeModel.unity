@@ -113,6 +113,186 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &278417948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1028647392421468, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 278417958}
+  - component: {fileID: 278417957}
+  - component: {fileID: 278417956}
+  - component: {fileID: 278417955}
+  - component: {fileID: 278417954}
+  - component: {fileID: 278417953}
+  - component: {fileID: 278417952}
+  - component: {fileID: 278417951}
+  - component: {fileID: 278417950}
+  - component: {fileID: 278417949}
+  m_Layer: 0
+  m_Name: Tree
+  m_TagString: Tree
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &278417949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278417948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d282ea7a674828b82e3084e9f28d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelAsset: Models/TreeModel
+--- !u!114 &278417950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114114518701679188, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278417948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c90e702383b486e850f4f93e4181978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 0
+  offset: {x: 0, y: 4.4, z: 0}
+  modelAsset: Models/LumberBar
+--- !u!114 &278417951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114354360436131238, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278417948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3627638789fc465d82cb3e8fa02faf5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSize: 0
+  maxSize: 3
+  minSpawnDistance: 1
+  maxSpawnDistance: 3
+  seedPrefab: {fileID: 278417948}
+  seeds: 1
+  lumberPerSize: 30
+  regenerationPerSecond: 1
+--- !u!114 &278417952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114200865302109050, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278417948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86727b971c8404db8732dc8c5286dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  current: 100
+  total: 100
+  harvesters: 0
+--- !u!114 &278417953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114194520413448628, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278417948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2428657b8bfc420487e0e70684d1437f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldDestroy: 0
+--- !u!114 &278417954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114766093863061418, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278417948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168b0e3756704251859c57ee75912ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedData:
+    Value:
+      x: 0
+      y: 0
+      z: 0
+--- !u!114 &278417955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114692036028976824, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278417948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911fcd4ef786ed24d927d8d8b1cf1f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _behaviourTreeName: Tree
+  _debugCurrentAction: 
+--- !u!114 &278417956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114575294843948470, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278417948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnIdleTotalTime: 0
+  spawnIdleCurrentTime: 0
+  spawnItemsMax: 0
+  spawnPrefab: {fileID: 278417948}
+  foodSelection: {fileID: 0}
+  foodConsumed: 0
+  idleTotalTime: 20
+  idleCurrentTime: 5
+  harvestLumberMaxDistance: 10
+  harvestLumberMinDistance: 1.5
+  harvestLumberCurrentTree: {fileID: 0}
+--- !u!114 &278417957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114257485424645210, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278417948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &278417958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4984155810848310, guid: db1fb71257b47d04f9397ef8e828286d,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278417948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790446321
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,45 +378,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2040411502
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4984155810848310, guid: db1fb71257b47d04f9397ef8e828286d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984155810848310, guid: db1fb71257b47d04f9397ef8e828286d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984155810848310, guid: db1fb71257b47d04f9397ef8e828286d, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984155810848310, guid: db1fb71257b47d04f9397ef8e828286d, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984155810848310, guid: db1fb71257b47d04f9397ef8e828286d, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984155810848310, guid: db1fb71257b47d04f9397ef8e828286d, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984155810848310, guid: db1fb71257b47d04f9397ef8e828286d, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4984155810848310, guid: db1fb71257b47d04f9397ef8e828286d, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: db1fb71257b47d04f9397ef8e828286d, type: 2}
-  m_IsPrefabAsset: 0

@@ -8,7 +8,6 @@ namespace VirtualVillagers
 		[UnityEngine.SerializeField]
 		protected Transform _modelTransform;
 
-		private BehaviourTreeContextComponent _treeData;
 		private LumberComponent _lumberComponent;
 		private Components.TreeComponent _treeComponent;
 
@@ -25,16 +24,15 @@ namespace VirtualVillagers
 			new Vector3(1.0f, 1.0f, 1.0f),
 		};
 		
-		public void SetTreeData(BehaviourTreeContextComponent treeData)
+		public void SetTreeData(GameObject treeData)
 		{
-			_treeData = treeData;
 			_lumberComponent = treeData.GetComponent<LumberComponent>();
 			_treeComponent = treeData.GetComponent<Components.TreeComponent>();
 		}
 
 		private void LateUpdate()
 		{
-			if (_treeData == null)
+			if (_treeComponent == null || _lumberComponent == null)
 				return;
 			
 			if (_size != _treeComponent.currentSize)

@@ -11,6 +11,8 @@ namespace VirtualVillagers.Components
     {
         [NonSerialized]
         public Model model;
+        
+        public string modelAsset;
     }
     
     public class ModelSystem : ComponentSystem
@@ -24,25 +26,24 @@ namespace VirtualVillagers.Components
         }
         
         [Inject] private Data _data;
-
-        // TODO: I suppose I should read this from assets or something dynamically...?
-        private GameObject _modelPrefab;
         
         private readonly List<Model> _models = new List<Model>();
-
-        public void SetModelPrefab(GameObject modelPrefab)
-        {
-            _modelPrefab = modelPrefab;
-        }
 
         protected override void OnUpdate()
         {
             for (var i = 0; i < _data.Length; i++)
             {
                 var model = _data.model[i];
+                
                 if (model.model == null)
                 {
-                    var gameObject = GameObject.Instantiate(_modelPrefab);
+                    if (string.IsNullOrEmpty(model.modelAsset))
+                    {
+                        continue;
+                    }
+
+                    var modelPrefab = Resources.Load<GameObject>(model.modelAsset);
+                    var gameObject = GameObject.Instantiate(modelPrefab);
                     model.model = gameObject.GetComponent<Model>();
 
                     model.model.entity = _data.entity[i];

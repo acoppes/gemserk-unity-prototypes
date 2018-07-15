@@ -44,7 +44,7 @@ public class DebugTools : MonoBehaviour
 //		btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
 			
 		var treeView = gameObject.GetComponent<VirtualVillagers.TreeView>();
-		treeView.SetTreeData(btContext);
+		treeView.SetTreeData(gameObject);
 
 		btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
 		

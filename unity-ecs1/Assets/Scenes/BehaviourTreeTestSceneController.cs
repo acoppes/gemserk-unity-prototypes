@@ -19,11 +19,11 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
 	public DebugTools debugTools;
 	
-	[SerializeField]
-	protected GameObject _lumberBarPrefab;
-	
-	[SerializeField]
-	protected GameObject _modelPrefab;
+//	[SerializeField]
+//	protected GameObject _lumberBarPrefab;
+//	
+//	[SerializeField]
+//	protected GameObject _modelPrefab;
 	
 	private void CreateWorld()
 	{
@@ -431,7 +431,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 		
 		World.Active.GetExistingManager<BehaviourTreeSystem>().SetBehaviourTreeManager(btManager);
 		// World.Active.GetExistingManager<LumberCanvasSystem>().SetLumberBarPrefab(_lumberBarPrefab);
-		World.Active.GetExistingManager<ModelSystem>().SetModelPrefab(_modelPrefab);
+//		World.Active.GetExistingManager<ModelSystem>().SetModelPrefab(_modelPrefab);
 		
 		// TODO: barras de vida para saber cuanto lumber queda o que tan lleno esta un lumbermill
 		
