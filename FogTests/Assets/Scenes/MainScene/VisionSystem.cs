@@ -1,6 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gemserk;
 using UnityEngine;
+
+namespace Gemserk
+{
+	public static class GameObjectExtensions
+	{
+		public static void SetLayerRecursive(this GameObject g, int layer)
+		{
+			g.layer = layer;
+			var t = g.transform;
+			var childCount = t.childCount;
+			for (var i = 0; i < childCount; i++)
+			{
+				t.GetChild(i).gameObject.SetLayerRecursive(layer);
+			}
+		}	
+	}
+}
 
 public class VisionSystem : MonoBehaviour {
 
@@ -190,12 +208,37 @@ public class VisionSystem : MonoBehaviour {
 		
 		// update visibles...
 
+		// if not dirty and visible didnt move nor change its visible bounds
+		// then don't update
+		
 		for (var i = 0; i < _visibles.Count; i++)
 		{
 			var visible = _visibles[i];
+			
+			var halfwidth = Mathf.CeilToInt(visible.bounds.x * 0.5f / _localScale.x);
+			var halfheight = Mathf.CeilToInt(visible.bounds.y * 0.5f / _localScale.y);
+			
 			GetMatrixPosition(visible.worldPosition, visible.matrixPosition);
-			visible.visible = _visionMatrix[visible.matrixPosition[0] + visible.matrixPosition[1] * width] > 1;
-			visible.gameObject.layer = visible.visible ? _layerVisible : _layerHidden;
+
+			var isVisible = false;
+
+			var colStart = Math.Max(visible.matrixPosition[0] - halfwidth, 0);
+			var colEnd = Math.Min(visible.matrixPosition[0] + halfwidth, width - 1);
+
+			var rowStart = Math.Max(visible.matrixPosition[1] - halfheight, 0);
+			var rowEnd = Math.Min(visible.matrixPosition[1] + halfheight, height - 1);
+
+			for (var j = colStart; !isVisible && j <= colEnd; j++)
+			{
+				for (var k = rowStart; !isVisible && k <= rowEnd; k++)
+				{
+					// change to retuurn 0 if outside matrix instead of fixing to always inside matrix.
+					isVisible = _visionMatrix[j + k * width] > 1;
+				}
+			}
+			
+			visible.visible = isVisible;
+			visible.gameObject.SetLayerRecursive(isVisible ? _layerVisible : _layerHidden);
 		}
 	}
 

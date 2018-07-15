@@ -12,7 +12,9 @@ public class Visible : MonoBehaviour
 	[NonSerialized]
 	public bool visible;
 
-	public Bounds bounds;
+	// bounds could be selected from presets or set custom
+	
+	public Vector2 bounds;
 	
 	public Vector2 worldPosition => transform.position;
 
@@ -21,13 +23,6 @@ public class Visible : MonoBehaviour
 	private void Awake()
 	{
 		_visionSystem = FindObjectOfType<VisionSystem>();
-
-		var collider = GetComponent<BoxCollider2D>();
-		if (collider != null)
-		{
-			bounds.size = GetComponent<BoxCollider2D>().bounds.size;
-			collider.enabled = false;
-		}
 	}
 	
 	private void OnEnable()
@@ -42,4 +37,10 @@ public class Visible : MonoBehaviour
 			_visionSystem.RemoveVisible(this);
 	}
 
+	private void OnDrawGizmos()
+	{
+		// TODO: in editor, on component added auto configure bounds from sprite.
+		Gizmos.color = Color.green;
+		Gizmos.DrawWireCube(transform.position, bounds);
+	}
 }
