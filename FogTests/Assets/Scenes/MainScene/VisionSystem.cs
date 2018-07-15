@@ -228,11 +228,19 @@ public class VisionSystem : MonoBehaviour {
 			var rowStart = Math.Max(visible.matrixPosition[1] - halfheight, 0);
 			var rowEnd = Math.Min(visible.matrixPosition[1] + halfheight, height - 1);
 
+//			var colStart = visible.matrixPosition[0] - halfwidth;
+//			var colEnd = visible.matrixPosition[0] + halfwidth;
+//
+//			var rowStart = visible.matrixPosition[1] - halfheight;
+//			var rowEnd = visible.matrixPosition[1] + halfheight;
+
 			for (var j = colStart; !isVisible && j <= colEnd; j++)
 			{
 				for (var k = rowStart; !isVisible && k <= rowEnd; k++)
 				{
 					// change to retuurn 0 if outside matrix instead of fixing to always inside matrix.
+//					if (j < 0 || j >= width || k < 0 || k >= height)
+//						continue;
 					isVisible = _visionMatrix[j + k * width] > 1;
 				}
 			}
