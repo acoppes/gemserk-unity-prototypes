@@ -365,7 +365,7 @@ Transform:
   m_GameObject: {fileID: 519409063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 32, y: 32, z: 1}
+  m_LocalScale: {x: 16, y: 16, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -382,8 +382,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 519409064}
-  width: 128
-  height: 64
+  width: 256
+  height: 128
   _updateDisabled: 0
   _updateTotal: 0
   _textureFormat: 4
