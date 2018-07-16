@@ -365,7 +365,7 @@ Transform:
   m_GameObject: {fileID: 519409063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 16, y: 16, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -382,8 +382,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 519409064}
-  width: 160
-  height: 120
+  width: 256
+  height: 128
   _updateDisabled: 0
   _updateTotal: 0
   _textureFormat: 4
@@ -839,7 +839,7 @@ Transform:
   m_GameObject: {fileID: 1591986958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 1600, y: 1200, z: 1}
+  m_LocalScale: {x: 4096, y: 2048, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -1023,7 +1023,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 600
+  orthographic size: 1024
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
