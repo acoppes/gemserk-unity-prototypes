@@ -134,13 +134,31 @@ public class VisionSystem : MonoBehaviour {
 		UpdateVision(visited, origin, p.Move(-1, 1), visionRange, visionValue);
 	}
 
+	private void UpdateMatrixVision(int mx, int my, short visionValue)
+	{
+		var p = GetWorldPosition(mx, my);
+				
+		var index = mx + my * width;
+				
+		if (mx >= 0 && mx < width && my >= 0 && my < height)
+		{
+			// init to +1 first time to mark it as previously visited
+			if (_visionMatrix[index].value == 0)
+				_visionMatrix[index].value++;
+
+			_visionMatrix[index].value += visionValue;
+		}
+	}
+
 	private void UpdateVision(VisionPosition mp, float visionRange, short visionValue)
 	{
 		// update first element
+		// UpdateMatrixVision(mp.x, mp.y, visionValue);
+		
 		var visionPosition = GetWorldPosition(mp.x, mp.y);
 		
-		var currentRowSize = 1;
-		var currentColSize = 1;
+		var currentRowSize = 0;
+		var currentColSize = 0;
 		
 		var rangeSqr = visionRange * visionRange;
 		
