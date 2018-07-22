@@ -445,10 +445,6 @@ MonoBehaviour:
   _visionTexture: {fileID: 519409067}
   _updateDisabled: 0
   _updateTotal: 0
-  _textureFormat: 4
-  _greyColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  _whiteColor: {r: 1, g: 1, b: 1, a: 1}
-  _errorColor: {r: 0, g: 0.5, b: 0, a: 1}
   _alwaysUpdate: 1
   _testObstacle: {fileID: 841794710}
 --- !u!114 &519409067
@@ -464,6 +460,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textureFormat: 4
   _spriteRenderer: {fileID: 519409064}
+  _greyColor: {r: 0.5, g: 0, b: 0, a: 1}
+  _whiteColor: {r: 1, g: 1, b: 1, a: 1}
+  _errorColor: {r: 0, g: 0.5, b: 0, a: 1}
+  _startColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &574272660
 GameObject:
   m_ObjectHideFlags: 0

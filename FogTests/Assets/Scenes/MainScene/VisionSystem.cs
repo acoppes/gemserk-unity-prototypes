@@ -9,7 +9,7 @@ public class VisionSystem : MonoBehaviour {
 	// the player vision and update each one depending on that, and the texture only updates if it is the 
 	// selected players, so the final color depends on the list of current selected players.
 
-	private struct VisionField
+	public struct VisionField
 	{
 		// vision value, > 1 is visible by player.
 		public int value;
@@ -27,8 +27,6 @@ public class VisionSystem : MonoBehaviour {
 	[SerializeField]
 	protected float _updateTotal;
 
-	private Color[] _colors;
-
 	private VisionField[] _visionMatrix;
 
 	private float _updateCurrent;
@@ -41,13 +39,6 @@ public class VisionSystem : MonoBehaviour {
 	private readonly List<Visible> _visibles = new List<Visible>();
 	
 	private Vector2 _localScale;
-	
-	[SerializeField]
-	protected Color _greyColor = new Color(0.5f, 0, 0, 1.0f);
-	[SerializeField]
-	protected Color _whiteColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-	[SerializeField]
-	protected Color _errorColor = new Color(0.0f, 0.5f, 0.0f, 1.0f);
 
 	[SerializeField]
 	protected bool _alwaysUpdate;
@@ -67,16 +58,9 @@ public class VisionSystem : MonoBehaviour {
 
 	    _visionTexture.Create(width, height);
 	    
-//		_texture =  new Texture2D(width, height, _textureFormat, false, false);
-//		_texture.filterMode = FilterMode.Point;
-//		_texture.wrapMode = TextureWrapMode.Clamp;
-
-		_colors = new Color[width * height];
 	    _visionMatrix = new VisionField[width * height];
 	    
 		ResetVision();
-
-//		spriteRenderer.sprite = Sprite.Create(_texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 1);
 
 	    _localScale = transform.localScale;
 
@@ -90,14 +74,14 @@ public class VisionSystem : MonoBehaviour {
 
 		for (var i = 0; i < width * height; i++)
 		{
-			_colors[i] = blackColor;
+			// _colors[i] = blackColor;
 			_visionMatrix[i] = new VisionField
 			{
 				value = 0
 			};
 		}
 
-		_visionTexture.OnVisionUpdated(_colors);
+		// _visionTexture.OnVisionUpdated(_colors);
 //		_texture.SetPixels(_colors);
 //		_texture.Apply();
 	}
@@ -202,7 +186,9 @@ public class VisionSystem : MonoBehaviour {
 		}
 
 		if (_dirty || _alwaysUpdate)
-			UpdateTexture();
+		{
+			_visionTexture.UpdateTexture(_visionMatrix);
+		}
 		
 		// update visibles...
 
@@ -273,34 +259,6 @@ public class VisionSystem : MonoBehaviour {
 		}
 
 		_removedVisions.Clear();
-	}
-
-	private void UpdateTexture()
-	{
-		for (var i = 0; i < width * height; i++)
-		{
-			if (_visionMatrix[i].value > 1)
-			{
-				_colors[i] = _whiteColor;
-				continue;
-			}
-
-			if (_visionMatrix[i].value == 1)
-			{
-				_colors[i] = _greyColor;
-				continue;
-			}
-			
-			// this is just for debug reasons
-			if (_visionMatrix[i].value < 0)
-			{
-				_colors[i] = _errorColor;
-			}
-		}
-		
-		_visionTexture.OnVisionUpdated(_colors);
-//		_texture.SetPixels(_colors);
-//		_texture.Apply();
 	}
 
 	public void Register(Vision vision)
