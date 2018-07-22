@@ -3,23 +3,6 @@ using System.Collections.Generic;
 using Gemserk;
 using UnityEngine;
 
-namespace Gemserk
-{
-	public static class GameObjectExtensions
-	{
-		public static void SetLayerRecursive(this GameObject g, int layer)
-		{
-			g.layer = layer;
-			var t = g.transform;
-			var childCount = t.childCount;
-			for (var i = 0; i < childCount; i++)
-			{
-				t.GetChild(i).gameObject.SetLayerRecursive(layer);
-			}
-		}	
-	}
-}
-
 public class VisionSystem : MonoBehaviour {
 
 	// TODO: since this is the vision of one player, we could extract part of the structure that represents 
@@ -72,6 +55,9 @@ public class VisionSystem : MonoBehaviour {
 
 	private int _layerVisible;
 	private int _layerHidden;
+
+	[SerializeField]
+	protected PolygonCollider2D _testObstacle;
 	
 	private void Start()
     {
@@ -152,12 +138,17 @@ public class VisionSystem : MonoBehaviour {
 			for (var j = columnStart; j <= columnEnd; j++)
 			{
 				var position = GetWorldPosition(j, i);
+				var index = (i * width) + j;
+
+				if (_testObstacle.OverlapPoint(position))
+				{
+					_visionMatrix[index] = -10;
+				}
 
 				var diff = position - visionPosition;
 				
 				if (diff.sqrMagnitude < rangeSqr)
 				{
-					var index = (i * width) + j;
 
 					// init to +1 first time to mark it as previously visited
 					if (_visionMatrix[index] == 0)
