@@ -8,6 +8,12 @@ public class VisionSystem : MonoBehaviour {
 	// TODO: since this is the vision of one player, we could extract part of the structure that represents 
 	// the player vision and update each one depending on that, and the texture only updates if it is the 
 	// selected players, so the final color depends on the list of current selected players.
+
+	private struct VisionField
+	{
+		// vision value, > 1 is visible by player.
+		public int value;
+	}
 	
 	[SerializeField]
 	protected SpriteRenderer spriteRenderer;
@@ -17,7 +23,7 @@ public class VisionSystem : MonoBehaviour {
 
 	private Color[] _colors;
 
-	private int[] _visionMatrix;
+	private VisionField[] _visionMatrix;
 
 	private Texture2D _texture;
 
@@ -69,7 +75,7 @@ public class VisionSystem : MonoBehaviour {
 		_texture.wrapMode = TextureWrapMode.Clamp;
 
 		_colors = new Color[width * height];
-	    _visionMatrix = new int[width * height];
+	    _visionMatrix = new VisionField[width * height];
 	    
 		ResetVision();
 
@@ -88,7 +94,10 @@ public class VisionSystem : MonoBehaviour {
 		for (var i = 0; i < width * height; i++)
 		{
 			_colors[i] = blackColor;
-			_visionMatrix[i] = 0;
+			_visionMatrix[i] = new VisionField
+			{
+				value = 0
+			};
 		}
 
 		_texture.SetPixels(_colors);
@@ -142,7 +151,7 @@ public class VisionSystem : MonoBehaviour {
 
 				if (_testObstacle.OverlapPoint(position))
 				{
-					_visionMatrix[index] = -10;
+					_visionMatrix[index].value = -10;
 				}
 
 				var diff = position - visionPosition;
@@ -151,10 +160,10 @@ public class VisionSystem : MonoBehaviour {
 				{
 
 					// init to +1 first time to mark it as previously visited
-					if (_visionMatrix[index] == 0)
-						_visionMatrix[index]++;
+					if (_visionMatrix[index].value == 0)
+						_visionMatrix[index].value++;
 					
-					_visionMatrix[index] += visionValue;
+					_visionMatrix[index].value += visionValue;
 				}
 			}
 		}
@@ -232,7 +241,7 @@ public class VisionSystem : MonoBehaviour {
 					// change to retuurn 0 if outside matrix instead of fixing to always inside matrix.
 //					if (j < 0 || j >= width || k < 0 || k >= height)
 //						continue;
-					isVisible = _visionMatrix[j + k * width] > 1;
+					isVisible = _visionMatrix[j + k * width].value > 1;
 				}
 			}
 			
@@ -272,20 +281,20 @@ public class VisionSystem : MonoBehaviour {
 	{
 		for (var i = 0; i < width * height; i++)
 		{
-			if (_visionMatrix[i] > 1)
+			if (_visionMatrix[i].value > 1)
 			{
 				_colors[i] = _whiteColor;
 				continue;
 			}
 
-			if (_visionMatrix[i] == 1)
+			if (_visionMatrix[i].value == 1)
 			{
 				_colors[i] = _greyColor;
 				continue;
 			}
 			
 			// this is just for debug reasons
-			if (_visionMatrix[i] < 0)
+			if (_visionMatrix[i].value < 0)
 			{
 				_colors[i] = _errorColor;
 			}
