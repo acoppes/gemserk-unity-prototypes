@@ -100,56 +100,6 @@ public class VisionSystem : MonoBehaviour {
 		return new Vector2(x, y);
 	}
 
-//	private int[] _tempPosition = new int[2];
-
-	private void UpdateVision(ICollection<VisionPosition> visited, Vector2 origin, VisionPosition p, float visionRange, short visionValue)
-	{
-		if (visited.Contains(p))
-			return;
-		
-		visited.Add(p);
-		
-		var visionPosition = GetWorldPosition(p.x, p.y);
-
-		if ((origin - visionPosition).sqrMagnitude > visionRange * visionRange)
-			return;
-
-		if (_testObstacle != null && _testObstacle.OverlapPoint(visionPosition))
-			return;
-		
-		var i = p.x + p.y * width;
-		
-		if (_visionMatrix[i].value == 0)
-			_visionMatrix[i].value++;
-
-		_visionMatrix[i].value += visionValue;
-		
-		UpdateVision(visited, origin, p.Move(1, 0), visionRange, visionValue);
-		UpdateVision(visited, origin, p.Move(-1, 0), visionRange, visionValue);
-		UpdateVision(visited, origin, p.Move(1, -1), visionRange, visionValue);
-		UpdateVision(visited, origin, p.Move(0, -1), visionRange, visionValue);
-		UpdateVision(visited, origin, p.Move(-1, -1), visionRange, visionValue);
-		UpdateVision(visited, origin, p.Move(1, 1), visionRange, visionValue);
-		UpdateVision(visited, origin, p.Move(0, 1), visionRange, visionValue);
-		UpdateVision(visited, origin, p.Move(-1, 1), visionRange, visionValue);
-	}
-
-	private void UpdateMatrixVision(int mx, int my, short visionValue)
-	{
-		var p = GetWorldPosition(mx, my);
-				
-		var index = mx + my * width;
-				
-		if (mx >= 0 && mx < width && my >= 0 && my < height)
-		{
-			// init to +1 first time to mark it as previously visited
-			if (_visionMatrix[index].value == 0)
-				_visionMatrix[index].value++;
-
-			_visionMatrix[index].value += visionValue;
-		}
-	}
-
 	private void UpdateVision(VisionPosition mp, float visionRange, short visionValue)
 	{
 		// update first element
@@ -190,13 +140,22 @@ public class VisionSystem : MonoBehaviour {
 				
 				if (mx >= 0 && mx < width && my >= 0 && my < height)
 				{
+					// check if rect to vision center is not blocked
+
+					// var d = diff.normalized;
+					
 					if (diff.sqrMagnitude < rangeSqr)
 					{
-						// init to +1 first time to mark it as previously visited
-						if (_visionMatrix[index].value == 0)
-							_visionMatrix[index].value++;
+						var blocked = _testObstacle != null && _testObstacle.OverlapPoint(p);
 
-						_visionMatrix[index].value += visionValue;
+						if (!blocked)
+						{
+							// init to +1 first time to mark it as previously visited
+							if (_visionMatrix[index].value == 0)
+								_visionMatrix[index].value++;
+
+							_visionMatrix[index].value += visionValue;
+						}
 					}
 				}
 
