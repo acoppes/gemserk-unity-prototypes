@@ -15,17 +15,11 @@ public class VisionSystem : MonoBehaviour {
 		public int value;
 	}
 	
-	[SerializeField]
-	protected SpriteRenderer spriteRenderer;
-
 	public int width = 128;
 	public int height = 128;
 
-	private Color[] _colors;
-
-	private VisionField[] _visionMatrix;
-
-	private Texture2D _texture;
+	[SerializeField]
+	protected VisionTexture _visionTexture;
 
 	[SerializeField]
 	protected bool _updateDisabled;
@@ -33,10 +27,11 @@ public class VisionSystem : MonoBehaviour {
 	[SerializeField]
 	protected float _updateTotal;
 
+	private Color[] _colors;
+
+	private VisionField[] _visionMatrix;
+
 	private float _updateCurrent;
-	
-	[SerializeField]
-	protected TextureFormat _textureFormat;
 	
 	private readonly List<Vision> _visions = new List<Vision>();
 
@@ -70,16 +65,18 @@ public class VisionSystem : MonoBehaviour {
 	    // update on first frame
 	    _updateCurrent = _updateTotal;
 
-		_texture =  new Texture2D(width, height, _textureFormat, false, false);
-		_texture.filterMode = FilterMode.Point;
-		_texture.wrapMode = TextureWrapMode.Clamp;
+	    _visionTexture.Create(width, height);
+	    
+//		_texture =  new Texture2D(width, height, _textureFormat, false, false);
+//		_texture.filterMode = FilterMode.Point;
+//		_texture.wrapMode = TextureWrapMode.Clamp;
 
 		_colors = new Color[width * height];
 	    _visionMatrix = new VisionField[width * height];
 	    
 		ResetVision();
 
-		spriteRenderer.sprite = Sprite.Create(_texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 1);
+//		spriteRenderer.sprite = Sprite.Create(_texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 1);
 
 	    _localScale = transform.localScale;
 
@@ -100,8 +97,9 @@ public class VisionSystem : MonoBehaviour {
 			};
 		}
 
-		_texture.SetPixels(_colors);
-		_texture.Apply();
+		_visionTexture.OnVisionUpdated(_colors);
+//		_texture.SetPixels(_colors);
+//		_texture.Apply();
 	}
 
 	private void GetMatrixPosition(Vector2 p, int[] position)
@@ -300,8 +298,9 @@ public class VisionSystem : MonoBehaviour {
 			}
 		}
 		
-		_texture.SetPixels(_colors);
-		_texture.Apply();
+		_visionTexture.OnVisionUpdated(_colors);
+//		_texture.SetPixels(_colors);
+//		_texture.Apply();
 	}
 
 	public void Register(Vision vision)
