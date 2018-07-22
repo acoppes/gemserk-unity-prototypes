@@ -6,10 +6,10 @@ public class Vision : MonoBehaviour {
 	public float currentRange = 100;
 
 	[NonSerialized]
-	public int[] currentPosition = new int[2];
+	public VisionPosition currentPosition;
 	
 	[NonSerialized]
-	public int[] previousPosition = new int[2];
+	public VisionPosition previousPosition;
 
 	[NonSerialized]
 	public float previousRange;
@@ -44,9 +44,7 @@ public class Vision : MonoBehaviour {
 
 	public void UpdateCachedPosition()
 	{
-		previousPosition[0] = currentPosition[0];
-		previousPosition[1] = currentPosition[1];
-
+		previousPosition = currentPosition;
 		previousRange = currentRange;
 	}
 

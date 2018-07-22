@@ -12,8 +12,10 @@ public class VisionSystem : MonoBehaviour {
 	public struct VisionField
 	{
 		// vision value, > 1 is visible by player.
-		public int value;
+		public short value;
 	}
+
+
 	
 	public int width = 128;
 	public int height = 128;
@@ -74,7 +76,7 @@ public class VisionSystem : MonoBehaviour {
 	    _layerHidden = LayerMask.NameToLayer("Hidden");
     }
 
-	private void GetMatrixPosition(Vector2 p, int[] position)
+	private VisionPosition GetMatrixPosition(Vector2 p)
 	{
 		var w = (float) width;
 		var h = (float) height;
@@ -82,8 +84,11 @@ public class VisionSystem : MonoBehaviour {
 		var i = Mathf.RoundToInt(p.x / _localScale.x + w * 0.5f);
 		var j = Mathf.RoundToInt(p.y / _localScale.y + h * 0.5f);
 
-		position[0] = Math.Max(0, Math.Min(i, width - 1));
-		position[1] = Math.Max(0, Math.Min(j, height - 1));
+		return new VisionPosition
+		{
+			x = Math.Max(0, Math.Min(i, width - 1)),
+			y = Math.Max(0, Math.Min(j, height - 1))
+		};
 	}
 
 	private Vector2 GetWorldPosition(int i, int j)
@@ -97,23 +102,58 @@ public class VisionSystem : MonoBehaviour {
 		return new Vector2(x, y);
 	}
 
-	private void UpdateVision(int[] matrixPosition, float visionRange, int visionValue)
+//	private int[] _tempPosition = new int[2];
+
+	private void UpdateVision(VisionPosition matrixPosition, float visionRange, short visionValue)
 	{
-		var visionPosition = GetWorldPosition(matrixPosition[0], matrixPosition[1]);
+		var visionPosition = GetWorldPosition(matrixPosition.x, matrixPosition.y);
 
 		var visionHeight = Mathf.RoundToInt(visionRange / _localScale.y);
 		var visionWidth = Mathf.RoundToInt(visionRange / _localScale.x);
 
-		var rowStart = Mathf.Max(matrixPosition[1] - visionHeight, 0);
-		var rowEnd = Mathf.Min(matrixPosition[1] + visionHeight + 2, height - 1);
+		var rowStart = Mathf.Max(matrixPosition.y - visionHeight, 0);
+		var rowEnd = Mathf.Min(matrixPosition.y + visionHeight + 2, height - 1);
 
-		var columnStart = Mathf.Max(matrixPosition[0] - visionWidth - 1, 0);
-		var columnEnd = Mathf.Min(matrixPosition[0] + visionWidth + 1, width - 1);
+		var columnStart = Mathf.Max(matrixPosition.x - visionWidth - 1, 0);
+		var columnEnd = Mathf.Min(matrixPosition.x + visionWidth + 1, width - 1);
 
 		var rangeSqr = visionRange * visionRange;
+
+//		var points = new List<Vector2>();
 		
 		for (var i = rowStart; i <= rowEnd; i++)
 		{
+//			var targetPosition = GetWorldPosition(columnStart, i);
+//		
+//			var diff = targetPosition - visionPosition;
+//			var direction = diff.normalized;
+//			var scale = _localScale.magnitude;
+//
+//			var nextPosition = visionPosition;
+//			
+//			while ((visionPosition - nextPosition).sqrMagnitude < diff.sqrMagnitude)
+//			{
+//				if ((visionPosition - nextPosition).sqrMagnitude > rangeSqr)
+//					break;
+//				
+//				if (_testObstacle != null && _testObstacle.OverlapPoint(nextPosition))
+//				{
+//					break;
+//				}
+//				
+//				GetMatrixPosition(nextPosition, _tempPosition);
+//				
+//				var index = (_tempPosition[1] * width) + _tempPosition[0];
+//
+//				if (_visionMatrix[index].value == 0)
+//					_visionMatrix[index].value++;
+//
+//				_visionMatrix[index].value += visionValue;
+//				
+//				nextPosition += direction * scale;
+//			}
+
+
 			for (var j = columnStart; j <= columnEnd; j++)
 			{
 				var position = GetWorldPosition(j, i);
@@ -158,10 +198,10 @@ public class VisionSystem : MonoBehaviour {
 			
 			foreach (var vision in _visions)
 			{	
-				GetMatrixPosition(vision.worldPosition, vision.currentPosition);
+				vision.currentPosition = GetMatrixPosition(vision.worldPosition);
 				
-				if (vision.currentPosition[0] == vision.previousPosition[0] &&
-				    vision.currentPosition[1] == vision.previousPosition[1] &&
+				if (vision.currentPosition.x == vision.previousPosition.x &&
+				    vision.currentPosition.y == vision.previousPosition.y &&
 				    vision.currentRange == vision.previousRange)
 					continue;
 			
@@ -190,15 +230,15 @@ public class VisionSystem : MonoBehaviour {
 			var halfwidth = Mathf.CeilToInt(visible.bounds.x * 0.5f / _localScale.x);
 			var halfheight = Mathf.CeilToInt(visible.bounds.y * 0.5f / _localScale.y);
 			
-			GetMatrixPosition(visible.worldPosition, visible.matrixPosition);
+			visible.matrixPosition = GetMatrixPosition(visible.worldPosition);
 
 			var isVisible = false;
 
-			var colStart = Math.Max(visible.matrixPosition[0] - halfwidth, 0);
-			var colEnd = Math.Min(visible.matrixPosition[0] + halfwidth, width - 1);
+			var colStart = Math.Max(visible.matrixPosition.x - halfwidth, 0);
+			var colEnd = Math.Min(visible.matrixPosition.x + halfwidth, width - 1);
 
-			var rowStart = Math.Max(visible.matrixPosition[1] - halfheight, 0);
-			var rowEnd = Math.Min(visible.matrixPosition[1] + halfheight, height - 1);
+			var rowStart = Math.Max(visible.matrixPosition.y - halfheight, 0);
+			var rowEnd = Math.Min(visible.matrixPosition.y + halfheight, height - 1);
 
 //			var colStart = visible.matrixPosition[0] - halfwidth;
 //			var colEnd = visible.matrixPosition[0] + halfwidth;
@@ -228,7 +268,7 @@ public class VisionSystem : MonoBehaviour {
 		{
 			_visions.Add(vision);
 			
-			GetMatrixPosition(vision.worldPosition, vision.currentPosition);
+			vision.currentPosition = GetMatrixPosition(vision.worldPosition);
 			UpdateVision(vision.currentPosition, vision.currentRange, 1);
 			vision.UpdateCachedPosition();
 			

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Visible : MonoBehaviour
 {
-	[NonSerialized]
-	public readonly int[] matrixPosition = new int[2];
+	[NonSerialized] 
+	public VisionPosition matrixPosition = new VisionPosition();
 
 //	[NonSerialized]
 //	public bool[] visibleByPlayer;
