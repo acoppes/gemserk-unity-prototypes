@@ -59,32 +59,20 @@ public class VisionSystem : MonoBehaviour {
 	    _visionTexture.Create(width, height);
 	    
 	    _visionMatrix = new VisionField[width * height];
-	    
-		ResetVision();
+
+	    for (var i = 0; i < width * height; i++)
+	    {
+		    _visionMatrix[i] = new VisionField
+		    {
+			    value = 0
+		    };
+	    }
 
 	    _localScale = transform.localScale;
 
 	    _layerVisible = LayerMask.NameToLayer("Default");
 	    _layerHidden = LayerMask.NameToLayer("Hidden");
     }
-
-	private void ResetVision()
-	{
-		var blackColor = new Color(0, 0, 0, 1.0f);
-
-		for (var i = 0; i < width * height; i++)
-		{
-			// _colors[i] = blackColor;
-			_visionMatrix[i] = new VisionField
-			{
-				value = 0
-			};
-		}
-
-		// _visionTexture.OnVisionUpdated(_colors);
-//		_texture.SetPixels(_colors);
-//		_texture.Apply();
-	}
 
 	private void GetMatrixPosition(Vector2 p, int[] position)
 	{
@@ -131,7 +119,7 @@ public class VisionSystem : MonoBehaviour {
 				var position = GetWorldPosition(j, i);
 				var index = (i * width) + j;
 
-				if (_testObstacle.OverlapPoint(position))
+				if (_testObstacle != null && _testObstacle.OverlapPoint(position))
 				{
 					_visionMatrix[index].value = -10;
 				}
