@@ -48,9 +48,8 @@ public class VisionSystem : MonoBehaviour {
 	private int _layerVisible;
 	private int _layerHidden;
 
-	[SerializeField]
-	protected PolygonCollider2D _testObstacle;
-	
+	private int _layerObstacles;
+
 	private void Start()
     {
 	    // update on first frame
@@ -72,6 +71,8 @@ public class VisionSystem : MonoBehaviour {
 
 	    _layerVisible = LayerMask.NameToLayer("Default");
 	    _layerHidden = LayerMask.NameToLayer("Hidden");
+
+	    _layerObstacles = Physics2D.GetLayerCollisionMask(LayerMask.NameToLayer("VisionGroundObstacle"));
     }
 
 	private VisionPosition GetMatrixPosition(Vector2 p)
@@ -102,9 +103,6 @@ public class VisionSystem : MonoBehaviour {
 
 	private void UpdateVision(VisionPosition mp, float visionRange, short visionValue)
 	{
-		// update first element
-		// UpdateMatrixVision(mp.x, mp.y, visionValue);
-		
 		var visionPosition = GetWorldPosition(mp.x, mp.y);
 		
 		var currentRowSize = 0;
@@ -146,9 +144,9 @@ public class VisionSystem : MonoBehaviour {
 					
 					if (diff.sqrMagnitude < rangeSqr)
 					{
-						var blocked = _testObstacle != null && _testObstacle.OverlapPoint(p);
-
-						if (!blocked)
+						var raycast = Physics2D.Linecast(p, visionPosition, _layerObstacles);
+						
+						if (raycast.collider == null)
 						{
 							// init to +1 first time to mark it as previously visited
 							if (_visionMatrix[index].value == 0)
@@ -192,53 +190,6 @@ public class VisionSystem : MonoBehaviour {
 			
 			if (currentColSize < maxColSize)
 				currentColSize++;
-		}
-	}
-
-	private void UpdateVision2(VisionPosition matrixPosition, float visionRange, short visionValue)
-	{
-		var visionPosition = GetWorldPosition(matrixPosition.x, matrixPosition.y);
-
-		var visionHeight = Mathf.RoundToInt(visionRange / _localScale.y);
-		var visionWidth = Mathf.RoundToInt(visionRange / _localScale.x);
-
-		var rowStart = Mathf.Max(matrixPosition.y - visionHeight, 0);
-		var rowEnd = Mathf.Min(matrixPosition.y + visionHeight + 2, height - 1);
-
-		var columnStart = Mathf.Max(matrixPosition.x - visionWidth - 1, 0);
-		var columnEnd = Mathf.Min(matrixPosition.x + visionWidth + 1, width - 1);
-
-		var rangeSqr = visionRange * visionRange;
-
-//		var points = new List<VisionPosition>();
-
-//		UpdateVision(points, visionPosition, matrixPosition, visionRange, visionValue);
-		
-		for (var i = rowStart; i <= rowEnd; i++)
-		{
-
-			for (var j = columnStart; j <= columnEnd; j++)
-			{
-				var position = GetWorldPosition(j, i);
-				var index = (i * width) + j;
-
-				if (_testObstacle != null && _testObstacle.OverlapPoint(position))
-				{
-					_visionMatrix[index].value = -10;
-				}
-
-				var diff = position - visionPosition;
-				
-				if (diff.sqrMagnitude < rangeSqr)
-				{
-
-					// init to +1 first time to mark it as previously visited
-					if (_visionMatrix[index].value == 0)
-						_visionMatrix[index].value++;
-					
-					_visionMatrix[index].value += visionValue;
-				}
-			}
 		}
 	}
 
