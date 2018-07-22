@@ -15,8 +15,6 @@ public class VisionSystem : MonoBehaviour {
 		public short value;
 	}
 
-
-	
 	public int width = 128;
 	public int height = 128;
 
@@ -104,7 +102,123 @@ public class VisionSystem : MonoBehaviour {
 
 //	private int[] _tempPosition = new int[2];
 
-	private void UpdateVision(VisionPosition matrixPosition, float visionRange, short visionValue)
+	private void UpdateVision(ICollection<VisionPosition> visited, Vector2 origin, VisionPosition p, float visionRange, short visionValue)
+	{
+		if (visited.Contains(p))
+			return;
+		
+		visited.Add(p);
+		
+		var visionPosition = GetWorldPosition(p.x, p.y);
+
+		if ((origin - visionPosition).sqrMagnitude > visionRange * visionRange)
+			return;
+
+		if (_testObstacle != null && _testObstacle.OverlapPoint(visionPosition))
+			return;
+		
+		var i = p.x + p.y * width;
+		
+		if (_visionMatrix[i].value == 0)
+			_visionMatrix[i].value++;
+
+		_visionMatrix[i].value += visionValue;
+		
+		UpdateVision(visited, origin, p.Move(1, 0), visionRange, visionValue);
+		UpdateVision(visited, origin, p.Move(-1, 0), visionRange, visionValue);
+		UpdateVision(visited, origin, p.Move(1, -1), visionRange, visionValue);
+		UpdateVision(visited, origin, p.Move(0, -1), visionRange, visionValue);
+		UpdateVision(visited, origin, p.Move(-1, -1), visionRange, visionValue);
+		UpdateVision(visited, origin, p.Move(1, 1), visionRange, visionValue);
+		UpdateVision(visited, origin, p.Move(0, 1), visionRange, visionValue);
+		UpdateVision(visited, origin, p.Move(-1, 1), visionRange, visionValue);
+	}
+
+	private void UpdateVision(VisionPosition mp, float visionRange, short visionValue)
+	{
+		// update first element
+		var visionPosition = GetWorldPosition(mp.x, mp.y);
+		
+		var currentRowSize = 1;
+		var currentColSize = 1;
+		
+		var rangeSqr = visionRange * visionRange;
+		
+		var visionWidth = Mathf.RoundToInt(visionRange / _localScale.x);
+		var visionHeight = Mathf.RoundToInt(visionRange / _localScale.y);
+
+		var maxColSize = visionWidth;
+		var maxRowSize = visionHeight;
+
+		while (currentRowSize != maxRowSize && currentColSize != maxColSize)
+		{
+			var x = -currentColSize;
+			var y = -currentRowSize;
+			
+			var dx = 1;
+			var dy = 0;
+
+			while (true)
+			{
+				// check current
+				var mx = mp.x + x;
+				var my = mp.y + y;
+				
+				var p = GetWorldPosition(mx, my);
+				
+				var diff = p - visionPosition;
+				
+				var index = mx + my * width;
+				
+				if (mx >= 0 && mx < width && my >= 0 && my < height)
+				{
+					if (diff.sqrMagnitude < rangeSqr)
+					{
+						// init to +1 first time to mark it as previously visited
+						if (_visionMatrix[index].value == 0)
+							_visionMatrix[index].value++;
+
+						_visionMatrix[index].value += visionValue;
+					}
+				}
+
+				if (x + dx > currentColSize)
+				{
+					dx = 0;
+					dy = 1;
+				}
+
+				if (y + dy > currentRowSize)
+				{
+					dx = -1;
+					dy = 0;
+				}
+
+				if (x + dx < -currentColSize)
+				{
+					dx = 0;
+					dy = -1;
+				}
+
+				if (y + dy < -currentRowSize)
+				{
+					// completed the cycle
+					break;
+				}
+				
+				x += dx;
+				y += dy;
+			}
+			
+			if (currentRowSize < maxRowSize)
+				currentRowSize++;
+			
+			if (currentColSize < maxColSize)
+				currentColSize++;
+		}
+	}
+
+	private void UpdateVision2(VisionPosition matrixPosition, float visionRange, short visionValue)
 	{
 		var visionPosition = GetWorldPosition(matrixPosition.x, matrixPosition.y);
 
@@ -119,40 +233,12 @@ public class VisionSystem : MonoBehaviour {
 
 		var rangeSqr = visionRange * visionRange;
 
-//		var points = new List<Vector2>();
+//		var points = new List<VisionPosition>();
+
+//		UpdateVision(points, visionPosition, matrixPosition, visionRange, visionValue);
 		
 		for (var i = rowStart; i <= rowEnd; i++)
 		{
-//			var targetPosition = GetWorldPosition(columnStart, i);
-//		
-//			var diff = targetPosition - visionPosition;
-//			var direction = diff.normalized;
-//			var scale = _localScale.magnitude;
-//
-//			var nextPosition = visionPosition;
-//			
-//			while ((visionPosition - nextPosition).sqrMagnitude < diff.sqrMagnitude)
-//			{
-//				if ((visionPosition - nextPosition).sqrMagnitude > rangeSqr)
-//					break;
-//				
-//				if (_testObstacle != null && _testObstacle.OverlapPoint(nextPosition))
-//				{
-//					break;
-//				}
-//				
-//				GetMatrixPosition(nextPosition, _tempPosition);
-//				
-//				var index = (_tempPosition[1] * width) + _tempPosition[0];
-//
-//				if (_visionMatrix[index].value == 0)
-//					_visionMatrix[index].value++;
-//
-//				_visionMatrix[index].value += visionValue;
-//				
-//				nextPosition += direction * scale;
-//			}
-
 
 			for (var j = columnStart; j <= columnEnd; j++)
 			{
