@@ -8,6 +8,9 @@ public class MoveWithTouch : MonoBehaviour
 	[SerializeField]
 	protected Vision _vision;
 
+	[SerializeField]
+	protected VisionSystem _visionSystem;
+
 	void Update () {
 
 		if (Input.GetMouseButton(0))
@@ -17,6 +20,7 @@ public class MoveWithTouch : MonoBehaviour
 			transform.position = v3;
 
 			_vision.groundLevel = 0;
+			_vision.player = _visionSystem.currentPlayer;
 			
 			var collider = Physics2D.OverlapPoint(v3);
 			if (collider != null)
