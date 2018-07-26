@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a3bdb2cd68f901469e7cc149151eb49, type: 3}
-  m_Name: New Post-Processing Profile
+  m_Name: New Post-Processing Profile 1
   m_EditorClassIdentifier: 
   debugViews:
     m_Enabled: 1
@@ -73,7 +73,7 @@ MonoBehaviour:
     m_Settings:
       focusDistance: 0.1
       aperture: 32
-      focalLength: 42
+      focalLength: 40
       useCameraFov: 0
       kernelSize: 3
   motionBlur:
