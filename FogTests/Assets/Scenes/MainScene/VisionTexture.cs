@@ -31,7 +31,7 @@ public class VisionTexture : MonoBehaviour
     private int _width;
     private int _height;
 	
-    public void Create(int width, int height)
+    public void Create(int width, int height, Vector2 scale)
     {
         _width = width;
         _height = height;
@@ -41,6 +41,7 @@ public class VisionTexture : MonoBehaviour
         _texture.wrapMode = TextureWrapMode.Clamp;
 		
         _spriteRenderer.sprite = Sprite.Create(_texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 1);
+        _spriteRenderer.transform.localScale = scale;
         
         _colors = new Color[width * height];
         

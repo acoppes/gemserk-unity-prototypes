@@ -20,6 +20,9 @@ public class VisionSystem : MonoBehaviour {
 
 	[SerializeField]
 	protected VisionTexture _visionTexture;
+	
+	[SerializeField]
+	protected VisionCamera _visionCamera;
 
 	[SerializeField]
 	protected bool _updateDisabled;
@@ -55,7 +58,9 @@ public class VisionSystem : MonoBehaviour {
 	    // update on first frame
 	    _updateCurrent = _updateTotal;
 
-	    _visionTexture.Create(width, height);
+	    _localScale = _visionCamera.GetScale(width, height);
+	   
+	    _visionTexture.Create(width, height, _localScale);
 	    
 	    _visionMatrix = new VisionField[width * height];
 
@@ -67,7 +72,7 @@ public class VisionSystem : MonoBehaviour {
 		    };
 	    }
 
-	    _localScale = transform.localScale;
+	    // _localScale = transform.localScale;
 
 	    _layerVisible = LayerMask.NameToLayer("Default");
 	    _layerHidden = LayerMask.NameToLayer("Hidden");
@@ -200,7 +205,7 @@ public class VisionSystem : MonoBehaviour {
 
 		_dirty = false;
 		
-		_localScale = transform.localScale;
+		// _localScale = transform.localScale;
 
 		ProcessPendingVisions();
 
