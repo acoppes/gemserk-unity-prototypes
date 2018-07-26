@@ -59,6 +59,7 @@ public class VisionTexture : MonoBehaviour
         for (var i = 0; i < _width * _height; i++)
         {
             // TODO: constants for visions in vision system.
+            _colors[i] = _startColor;
             
             if (visionMatrix[i].value > 1)
             {

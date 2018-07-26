@@ -1,18 +1,25 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class Vision : MonoBehaviour {
-
-	public float currentRange = 100;
+public class Vision : MonoBehaviour
+{
+	public int player;
+	
+	[FormerlySerializedAs("currentRange")]
+	public float range = 100;
 
 	[NonSerialized]
-	public VisionPosition currentPosition;
+	public VisionPosition position;
 	
 	[NonSerialized]
 	public VisionPosition previousPosition;
 
 	[NonSerialized]
 	public float previousRange;
+
+	[NonSerialized]
+	public int previousPlayer;
 	
 	#if UNITY_EDITOR
 	public Color _debugColor;
@@ -44,14 +51,15 @@ public class Vision : MonoBehaviour {
 
 	public void UpdateCachedPosition()
 	{
-		previousPosition = currentPosition;
-		previousRange = currentRange;
+		previousPosition = position;
+		previousRange = range;
+		previousPlayer = player;
 	}
 
 	#if UNITY_EDITOR
 	void OnDrawGizmos() {
 		Gizmos.color = _debugColor;
-		Gizmos.DrawWireSphere(worldPosition, currentRange);	
+		Gizmos.DrawWireSphere(worldPosition, range);	
 	}
 	#endif
 	

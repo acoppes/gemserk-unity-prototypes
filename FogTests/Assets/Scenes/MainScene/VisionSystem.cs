@@ -18,6 +18,9 @@ public class VisionSystem : MonoBehaviour {
 	public int width = 128;
 	public int height = 128;
 
+	public int totalPlayers = 2;
+	public int currentPlayer = 0;
+
 	[SerializeField]
 	protected VisionTexture _visionTexture;
 	
@@ -30,7 +33,7 @@ public class VisionSystem : MonoBehaviour {
 	[SerializeField]
 	protected float _updateTotal;
 
-	private VisionField[] _visionMatrix;
+	private VisionField[][] _visionMatrix;
 
 	private float _updateCurrent;
 	
@@ -62,14 +65,18 @@ public class VisionSystem : MonoBehaviour {
 	   
 	    _visionTexture.Create(width, height, _localScale);
 	    
-	    _visionMatrix = new VisionField[width * height];
+	    _visionMatrix = new VisionField[totalPlayers][];
 
-	    for (var i = 0; i < width * height; i++)
+	    for (var j = 0; j < totalPlayers; j++)
 	    {
-		    _visionMatrix[i] = new VisionField
+		    _visionMatrix[j] = new VisionField[width * height];
+		    for (var i = 0; i < width * height; i++)
 		    {
-			    value = 0
-		    };
+			    _visionMatrix[j][i] = new VisionField
+			    {
+				    value = 0
+			    };
+		    }
 	    }
 
 	    // _localScale = transform.localScale;
@@ -106,7 +113,7 @@ public class VisionSystem : MonoBehaviour {
 		return new Vector2(x, y);
 	}
 
-	private void UpdateVision(VisionPosition mp, float visionRange, short visionValue)
+	private void UpdateVision(VisionPosition mp, float visionRange, int player, short visionValue)
 	{
 		var visionPosition = GetWorldPosition(mp.x, mp.y);
 		
@@ -154,10 +161,10 @@ public class VisionSystem : MonoBehaviour {
 						if (raycast.collider == null)
 						{
 							// init to +1 first time to mark it as previously visited
-							if (_visionMatrix[index].value == 0)
-								_visionMatrix[index].value++;
+							if (_visionMatrix[player][index].value == 0)
+								_visionMatrix[player][index].value++;
 
-							_visionMatrix[index].value += visionValue;
+							_visionMatrix[player][index].value += visionValue;
 						}
 					}
 				}
@@ -217,15 +224,15 @@ public class VisionSystem : MonoBehaviour {
 			
 			foreach (var vision in _visions)
 			{	
-				vision.currentPosition = GetMatrixPosition(vision.worldPosition);
+				vision.position = GetMatrixPosition(vision.worldPosition);
 				
-				if (vision.currentPosition.x == vision.previousPosition.x &&
-				    vision.currentPosition.y == vision.previousPosition.y &&
-				    vision.currentRange == vision.previousRange)
+				if (vision.position.x == vision.previousPosition.x &&
+				    vision.position.y == vision.previousPosition.y &&
+				    vision.range == vision.previousRange)
 					continue;
 			
-				UpdateVision(vision.previousPosition, vision.previousRange, -1);
-				UpdateVision(vision.currentPosition, vision.currentRange, 1);
+				UpdateVision(vision.previousPosition, vision.previousRange, vision.previousPlayer, -1);
+				UpdateVision(vision.position, vision.range, vision.player, 1);
 			
 				vision.UpdateCachedPosition();
 				_dirty = true;
@@ -234,7 +241,7 @@ public class VisionSystem : MonoBehaviour {
 
 		if (_dirty || _alwaysUpdate)
 		{
-			_visionTexture.UpdateTexture(_visionMatrix);
+			_visionTexture.UpdateTexture(_visionMatrix[currentPlayer]);
 		}
 		
 		// update visibles...
@@ -272,7 +279,7 @@ public class VisionSystem : MonoBehaviour {
 					// change to retuurn 0 if outside matrix instead of fixing to always inside matrix.
 //					if (j < 0 || j >= width || k < 0 || k >= height)
 //						continue;
-					isVisible = _visionMatrix[j + k * width].value > 1;
+					isVisible = _visionMatrix[currentPlayer][j + k * width].value > 1;
 				}
 			}
 			
@@ -287,8 +294,8 @@ public class VisionSystem : MonoBehaviour {
 		{
 			_visions.Add(vision);
 			
-			vision.currentPosition = GetMatrixPosition(vision.worldPosition);
-			UpdateVision(vision.currentPosition, vision.currentRange, 1);
+			vision.position = GetMatrixPosition(vision.worldPosition);
+			UpdateVision(vision.position, vision.range, vision.player, 1);
 			vision.UpdateCachedPosition();
 			
 			_dirty = true;
@@ -300,7 +307,7 @@ public class VisionSystem : MonoBehaviour {
 		{
 			_visions.Remove(vision);
 //			GetMatrixPosition(vision.position, vision.matrixPosition);
-			UpdateVision(vision.previousPosition, vision.previousRange, -1);
+			UpdateVision(vision.previousPosition, vision.previousRange, vision.previousPlayer, -1);
 
 			_dirty = true;
 		}
