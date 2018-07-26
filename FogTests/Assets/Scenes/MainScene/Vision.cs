@@ -9,6 +9,8 @@ public class Vision : MonoBehaviour
 	[FormerlySerializedAs("currentRange")]
 	public float range = 100;
 
+	public int groundLevel = 0;
+
 	[NonSerialized]
 	public VisionPosition position;
 	
@@ -20,6 +22,9 @@ public class Vision : MonoBehaviour
 
 	[NonSerialized]
 	public int previousPlayer;
+
+	[NonSerialized]
+	public int previousGroundLevel;
 	
 	#if UNITY_EDITOR
 	public Color _debugColor;
@@ -54,6 +59,7 @@ public class Vision : MonoBehaviour
 		previousPosition = position;
 		previousRange = range;
 		previousPlayer = player;
+		previousGroundLevel = groundLevel;
 	}
 
 	#if UNITY_EDITOR

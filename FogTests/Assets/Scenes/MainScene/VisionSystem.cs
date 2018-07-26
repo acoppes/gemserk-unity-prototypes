@@ -113,7 +113,7 @@ public class VisionSystem : MonoBehaviour {
 		return new Vector2(x, y);
 	}
 
-	private void UpdateVision(VisionPosition mp, float visionRange, int player, short visionValue)
+	private void UpdateVision(VisionPosition mp, float visionRange, int player, int groundLevel, short visionValue)
 	{
 		var visionPosition = GetWorldPosition(mp.x, mp.y);
 		
@@ -157,8 +157,17 @@ public class VisionSystem : MonoBehaviour {
 					if (diff.sqrMagnitude < rangeSqr)
 					{
 						var raycast = Physics2D.Linecast(p, visionPosition, _layerObstacles);
+
+						var blocked = raycast.collider != null;
+
+						if (blocked)
+						{
+							var obstacle = raycast.collider.GetComponent<VisionObstacle>();
+							if (obstacle != null)
+								blocked = obstacle.groundLevel >= groundLevel;
+						}
 						
-						if (raycast.collider == null)
+						if (!blocked)
 						{
 							// init to +1 first time to mark it as previously visited
 							if (_visionMatrix[player][index].value == 0)
@@ -228,11 +237,13 @@ public class VisionSystem : MonoBehaviour {
 				
 				if (vision.position.x == vision.previousPosition.x &&
 				    vision.position.y == vision.previousPosition.y &&
-				    vision.range == vision.previousRange)
+				    vision.range == vision.previousRange && 
+				    vision.player == vision.previousPlayer && 
+				    vision.groundLevel == vision.previousGroundLevel)
 					continue;
 			
-				UpdateVision(vision.previousPosition, vision.previousRange, vision.previousPlayer, -1);
-				UpdateVision(vision.position, vision.range, vision.player, 1);
+				UpdateVision(vision.previousPosition, vision.previousRange, vision.previousPlayer, vision.previousGroundLevel, -1);
+				UpdateVision(vision.position, vision.range, vision.player, vision.groundLevel, 1);
 			
 				vision.UpdateCachedPosition();
 				_dirty = true;
@@ -295,7 +306,7 @@ public class VisionSystem : MonoBehaviour {
 			_visions.Add(vision);
 			
 			vision.position = GetMatrixPosition(vision.worldPosition);
-			UpdateVision(vision.position, vision.range, vision.player, 1);
+			UpdateVision(vision.position, vision.range, vision.player, vision.groundLevel, 1);
 			vision.UpdateCachedPosition();
 			
 			_dirty = true;
@@ -307,7 +318,7 @@ public class VisionSystem : MonoBehaviour {
 		{
 			_visions.Remove(vision);
 //			GetMatrixPosition(vision.position, vision.matrixPosition);
-			UpdateVision(vision.previousPosition, vision.previousRange, vision.previousPlayer, -1);
+			UpdateVision(vision.previousPosition, vision.previousRange, vision.previousPlayer, vision.previousGroundLevel, -1);
 
 			_dirty = true;
 		}
