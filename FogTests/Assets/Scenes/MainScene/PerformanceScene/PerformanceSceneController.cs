@@ -17,6 +17,7 @@ public class PerformanceSceneController : MonoBehaviour
 	// Use this for initialization
 	private void Start ()
 	{
+		Application.targetFrameRate = 60;
 		SpawnUnits(unitsCount);
 	}
 
