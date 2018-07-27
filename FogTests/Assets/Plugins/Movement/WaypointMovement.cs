@@ -11,6 +11,12 @@ public class WaypointMovement : MonoBehaviour
 	
 	private int _current;
 
+	public void SetWaypoint(Waypoint waypoint)
+	{
+		_waypoint = waypoint;
+		Start();
+	}
+
 	private void Start()
 	{
 		var best = 9999999.9f;
