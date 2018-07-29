@@ -54,27 +54,29 @@ public class VisionTexture : MonoBehaviour
         _texture.Apply();
     }
     
-    public void UpdateTexture(IList<VisionSystem.VisionField> visionMatrix)
+    public void UpdateTexture(VisionSystem.VisionField[] visionMatrix)
     {
         for (var i = 0; i < _width * _height; i++)
         {
+            var visionField = visionMatrix[i];
+            
             // TODO: constants for visions in vision system.
             _colors[i] = _startColor;
-            
-            if (visionMatrix[i].value > 1)
+
+            if (visionField.value > 1)
             {
                 _colors[i] = _whiteColor;
                 continue;
             }
 
-            if (visionMatrix[i].value == 1)
+            if (visionField.value == 1)
             {
                 _colors[i] = _greyColor;
                 continue;
             }
 			
             // this is just for debug reasons
-            if (visionMatrix[i].value < 0)
+            if (visionField.value < 0)
             {
                 _colors[i] = _errorColor;
             }
