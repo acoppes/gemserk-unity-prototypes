@@ -92,13 +92,14 @@ public class LineGenerator : MonoBehaviour
         {
             //Calculate FPS
             _deltaTime += (Time.deltaTime - _deltaTime) * 0.1f;
-            float msec = _deltaTime * 1000.0f;
-            float fps = 1.0f / _deltaTime;
-            _fpsString = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
+            
+            var msec = _deltaTime * 1000.0f;
+            var fps = 1.0f / _deltaTime;
 
             //Display in Text field in Canvas
-            if (fpsText != null)
+            if (fpsText != null && fpsText.isActiveAndEnabled)
             {
+                _fpsString = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
                 fpsText.text = _fpsString;
             }
 
