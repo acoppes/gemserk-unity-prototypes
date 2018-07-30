@@ -52,12 +52,14 @@ public class PerformanceSceneController : MonoBehaviour
 			StartCoroutine(UpdateUnitGround(vision));
 		}
 	}
+	
+	private readonly WaitForFixedUpdate _waitforFixedUpdate = new WaitForFixedUpdate();
 
 	private IEnumerator UpdateUnitGround(Vision vision)
 	{
 		while (true)
 		{
-			yield return new WaitForFixedUpdate();
+			yield return _waitforFixedUpdate;
 
 			var position = vision.transform.position;
 			
