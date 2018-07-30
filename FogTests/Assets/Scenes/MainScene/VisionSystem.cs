@@ -21,6 +21,8 @@ public class VisionSystem : MonoBehaviour {
 	public int totalPlayers = 2;
 	public int currentPlayer = 0;
 
+	public bool raycastEnabled = true;
+
 	[SerializeField]
 	protected VisionTexture _visionTexture;
 	
@@ -178,16 +180,20 @@ public class VisionSystem : MonoBehaviour {
 //									blocked = obstacle.groundLevel >= groundLevel;
 //							}
 //						}
+						var blocked = false;
 						
-						var raycast = Physics2D.Linecast(p, visionPosition, _layerObstacles);
-
-						var blocked = raycast.collider != null;
-
-						if (blocked)
+						if (raycastEnabled)
 						{
-							var obstacle = raycast.collider.GetComponent<VisionObstacle>();
+							var raycast = Physics2D.Linecast(p, visionPosition, _layerObstacles);
+							var raycastCollider = raycast.collider;
+
+							var obstacle = raycastCollider == null
+								? null
+								: raycastCollider.GetComponent<VisionObstacle>();
+
 							if (obstacle != null)
 								blocked = obstacle.groundLevel >= groundLevel;
+
 						}
 						
 						if (!blocked)

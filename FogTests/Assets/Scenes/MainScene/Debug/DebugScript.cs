@@ -21,4 +21,9 @@ public class DebugScript : MonoBehaviour
 			_fpsText.gameObject.SetActive(!_fpsText.gameObject.active);
 		}
 	}
+
+	public void ToggleRaycast()
+	{
+		_visionSystem.raycastEnabled = !_visionSystem.raycastEnabled;
+	}
 }
