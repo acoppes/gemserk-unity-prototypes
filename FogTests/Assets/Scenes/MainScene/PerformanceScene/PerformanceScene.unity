@@ -252,7 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95aa05d5ff52e104f84962581a02fbba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLevel: 0
+  groundLevel: 1
+  _collider: {fileID: 150417183}
 --- !u!60 &150417183
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -628,12 +629,6 @@ MonoBehaviour:
   - {x: 370.85934, y: 300.4027, z: 0}
   - {x: 228.69691, y: 619.74274, z: 0}
   - {x: 74.94711, y: 629.99005, z: 0}
---- !u!114 &955749510 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114433528526095686, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-    type: 2}
-  m_PrefabInternal: {fileID: 1176919425}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &957624267
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,134 +867,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1176919425
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224908345543801736, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224290812365875836, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224290812365875836, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114338175244666884, guid: e542e397cb3e28a48a8c3a98f3c9ab68,
-        type: 2}
-      propertyPath: fpsGraphColor.a
-      value: 0.23529412
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182030511327412, guid: e542e397cb3e28a48a8c3a98f3c9ab68, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1726082701986398, guid: e542e397cb3e28a48a8c3a98f3c9ab68, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e542e397cb3e28a48a8c3a98f3c9ab68, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &1192544562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95aa05d5ff52e104f84962581a02fbba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLevel: 0
+  groundLevel: 1
+  _collider: {fileID: 1676814238}
 --- !u!60 &1676814238
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1790,7 +1658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _visionSystem: {fileID: 1955262463}
-  _fpsText: {fileID: 955749510}
+  _fpsText: {fileID: 0}
 --- !u!1 &1748801824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,7 +1759,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95aa05d5ff52e104f84962581a02fbba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLevel: 0
+  groundLevel: 1
+  _collider: {fileID: 1903772456}
 --- !u!60 &1903772456
 PolygonCollider2D:
   m_ObjectHideFlags: 0

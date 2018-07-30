@@ -66,6 +66,10 @@ public class VisionTexture : MonoBehaviour
             if (visionField.value > 1)
             {
                 _colors[i] = _whiteColor;
+
+                if (visionField.groundLevel == 1)
+                    _colors[i].b = 0.5f;
+                
                 continue;
             }
 

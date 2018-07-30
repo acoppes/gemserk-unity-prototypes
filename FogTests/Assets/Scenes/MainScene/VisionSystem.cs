@@ -13,6 +13,10 @@ public class VisionSystem : MonoBehaviour {
 	{
 		// vision value, > 1 is visible by player.
 		public short value;
+		public short groundLevel;
+		
+		// we could have players here, value for each player
+		// where player total is a constant
 	}
 
 	public int width = 128;
@@ -78,7 +82,8 @@ public class VisionSystem : MonoBehaviour {
 		    {
 			    _visionMatrix[j][i] = new VisionField
 			    {
-				    value = 0
+				    value = 0,
+				    groundLevel = 0
 			    };
 		    }
 	    }
@@ -93,6 +98,14 @@ public class VisionSystem : MonoBehaviour {
 	    _contactFilter = new ContactFilter2D()
 		    .NoFilter();
 	    _contactFilter.SetLayerMask(_layerObstacles);
+	    
+	    // register static ground configuration...
+
+	    var obstacles = FindObjectsOfType<VisionObstacle>();
+	    foreach (var obstacle in obstacles)
+	    {
+		    RegisterObstacle(obstacle);
+	    }
     }
 
 	private VisionPosition GetMatrixPosition(Vector2 p)
@@ -374,4 +387,31 @@ public class VisionSystem : MonoBehaviour {
 	{
 		_visibles.Remove(visible);
 	}
+
+	public void RegisterObstacle(VisionObstacle obstacle)
+	{
+		// TODO: obstacles should be player independant
+		
+		for (var j = 0; j < totalPlayers; j++)
+		{
+			for (var i = 0; i < width; i++)
+			{
+				for (var k = 0; k < height; k++)
+				{
+					var p = GetWorldPosition(i, k);
+					var currentLevel = _visionMatrix[j][i + k * width].groundLevel;
+					
+					if (currentLevel == 0)
+						currentLevel = obstacle.GetGroundLevel(p);
+
+					_visionMatrix[j][i + k * width].groundLevel = currentLevel;
+				}
+			}
+		}		
+	}
+
+//	public void UnregisterObstacle(VisionObstacle obstacle)
+//	{
+//		throw new NotImplementedException();
+//	}
 }
