@@ -55,6 +55,8 @@ public class VisionSystem : MonoBehaviour {
 	private int _layerHidden;
 
 	private int _layerObstacles;
+	private readonly RaycastHit2D[] _raycastHit = new RaycastHit2D[1];
+	private ContactFilter2D _contactFilter;
 
 	private void Start()
     {
@@ -85,6 +87,10 @@ public class VisionSystem : MonoBehaviour {
 	    _layerHidden = LayerMask.NameToLayer("Hidden");
 
 	    _layerObstacles = Physics2D.GetLayerCollisionMask(LayerMask.NameToLayer("VisionGroundObstacle"));
+	    
+	    _contactFilter = new ContactFilter2D()
+		    .NoFilter();
+	    _contactFilter.SetLayerMask(_layerObstacles);
     }
 
 	private VisionPosition GetMatrixPosition(Vector2 p)
@@ -156,6 +162,23 @@ public class VisionSystem : MonoBehaviour {
 					
 					if (diff.sqrMagnitude < rangeSqr)
 					{
+//						var raycastCount = Physics2D.Linecast(p, visionPosition, _contactFilter, _raycastHit);
+//
+//						var blocked = false;
+//
+//						if (raycastCount > 0)
+//						{
+//							var raycastCollider = _raycastHit[0].collider;
+//							blocked = raycastCollider != null;
+//
+//							if (blocked)
+//							{
+//								var obstacle = raycastCollider.GetComponent(typeof(VisionObstacle)) as VisionObstacle;
+//								if (obstacle != null)
+//									blocked = obstacle.groundLevel >= groundLevel;
+//							}
+//						}
+						
 						var raycast = Physics2D.Linecast(p, visionPosition, _layerObstacles);
 
 						var blocked = raycast.collider != null;
