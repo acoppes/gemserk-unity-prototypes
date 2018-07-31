@@ -455,4 +455,10 @@ public class VisionSystem : MonoBehaviour {
 //	{
 //		throw new NotImplementedException();
 //	}
+	
+	public short GetGroundLevel(Vector3 position)
+	{
+		var mp = GetMatrixPosition(position);
+		return _visionMatrix[currentPlayer][mp.x + mp.y * width].groundLevel;
+	}
 }

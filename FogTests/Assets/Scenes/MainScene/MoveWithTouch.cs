@@ -21,18 +21,8 @@ public class MoveWithTouch : MonoBehaviour
 
 			_vision.groundLevel = 0;
 			_vision.player = _visionSystem.currentPlayer;
-			
-			var collider = Physics2D.OverlapPoint(v3);
-			if (collider != null)
-			{
-				var obstacle = collider.GetComponent<VisionObstacle>();
-				if (obstacle != null)
-				{
-					short increment = 1;
-					_vision.groundLevel = (short) (obstacle.groundLevel + increment);
-				}
-			}
-			
+
+			_vision.groundLevel = _visionSystem.GetGroundLevel(v3);
 		}
 	}
 }

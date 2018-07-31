@@ -13,10 +13,14 @@ public class PerformanceSceneController : MonoBehaviour
 	public float maxVision;
 
 	public Transform unitsParent;
+
+	private VisionSystem _visionSystem;
 	
 	// Use this for initialization
 	private void Start ()
 	{
+		_visionSystem = FindObjectOfType<VisionSystem>();
+		
 		Application.targetFrameRate = 60;
 		SpawnUnits(unitsCount);
 	}
@@ -62,19 +66,10 @@ public class PerformanceSceneController : MonoBehaviour
 			yield return _waitforFixedUpdate;
 
 			var position = vision.transform.position;
+
+			var groundLevel = _visionSystem.GetGroundLevel(position);
 			
-			var collider = Physics2D.OverlapPoint(position);
-			if (collider == null)
-			{
-				vision.groundLevel = 0;
-				continue;
-			}
-			
-			var obstacle = collider.GetComponent<VisionObstacle>();
-			if (obstacle == null) 
-				continue;
-			
-			vision.groundLevel = (short) (obstacle.groundLevel + 1);
+			vision.groundLevel = groundLevel;
 		}
 	}
 }
