@@ -74,7 +74,7 @@ public class PerformanceSceneController : MonoBehaviour
 			if (obstacle == null) 
 				continue;
 			
-			vision.groundLevel = obstacle.groundLevel + 1;
+			vision.groundLevel = (short) (obstacle.groundLevel + 1);
 		}
 	}
 }

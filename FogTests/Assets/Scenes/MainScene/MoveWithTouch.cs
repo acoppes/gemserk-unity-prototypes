@@ -28,7 +28,8 @@ public class MoveWithTouch : MonoBehaviour
 				var obstacle = collider.GetComponent<VisionObstacle>();
 				if (obstacle != null)
 				{
-					_vision.groundLevel = obstacle.groundLevel + 1;
+					short increment = 1;
+					_vision.groundLevel = (short) (obstacle.groundLevel + increment);
 				}
 			}
 			

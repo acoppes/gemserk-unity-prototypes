@@ -134,7 +134,46 @@ public class VisionSystem : MonoBehaviour {
 		return new Vector2(x, y);
 	}
 
-	private void UpdateVision(VisionPosition mp, float visionRange, int player, int groundLevel, short visionValue)
+	private bool IsBlocked(int player, short groundLevel, int x0, int y0, int x1, int y1)
+	{
+		int dx = Math.Abs(x1 - x0);
+		int dy = Math.Abs(y1 - y0);
+
+		int sx = x0 < x1 ? 1 : -1;
+		int sy = y0 < y1 ? 1 : -1;
+
+		int err = (dx > dy ? dx : -dy) / 2;
+		int e2;
+
+		for (;;)
+		{
+			var visionField = _visionMatrix[player][x0 + y0 * width];
+
+			if (visionField.groundLevel > groundLevel)
+				return true;
+			
+			if (x0 == x1 && y0 == y1)
+				break;
+
+			e2 = err;
+			
+			if (e2 > -dx)
+			{
+				err -= dy;
+				x0 += sx;
+			}
+
+			if (e2 >= dy) 
+				continue;
+			
+			err += dx;
+			y0 += sy;
+		}
+
+		return false;
+	}
+
+	private void UpdateVision(VisionPosition mp, float visionRange, int player, short groundLevel, short visionValue)
 	{
 		var visionPosition = GetWorldPosition(mp.x, mp.y);
 		
@@ -193,21 +232,23 @@ public class VisionSystem : MonoBehaviour {
 //									blocked = obstacle.groundLevel >= groundLevel;
 //							}
 //						}
-						var blocked = false;
-						
-						if (raycastEnabled)
-						{
-							var raycast = Physics2D.Linecast(p, visionPosition, _layerObstacles);
-							var raycastCollider = raycast.collider;
+//						var blocked = false;
+//						
+//						if (raycastEnabled)
+//						{
+//							var raycast = Physics2D.Linecast(p, visionPosition, _layerObstacles);
+//							var raycastCollider = raycast.collider;
+//
+//							var obstacle = raycastCollider == null
+//								? null
+//								: raycastCollider.GetComponent<VisionObstacle>();
+//
+//							if (obstacle != null)
+//								blocked = obstacle.groundLevel >= groundLevel;
+//
+//						}
 
-							var obstacle = raycastCollider == null
-								? null
-								: raycastCollider.GetComponent<VisionObstacle>();
-
-							if (obstacle != null)
-								blocked = obstacle.groundLevel >= groundLevel;
-
-						}
+						var blocked = IsBlocked(player, groundLevel, mx, my, mp.x, mp.y);
 						
 						if (!blocked)
 						{
@@ -388,7 +429,7 @@ public class VisionSystem : MonoBehaviour {
 		_visibles.Remove(visible);
 	}
 
-	public void RegisterObstacle(VisionObstacle obstacle)
+	private void RegisterObstacle(VisionObstacle obstacle)
 	{
 		// TODO: obstacles should be player independant
 		
