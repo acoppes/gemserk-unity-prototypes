@@ -60,10 +60,6 @@ public class VisionSystem : MonoBehaviour {
 	private int _layerVisible;
 	private int _layerHidden;
 
-	private int _layerObstacles;
-	private readonly RaycastHit2D[] _raycastHit = new RaycastHit2D[1];
-	private ContactFilter2D _contactFilter;
-
 	private void Start()
     {
 	    // update on first frame
@@ -93,12 +89,6 @@ public class VisionSystem : MonoBehaviour {
 	    _layerVisible = LayerMask.NameToLayer("Default");
 	    _layerHidden = LayerMask.NameToLayer("Hidden");
 
-	    _layerObstacles = Physics2D.GetLayerCollisionMask(LayerMask.NameToLayer("VisionGroundObstacle"));
-	    
-	    _contactFilter = new ContactFilter2D()
-		    .NoFilter();
-	    _contactFilter.SetLayerMask(_layerObstacles);
-	    
 	    // register static ground configuration...
 
 	    var obstacles = FindObjectsOfType<VisionObstacle>();
@@ -216,38 +206,6 @@ public class VisionSystem : MonoBehaviour {
 					
 					if (diff.sqrMagnitude < rangeSqr)
 					{
-//						var raycastCount = Physics2D.Linecast(p, visionPosition, _contactFilter, _raycastHit);
-//
-//						var blocked = false;
-//
-//						if (raycastCount > 0)
-//						{
-//							var raycastCollider = _raycastHit[0].collider;
-//							blocked = raycastCollider != null;
-//
-//							if (blocked)
-//							{
-//								var obstacle = raycastCollider.GetComponent(typeof(VisionObstacle)) as VisionObstacle;
-//								if (obstacle != null)
-//									blocked = obstacle.groundLevel >= groundLevel;
-//							}
-//						}
-//						var blocked = false;
-//						
-//						if (raycastEnabled)
-//						{
-//							var raycast = Physics2D.Linecast(p, visionPosition, _layerObstacles);
-//							var raycastCollider = raycast.collider;
-//
-//							var obstacle = raycastCollider == null
-//								? null
-//								: raycastCollider.GetComponent<VisionObstacle>();
-//
-//							if (obstacle != null)
-//								blocked = obstacle.groundLevel >= groundLevel;
-//
-//						}
-
 						var blocked = IsBlocked(player, groundLevel, mx, my, mp.x, mp.y);
 						
 						if (!blocked)
