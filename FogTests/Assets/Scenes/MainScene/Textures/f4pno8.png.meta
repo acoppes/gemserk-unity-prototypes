@@ -130,7 +130,7 @@ TextureImporter:
     21300250: f4pno8_125
     21300252: f4pno8_126
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -172,7 +172,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 0.5
+  spritePixelsToUnits: 0.6
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -2792,6 +2792,8 @@ TextureImporter:
     edges: []
     weights: []
   spritePackingTag: Marine
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

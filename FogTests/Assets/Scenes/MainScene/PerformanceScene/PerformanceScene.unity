@@ -136,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 119934868}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 4096, y: 2048, z: 1}
+  m_LocalScale: {x: 4096, y: 4096, z: 1}
   m_Children:
   - {fileID: 1529917430}
   m_Father: {fileID: 1955262465}
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 509982878}
   - component: {fileID: 509982879}
   m_Layer: 2
-  m_Name: SpawnBounds
+  m_Name: WorldBounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -531,7 +531,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 9}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -542,7 +542,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3295, y: 1411.5107}
+  m_Size: {x: 4111, y: 2290.33}
   m_EdgeRadius: 0
 --- !u!1 &647888322
 GameObject:
@@ -568,7 +568,7 @@ Transform:
   m_GameObject: {fileID: 647888322}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 63, y: 14, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 761336775}
   m_RootOrder: 2
@@ -841,8 +841,8 @@ MonoBehaviour:
   unitPrefab: {fileID: 1216008585793352, guid: 1be2e41ba05f6a14eaa40e96eb2f8b7b, type: 2}
   unitsCount: 100
   spawnBounds: {fileID: 509982879}
-  minVision: 180
-  maxVision: 360
+  minVision: 120
+  maxVision: 240
   unitsParent: {fileID: 1547910898}
 --- !u!4 &1023079061
 Transform:
@@ -914,7 +914,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 891
+  orthographic size: 600
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1196,7 +1196,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1024
+  orthographic size: 2048
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -1282,7 +1282,7 @@ Transform:
   m_GameObject: {fileID: 1339157025}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 109, y: 13, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 761336775}
   m_RootOrder: 0
@@ -1908,7 +1908,7 @@ Transform:
   m_GameObject: {fileID: 1766171214}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -48, y: 8, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 761336775}
   m_RootOrder: 1
@@ -2071,8 +2071,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f80efab45c9e9c479c584d145b3fbfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 128
-  height: 64
+  width: 256
+  height: 256
   totalPlayers: 2
   currentPlayer: 0
   raycastEnabled: 1
@@ -2238,7 +2238,7 @@ Transform:
   m_GameObject: {fileID: 2063601818}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.12, y: 8, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 761336775}
   m_RootOrder: 3
