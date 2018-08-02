@@ -346,6 +346,49 @@ PolygonCollider2D:
       - {x: 386.6382, y: 971.8549}
       - {x: 239.3621, y: 1065.4109}
       - {x: 141.78845, y: 1098.4287}
+--- !u!1 &162347771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 162347772}
+  - component: {fileID: 162347773}
+  m_Layer: 0
+  m_Name: MoveCameraController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &162347772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 162347771}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1023079061}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &162347773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 162347771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd3adcd433be5954cbcbe70fbaa55793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 1038996162}
+  _speed: -100
+  _worldBounds: {fileID: 509982879}
 --- !u!1 &373255788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,8 +1224,8 @@ MonoBehaviour:
   unitPrefab: {fileID: 1216008585793352, guid: 1be2e41ba05f6a14eaa40e96eb2f8b7b, type: 2}
   unitsCount: 100
   spawnBounds: {fileID: 509982879}
-  minVision: 90
-  maxVision: 180
+  minVision: 80
+  maxVision: 240
   unitsParent: {fileID: 1547910898}
 --- !u!4 &1023079061
 Transform:
@@ -1195,6 +1238,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 509982878}
+  - {fileID: 162347772}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1238,8 +1282,8 @@ Camera:
   m_GameObject: {fileID: 1038996159}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -1729,7 +1773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1483364256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2308,8 +2352,8 @@ MonoBehaviour:
   nameOffset: {x: 0, y: 31.79, z: 0}
   newWaypointOffset: {x: 50, y: 0, z: 0}
   points:
-  - {x: -1779.9976, y: -310.88498, z: 0}
-  - {x: -990.0636, y: -701.2719, z: 0}
+  - {x: -1037.0759, y: -1028.5155, z: 0}
+  - {x: -1046.9683, y: -777.14465, z: 0}
   - {x: -5.3356857, y: -1107.5543, z: 0}
   - {x: 373.1491, y: -872.26184, z: 0}
   - {x: 1514.8357, y: -857.5796, z: 0}
@@ -2318,10 +2362,18 @@ MonoBehaviour:
   - {x: -211.01993, y: -139.81088, z: 0}
   - {x: 424.67474, y: -834.23706, z: 0}
   - {x: 120.21301, y: -1104.8872, z: 0}
-  - {x: -993.1893, y: -574.2771, z: 0}
+  - {x: -993.1894, y: -680.85657, z: 0}
   - {x: -1357.6338, y: -218.40976, z: 0}
   - {x: -1454.3464, y: 425.06863, z: 0}
   - {x: -1753.8746, y: 434.63782, z: 0}
+  - {x: -1918.8474, y: -55.37439, z: 0}
+  - {x: -1900.4614, y: -497.96616, z: 0}
+  - {x: -1420.5154, y: -485.32068, z: 0}
+  - {x: -1136.5741, y: -716.1006, z: 0}
+  - {x: -1288.9017, y: -871.00757, z: 0}
+  - {x: -1532.9088, y: -725.5847, z: 0}
+  - {x: -1726.3342, y: -871.0077, z: 0}
+  - {x: -1233.7427, y: -1092.3033, z: 0}
 --- !u!1 &1766171214
 GameObject:
   m_ObjectHideFlags: 0
