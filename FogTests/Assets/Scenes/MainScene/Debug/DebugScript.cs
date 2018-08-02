@@ -15,17 +15,34 @@ public class DebugScript : MonoBehaviour
 	[SerializeField]
 	protected string _fogLayerName = "Fog";
 	
+	[SerializeField]
+	protected string _visionLayerName = "Vision";
+	
 	public void ToggleFogTexture()
 	{
-		var fogMask = LayerMask.GetMask(_fogLayerName);
+		var layerMask = LayerMask.GetMask(_fogLayerName);
 
-		if ((_mainCamera.cullingMask & fogMask) == fogMask)
+		if ((_mainCamera.cullingMask & layerMask) == layerMask)
 		{
-			_mainCamera.cullingMask = _mainCamera.cullingMask & ~fogMask;
+			_mainCamera.cullingMask = _mainCamera.cullingMask & ~layerMask;
 		}
 		else
 		{
-			_mainCamera.cullingMask = _mainCamera.cullingMask | fogMask;
+			_mainCamera.cullingMask = _mainCamera.cullingMask | layerMask;
+		}
+	}
+	
+	public void ToggleVisionTexture()
+	{
+		var layerMask = LayerMask.GetMask(_visionLayerName );
+
+		if ((_mainCamera.cullingMask & layerMask) == layerMask)
+		{
+			_mainCamera.cullingMask = _mainCamera.cullingMask & ~layerMask;
+		}
+		else
+		{
+			_mainCamera.cullingMask = _mainCamera.cullingMask | layerMask;
 		}
 	}
 
