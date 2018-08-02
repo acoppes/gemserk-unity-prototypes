@@ -16,8 +16,11 @@ public class MoveCamera : MonoBehaviour
 	private Vector3 _pressedPosition;
 
 	private Bounds _bounds;
-	
-	void Start()
+
+	[SerializeField]
+	protected bool _truncatePosition = false;
+
+	private void Start()
 	{
 		_bounds = _worldBounds.bounds;
 		_bounds.extents = _bounds.extents - 
@@ -28,10 +31,6 @@ public class MoveCamera : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			var v3 = Input.mousePosition;
-			v3 = _camera.ScreenToWorldPoint(v3);
-			transform.position = v3;
-
 			_pressedPosition = Input.mousePosition;
 		}
 
@@ -45,9 +44,21 @@ public class MoveCamera : MonoBehaviour
 			_pressedPosition = currentPosition;
 		}
 
-		var p = _bounds.ClosestPoint(_camera.transform.position);
-		p.z = _camera.transform.position.z;
-		_camera.transform.position = p;
+		if (_truncatePosition)
+		{
+			//var sp = _camera.WorldToScreenPoint(_camera.transform.position);
+			var sp = _camera.transform.position;
+			var p = _bounds.ClosestPoint(sp);
+			p.z = sp.z;
+			_camera.transform.position = p;
+		
+			// _camera.transform.position = _camera.ScreenToWorldPoint(p);
+		}
 	}
-	
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.blue;
+		Gizmos.DrawWireCube(transform.position + _bounds.center, _bounds.size);
+	}
 }
