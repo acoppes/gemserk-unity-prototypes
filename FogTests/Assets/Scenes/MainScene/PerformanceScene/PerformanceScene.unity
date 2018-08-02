@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1038996162}
-  _speed: -100
+  _speed: -1
   _worldBounds: {fileID: 509982879}
   _truncatePosition: 0
 --- !u!1 &373255788

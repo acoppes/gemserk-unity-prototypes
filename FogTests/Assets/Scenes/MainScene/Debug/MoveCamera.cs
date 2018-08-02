@@ -37,9 +37,13 @@ public class MoveCamera : MonoBehaviour
 		if (Input.GetMouseButton(0))
 		{
 			var currentPosition = Input.mousePosition;
-			var difference = currentPosition - _pressedPosition;
+
+			var p0 = _camera.ScreenToWorldPoint(_pressedPosition);
+			var p1 = _camera.ScreenToWorldPoint(currentPosition);
 			
-			_camera.transform.position = _camera.transform.position + difference * _speed * Time.deltaTime;
+			var difference = p1 - p0;
+			
+			_camera.transform.position = _camera.transform.position + difference * _speed;
 
 			_pressedPosition = currentPosition;
 		}
