@@ -7,7 +7,7 @@ public class DebugScript : MonoBehaviour
 	private VisionSystem _visionSystem;
 
 	[SerializeField]
-	private Text _fpsText;
+	private CanvasGroup _fpsGroup;
 
 	[SerializeField]
 	protected Camera _mainCamera;
@@ -68,10 +68,9 @@ public class DebugScript : MonoBehaviour
 
 	public void ToggleFpsText()
 	{
-		if (_fpsText != null)
-		{
-			_fpsText.gameObject.SetActive(!_fpsText.gameObject.active);
-		}
+		_fpsGroup.interactable = !_fpsGroup.interactable;
+		_fpsGroup.blocksRaycasts = !_fpsGroup.blocksRaycasts;
+		_fpsGroup.alpha = _fpsGroup.interactable ? 1.0f : 0.0f;
 	}
 
 	public void ToggleRaycast()
