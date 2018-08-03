@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.PostProcessing;
 using UnityEngine.UI;
 
 public class DebugScript : MonoBehaviour
@@ -20,6 +21,9 @@ public class DebugScript : MonoBehaviour
 
 	[SerializeField]
 	protected CanvasGroup _menuGroup;
+
+	[SerializeField]
+	protected PostProcessingBehaviour _postProcessing;
 
 	private void Start()
 	{
@@ -76,5 +80,13 @@ public class DebugScript : MonoBehaviour
 	public void ToggleRaycast()
 	{
 		_visionSystem.raycastEnabled = !_visionSystem.raycastEnabled;
+	}
+
+	public void ToggleBlur()
+	{
+		if (_postProcessing != null)
+		{
+			_postProcessing.enabled = !_postProcessing.enabled;
+		}	
 	}
 }
