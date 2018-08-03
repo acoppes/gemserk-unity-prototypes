@@ -17,6 +17,21 @@ public class DebugScript : MonoBehaviour
 	
 	[SerializeField]
 	protected string _visionLayerName = "Vision";
+
+	[SerializeField]
+	protected CanvasGroup _menuGroup;
+
+	private void Start()
+	{
+		ToggleMenuGroup();
+	}
+	
+	public void ToggleMenuGroup()
+	{
+		_menuGroup.interactable = !_menuGroup.interactable;
+		_menuGroup.blocksRaycasts = !_menuGroup.blocksRaycasts;
+		_menuGroup.alpha = _menuGroup.interactable ? 1.0f : 0.0f;
+	}
 	
 	public void ToggleFogTexture()
 	{

@@ -60,6 +60,13 @@ public class VisionSystem : MonoBehaviour {
 	private int _layerVisible;
 	private int _layerHidden;
 
+	private float _lastProcessTime;
+
+	public float GetLastProcessTime()
+	{
+		return _lastProcessTime;
+	}
+
 	private void Start()
     {
 	    // update on first frame
@@ -206,7 +213,7 @@ public class VisionSystem : MonoBehaviour {
 					
 					if (diff.sqrMagnitude < rangeSqr)
 					{
-						var blocked = IsBlocked(player, groundLevel, mx, my, mp.x, mp.y);
+						var blocked = raycastEnabled && IsBlocked(player, groundLevel, mx, my, mp.x, mp.y);
 						
 						if (!blocked)
 						{
@@ -261,6 +268,8 @@ public class VisionSystem : MonoBehaviour {
 			return;
 
 		_dirty = false;
+
+		var currentTime = Time.realtimeSinceStartup;
 		
 		// _localScale = transform.localScale;
 
@@ -338,6 +347,8 @@ public class VisionSystem : MonoBehaviour {
 			visible.visible = isVisible;
 			visible.gameObject.SetLayerRecursive(isVisible ? _layerVisible : _layerHidden);
 		}
+
+		_lastProcessTime = Time.realtimeSinceStartup - currentTime;
 	}
 
 	private void ProcessPendingVisions()
