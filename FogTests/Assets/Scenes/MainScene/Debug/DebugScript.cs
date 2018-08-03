@@ -25,9 +25,20 @@ public class DebugScript : MonoBehaviour
 	[SerializeField]
 	protected PostProcessingBehaviour _postProcessing;
 
+	[SerializeField]
+	protected Text _moveCameraText;
+	
+	[SerializeField]
+	protected GameObject _moveVision;
+
+	[SerializeField]
+	protected GameObject _moveCamera;
+	
 	private void Start()
 	{
 		ToggleMenuGroup();
+		
+		_moveCameraText.text = _moveCamera.active ? "move vision" : "move camera";
 	}
 	
 	public void ToggleMenuGroup()
@@ -88,5 +99,21 @@ public class DebugScript : MonoBehaviour
 		{
 			_postProcessing.enabled = !_postProcessing.enabled;
 		}	
+	}
+
+	public void ToggleMoveCamera()
+	{
+		if (_moveCamera.active)
+		{
+			_moveVision.SetActive(true);
+			_moveCamera.SetActive(false);
+			_moveCameraText.text = "move camera";
+		}
+		else
+		{
+			_moveVision.SetActive(false);
+			_moveCamera.SetActive(true);
+			_moveCameraText.text = "move vision";
+		}
 	}
 }
