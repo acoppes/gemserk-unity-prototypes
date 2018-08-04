@@ -33,12 +33,15 @@ public class DebugScript : MonoBehaviour
 
 	[SerializeField]
 	protected GameObject _moveCamera;
+
+	[SerializeField]
+	protected DebugPanelScript _debugPanelScript;
 	
 	private void Start()
 	{
 		ToggleMenuGroup();
 		
-		_moveCameraText.text = _moveCamera.active ? "move vision" : "move camera";
+		_moveCameraText.text = _moveCamera.activeSelf ? "move vision" : "move camera";
 	}
 	
 	public void ToggleMenuGroup()
@@ -103,7 +106,7 @@ public class DebugScript : MonoBehaviour
 
 	public void ToggleMoveCamera()
 	{
-		if (_moveCamera.active)
+		if (_moveCamera.activeSelf)
 		{
 			_moveVision.SetActive(true);
 			_moveCamera.SetActive(false);

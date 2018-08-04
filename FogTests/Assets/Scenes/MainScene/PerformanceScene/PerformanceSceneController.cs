@@ -23,6 +23,26 @@ public class PerformanceSceneController : MonoBehaviour
 		
 		Application.targetFrameRate = 60;
 		SpawnUnits(unitsCount);
+
+		var debugPanelScript = FindObjectOfType<DebugPanelScript>();
+		if (debugPanelScript != null)
+		{
+			debugPanelScript.AddButton("+10 units", delegate
+			{
+				SpawnUnits(10);
+			});
+			
+			debugPanelScript.AddButton("-10 units", delegate
+			{
+				var toRemove = 10;
+				while (unitsParent.childCount > 0 && toRemove > 0)
+				{
+					var unit = unitsParent.GetChild(UnityEngine.Random.Range(0, unitsParent.childCount));
+					Destroy(unit.gameObject);
+					toRemove--;
+				}
+			});
+		}
 	}
 
 	public void SpawnUnits(int count)
@@ -53,7 +73,7 @@ public class PerformanceSceneController : MonoBehaviour
 				unitObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
 			}
 
-			StartCoroutine(UpdateUnitGround(vision));
+			vision.StartCoroutine(UpdateUnitGround(vision));
 		}
 	}
 	
