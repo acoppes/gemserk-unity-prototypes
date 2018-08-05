@@ -35,7 +35,11 @@ public class DrawingSceneController : MonoBehaviour
 	private static void DrawPixel(VisionSystem.VisionMatrix visionMatrix, int x, int y, short value)
 	{
 		if (visionMatrix.IsInside(x, y))
-			visionMatrix.SetValue(x, y, value);
+		{
+			var v = visionMatrix.GetValue(x, y);
+			v.value = value;
+			visionMatrix.SetValue(x, y, v);
+		}
 	}
 	
 	void DrawFilledCircle(int x0, int y0, int radius)

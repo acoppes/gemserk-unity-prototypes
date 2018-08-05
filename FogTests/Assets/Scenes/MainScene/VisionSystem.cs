@@ -42,9 +42,26 @@ public class VisionSystem : MonoBehaviour {
 			return index >= 0 && index < vision.Length;
 		}
 
+		public void SetValue(int i, int j, VisionField value)
+		{
+			vision[i + j * width] = value;
+		}
+
+		public VisionField GetValue(int i, int j)
+		{
+			return vision[i + j * width];
+		}
+		
 		public void SetValue(int i, int j, short value)
 		{
-			vision[i + j * width].value = value;
+			var index = i + j * width;
+			
+			if (index < 0 && index >= vision.Length)
+				return;
+			
+			if (vision[index].value == 0)
+				vision[index].value += 1;
+			vision[index].value += value;
 		}
 
 		public void Clear(short value, short groundLevel)
@@ -100,14 +117,7 @@ public class VisionSystem : MonoBehaviour {
 
 	private int _layerVisible;
 	private int _layerHidden;
-
-	private float _lastProcessTime;
-
-	public float GetLastProcessTime()
-	{
-		return _lastProcessTime;
-	}
-
+	
 	private void Start()
     {
 	    // update on first frame
@@ -175,7 +185,7 @@ public class VisionSystem : MonoBehaviour {
 		return new Vector2(x, y);
 	}
 
-	private bool IsBlocked(int player, short groundLevel, int x0, int y0, int x1, int y1)
+	private static bool IsBlocked(VisionMatrix visionMatrix, short groundLevel, int x0, int y0, int x1, int y1)
 	{
 		int dx = Math.Abs(x1 - x0);
 		int dy = Math.Abs(y1 - y0);
@@ -188,7 +198,7 @@ public class VisionSystem : MonoBehaviour {
 
 		for (;;)
 		{
-			var visionField = _visionMatrixPerPlayer[player].vision[x0 + y0 * width];
+			var visionField = visionMatrix.vision[x0 + y0 * visionMatrix.width];
 
 			if (visionField.groundLevel > groundLevel)
 				return true;
@@ -213,8 +223,59 @@ public class VisionSystem : MonoBehaviour {
 
 		return false;
 	}
+	
+	private void DrawPixel(VisionMatrix visionMatrix, int x0, int y0, int x, int y, short value, short groundLevel)
+	{
+		var blocked = raycastEnabled && IsBlocked(visionMatrix, groundLevel, x, y, x0, y0);
+
+		if (blocked) 
+			return;
+		
+		visionMatrix.SetValue(x, y, value);
+	}
 
 	private void UpdateVision(VisionPosition mp, float visionRange, int player, short groundLevel, short visionValue)
+	{
+		int radius = Mathf.RoundToInt(visionRange / _localScale.x);
+		int x0 = mp.x;
+		int y0 = mp.y;
+		
+		int x = radius;
+		int y = 0;
+		int xChange = 1 - (radius << 1);
+		int yChange = 0;
+		int radiusError = 0;
+
+		var visionMatrix = _visionMatrixPerPlayer[player];
+		
+		while (x >= y)
+		{
+			for (var i = x0 - x; i <= x0 + x; i++)
+			{
+				DrawPixel(visionMatrix, x0, y0, i, y0 + y, visionValue, groundLevel);
+				DrawPixel(visionMatrix, x0, y0, i, y0 - y, visionValue, groundLevel);
+			}
+			for (var i = x0 - y; i <= x0 + y; i++)
+			{
+				DrawPixel(visionMatrix, x0, y0, i, y0 + x, visionValue, groundLevel);
+				DrawPixel(visionMatrix, x0, y0, i, y0 - x, visionValue, groundLevel);
+			}
+
+			y++;
+			radiusError += yChange;
+			yChange += 2;
+			
+			if (((radiusError << 1) + xChange) > 0)
+			{
+				x--;
+				radiusError += xChange;
+				xChange += 2;
+			}
+		}
+		
+	}
+
+	private void UpdateVision2(VisionPosition mp, float visionRange, int player, short groundLevel, short visionValue)
 	{
 		var visionPosition = GetWorldPosition(mp.x, mp.y);
 		
@@ -228,6 +289,8 @@ public class VisionSystem : MonoBehaviour {
 
 		var maxColSize = visionWidth;
 		var maxRowSize = visionHeight;
+
+		var visionMatrix = _visionMatrixPerPlayer[player];
 
 		while (currentRowSize != maxRowSize && currentColSize != maxColSize)
 		{
@@ -257,15 +320,15 @@ public class VisionSystem : MonoBehaviour {
 					
 					if (diff.sqrMagnitude < rangeSqr)
 					{
-						var blocked = raycastEnabled && IsBlocked(player, groundLevel, mx, my, mp.x, mp.y);
+						var blocked = raycastEnabled && IsBlocked(visionMatrix, groundLevel, mx, my, mp.x, mp.y);
 						
 						if (!blocked)
 						{
 							// init to +1 first time to mark it as previously visited
-							if (_visionMatrixPerPlayer[player].vision[index].value == 0)
-								_visionMatrixPerPlayer[player].vision[index].value++;
+							if (visionMatrix.vision[index].value == 0)
+								visionMatrix.vision[index].value++;
 
-							_visionMatrixPerPlayer[player].vision[index].value += visionValue;
+							visionMatrix.vision[index].value += visionValue;
 						}
 					}
 				}
@@ -312,8 +375,6 @@ public class VisionSystem : MonoBehaviour {
 			return;
 
 		_dirty = false;
-
-		var currentTime = Time.realtimeSinceStartup;
 		
 		// _localScale = transform.localScale;
 
@@ -392,7 +453,6 @@ public class VisionSystem : MonoBehaviour {
 			visible.gameObject.SetLayerRecursive(isVisible ? _layerVisible : _layerHidden);
 		}
 
-		_lastProcessTime = Time.realtimeSinceStartup - currentTime;
 	}
 
 	private void ProcessPendingVisions()
