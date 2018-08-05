@@ -2150,7 +2150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 1216008585793352, guid: 1be2e41ba05f6a14eaa40e96eb2f8b7b, type: 2}
-  unitsCount: 0
+  unitsCount: 50
   spawnBounds: {fileID: 509982879}
   minVision: 100
   maxVision: 300

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class VisionTexture : MonoBehaviour
@@ -82,18 +81,32 @@ public class VisionTexture : MonoBehaviour
             return a - b < error;
         return b - a < error;
     }
+
+    private VisionSystem.VisionField[] _visionMatrix;
+    private bool _dirty = true;
     
     public void UpdateTexture(VisionSystem.VisionField[] visionMatrix)
     {
+        _visionMatrix = visionMatrix;
+        _dirty = true;
+    }
+
+    private void Update()
+    {
+        if (!_dirty || _visionMatrix == null)
+            return;
+
+        _dirty = false;
+        
         var interpolationEnabled = _interpolateColorSpeed > Mathf.Epsilon;
         var alpha = Time.deltaTime * _interpolateColorSpeed;
         
         for (var i = 0; i < _width * _height; i++)
         {
-            var visionField = visionMatrix[i];
+            var visionField = _visionMatrix[i];
             
             // TODO: constants for visions in vision system.
-           // _colors[i] = _startColor;
+            // _colors[i] = _startColor;
 
             var value = visionField.value;
             var newColor = _startColor;
