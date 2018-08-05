@@ -19,6 +19,47 @@ public class VisionSystem : MonoBehaviour {
 		// where player total is a constant
 	}
 
+	public struct VisionMatrix
+	{
+		public int width;
+		public int height;
+
+		public VisionField[] vision;
+		
+		public void Init(int width, int height, short value, short groundLevel)
+		{
+			this.width = width;
+			this.height = height;
+			
+			vision = new VisionField[width * height];
+			
+			Clear(value, groundLevel);
+		}
+
+		public bool IsInside(int i, int j)
+		{
+			var index = i + j * width;
+			return index >= 0 && index < vision.Length;
+		}
+
+		public void SetValue(int i, int j, short value)
+		{
+			vision[i + j * width].value = value;
+		}
+
+		public void Clear(short value, short groundLevel)
+		{
+			for (var i = 0; i < width * height; i++)
+			{
+				vision[i] = new VisionField
+				{
+					value = value,
+					groundLevel = groundLevel
+				};
+			}
+		}
+	}
+
 	public int width = 128;
 	public int height = 128;
 
@@ -39,7 +80,7 @@ public class VisionSystem : MonoBehaviour {
 	[SerializeField]
 	protected float _updateTotal;
 
-	private VisionField[][] _visionMatrix;
+	private VisionMatrix[] _visionMatrixPerPlayer;
 
 	private float _updateCurrent;
 	
@@ -76,14 +117,17 @@ public class VisionSystem : MonoBehaviour {
 	   
 	    _visionTexture.Create(width, height, _localScale);
 	    
-	    _visionMatrix = new VisionField[totalPlayers][];
+	    _visionMatrixPerPlayer = new VisionMatrix[totalPlayers];
 
 	    for (var j = 0; j < totalPlayers; j++)
 	    {
-		    _visionMatrix[j] = new VisionField[width * height];
+		    _visionMatrixPerPlayer[j].width = width;
+		    _visionMatrixPerPlayer[j].height = height;
+		    
+		    _visionMatrixPerPlayer[j].vision = new VisionField[width * height];
 		    for (var i = 0; i < width * height; i++)
 		    {
-			    _visionMatrix[j][i] = new VisionField
+			    _visionMatrixPerPlayer[j].vision[i] = new VisionField
 			    {
 				    value = 0,
 				    groundLevel = 0
@@ -144,7 +188,7 @@ public class VisionSystem : MonoBehaviour {
 
 		for (;;)
 		{
-			var visionField = _visionMatrix[player][x0 + y0 * width];
+			var visionField = _visionMatrixPerPlayer[player].vision[x0 + y0 * width];
 
 			if (visionField.groundLevel > groundLevel)
 				return true;
@@ -218,10 +262,10 @@ public class VisionSystem : MonoBehaviour {
 						if (!blocked)
 						{
 							// init to +1 first time to mark it as previously visited
-							if (_visionMatrix[player][index].value == 0)
-								_visionMatrix[player][index].value++;
+							if (_visionMatrixPerPlayer[player].vision[index].value == 0)
+								_visionMatrixPerPlayer[player].vision[index].value++;
 
-							_visionMatrix[player][index].value += visionValue;
+							_visionMatrixPerPlayer[player].vision[index].value += visionValue;
 						}
 					}
 				}
@@ -302,7 +346,7 @@ public class VisionSystem : MonoBehaviour {
 
 		if (_dirty || _alwaysUpdate)
 		{
-			_visionTexture.UpdateTexture(_visionMatrix[currentPlayer]);
+			_visionTexture.UpdateTexture(_visionMatrixPerPlayer[currentPlayer]);
 		}
 		
 		// update visibles...
@@ -340,7 +384,7 @@ public class VisionSystem : MonoBehaviour {
 					// change to retuurn 0 if outside matrix instead of fixing to always inside matrix.
 //					if (j < 0 || j >= width || k < 0 || k >= height)
 //						continue;
-					isVisible = _visionMatrix[currentPlayer][j + k * width].value > 1;
+					isVisible = _visionMatrixPerPlayer[currentPlayer].vision[j + k * width].value > 1;
 				}
 			}
 			
@@ -409,12 +453,12 @@ public class VisionSystem : MonoBehaviour {
 				for (var k = 0; k < height; k++)
 				{
 					var p = GetWorldPosition(i, k);
-					var currentLevel = _visionMatrix[j][i + k * width].groundLevel;
+					var currentLevel = _visionMatrixPerPlayer[j].vision[i + k * width].groundLevel;
 					
 					if (currentLevel == 0)
 						currentLevel = obstacle.GetGroundLevel(p);
 
-					_visionMatrix[j][i + k * width].groundLevel = currentLevel;
+					_visionMatrixPerPlayer[j].vision[i + k * width].groundLevel = currentLevel;
 				}
 			}
 		}		
@@ -428,6 +472,6 @@ public class VisionSystem : MonoBehaviour {
 	public short GetGroundLevel(Vector3 position)
 	{
 		var mp = GetMatrixPosition(position);
-		return _visionMatrix[currentPlayer][mp.x + mp.y * width].groundLevel;
+		return _visionMatrixPerPlayer[currentPlayer].vision[mp.x + mp.y * width].groundLevel;
 	}
 }

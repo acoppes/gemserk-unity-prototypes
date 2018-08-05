@@ -48,15 +48,9 @@ public class VisionTexture : MonoBehaviour
         get { return _interpolateColorSpeed > 0; }
         set { _interpolateColorSpeed = value ? _defaultInterpolationColorSpeed  : 0.0f; }
     }
-
-    private int _width;
-    private int _height;
 	
     public void Create(int width, int height, Vector2 scale)
     {
-        _width = width;
-        _height = height;
-        
         _texture =  new Texture2D(width, height, _textureFormat, false, false);
         _texture.filterMode = FilterMode.Point;
         _texture.wrapMode = TextureWrapMode.Clamp;
@@ -82,10 +76,10 @@ public class VisionTexture : MonoBehaviour
         return b - a < error;
     }
 
-    private VisionSystem.VisionField[] _visionMatrix;
+    private VisionSystem.VisionMatrix _visionMatrix;
     private bool _dirty = true;
     
-    public void UpdateTexture(VisionSystem.VisionField[] visionMatrix)
+    public void UpdateTexture(VisionSystem.VisionMatrix visionMatrix)
     {
         _visionMatrix = visionMatrix;
         _dirty = true;
@@ -93,17 +87,20 @@ public class VisionTexture : MonoBehaviour
 
     private void Update()
     {
-        if (!_dirty || _visionMatrix == null)
+        if (!_dirty || _visionMatrix.vision == null)
             return;
 
         _dirty = false;
         
         var interpolationEnabled = _interpolateColorSpeed > Mathf.Epsilon;
         var alpha = Time.deltaTime * _interpolateColorSpeed;
+
+        var width = _visionMatrix.width;
+        var height = _visionMatrix.height;
         
-        for (var i = 0; i < _width * _height; i++)
+        for (var i = 0; i < width * height; i++)
         {
-            var visionField = _visionMatrix[i];
+            var visionField = _visionMatrix.vision[i];
             
             // TODO: constants for visions in vision system.
             // _colors[i] = _startColor;

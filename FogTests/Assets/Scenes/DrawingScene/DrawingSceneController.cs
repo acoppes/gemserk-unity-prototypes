@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DrawingSceneController : MonoBehaviour
@@ -21,31 +19,23 @@ public class DrawingSceneController : MonoBehaviour
 	
 	private Vector2 _localScale;
 
-	private VisionSystem.VisionField[] _visionMatrix;
+	private VisionSystem.VisionMatrix _visionMatrix;
 	
 	// Use this for initialization
 	private void Start () {
 		_localScale = _visionCamera.GetScale(_width, _height);
 		_visionTexture.Create(_width, _height, _localScale);
 		
-		_visionMatrix = new VisionSystem.VisionField[_width * _height];
-		for (var i = 0; i < _width * _height; i++)
-		{
-			_visionMatrix[i] = new VisionSystem.VisionField
-			{
-				value = 0,
-				groundLevel = 0
-			};
-		}
+//		_visionMatrix = new VisionSystem.VisionMatrix[_width * _height];
+		
+		_visionMatrix.Init(_width, _height, 0, 0);
 	}
 
 	// TODO: create struct/class for vision matrix with width/height in it.
-	private static void DrawPixel(VisionSystem.VisionField[] visionMatrix, int x, int y, short value, int width)
+	private static void DrawPixel(VisionSystem.VisionMatrix visionMatrix, int x, int y, short value)
 	{
-		var i = x + y * width;
-
-		if (i >= 0 && i < visionMatrix.Length)
-			visionMatrix[i].value = value;
+		if (visionMatrix.IsInside(x, y))
+			visionMatrix.SetValue(x, y, value);
 	}
 	
 	void DrawFilledCircle(int x0, int y0, int radius)
@@ -63,16 +53,16 @@ public class DrawingSceneController : MonoBehaviour
 				var i0 = i + (y0 + y) * _width;
 				var i1 = i + (y0 - y) * _width;
 
-				DrawPixel(_visionMatrix, i, y0 + y, 2, _width);
-				DrawPixel(_visionMatrix, i, y0 - y, 2, _width);
+				DrawPixel(_visionMatrix, i, y0 + y, 2);
+				DrawPixel(_visionMatrix, i, y0 - y, 2);
 			}
 			for (int i = x0 - y; i <= x0 + y; i++)
 			{
 				var i0 = i + (y0 + x) * _width;
 				var i1 = i + (y0 - x) * _width;
 
-				DrawPixel(_visionMatrix, i, y0 + x, 2, _width);
-				DrawPixel(_visionMatrix, i, y0 - x, 2, _width);
+				DrawPixel(_visionMatrix, i, y0 + x, 2);
+				DrawPixel(_visionMatrix, i, y0 - x, 2);
 			}
 
 			y++;
@@ -107,10 +97,7 @@ public class DrawingSceneController : MonoBehaviour
 
 	private void ClearMatrix()
 	{
-		for (var i = 0; i < _width * _height; i++)
-		{
-			_visionMatrix[i].value = 0;
-		}
+		_visionMatrix.Clear(0, 0);
 	}
 	
 	private void Update()
