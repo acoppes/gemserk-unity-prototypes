@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Gemserk;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class VisionSystem : MonoBehaviour {
 
@@ -77,6 +78,37 @@ public class VisionSystem : MonoBehaviour {
 		}
 	}
 
+	public struct CachedAbs
+	{
+		public int width;
+
+		public int[] cache;
+
+		public void Init(int width)
+		{
+			this.width = width;
+			cache = new int[width * 2];
+			for (int i = 0; i < width; i++)
+			{
+				for (int j = 0; j < width; j++)
+				{
+					SetAbs(i - j, Math.Abs(i - j));
+//					cache[i] = Mathf.Abs(i - j);
+				}
+			}
+		}
+
+		void SetAbs(int x, int value)
+		{
+			cache[x + width] = value;
+		}
+
+		public int Abs(int x)
+		{
+			return cache[x + width];
+		} 
+	}
+
 	public int width = 128;
 	public int height = 128;
 
@@ -117,6 +149,8 @@ public class VisionSystem : MonoBehaviour {
 
 	private int _layerVisible;
 	private int _layerHidden;
+
+	private static CachedAbs testAbs;
 	
 	private void Start()
     {
@@ -131,18 +165,7 @@ public class VisionSystem : MonoBehaviour {
 
 	    for (var j = 0; j < totalPlayers; j++)
 	    {
-		    _visionMatrixPerPlayer[j].width = width;
-		    _visionMatrixPerPlayer[j].height = height;
-		    
-		    _visionMatrixPerPlayer[j].vision = new VisionField[width * height];
-		    for (var i = 0; i < width * height; i++)
-		    {
-			    _visionMatrixPerPlayer[j].vision[i] = new VisionField
-			    {
-				    value = 0,
-				    groundLevel = 0
-			    };
-		    }
+		    _visionMatrixPerPlayer[j].Init(width, height, 0, 0);
 	    }
 
 	    // _localScale = transform.localScale;
@@ -157,6 +180,8 @@ public class VisionSystem : MonoBehaviour {
 	    {
 		    RegisterObstacle(obstacle);
 	    }
+
+	    testAbs.Init(Math.Max(width, height));
     }
 
 	private VisionPosition GetMatrixPosition(Vector2 p)
@@ -187,9 +212,15 @@ public class VisionSystem : MonoBehaviour {
 
 	private static bool IsBlocked(VisionMatrix visionMatrix, short groundLevel, int x0, int y0, int x1, int y1)
 	{
-		int dx = Math.Abs(x1 - x0);
-		int dy = Math.Abs(y1 - y0);
+		// cached matrix for absolute values?
+//		int dx = Math.Abs(x1 - x0);
+//		int dy = Math.Abs(y1 - y0);
+		
+		Profiler.BeginSample("IsBlocked");
 
+		int dx = testAbs.Abs(x1 - x0);
+		int dy = testAbs.Abs(y1 - y0);
+		
 		int sx = x0 < x1 ? 1 : -1;
 		int sy = y0 < y1 ? 1 : -1;
 
@@ -198,10 +229,18 @@ public class VisionSystem : MonoBehaviour {
 
 		for (;;)
 		{
-			var visionField = visionMatrix.vision[x0 + y0 * visionMatrix.width];
+			if (visionMatrix.IsInside(x0, y0))
+			{
+				var visionField = visionMatrix.GetValue(x0, y0);
 
-			if (visionField.groundLevel > groundLevel)
-				return true;
+				// var visionField = visionMatrix.vision[x0 + y0 * visionMatrix.width];
+
+				if (visionField.groundLevel > groundLevel)
+				{
+					Profiler.EndSample();
+					return true;
+				}
+			}
 			
 			if (x0 == x1 && y0 == y1)
 				break;
@@ -221,6 +260,7 @@ public class VisionSystem : MonoBehaviour {
 			y0 += sy;
 		}
 
+		Profiler.EndSample();
 		return false;
 	}
 	
