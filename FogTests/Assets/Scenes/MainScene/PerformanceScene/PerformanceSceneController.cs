@@ -30,7 +30,7 @@ public class PerformanceSceneController : MonoBehaviour
 			debugPanelScript.AddButton("add 10 units", delegate
 			{
 				SpawnUnits(10);
-			});
+			}, null);
 			
 			debugPanelScript.AddButton("remove 10 units", delegate
 			{
@@ -41,7 +41,18 @@ public class PerformanceSceneController : MonoBehaviour
 					Destroy(unit.gameObject);
 					toRemove--;
 				}
-			});
+			}, null);
+			
+			var visionTexture = FindObjectOfType<VisionTexture>();
+			
+			if (visionTexture != null)
+			{
+				debugPanelScript.AddButton("fog interpolation", button =>
+				{
+					visionTexture.ColorInterpolation = !visionTexture.ColorInterpolation;
+					button.UpdateText(string.Format("fog easing: {0}", visionTexture.ColorInterpolation ? "on" : "off"));
+				}, null);
+			}
 
 			debugPanelScript.AddLabel("unitCount", delegate(DebugPanelLabel label)
 			{

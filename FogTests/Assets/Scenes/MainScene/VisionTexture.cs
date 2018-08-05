@@ -41,6 +41,14 @@ public class VisionTexture : MonoBehaviour
     [SerializeField]
     protected float _interpolateColorSpeed;
 
+    private const float _defaultInterpolationColorSpeed = 6.0f; 
+    
+    public bool ColorInterpolation
+    {
+        get { return _interpolateColorSpeed > 0; }
+        set { _interpolateColorSpeed = value ? _defaultInterpolationColorSpeed  : 0.0f; }
+    }
+
     private int _width;
     private int _height;
 	
@@ -70,6 +78,7 @@ public class VisionTexture : MonoBehaviour
     public void UpdateTexture(VisionSystem.VisionField[] visionMatrix)
     {
         var interpolationEnabled = _interpolateColorSpeed > Mathf.Epsilon;
+        var alpha = Time.deltaTime * _interpolateColorSpeed;
         
         for (var i = 0; i < _width * _height; i++)
         {
@@ -101,7 +110,7 @@ public class VisionTexture : MonoBehaviour
 
             if (interpolationEnabled)
             {
-                _colors[i] = Color.Lerp(_colors[i], newColor, Time.deltaTime * _interpolateColorSpeed);
+                _colors[i].r = Mathf.LerpUnclamped(_colors[i].r, newColor.r, alpha);
             } else
             {
                 _colors[i] = newColor;

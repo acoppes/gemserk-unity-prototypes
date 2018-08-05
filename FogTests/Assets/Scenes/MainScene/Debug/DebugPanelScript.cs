@@ -18,16 +18,17 @@ public class DebugPanelScript : MonoBehaviour
 	[SerializeField]
 	protected GameObject _labelTemplate;
 
-	public void AddButton(string text, UnityAction action)
+	public void AddButton(string text, Action<DebugPanelButton> callbackAction, Action<DebugPanelButton> updateAction)
 	{
 		var buttonObject = Instantiate(_buttonTemplate, _parent, false);
 		buttonObject.SetActive(true);
-
-		var button = buttonObject.GetComponentInChildren<Button>();
-		button.onClick.AddListener(action);
 		
 		var buttonText = buttonObject.GetComponentInChildren<Text>();
 		buttonText.text = text;
+		
+		var debugLabel = buttonObject.GetComponent<DebugPanelButton>();
+		debugLabel.SetCallbackAction(callbackAction);
+		debugLabel.SetUpdateAction(updateAction);
 	}
 
 	public void AddLabel(string name, Action<DebugPanelLabel> updateAction)
@@ -36,16 +37,6 @@ public class DebugPanelScript : MonoBehaviour
 		labelObject.SetActive(true);
 
 		var debugLabel = labelObject.GetComponent<DebugPanelLabel>();
-
-		StartCoroutine(UpdateLabel(debugLabel, updateAction));
-	}
-
-	private static IEnumerator UpdateLabel(DebugPanelLabel label, Action<DebugPanelLabel> updateAction)
-	{
-		while (true)
-		{
-			yield return null;
-			updateAction(label);
-		}
+		debugLabel.SetUpdateAction(updateAction);
 	}
 }

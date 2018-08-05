@@ -40,15 +40,13 @@ public class DebugScript : MonoBehaviour
 	private void Start()
 	{
 		ToggleMenuGroup();
-		
+		ToggleFpsText();
 		_moveCameraText.text = _moveCamera.activeSelf ? "move vision" : "move camera";
 	}
 	
 	public void ToggleMenuGroup()
 	{
-		_menuGroup.interactable = !_menuGroup.interactable;
-		_menuGroup.blocksRaycasts = !_menuGroup.blocksRaycasts;
-		_menuGroup.alpha = _menuGroup.interactable ? 1.0f : 0.0f;
+		_menuGroup.gameObject.SetActive(!_menuGroup.gameObject.activeSelf);
 	}
 	
 	public void ToggleFogTexture()
@@ -86,9 +84,7 @@ public class DebugScript : MonoBehaviour
 
 	public void ToggleFpsText()
 	{
-		_fpsGroup.interactable = !_fpsGroup.interactable;
-		_fpsGroup.blocksRaycasts = !_fpsGroup.blocksRaycasts;
-		_fpsGroup.alpha = _fpsGroup.interactable ? 1.0f : 0.0f;
+		_fpsGroup.gameObject.SetActive(!_fpsGroup.gameObject.activeSelf);
 	}
 
 	public void ToggleRaycast()
