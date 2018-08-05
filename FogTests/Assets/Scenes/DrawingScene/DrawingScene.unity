@@ -494,10 +494,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da204eb6fe46fce43b02874e74fb4aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 1038996162}
   _visionTexture: {fileID: 1955262466}
   _visionCamera: {fileID: 1955262464}
   _width: 256
   _height: 256
+  _testRadius: 10
 --- !u!4 &1023079061
 Transform:
   m_ObjectHideFlags: 0
@@ -571,7 +573,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 567
+    m_Bits: 823
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
