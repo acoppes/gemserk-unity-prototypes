@@ -42,6 +42,11 @@ public class PerformanceSceneController : MonoBehaviour
 					toRemove--;
 				}
 			});
+
+			debugPanelScript.AddLabel("unitCount", delegate(DebugPanelLabel label)
+			{
+				label.UpdateText(string.Format("units: {0}", unitsParent.childCount));
+			});
 		}
 	}
 
