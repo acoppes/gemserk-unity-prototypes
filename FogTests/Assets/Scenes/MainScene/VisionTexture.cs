@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class VisionTexture : MonoBehaviour
@@ -74,6 +75,13 @@ public class VisionTexture : MonoBehaviour
         _texture.SetPixels(_colors);
         _texture.Apply();
     }
+
+    private static bool CompareFloat(float a, float b, float error)
+    {
+        if (a > b)
+            return a - b < error;
+        return b - a < error;
+    }
     
     public void UpdateTexture(VisionSystem.VisionField[] visionMatrix)
     {
@@ -110,6 +118,7 @@ public class VisionTexture : MonoBehaviour
 
             if (interpolationEnabled)
             {
+//                _colors[i].r = Unity.Mathematics.math.lerp(_colors[i].r, newColor.r, alpha);
                 _colors[i].r = Mathf.LerpUnclamped(_colors[i].r, newColor.r, alpha);
             } else
             {
