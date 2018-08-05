@@ -27,12 +27,12 @@ public class PerformanceSceneController : MonoBehaviour
 		var debugPanelScript = FindObjectOfType<DebugPanelScript>();
 		if (debugPanelScript != null)
 		{
-			debugPanelScript.AddButton("+10 units", delegate
+			debugPanelScript.AddButton("add 10 units", delegate
 			{
 				SpawnUnits(10);
 			});
 			
-			debugPanelScript.AddButton("-10 units", delegate
+			debugPanelScript.AddButton("remove 10 units", delegate
 			{
 				var toRemove = 10;
 				while (unitsParent.childCount > 0 && toRemove > 0)

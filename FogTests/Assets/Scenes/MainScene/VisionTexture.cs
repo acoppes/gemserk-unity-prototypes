@@ -27,6 +27,16 @@ public class VisionTexture : MonoBehaviour
 
     [SerializeField] protected Color _startColor = new Color(0, 0, 0, 1.0f);
 
+    [SerializeField] 
+    protected Color[] _groundColors = new Color[]
+    {
+        new Color(0, 0, 0.2f, 1.0f),
+        new Color(0, 0, 0.6f, 1.0f),
+        new Color(0, 0, 0.8f, 1.0f),
+    };
+
+    [SerializeField]
+    protected bool _writeGroundColor;
 
     private int _width;
     private int _height;
@@ -63,26 +73,24 @@ public class VisionTexture : MonoBehaviour
             // TODO: constants for visions in vision system.
             _colors[i] = _startColor;
 
-            if (visionField.value > 1)
+            var value = visionField.value;
+            
+            if (value > 1)
             {
                 _colors[i] = _whiteColor;
-
-                if (visionField.groundLevel == 1)
-                    _colors[i].b = 0.5f;
-                
-                continue;
-            }
-
-            if (visionField.value == 1)
+            } else if (value == 1)
             {
                 _colors[i] = _greyColor;
-                continue;
-            }
-			
-            // this is just for debug reasons
-            if (visionField.value < 0)
+            } else if (value < 0)
             {
+                // for debug, should never be < 0
                 _colors[i] = _errorColor;
+            }
+
+            if (_writeGroundColor)
+            {
+                var groundColor = _groundColors[visionField.groundLevel];
+                _colors[i] += groundColor;
             }
         }
 		
