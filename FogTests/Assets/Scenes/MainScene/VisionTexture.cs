@@ -38,6 +38,9 @@ public class VisionTexture : MonoBehaviour
     [SerializeField]
     protected bool _writeGroundColor;
 
+    [SerializeField]
+    protected float _interpolateColorSpeed;
+
     private int _width;
     private int _height;
 	
@@ -66,31 +69,42 @@ public class VisionTexture : MonoBehaviour
     
     public void UpdateTexture(VisionSystem.VisionField[] visionMatrix)
     {
+        var interpolationEnabled = _interpolateColorSpeed > Mathf.Epsilon;
+        
         for (var i = 0; i < _width * _height; i++)
         {
             var visionField = visionMatrix[i];
             
             // TODO: constants for visions in vision system.
-            _colors[i] = _startColor;
+           // _colors[i] = _startColor;
 
             var value = visionField.value;
+            var newColor = _startColor;
             
             if (value > 1)
             {
-                _colors[i] = _whiteColor;
+                newColor = _whiteColor;
             } else if (value == 1)
             {
-                _colors[i] = _greyColor;
+                newColor = _greyColor;
             } else if (value < 0)
             {
                 // for debug, should never be < 0
-                _colors[i] = _errorColor;
+                newColor = _errorColor;
             }
 
             if (_writeGroundColor)
             {
                 var groundColor = _groundColors[visionField.groundLevel];
-                _colors[i] += groundColor;
+                newColor += groundColor;
+            }
+
+            if (interpolationEnabled)
+            {
+                _colors[i] = Color.Lerp(_colors[i], newColor, Time.deltaTime * _interpolateColorSpeed);
+            } else
+            {
+                _colors[i] = newColor;
             }
         }
 		
