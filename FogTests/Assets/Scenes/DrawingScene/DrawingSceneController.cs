@@ -38,6 +38,15 @@ public class DrawingSceneController : MonoBehaviour
 			};
 		}
 	}
+
+	// TODO: create struct/class for vision matrix with width/height in it.
+	private static void DrawPixel(VisionSystem.VisionField[] visionMatrix, int x, int y, short value, int width)
+	{
+		var i = x + y * width;
+
+		if (i >= 0 && i < visionMatrix.Length)
+			visionMatrix[i].value = value;
+	}
 	
 	void DrawFilledCircle(int x0, int y0, int radius)
 	{
@@ -51,25 +60,19 @@ public class DrawingSceneController : MonoBehaviour
 		{
 			for (int i = x0 - x; i <= x0 + x; i++)
 			{
-//				SetPixel(i, y0 + y);
-//				SetPixel(i, y0 - y);
-
 				var i0 = i + (y0 + y) * _width;
 				var i1 = i + (y0 - y) * _width;
-				
-				_visionMatrix[i0].value = 2;
-				_visionMatrix[i1].value = 2;
+
+				DrawPixel(_visionMatrix, i, y0 + y, 2, _width);
+				DrawPixel(_visionMatrix, i, y0 - y, 2, _width);
 			}
 			for (int i = x0 - y; i <= x0 + y; i++)
 			{
-//				SetPixel(i, y0 + x);
-//				SetPixel(i, y0 - x);
-				
 				var i0 = i + (y0 + x) * _width;
 				var i1 = i + (y0 - x) * _width;
 
-				_visionMatrix[i0].value = 2;
-				_visionMatrix[i1].value = 2;
+				DrawPixel(_visionMatrix, i, y0 + x, 2, _width);
+				DrawPixel(_visionMatrix, i, y0 - x, 2, _width);
 			}
 
 			y++;
