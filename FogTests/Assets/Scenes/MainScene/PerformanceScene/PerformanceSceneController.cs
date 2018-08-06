@@ -53,6 +53,17 @@ public class PerformanceSceneController : MonoBehaviour
 					button.UpdateText(string.Format("fog easing: {0}", visionTexture.ColorInterpolation ? "on" : "off"));
 				}, null);
 			}
+			
+			if (_visionSystem != null)
+			{
+				var b = debugPanelScript.AddButton("update method", button =>
+				{
+					_visionSystem.updateMethod = !_visionSystem.updateMethod;
+					button.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
+				}, null);
+				
+				b.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
+			}
 
 			debugPanelScript.AddLabel("unitCount", delegate(DebugPanelLabel label)
 			{

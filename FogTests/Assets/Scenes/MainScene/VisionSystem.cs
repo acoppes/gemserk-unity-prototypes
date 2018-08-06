@@ -151,6 +151,9 @@ public class VisionSystem : MonoBehaviour {
 	private int _layerHidden;
 
 	private static CachedAbs testAbs;
+
+	[NonSerialized]
+	public bool updateMethod;
 	
 	private void Start()
     {
@@ -274,7 +277,20 @@ public class VisionSystem : MonoBehaviour {
 		visionMatrix.SetValue(x, y, value);
 	}
 
+
 	private void UpdateVision(VisionPosition mp, float visionRange, int player, short groundLevel, short visionValue)
+	{
+		if (updateMethod)
+		{
+			UpdateVision1(mp, visionRange, player, groundLevel, visionValue);
+		}
+		else
+		{
+			UpdateVision2(mp, visionRange, player, groundLevel, visionValue);
+		}
+	}
+
+	private void UpdateVision2(VisionPosition mp, float visionRange, int player, short groundLevel, short visionValue)
 	{
 		int radius = Mathf.RoundToInt(visionRange / _localScale.x);
 		int x0 = mp.x;
@@ -315,7 +331,7 @@ public class VisionSystem : MonoBehaviour {
 		
 	}
 
-	private void UpdateVision2(VisionPosition mp, float visionRange, int player, short groundLevel, short visionValue)
+	private void UpdateVision1(VisionPosition mp, float visionRange, int player, short groundLevel, short visionValue)
 	{
 		var visionPosition = GetWorldPosition(mp.x, mp.y);
 		
@@ -409,7 +425,7 @@ public class VisionSystem : MonoBehaviour {
 		}
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		if (_updateDisabled) 
 			return;

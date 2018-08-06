@@ -4538,7 +4538,7 @@ MonoBehaviour:
   height: 256
   totalPlayers: 2
   currentPlayer: 0
-  raycastEnabled: 1
+  raycastEnabled: 0
   _visionTexture: {fileID: 1955262466}
   _visionCamera: {fileID: 1955262464}
   _updateDisabled: 0
