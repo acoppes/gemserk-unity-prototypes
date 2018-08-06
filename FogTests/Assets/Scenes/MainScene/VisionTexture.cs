@@ -122,7 +122,7 @@ public class VisionTexture : MonoBehaviour
 
             if (_writeGroundColor)
             {
-                var groundColor = _groundColors[visionField.groundLevel];
+                var groundColor = _groundColors[_visionMatrix.ground[i]];
                 newColor += groundColor;
             }
 
