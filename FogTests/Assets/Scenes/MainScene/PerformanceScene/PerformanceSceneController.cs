@@ -37,8 +37,8 @@ public class PerformanceSceneController : MonoBehaviour
 				var toRemove = 10;
 				while (unitsParent.childCount > 0 && toRemove > 0)
 				{
-					var unit = unitsParent.GetChild(UnityEngine.Random.Range(0, unitsParent.childCount));
-					Destroy(unit.gameObject);
+					var unit = unitsParent.GetChild(0);
+					DestroyImmediate(unit.gameObject);
 					toRemove--;
 				}
 			}, null);

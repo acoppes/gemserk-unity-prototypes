@@ -2152,8 +2152,8 @@ MonoBehaviour:
   unitPrefab: {fileID: 1216008585793352, guid: 1be2e41ba05f6a14eaa40e96eb2f8b7b, type: 2}
   unitsCount: 100
   spawnBounds: {fileID: 509982879}
-  minVision: 100
-  maxVision: 300
+  minVision: 250
+  maxVision: 250
   unitsParent: {fileID: 1547910898}
 --- !u!4 &1023079061
 Transform:
@@ -4534,17 +4534,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f80efab45c9e9c479c584d145b3fbfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 256
-  height: 256
+  width: 128
+  height: 128
   totalPlayers: 2
   currentPlayer: 0
-  raycastEnabled: 0
+  raycastEnabled: 1
   _visionTexture: {fileID: 1955262466}
   _visionCamera: {fileID: 1955262464}
   _updateDisabled: 0
   _resetMatrixEachFrame: 1
   _updateTotal: 0.1
   _alwaysUpdate: 1
+  updateMethod: 1
 --- !u!114 &1955262464
 MonoBehaviour:
   m_ObjectHideFlags: 0

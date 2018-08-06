@@ -33,8 +33,6 @@ public class VisionSystem : MonoBehaviour {
 			ground = new short[length];
 			visited = new bool[length];
 			
-//			vision = new VisionField[width * height];
-			
 			Clear(value, groundLevel);
 		}
 
@@ -83,10 +81,7 @@ public class VisionSystem : MonoBehaviour {
 		
 		public void ClearValues()
 		{
-			for (var i = 0; i < width * height; i++)
-			{
-				values[i] = 0;
-			}
+			Array.Clear(values, 0, values.Length);
 		}
 
 
@@ -139,7 +134,7 @@ public class VisionSystem : MonoBehaviour {
 
 	private static CachedIntAbsoluteValues cachedAbsoluteValues;
 
-	[NonSerialized]
+	[SerializeField]
 	public bool updateMethod;
 	
 	private void Start()
@@ -202,10 +197,6 @@ public class VisionSystem : MonoBehaviour {
 
 	private static bool IsBlocked(VisionMatrix visionMatrix, short groundLevel, int x0, int y0, int x1, int y1)
 	{
-		// cached matrix for absolute values?
-//		int dx = Math.Abs(x1 - x0);
-//		int dy = Math.Abs(y1 - y0);
-		
 		Profiler.BeginSample("IsBlocked");
 
 		int dx = cachedAbsoluteValues.Abs(x1 - x0);
@@ -267,7 +258,7 @@ public class VisionSystem : MonoBehaviour {
 
 	private void UpdateVision(VisionPosition mp, float visionRange, int player, short groundLevel, short visionValue)
 	{
-		if (updateMethod)
+		if (!updateMethod)
 		{
 			UpdateVision1(mp, visionRange, player, groundLevel, visionValue);
 		}
@@ -277,9 +268,11 @@ public class VisionSystem : MonoBehaviour {
 		}
 	}
 
-	private void UpdateVision2(VisionPosition mp, float visionRange, int player, short groundLevel, short visionValue)
+//	private short[] currentVisionTest = new short[100*100];
+
+	private void UpdateVision2(VisionPosition mp, float visionRange, int player, short groundLevel, short value)
 	{
-		int radius = Mathf.RoundToInt(visionRange / _localScale.x);
+		int radius = Mathf.CeilToInt(visionRange / _localScale.x);
 		int x0 = mp.x;
 		int y0 = mp.y;
 		
@@ -291,17 +284,19 @@ public class VisionSystem : MonoBehaviour {
 
 		var visionMatrix = _visionMatrixPerPlayer[player];
 		
+//		Array.Clear(currentVisionTest, 0, currentVisionTest.Length);
+		
 		while (x >= y)
 		{
 			for (var i = x0 - x; i <= x0 + x; i++)
 			{
-				DrawPixel(visionMatrix, x0, y0, i, y0 + y, visionValue, groundLevel);
-				DrawPixel(visionMatrix, x0, y0, i, y0 - y, visionValue, groundLevel);
+				DrawPixel(visionMatrix, x0, y0, i, y0 + y, value, groundLevel);
+				DrawPixel(visionMatrix, x0, y0, i, y0 - y, value, groundLevel);
 			}
 			for (var i = x0 - y; i <= x0 + y; i++)
 			{
-				DrawPixel(visionMatrix, x0, y0, i, y0 + x, visionValue, groundLevel);
-				DrawPixel(visionMatrix, x0, y0, i, y0 - x, visionValue, groundLevel);
+				DrawPixel(visionMatrix, x0, y0, i, y0 + x, value, groundLevel);
+				DrawPixel(visionMatrix, x0, y0, i, y0 - x, value, groundLevel);
 			}
 
 			y++;
@@ -469,7 +464,6 @@ public class VisionSystem : MonoBehaviour {
 		Profiler.BeginSample("Visibles");
 		for (var i = 0; i < _visibles.Count; i++)
 		{
-			
 			var visible = _visibles[i];
 			
 			var halfwidth = Mathf.CeilToInt(visible.bounds.x * 0.5f / _localScale.x);
@@ -485,19 +479,10 @@ public class VisionSystem : MonoBehaviour {
 			var rowStart = Math.Max(visible.matrixPosition.y - halfheight, 0);
 			var rowEnd = Math.Min(visible.matrixPosition.y + halfheight, height - 1);
 
-//			var colStart = visible.matrixPosition[0] - halfwidth;
-//			var colEnd = visible.matrixPosition[0] + halfwidth;
-//
-//			var rowStart = visible.matrixPosition[1] - halfheight;
-//			var rowEnd = visible.matrixPosition[1] + halfheight;
-
 			for (var j = colStart; !isVisible && j <= colEnd; j++)
 			{
 				for (var k = rowStart; !isVisible && k <= rowEnd; k++)
 				{
-					// change to retuurn 0 if outside matrix instead of fixing to always inside matrix.
-//					if (j < 0 || j >= width || k < 0 || k >= height)
-//						continue;
 					isVisible = _visionMatrixPerPlayer[currentPlayer].GetValue(j, k) > 1;
 				}
 			}
