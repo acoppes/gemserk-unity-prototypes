@@ -4,6 +4,7 @@ using Gemserk;
 using UnityEngine;
 using UnityEngine.Profiling;
 
+
 public class VisionSystem : MonoBehaviour {
 
 	// TODO: since this is the vision of one player, we could extract part of the structure that represents 
@@ -91,36 +92,6 @@ public class VisionSystem : MonoBehaviour {
 
 	}
 
-	public struct CachedAbs
-	{
-		public int width;
-
-		public int[] cache;
-
-		public void Init(int width)
-		{
-			this.width = width;
-			cache = new int[width * 2];
-			for (int i = 0; i < width; i++)
-			{
-				for (int j = 0; j < width; j++)
-				{
-					SetAbs(i - j, Math.Abs(i - j));
-//					cache[i] = Mathf.Abs(i - j);
-				}
-			}
-		}
-
-		void SetAbs(int x, int value)
-		{
-			cache[x + width] = value;
-		}
-
-		public int Abs(int x)
-		{
-			return cache[x + width];
-		} 
-	}
 
 	public int width = 128;
 	public int height = 128;
@@ -166,7 +137,7 @@ public class VisionSystem : MonoBehaviour {
 	private int _layerVisible;
 	private int _layerHidden;
 
-	private static CachedAbs testAbs;
+	private static CachedIntAbsoluteValues cachedAbsoluteValues;
 
 	[NonSerialized]
 	public bool updateMethod;
@@ -200,7 +171,7 @@ public class VisionSystem : MonoBehaviour {
 		    RegisterObstacle(obstacle);
 	    }
 
-	    testAbs.Init(Math.Max(width, height));
+	    cachedAbsoluteValues.Init(Math.Max(width, height));
     }
 
 	private VisionPosition GetMatrixPosition(Vector2 p)
@@ -237,8 +208,8 @@ public class VisionSystem : MonoBehaviour {
 		
 		Profiler.BeginSample("IsBlocked");
 
-		int dx = testAbs.Abs(x1 - x0);
-		int dy = testAbs.Abs(y1 - y0);
+		int dx = cachedAbsoluteValues.Abs(x1 - x0);
+		int dy = cachedAbsoluteValues.Abs(y1 - y0);
 		
 		int sx = x0 < x1 ? 1 : -1;
 		int sy = y0 < y1 ? 1 : -1;
