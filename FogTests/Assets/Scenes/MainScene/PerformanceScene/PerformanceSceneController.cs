@@ -56,13 +56,21 @@ public class PerformanceSceneController : MonoBehaviour
 			
 			if (_visionSystem != null)
 			{
-				var b = debugPanelScript.AddButton("update method", button =>
+				var b1 = debugPanelScript.AddButton("update method", button =>
 				{
 					_visionSystem.updateMethod = !_visionSystem.updateMethod;
 					button.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
 				}, null);
 				
-				b.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
+				b1.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
+				
+//				var b1 = debugPanelScript.AddButton("update method", button =>
+//				{
+//					_visionSystem.updateMethod = !_visionSystem.updateMethod;
+//					button.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
+//				}, null);
+//				
+//				b1.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
 			}
 
 			debugPanelScript.AddLabel("unitCount", delegate(DebugPanelLabel label)
