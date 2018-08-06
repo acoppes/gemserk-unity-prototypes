@@ -76,6 +76,17 @@ public class VisionSystem : MonoBehaviour {
 				};
 			}
 		}
+		
+		public void ClearValues()
+		{
+			for (var i = 0; i < width * height; i++)
+			{
+				var v = vision[i].value;
+				vision[i].value = 0;
+				if (v > 0)
+					vision[i].value = 1;
+			}
+		}
 	}
 
 	public struct CachedAbs
@@ -125,6 +136,9 @@ public class VisionSystem : MonoBehaviour {
 
 	[SerializeField]
 	protected bool _updateDisabled;
+
+	[SerializeField]
+	public bool _resetMatrixEachFrame;
 
 	[SerializeField]
 	protected float _updateTotal;
@@ -429,7 +443,7 @@ public class VisionSystem : MonoBehaviour {
 	{
 		if (_updateDisabled) 
 			return;
-
+		
 		_dirty = false;
 		
 		// _localScale = transform.localScale;
@@ -440,25 +454,39 @@ public class VisionSystem : MonoBehaviour {
 
 		if (_updateCurrent >= _updateTotal)
 		{
+			Profiler.BeginSample("VisionUpdate");
+
 			_updateCurrent = 0;
+
+			if (_resetMatrixEachFrame)
+			{
+				foreach (var _visionMatrix in _visionMatrixPerPlayer)
+				{
+					_visionMatrix.ClearValues();
+				}
+			}
 			
 			foreach (var vision in _visions)
 			{	
 				vision.position = GetMatrixPosition(vision.worldPosition);
 				
-				if (vision.position.x == vision.previousPosition.x &&
+				if (!_resetMatrixEachFrame && vision.position.x == vision.previousPosition.x &&
 				    vision.position.y == vision.previousPosition.y &&
 				    vision.range == vision.previousRange && 
 				    vision.player == vision.previousPlayer && 
 				    vision.groundLevel == vision.previousGroundLevel)
 					continue;
 			
-				UpdateVision(vision.previousPosition, vision.previousRange, vision.previousPlayer, vision.previousGroundLevel, -1);
+				if (!_resetMatrixEachFrame)
+					UpdateVision(vision.previousPosition, vision.previousRange, vision.previousPlayer, vision.previousGroundLevel, -1);
+				
 				UpdateVision(vision.position, vision.range, vision.player, vision.groundLevel, 1);
 			
 				vision.UpdateCachedPosition();
 				_dirty = true;
 			}
+			
+			Profiler.EndSample();
 		}
 
 		if (_dirty || _alwaysUpdate)
@@ -471,8 +499,10 @@ public class VisionSystem : MonoBehaviour {
 		// if not dirty and visible didnt move nor change its visible bounds
 		// then don't update
 		
+		Profiler.BeginSample("Visibles");
 		for (var i = 0; i < _visibles.Count; i++)
 		{
+			
 			var visible = _visibles[i];
 			
 			var halfwidth = Mathf.CeilToInt(visible.bounds.x * 0.5f / _localScale.x);
@@ -507,8 +537,11 @@ public class VisionSystem : MonoBehaviour {
 			
 			visible.visible = isVisible;
 			visible.gameObject.SetLayerRecursive(isVisible ? _layerVisible : _layerHidden);
+			
 		}
+		Profiler.EndSample();
 
+		
 	}
 
 	private void ProcessPendingVisions()
@@ -530,7 +563,8 @@ public class VisionSystem : MonoBehaviour {
 		{
 			_visions.Remove(vision);
 //			GetMatrixPosition(vision.position, vision.matrixPosition);
-			UpdateVision(vision.previousPosition, vision.previousRange, vision.previousPlayer, vision.previousGroundLevel, -1);
+			if (!_resetMatrixEachFrame)
+				UpdateVision(vision.previousPosition, vision.previousRange, vision.previousPlayer, vision.previousGroundLevel, -1);
 
 			_dirty = true;
 		}
