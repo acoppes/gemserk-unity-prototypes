@@ -108,10 +108,10 @@ public class VisionTexture : MonoBehaviour
             var value = visionField.value;
             var newColor = _startColor;
             
-            if (value > 1)
+            if (value > 0)
             {
                 newColor = _whiteColor;
-            } else if (value == 1)
+            } else if (value == 0 && _visionMatrix.visited[i])
             {
                 newColor = _greyColor;
             } else if (value < 0)

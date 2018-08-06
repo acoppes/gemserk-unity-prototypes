@@ -26,11 +26,23 @@ public class VisionSystem : MonoBehaviour {
 		public int height;
 
 		public VisionField[] vision;
+//
+//		public short[] values;
+//		public short[] ground;
+		public bool[] visited;
+		
+		// TODO: move player value to vision matrix
 		
 		public void Init(int width, int height, short value, short groundLevel)
 		{
 			this.width = width;
 			this.height = height;
+
+			var length = width * height;
+			
+//			values = new short[length];
+//			ground = new short[length];
+			visited = new bool[length];
 			
 			vision = new VisionField[width * height];
 			
@@ -59,9 +71,11 @@ public class VisionSystem : MonoBehaviour {
 			
 			if (index < 0 && index >= vision.Length)
 				return;
+
+			visited[index] = true;
 			
-			if (vision[index].value == 0)
-				vision[index].value += 1;
+//			if (vision[index].value == 0)
+//				vision[index].value += 1;
 			vision[index].value += value;
 		}
 
@@ -81,10 +95,10 @@ public class VisionSystem : MonoBehaviour {
 		{
 			for (var i = 0; i < width * height; i++)
 			{
-				var v = vision[i].value;
+//				var v = vision[i].value;
 				vision[i].value = 0;
-				if (v > 0)
-					vision[i].value = 1;
+//				if (v > 0)
+//					vision[i].value = 1;
 			}
 		}
 	}
