@@ -36,9 +36,7 @@ public class DrawingSceneController : MonoBehaviour
 	{
 		if (visionMatrix.IsInside(x, y))
 		{
-			var v = visionMatrix.GetValue(x, y);
-			v.value = value;
-			visionMatrix.SetValue(x, y, v);
+			visionMatrix.SetValue(x, y, value);
 		}
 	}
 	

@@ -69,13 +69,6 @@ public class VisionTexture : MonoBehaviour
         _texture.Apply();
     }
 
-    private static bool CompareFloat(float a, float b, float error)
-    {
-        if (a > b)
-            return a - b < error;
-        return b - a < error;
-    }
-
     private VisionSystem.VisionMatrix _visionMatrix;
     private bool _dirty = true;
     
@@ -87,7 +80,7 @@ public class VisionTexture : MonoBehaviour
 
     private void Update()
     {
-        if (!_dirty || _visionMatrix.vision == null)
+        if (!_dirty || _visionMatrix.values == null)
             return;
 
         _dirty = false;
@@ -100,12 +93,11 @@ public class VisionTexture : MonoBehaviour
         
         for (var i = 0; i < width * height; i++)
         {
-            var visionField = _visionMatrix.vision[i];
+            var value = _visionMatrix.values[i];
             
             // TODO: constants for visions in vision system.
             // _colors[i] = _startColor;
 
-            var value = visionField.value;
             var newColor = _startColor;
             
             if (value > 0)

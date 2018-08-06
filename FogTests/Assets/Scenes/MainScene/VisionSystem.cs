@@ -10,23 +10,12 @@ public class VisionSystem : MonoBehaviour {
 	// the player vision and update each one depending on that, and the texture only updates if it is the 
 	// selected players, so the final color depends on the list of current selected players.
 
-	public struct VisionField
-	{
-		// vision value, > 1 is visible by player.
-		public short value;
-
-		// we could have players here, value for each player
-		// where player total is a constant
-	}
-
 	public struct VisionMatrix
 	{
 		public int width;
 		public int height;
 
-		public VisionField[] vision;
-//
-//		public short[] values;
+		public short[] values;
 		public short[] ground;
 		public bool[] visited;
 		
@@ -39,11 +28,11 @@ public class VisionSystem : MonoBehaviour {
 
 			var length = width * height;
 			
-//			values = new short[length];
+			values = new short[length];
 			ground = new short[length];
 			visited = new bool[length];
 			
-			vision = new VisionField[width * height];
+//			vision = new VisionField[width * height];
 			
 			Clear(value, groundLevel);
 		}
@@ -51,17 +40,24 @@ public class VisionSystem : MonoBehaviour {
 		public bool IsInside(int i, int j)
 		{
 			var index = i + j * width;
-			return index >= 0 && index < vision.Length;
+			return index >= 0 && index < values.Length;
 		}
 
-		public void SetValue(int i, int j, VisionField value)
+		public void SetValue(int i, int j, short value)
 		{
-			vision[i + j * width] = value;
+			visited[i + j * width] = true;
+			values[i + j * width] = value;
+		}
+		
+		public void AddValue(int i, int j, short value)
+		{
+			visited[i + j * width] = true;
+			values[i + j * width] += value;
 		}
 
-		public VisionField GetValue(int i, int j)
+		public short GetValue(int i, int j)
 		{
-			return vision[i + j * width];
+			return values[i + j * width];
 		}
 
 		public short GetGround(int i, int j)
@@ -73,17 +69,6 @@ public class VisionSystem : MonoBehaviour {
 		{
 			this.ground[i + j * width] = ground;
 		}
-		
-		public void SetValue(int i, int j, short value)
-		{
-			var index = i + j * width;
-			
-			if (index < 0 && index >= vision.Length)
-				return;
-
-			visited[index] = true;
-			vision[index].value += value;
-		}
 
 		public void Clear(short value, short groundLevel)
 		{
@@ -91,10 +76,7 @@ public class VisionSystem : MonoBehaviour {
 			{
 				visited[i] = false;
 				ground[i] = groundLevel;
-				vision[i] = new VisionField
-				{
-					value = value
-				};
+				values[i] = value;
 			}
 		}
 		
@@ -102,7 +84,7 @@ public class VisionSystem : MonoBehaviour {
 		{
 			for (var i = 0; i < width * height; i++)
 			{
-				vision[i].value = 0;
+				values[i] = 0;
 			}
 		}
 
@@ -308,7 +290,7 @@ public class VisionSystem : MonoBehaviour {
 		if (blocked) 
 			return;
 		
-		visionMatrix.SetValue(x, y, value);
+		visionMatrix.AddValue(x, y, value);
 	}
 
 
@@ -400,8 +382,6 @@ public class VisionSystem : MonoBehaviour {
 				
 				var diff = p - visionPosition;
 				
-				var index = mx + my * width;
-				
 				if (mx >= 0 && mx < width && my >= 0 && my < height)
 				{
 					// check if rect to vision center is not blocked
@@ -414,11 +394,7 @@ public class VisionSystem : MonoBehaviour {
 						
 						if (!blocked)
 						{
-							// init to +1 first time to mark it as previously visited
-							if (visionMatrix.vision[index].value == 0)
-								visionMatrix.vision[index].value++;
-
-							visionMatrix.vision[index].value += visionValue;
+							visionMatrix.AddValue(mx, my, visionValue);
 						}
 					}
 				}
@@ -551,7 +527,7 @@ public class VisionSystem : MonoBehaviour {
 					// change to retuurn 0 if outside matrix instead of fixing to always inside matrix.
 //					if (j < 0 || j >= width || k < 0 || k >= height)
 //						continue;
-					isVisible = _visionMatrixPerPlayer[currentPlayer].vision[j + k * width].value > 1;
+					isVisible = _visionMatrixPerPlayer[currentPlayer].GetValue(j, k) > 1;
 				}
 			}
 			
