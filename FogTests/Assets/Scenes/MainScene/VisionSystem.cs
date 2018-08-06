@@ -208,16 +208,24 @@ public class VisionSystem : MonoBehaviour {
 		int err = (dx > dy ? dx : -dy) / 2;
 		int e2;
 
+		var blocked = false;
+		
 		for (;;)
 		{
+//			if (_currentBlocked[x1 - x0 + 50, y1 - y0 + 50])
+//			{
+//				blocked = true;
+//				break;
+//			}
+			
 			var ground = visionMatrix.GetGround(x0, y0);
 
 			// var visionField = visionMatrix.vision[x0 + y0 * visionMatrix.width];
 
 			if (ground > groundLevel)
 			{
-				Profiler.EndSample();
-				return true;
+				blocked = true;
+				break;
 			}
 			
 			if (x0 == x1 && y0 == y1)
@@ -239,7 +247,7 @@ public class VisionSystem : MonoBehaviour {
 		}
 
 		Profiler.EndSample();
-		return false;
+		return blocked;
 	}
 	
 	private void DrawPixel(VisionMatrix visionMatrix, int x0, int y0, int x, int y, short value, short groundLevel)
@@ -249,9 +257,13 @@ public class VisionSystem : MonoBehaviour {
 		
 		var blocked = raycastEnabled && IsBlocked(visionMatrix, groundLevel, x, y, x0, y0);
 
-		if (blocked) 
+		if (blocked)
+		{
+//			_currentBlocked[x0 - x + 50, y0 - y + 50] = true;
 			return;
+		}
 		
+//		_currentBlocked[x0 - x + 50, y0 - y + 50] = false;
 		visionMatrix.AddValue(x, y, value);
 	}
 
@@ -268,7 +280,8 @@ public class VisionSystem : MonoBehaviour {
 		}
 	}
 
-//	private short[] currentVisionTest = new short[100*100];
+	// max matrix size, if vision range > max, then cant use the cached matrix
+//	private static bool[,] _currentBlocked = new bool[100, 100];
 
 	private void UpdateVision2(VisionPosition mp, float visionRange, int player, short groundLevel, short value)
 	{
@@ -284,7 +297,8 @@ public class VisionSystem : MonoBehaviour {
 
 		var visionMatrix = _visionMatrixPerPlayer[player];
 		
-//		Array.Clear(currentVisionTest, 0, currentVisionTest.Length);
+		// use a cached sub matrix for blocked pixels
+//		Array.Clear(_currentBlocked, 0, _currentBlocked.Length);
 		
 		while (x >= y)
 		{

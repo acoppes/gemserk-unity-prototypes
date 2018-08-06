@@ -4545,7 +4545,7 @@ MonoBehaviour:
   _resetMatrixEachFrame: 1
   _updateTotal: 0.1
   _alwaysUpdate: 1
-  updateMethod: 1
+  updateMethod: 0
 --- !u!114 &1955262464
 MonoBehaviour:
   m_ObjectHideFlags: 0
