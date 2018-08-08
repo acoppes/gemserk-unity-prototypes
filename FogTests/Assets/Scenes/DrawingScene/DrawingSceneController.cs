@@ -32,11 +32,11 @@ public class DrawingSceneController : MonoBehaviour
 	}
 
 	// TODO: create struct/class for vision matrix with width/height in it.
-	private static void DrawPixel(VisionSystem.VisionMatrix visionMatrix, int x, int y, short value)
+	private static void DrawPixel(VisionSystem.VisionMatrix visionMatrix, int x, int y, int value)
 	{
 		if (visionMatrix.IsInside(x, y))
 		{
-			visionMatrix.SetValue(x, y, value);
+			visionMatrix.SetVisible(1, x, y);
 		}
 	}
 	
@@ -119,7 +119,7 @@ public class DrawingSceneController : MonoBehaviour
 			ClearMatrix();
 		}
 		
-		_visionTexture.UpdateTexture(_visionMatrix);
+		_visionTexture.UpdateTexture(_visionMatrix, 1);
 	}
 	
 }

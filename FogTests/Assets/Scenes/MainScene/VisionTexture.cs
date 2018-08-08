@@ -71,10 +71,13 @@ public class VisionTexture : MonoBehaviour
 
     private VisionSystem.VisionMatrix _visionMatrix;
     private bool _dirty = true;
+
+    private int _activePlayers;
     
-    public void UpdateTexture(VisionSystem.VisionMatrix visionMatrix)
+    public void UpdateTexture(VisionSystem.VisionMatrix visionMatrix, int activePlayers)
     {
         _visionMatrix = visionMatrix;
+        _activePlayers = activePlayers;
         _dirty = true;
     }
 
@@ -91,40 +94,39 @@ public class VisionTexture : MonoBehaviour
         var width = _visionMatrix.width;
         var height = _visionMatrix.height;
         
-        for (var i = 0; i < width * height; i++)
+        for (var i = 0; i < width; i++)
         {
-            var value = _visionMatrix.values[i];
-            
-            // TODO: constants for visions in vision system.
-            // _colors[i] = _startColor;
+            for (var j = 0; j < height; j++)
+            {
+                var isVisible = _visionMatrix.IsVisible(_activePlayers, i, j);
 
-            var newColor = _startColor;
-            
-            if (value > 0)
-            {
-                newColor = _whiteColor;
-            } else if (value == 0 && _visionMatrix.visited[i])
-            {
-                newColor = _greyColor;
-            } else if (value < 0)
-            {
-                // for debug, should never be < 0
-                newColor = _errorColor;
-            }
+                var k = i + j * width;
+                
+                var newColor = _startColor;
+                
+                if (isVisible)
+                {
+                    newColor = _whiteColor;
+                } else if (_visionMatrix.WasVisible(_activePlayers, i, j))
+                {
+                    newColor = _greyColor;
+                } 
+    
+                if (_writeGroundColor)
+                {
+                    var groundColor = _groundColors[_visionMatrix.GetGround(i, j)];
+                    newColor += groundColor;
+                }
+    
+                if (interpolationEnabled)
+                {
+    //                _colors[i].r = Unity.Mathematics.math.lerp(_colors[i].r, newColor.r, alpha);
+                    _colors[k].r = Mathf.LerpUnclamped(_colors[k].r, newColor.r, alpha);
+                } else
+                {
+                    _colors[k] = newColor;
+                }
 
-            if (_writeGroundColor)
-            {
-                var groundColor = _groundColors[_visionMatrix.ground[i]];
-                newColor += groundColor;
-            }
-
-            if (interpolationEnabled)
-            {
-//                _colors[i].r = Unity.Mathematics.math.lerp(_colors[i].r, newColor.r, alpha);
-                _colors[i].r = Mathf.LerpUnclamped(_colors[i].r, newColor.r, alpha);
-            } else
-            {
-                _colors[i] = newColor;
             }
         }
 		

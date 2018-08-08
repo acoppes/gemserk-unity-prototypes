@@ -79,7 +79,7 @@ public class DebugScript : MonoBehaviour
 
 	public void SwitchPlayerVision()
 	{
-		_visionSystem.currentPlayer = (_visionSystem.currentPlayer + 1) % _visionSystem.totalPlayers;
+		_visionSystem._activePlayers = (_visionSystem._activePlayers + 1) % _visionSystem.totalPlayers;
 	}
 
 	public void ToggleFpsText()

@@ -20,7 +20,7 @@ public class MoveWithTouch : MonoBehaviour
 			transform.position = v3;
 
 			_vision.groundLevel = 0;
-			_vision.player = _visionSystem.currentPlayer;
+			_vision.player = _visionSystem._activePlayers;
 
 			_vision.groundLevel = _visionSystem.GetGroundLevel(v3);
 		}

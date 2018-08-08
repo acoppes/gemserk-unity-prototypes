@@ -16,22 +16,22 @@ public class VisionSystem : MonoBehaviour {
 		public int width;
 		public int height;
 
-		public short[] values;
-		public short[] ground;
-		public bool[] visited;
+		public int[] values;
+		private short[] ground;
+		private int[] visited;
 		
 		// TODO: move player value to vision matrix
 		
-		public void Init(int width, int height, short value, short groundLevel)
+		public void Init(int width, int height, int value, short groundLevel)
 		{
 			this.width = width;
 			this.height = height;
 
 			var length = width * height;
 			
-			values = new short[length];
+			values = new int[length];
 			ground = new short[length];
-			visited = new bool[length];
+			visited = new int[length];
 			
 			Clear(value, groundLevel);
 		}
@@ -42,21 +42,20 @@ public class VisionSystem : MonoBehaviour {
 			return index >= 0 && index < values.Length;
 		}
 
-		public void SetValue(int i, int j, short value)
+		public void SetVisible(int playerFlags, int i, int j)
 		{
-			visited[i + j * width] = true;
-			values[i + j * width] = value;
-		}
-		
-		public void AddValue(int i, int j, short value)
-		{
-			visited[i + j * width] = true;
-			values[i + j * width] += value;
+			visited[i + j * width] |= playerFlags;
+			values[i + j * width] |= playerFlags;
 		}
 
-		public short GetValue(int i, int j)
+		public bool IsVisible(int playerFlags, int i, int j)
 		{
-			return values[i + j * width];
+			return (values[i + j * width] & playerFlags) > 0;
+		}
+		
+		public bool WasVisible(int playerFlags, int i, int j)
+		{
+			return (visited[i + j * width] & playerFlags) > 0;
 		}
 
 		public short GetGround(int i, int j)
@@ -69,11 +68,11 @@ public class VisionSystem : MonoBehaviour {
 			this.ground[i + j * width] = ground;
 		}
 
-		public void Clear(short value, short groundLevel)
+		public void Clear(int value, short groundLevel)
 		{
 			for (var i = 0; i < width * height; i++)
 			{
-				visited[i] = false;
+				visited[i] = 0;
 				ground[i] = groundLevel;
 				values[i] = value;
 			}
@@ -87,12 +86,13 @@ public class VisionSystem : MonoBehaviour {
 
 	}
 
-
 	public int width = 128;
 	public int height = 128;
 
 	public int totalPlayers = 2;
-	public int currentPlayer = 0;
+	
+	// flag...
+	public int _activePlayers = 1;
 
 	public bool raycastEnabled = true;
 
@@ -106,12 +106,12 @@ public class VisionSystem : MonoBehaviour {
 	protected bool _updateDisabled;
 
 	[SerializeField]
-	public bool _resetMatrixEachFrame;
+	public bool _resetMatrixEachFrame = true;
 
 	[SerializeField]
 	protected float _updateTotal;
 
-	private VisionMatrix[] _visionMatrixPerPlayer;
+	private VisionMatrix _visionMatrix;
 
 	private float _updateCurrent;
 	
@@ -146,12 +146,13 @@ public class VisionSystem : MonoBehaviour {
 	   
 	    _visionTexture.Create(width, height, _localScale);
 	    
-	    _visionMatrixPerPlayer = new VisionMatrix[totalPlayers];
+	    _visionMatrix = new VisionMatrix();
+	    _visionMatrix.Init(width, height, 0, 0);
 
-	    for (var j = 0; j < totalPlayers; j++)
-	    {
-		    _visionMatrixPerPlayer[j].Init(width, height, 0, 0);
-	    }
+//	    for (var j = 0; j < totalPlayers; j++)
+//	    {
+//		    _visionMatrix[j].Init(width, height, 0, 0);
+//	    }
 
 	    // _localScale = transform.localScale;
 
@@ -250,7 +251,7 @@ public class VisionSystem : MonoBehaviour {
 		return blocked;
 	}
 	
-	private void DrawPixel(VisionMatrix visionMatrix, int x0, int y0, int x, int y, short value, short groundLevel)
+	private void DrawPixel(VisionMatrix visionMatrix, int player, int x0, int y0, int x, int y, int value, short groundLevel)
 	{
 		if (!visionMatrix.IsInside(x, y))
 			return;
@@ -264,7 +265,10 @@ public class VisionSystem : MonoBehaviour {
 		}
 		
 //		_currentBlocked[x0 - x + 50, y0 - y + 50] = false;
-		visionMatrix.AddValue(x, y, value);
+		// TODO: think a way of improving this..
+		// if (_visionMatrix.GetValue(player, x, y) == 0)
+		
+		visionMatrix.SetVisible(1 << player, x, y);
 	}
 
 
@@ -294,8 +298,6 @@ public class VisionSystem : MonoBehaviour {
 		int xChange = 1 - (radius << 1);
 		int yChange = 0;
 		int radiusError = 0;
-
-		var visionMatrix = _visionMatrixPerPlayer[player];
 		
 		// use a cached sub matrix for blocked pixels
 //		Array.Clear(_currentBlocked, 0, _currentBlocked.Length);
@@ -304,13 +306,13 @@ public class VisionSystem : MonoBehaviour {
 		{
 			for (var i = x0 - x; i <= x0 + x; i++)
 			{
-				DrawPixel(visionMatrix, x0, y0, i, y0 + y, value, groundLevel);
-				DrawPixel(visionMatrix, x0, y0, i, y0 - y, value, groundLevel);
+				DrawPixel(_visionMatrix, player, x0, y0, i, y0 + y, value, groundLevel);
+				DrawPixel(_visionMatrix, player, x0, y0, i, y0 - y, value, groundLevel);
 			}
 			for (var i = x0 - y; i <= x0 + y; i++)
 			{
-				DrawPixel(visionMatrix, x0, y0, i, y0 + x, value, groundLevel);
-				DrawPixel(visionMatrix, x0, y0, i, y0 - x, value, groundLevel);
+				DrawPixel(_visionMatrix, player, x0, y0, i, y0 + x, value, groundLevel);
+				DrawPixel(_visionMatrix, player, x0, y0, i, y0 - x, value, groundLevel);
 			}
 
 			y++;
@@ -342,7 +344,7 @@ public class VisionSystem : MonoBehaviour {
 		var maxColSize = visionWidth;
 		var maxRowSize = visionHeight;
 
-		var visionMatrix = _visionMatrixPerPlayer[player];
+//		var visionMatrix = _visionMatrix[player];
 
 		while (currentRowSize != maxRowSize && currentColSize != maxColSize)
 		{
@@ -370,11 +372,13 @@ public class VisionSystem : MonoBehaviour {
 					
 					if (diff.sqrMagnitude < rangeSqr)
 					{
-						var blocked = raycastEnabled && IsBlocked(visionMatrix, groundLevel, mx, my, mp.x, mp.y);
+						var blocked = raycastEnabled && IsBlocked(_visionMatrix, groundLevel, mx, my, mp.x, mp.y);
 						
 						if (!blocked)
 						{
-							visionMatrix.AddValue(mx, my, visionValue);
+//							throw new NotImplementedException("new implementation doesnt support this method");
+							// if (_visionMatrix.GetValue(player, mx, my) == 0)
+							_visionMatrix.SetVisible(1 << player, mx, my);
 						}
 					}
 				}
@@ -436,10 +440,11 @@ public class VisionSystem : MonoBehaviour {
 
 			if (_resetMatrixEachFrame)
 			{
-				foreach (var _visionMatrix in _visionMatrixPerPlayer)
-				{
-					_visionMatrix.ClearValues();
-				}
+				_visionMatrix.ClearValues();
+//				foreach (var _visionMatrix in _visionMatrix)
+//				{
+//					_visionMatrix.ClearValues();
+//				}
 			}
 			
 			foreach (var vision in _visions)
@@ -467,7 +472,7 @@ public class VisionSystem : MonoBehaviour {
 
 		if (_dirty || _alwaysUpdate)
 		{
-			_visionTexture.UpdateTexture(_visionMatrixPerPlayer[currentPlayer]);
+			_visionTexture.UpdateTexture(_visionMatrix, _activePlayers);
 		}
 		
 		// update visibles...
@@ -497,7 +502,7 @@ public class VisionSystem : MonoBehaviour {
 			{
 				for (var k = rowStart; !isVisible && k <= rowEnd; k++)
 				{
-					isVisible = _visionMatrixPerPlayer[currentPlayer].GetValue(j, k) > 1;
+					isVisible = _visionMatrix.IsVisible(_activePlayers, j, k);
 				}
 			}
 			
@@ -560,8 +565,6 @@ public class VisionSystem : MonoBehaviour {
 
 	private void RegisterObstacle(VisionObstacle obstacle)
 	{
-		// TODO: obstacles should be player independant
-		
 		for (var j = 0; j < totalPlayers; j++)
 		{
 			for (var i = 0; i < width; i++)
@@ -569,12 +572,12 @@ public class VisionSystem : MonoBehaviour {
 				for (var k = 0; k < height; k++)
 				{
 					var p = GetWorldPosition(i, k);
-					var currentLevel = _visionMatrixPerPlayer[j].GetGround(i, k);
+					var currentLevel = _visionMatrix.GetGround(i, k);
 					
 					if (currentLevel == 0)
 						currentLevel = obstacle.GetGroundLevel(p);
 
-					_visionMatrixPerPlayer[j].SetGround(i, k, currentLevel);
+					_visionMatrix.SetGround(i, k, currentLevel);
 				}
 			}
 		}		
@@ -588,6 +591,6 @@ public class VisionSystem : MonoBehaviour {
 	public short GetGroundLevel(Vector3 position)
 	{
 		var mp = GetMatrixPosition(position);
-		return _visionMatrixPerPlayer[currentPlayer].GetGround(mp.x, mp.y);
+		return _visionMatrix.GetGround(mp.x, mp.y);
 	}
 }

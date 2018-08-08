@@ -4537,7 +4537,7 @@ MonoBehaviour:
   width: 128
   height: 128
   totalPlayers: 2
-  currentPlayer: 0
+  _activePlayers: 0
   raycastEnabled: 1
   _visionTexture: {fileID: 1955262466}
   _visionCamera: {fileID: 1955262464}
@@ -4545,7 +4545,7 @@ MonoBehaviour:
   _resetMatrixEachFrame: 1
   _updateTotal: 0.1
   _alwaysUpdate: 1
-  updateMethod: 0
+  updateMethod: 1
 --- !u!114 &1955262464
 MonoBehaviour:
   m_ObjectHideFlags: 0
