@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VisionTexture : MonoBehaviour
@@ -94,39 +93,32 @@ public class VisionTexture : MonoBehaviour
         var width = _visionMatrix.width;
         var height = _visionMatrix.height;
         
-        for (var i = 0; i < width; i++)
+        for (var i = 0; i < width * height; i++)
         {
-            for (var j = 0; j < height; j++)
+            var isVisible = _visionMatrix.IsVisible(_activePlayers, i);
+                
+            var newColor = _startColor;
+                
+            if (isVisible)
             {
-                var isVisible = _visionMatrix.IsVisible(_activePlayers, i, j);
-
-                var k = i + j * width;
-                
-                var newColor = _startColor;
-                
-                if (isVisible)
-                {
-                    newColor = _whiteColor;
-                } else if (_visionMatrix.WasVisible(_activePlayers, i, j))
-                {
-                    newColor = _greyColor;
-                } 
+                newColor = _whiteColor;
+            } else if (_visionMatrix.WasVisible(_activePlayers, i))
+            {
+                newColor = _greyColor;
+            } 
     
-                if (_writeGroundColor)
-                {
-                    var groundColor = _groundColors[_visionMatrix.GetGround(i, j)];
-                    newColor += groundColor;
-                }
+            if (_writeGroundColor)
+            {
+                var groundColor = _groundColors[_visionMatrix.GetGround(i)];
+                newColor += groundColor;
+            }
     
-                if (interpolationEnabled)
-                {
-    //                _colors[i].r = Unity.Mathematics.math.lerp(_colors[i].r, newColor.r, alpha);
-                    _colors[k].r = Mathf.LerpUnclamped(_colors[k].r, newColor.r, alpha);
-                } else
-                {
-                    _colors[k] = newColor;
-                }
-
+            if (interpolationEnabled)
+            {
+                _colors[i].r = Mathf.LerpUnclamped(_colors[i].r, newColor.r, alpha);
+            } else
+            {
+                _colors[i] = newColor;
             }
         }
 		

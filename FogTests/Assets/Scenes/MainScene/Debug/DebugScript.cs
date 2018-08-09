@@ -23,9 +23,6 @@ public class DebugScript : MonoBehaviour
 	protected CanvasGroup _menuGroup;
 
 	[SerializeField]
-	protected PostProcessingBehaviour _postProcessing;
-
-	[SerializeField]
 	protected Text _moveCameraText;
 	
 	[SerializeField]
@@ -77,27 +74,9 @@ public class DebugScript : MonoBehaviour
 		}
 	}
 
-	public void SwitchPlayerVision()
-	{
-		_visionSystem._activePlayers = (_visionSystem._activePlayers + 1) % _visionSystem.totalPlayers;
-	}
-
 	public void ToggleFpsText()
 	{
 		_fpsGroup.gameObject.SetActive(!_fpsGroup.gameObject.activeSelf);
-	}
-
-	public void ToggleRaycast()
-	{
-		_visionSystem.raycastEnabled = !_visionSystem.raycastEnabled;
-	}
-
-	public void ToggleBlur()
-	{
-		if (_postProcessing != null)
-		{
-			_postProcessing.enabled = !_postProcessing.enabled;
-		}	
 	}
 
 	public void ToggleMoveCamera()

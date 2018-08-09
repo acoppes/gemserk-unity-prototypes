@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class PerformanceSceneController : MonoBehaviour
 {
@@ -15,6 +16,16 @@ public class PerformanceSceneController : MonoBehaviour
 	public Transform unitsParent;
 
 	private VisionSystem _visionSystem;
+
+	private int _currentPlayerIndex;
+
+	private int[] _playerConfigs = new int[]
+	{
+		0, 1, 2, 3
+	};
+	
+	[SerializeField]
+	protected PostProcessingBehaviour _postProcessing;
 	
 	// Use this for initialization
 	private void Start ()
@@ -27,6 +38,15 @@ public class PerformanceSceneController : MonoBehaviour
 		var debugPanelScript = FindObjectOfType<DebugPanelScript>();
 		if (debugPanelScript != null)
 		{
+			_currentPlayerIndex = 1;
+			_visionSystem._activePlayers = _playerConfigs[_currentPlayerIndex];
+			
+			debugPanelScript.AddButton("switch players", delegate
+			{
+				_currentPlayerIndex = (_currentPlayerIndex + 1) % _playerConfigs.Length;
+				_visionSystem._activePlayers = _playerConfigs[_currentPlayerIndex];				
+			}, null);
+			
 			debugPanelScript.AddButton("add 10 units", delegate
 			{
 				SpawnUnits(10);
@@ -47,32 +67,55 @@ public class PerformanceSceneController : MonoBehaviour
 			
 			if (visionTexture != null)
 			{
-				debugPanelScript.AddButton("fog interpolation", button =>
+				var b = debugPanelScript.AddButton("fog interpolation", button =>
 				{
 					visionTexture.ColorInterpolation = !visionTexture.ColorInterpolation;
-					button.UpdateText(string.Format("fog easing: {0}", visionTexture.ColorInterpolation ? "on" : "off"));
+					button.UpdateText(string.Format("easing: {0}", visionTexture.ColorInterpolation ? "on" : "off"));
 				}, null);
+				b.UpdateText(string.Format("easing: {0}", visionTexture.ColorInterpolation ? "on" : "off"));
 			}
 			
 			if (_visionSystem != null)
 			{
-				var b1 = debugPanelScript.AddButton("update method", button =>
+				var b = debugPanelScript.AddButton("update method", button =>
 				{
 					_visionSystem.updateMethod = !_visionSystem.updateMethod;
 					button.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
 				}, null);
 				
-				b1.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
+				b.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
+			}
+			
+			if (_visionSystem != null)
+			{
+				var b = debugPanelScript.AddButton("raycast", button =>
+				{
+					_visionSystem.raycastEnabled = !_visionSystem.raycastEnabled;
+					button.UpdateText(string.Format("raycast: {0}", _visionSystem.raycastEnabled ? "on" : "off"));
+				}, null);
 				
-//				var b1 = debugPanelScript.AddButton("update method", button =>
-//				{
-//					_visionSystem.updateMethod = !_visionSystem.updateMethod;
-//					button.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
-//				}, null);
-//				
-//				b1.UpdateText(string.Format("method: {0}", _visionSystem.updateMethod ? "1" : "2"));
+				b.UpdateText(string.Format("raycast: {0}", _visionSystem.raycastEnabled ? "on" : "off"));
+			}
+			
+			if (_postProcessing != null)
+			{
+				var b = debugPanelScript.AddButton("blur", button =>
+				{
+					_postProcessing.enabled = !_postProcessing.enabled;
+					button.UpdateText(string.Format("blur: {0}", _postProcessing.enabled ? "on" : "off"));
+				}, null);
+				
+				b.UpdateText(string.Format("blur: {0}", _postProcessing.enabled ? "on" : "off"));
 			}
 
+			if (_visionSystem != null)
+			{
+				var b = debugPanelScript.AddButton("clear", button =>
+				{
+					_visionSystem.Clear();
+				}, null);
+			}
+			
 			debugPanelScript.AddLabel("unitCount", delegate(DebugPanelLabel label)
 			{
 				label.UpdateText(string.Format("units: {0}", unitsParent.childCount));
@@ -96,10 +139,10 @@ public class PerformanceSceneController : MonoBehaviour
 			waypointMovement.SetWaypoint(waypoints[UnityEngine.Random.Range(0, waypoints.Length)]);
 
 			var vision = unitObject.GetComponentInChildren<Vision>();
-			vision.player = UnityEngine.Random.Range(0, visionSystem.totalPlayers);
+			vision.player = 1 << UnityEngine.Random.Range(0, visionSystem.totalPlayers);
 			vision.range = UnityEngine.Random.Range(minVision, maxVision);
 
-			if (vision.player == 0)
+			if (vision.player == 1)
 			{
 				unitObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
 			}

@@ -14,18 +14,6 @@ public class Vision : MonoBehaviour
 	[NonSerialized]
 	public VisionPosition position;
 	
-	[NonSerialized]
-	public VisionPosition previousPosition;
-
-	[NonSerialized]
-	public float previousRange;
-
-	[NonSerialized]
-	public int previousPlayer;
-
-	[NonSerialized]
-	public short previousGroundLevel;
-	
 	#if UNITY_EDITOR
 	public Color _debugColor;
 	#endif
@@ -52,14 +40,6 @@ public class Vision : MonoBehaviour
 	{
 		if (_visionSystem != null)
 			_visionSystem.Unregister(this);
-	}
-
-	public void UpdateCachedPosition()
-	{
-		previousPosition = position;
-		previousRange = range;
-		previousPlayer = player;
-		previousGroundLevel = groundLevel;
 	}
 
 	#if UNITY_EDITOR
