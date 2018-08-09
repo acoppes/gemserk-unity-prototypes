@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gemserk;
+using Gemserk.Vision;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -51,11 +52,6 @@ public class VisionSystem : MonoBehaviour {
 		public bool IsVisible(int playerFlags, int i, int j)
 		{
 			return (values[i + j * width] & playerFlags) > 0;
-		}
-		
-		public bool WasVisible(int playerFlags, int i, int j)
-		{
-			return (visited[i + j * width] & playerFlags) > 0;
 		}
 		
 		public bool IsVisible(int playerFlags, int i)
@@ -121,6 +117,9 @@ public class VisionSystem : MonoBehaviour {
 	
 	[SerializeField]
 	protected VisionCamera _visionCamera;
+	
+	[SerializeField]
+	protected VisionTerrainTexture _visionTerrain;
 
 	[SerializeField]
 	protected bool _updateDisabled;
@@ -162,6 +161,11 @@ public class VisionSystem : MonoBehaviour {
 	    _localScale = _visionCamera.GetScale(width, height);
 	   
 	    _visionTexture.Create(width, height, _localScale);
+
+	    if (_visionTerrain != null)
+	    {
+		    _visionTerrain.Create(width, height, _localScale);
+	    }
 	    
 	    _visionMatrix = new VisionMatrix();
 	    _visionMatrix.Init(width, height, 0, 0);
@@ -445,6 +449,11 @@ public class VisionSystem : MonoBehaviour {
 	{
 		if (_updateDisabled) 
 			return;
+
+		if (_visionTerrain != null)
+		{
+			_visionTerrain.UpdateTexture(_visionMatrix);
+		}
 		
 		_dirty = false;
 		

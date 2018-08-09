@@ -1750,6 +1750,9 @@ MonoBehaviour:
   maxVision: 250
   unitsParent: {fileID: 1547910898}
   _postProcessing: {fileID: 1279455136}
+  _visionTerrain: {fileID: 1521183270}
+  _fogLayerName: Fog
+  _defaultLayerName: Default
 --- !u!4 &1023079061
 Transform:
   m_ObjectHideFlags: 0
@@ -2679,6 +2682,99 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!1 &1521183268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1521183269}
+  - component: {fileID: 1521183271}
+  - component: {fileID: 1521183270}
+  m_Layer: 8
+  m_Name: TerrainView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1521183269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1521183268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1955262465}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1521183270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1521183268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfe98a61b5849a3bf07b9cde1b2b201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textureFormat: 4
+  _spriteRenderer: {fileID: 1521183271}
+  _terrainColors:
+  - {r: 0, g: 0, b: 0.41960785, a: 1}
+  - {r: 0, g: 0, b: 0.78431374, a: 1}
+  - {r: 0, g: 0.26666668, b: 1, a: 1}
+--- !u!212 &1521183271
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1521183268}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1529917429
 GameObject:
   m_ObjectHideFlags: 0
@@ -3885,6 +3981,7 @@ MonoBehaviour:
   raycastEnabled: 1
   _visionTexture: {fileID: 1955262466}
   _visionCamera: {fileID: 1955262464}
+  _visionTerrain: {fileID: 1521183270}
   _updateDisabled: 0
   _updateTotal: 0.1
   _alwaysUpdate: 1
@@ -3915,6 +4012,7 @@ Transform:
   - {fileID: 957624268}
   - {fileID: 1279455135}
   - {fileID: 119934869}
+  - {fileID: 1521183269}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

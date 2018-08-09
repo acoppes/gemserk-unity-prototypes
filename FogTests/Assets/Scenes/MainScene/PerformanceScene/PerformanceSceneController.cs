@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using Gemserk;
+using Gemserk.Vision;
 using UnityEngine;
 using UnityEngine.PostProcessing;
 
@@ -26,6 +28,15 @@ public class PerformanceSceneController : MonoBehaviour
 	
 	[SerializeField]
 	protected PostProcessingBehaviour _postProcessing;
+
+	[SerializeField]
+	protected VisionTerrainTexture _visionTerrain;
+	
+	[SerializeField]
+	protected string _fogLayerName = "Fog";
+	
+	[SerializeField]
+	protected string _defaultLayerName = "Default";
 	
 	// Use this for initialization
 	private void Start ()
@@ -114,6 +125,27 @@ public class PerformanceSceneController : MonoBehaviour
 				{
 					_visionSystem.Clear();
 				}, null);
+			}
+
+			if (_visionTerrain != null)
+			{
+				var fogLayerMask = LayerMask.NameToLayer(_fogLayerName);
+				var defaultLayerMask = LayerMask.NameToLayer(_defaultLayerName);
+				
+				var b = debugPanelScript.AddButton("terrain", button =>
+				{
+					if (_visionTerrain.gameObject.layer == fogLayerMask)
+					{
+						_visionTerrain.gameObject.SetLayerRecursive(defaultLayerMask);	
+					} else if (_visionTerrain.gameObject.layer == defaultLayerMask)
+					{
+						_visionTerrain.gameObject.SetLayerRecursive(fogLayerMask);
+					}
+					
+					button.UpdateText(string.Format("terrain: {0}", _visionTerrain.gameObject.layer == defaultLayerMask ? "on" : "off"));
+				}, null);
+				
+				b.UpdateText(string.Format("terrain: {0}", _visionTerrain.gameObject.layer == defaultLayerMask ? "on" : "off"));
 			}
 			
 			debugPanelScript.AddLabel("unitCount", delegate(DebugPanelLabel label)
