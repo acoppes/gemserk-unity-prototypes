@@ -20,22 +20,8 @@ public class VisionTexture : MonoBehaviour
     
     [SerializeField]
     protected Color _whiteColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-    
-    [SerializeField]
-    protected Color _errorColor = new Color(0.0f, 0.5f, 0.0f, 1.0f);
 
     [SerializeField] protected Color _startColor = new Color(0, 0, 0, 1.0f);
-
-    [SerializeField] 
-    protected Color[] _groundColors = new Color[]
-    {
-        new Color(0, 0, 0.2f, 1.0f),
-        new Color(0, 0, 0.6f, 1.0f),
-        new Color(0, 0, 0.8f, 1.0f),
-    };
-
-    [SerializeField]
-    protected bool _writeGroundColor;
 
     [SerializeField]
     protected float _interpolateColorSpeed;
@@ -107,19 +93,12 @@ public class VisionTexture : MonoBehaviour
                 newColor = _greyColor;
             } 
     
-            if (_writeGroundColor)
-            {
-                var groundColor = _groundColors[_visionMatrix.GetGround(i)];
-                newColor += groundColor;
-            }
-    
             if (interpolationEnabled)
             {
-                _colors[i].r = Mathf.LerpUnclamped(_colors[i].r, newColor.r, alpha);
-            } else
-            {
-                _colors[i] = newColor;
+                newColor.r = Mathf.LerpUnclamped(_colors[i].r, newColor.r, alpha);
             }
+            
+            _colors[i] = newColor;
         }
 		
         _texture.SetPixels(_colors);

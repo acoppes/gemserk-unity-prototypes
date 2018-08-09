@@ -2765,7 +2765,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4029,7 +4029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textureFormat: 4
   _spriteRenderer: {fileID: 957624269}
-  _greyColor: {r: 0.5, g: 0.5019608, b: 0.5019608, a: 1}
+  _greyColor: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 1}
   _whiteColor: {r: 1, g: 1, b: 1, a: 1}
   _errorColor: {r: 0, g: 0.5, b: 0, a: 1}
   _startColor: {r: 0, g: 0, b: 0, a: 1}
