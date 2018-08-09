@@ -494,6 +494,7 @@ public class VisionSystem : MonoBehaviour {
 		// then don't update
 		
 		Profiler.BeginSample("Visibles");
+		
 		for (var i = 0; i < _visibles.Count; i++)
 		{
 			var visible = _visibles[i];
@@ -521,11 +522,9 @@ public class VisionSystem : MonoBehaviour {
 			
 			visible.visible = isVisible;
 			visible.gameObject.SetLayerRecursive(isVisible ? _layerVisible : _layerHidden);
-			
 		}
-		Profiler.EndSample();
-
 		
+		Profiler.EndSample();
 	}
 
 	private void ProcessPendingVisions()

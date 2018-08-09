@@ -26,8 +26,17 @@ public class VisionTexture : MonoBehaviour
     [SerializeField]
     protected float _interpolateColorSpeed;
 
-    private const float _defaultInterpolationColorSpeed = 6.0f; 
-    
+    private const float _defaultInterpolationColorSpeed = 6.0f;
+
+    [SerializeField]
+    protected bool _previousVision = true;
+
+    public bool PreviousVision
+    {
+        get { return _previousVision; }
+        set { _previousVision = value; }
+    }
+
     public bool ColorInterpolation
     {
         get { return _interpolateColorSpeed > 0; }
@@ -88,7 +97,7 @@ public class VisionTexture : MonoBehaviour
             if (isVisible)
             {
                 newColor = _whiteColor;
-            } else if (_visionMatrix.WasVisible(_activePlayers, i))
+            } else if (_previousVision && _visionMatrix.WasVisible(_activePlayers, i))
             {
                 newColor = _greyColor;
             } 

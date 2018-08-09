@@ -86,6 +86,21 @@ public class PerformanceSceneController : MonoBehaviour
 				b.UpdateText(string.Format("easing: {0}", visionTexture.ColorInterpolation ? "on" : "off"));
 			}
 			
+			if (visionTexture != null)
+			{
+				var b = debugPanelScript.AddButton("previous vision", new DebugPanelButton.Actions()
+				{
+					callbackAction = button =>
+					{
+						visionTexture.PreviousVision = !visionTexture.PreviousVision;
+					},
+					refreshAction = button =>
+					{
+						button.UpdateText(string.Format("visited: {0}", visionTexture.PreviousVision ? "on" : "off"));
+					}
+				});
+			}
+			
 			if (_visionSystem != null)
 			{
 				var b = debugPanelScript.AddButton("update method", button =>

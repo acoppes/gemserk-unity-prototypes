@@ -4029,16 +4029,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textureFormat: 4
   _spriteRenderer: {fileID: 957624269}
-  _greyColor: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 1}
-  _whiteColor: {r: 1, g: 1, b: 1, a: 1}
-  _errorColor: {r: 0, g: 0.5, b: 0, a: 1}
+  _greyColor: {r: 0.34117648, g: 0, b: 0, a: 1}
+  _whiteColor: {r: 1, g: 0, b: 0, a: 1}
   _startColor: {r: 0, g: 0, b: 0, a: 1}
-  _groundColors:
-  - {r: 0, g: 0, b: 0.2, a: 1}
-  - {r: 0, g: 0, b: 0.6, a: 1}
-  - {r: 0, g: 0, b: 0.8, a: 1}
-  _writeGroundColor: 0
   _interpolateColorSpeed: 6
+  _previousVision: 1
 --- !u!1 &2063601818
 GameObject:
   m_ObjectHideFlags: 0

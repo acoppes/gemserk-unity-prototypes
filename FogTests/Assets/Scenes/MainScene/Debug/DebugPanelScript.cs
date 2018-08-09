@@ -32,6 +32,23 @@ public class DebugPanelScript : MonoBehaviour
 
 		return debugButton;
 	}
+	
+	public DebugPanelButton AddButton(string text, DebugPanelButton.Actions actions)
+	{
+		var buttonObject = Instantiate(_buttonTemplate, _parent, false);
+		buttonObject.SetActive(true);
+		
+		var buttonText = buttonObject.GetComponentInChildren<Text>();
+		buttonText.text = text;
+		
+		var debugButton = buttonObject.GetComponent<DebugPanelButton>();
+		
+		debugButton.SetCallbackAction(actions.callbackAction);
+		debugButton.SetUpdateAction(actions.updateAction);
+		debugButton.SetRefreshAction(actions.refreshAction);
+
+		return debugButton;
+	}
 
 	public DebugPanelLabel AddLabel(string name, Action<DebugPanelLabel> updateAction)
 	{
