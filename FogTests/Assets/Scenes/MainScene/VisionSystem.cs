@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Gemserk;
 using UnityEngine;
@@ -38,8 +38,7 @@ public class VisionSystem : MonoBehaviour {
 
 		public bool IsInside(int i, int j)
 		{
-			var index = i + j * width;
-			return index >= 0 && index < values.Length;
+			return i >= 0 && i < width && j >= 0 && j < height;
 		}
 
 		public void SetVisible(int playerFlags, int i, int j)
