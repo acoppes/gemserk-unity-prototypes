@@ -8,10 +8,6 @@ using UnityEngine.Profiling;
 
 public class VisionSystem : MonoBehaviour {
 
-	// TODO: since this is the vision of one player, we could extract part of the structure that represents 
-	// the player vision and update each one depending on that, and the texture only updates if it is the 
-	// selected players, so the final color depends on the list of current selected players.
-
 	public struct VisionMatrix
 	{
 		public int width;
@@ -20,8 +16,8 @@ public class VisionSystem : MonoBehaviour {
 		public int[] values;
 		private short[] ground;
 		private int[] visited;
-		
-		// TODO: move player value to vision matrix
+
+		public int[] temporaryVisible;
 		
 		public void Init(int width, int height, int value, short groundLevel)
 		{
@@ -33,13 +29,14 @@ public class VisionSystem : MonoBehaviour {
 			values = new int[length];
 			ground = new short[length];
 			visited = new int[length];
+
+			temporaryVisible = new int[length];
 			
 			Clear(value, groundLevel);
 		}
 
 		public bool IsInside(int i, int j)
 		{
-//			var index = i + j * width;
 			return i >= 0 && i < width && j >= 0 && j < height;
 		}
 
@@ -143,6 +140,9 @@ public class VisionSystem : MonoBehaviour {
 	[SerializeField]
 	protected bool _alwaysUpdate;
 
+	[SerializeField]
+	protected bool _cacheVisible = true;
+	
 	private bool _dirty;
 
 	private int _layerVisible;
@@ -169,13 +169,6 @@ public class VisionSystem : MonoBehaviour {
 	    
 	    _visionMatrix = new VisionMatrix();
 	    _visionMatrix.Init(width, height, 0, 0);
-
-//	    for (var j = 0; j < totalPlayers; j++)
-//	    {
-//		    _visionMatrix[j].Init(width, height, 0, 0);
-//	    }
-
-	    // _localScale = transform.localScale;
 
 	    _layerVisible = LayerMask.NameToLayer("Default");
 	    _layerHidden = LayerMask.NameToLayer("Hidden");
@@ -217,7 +210,7 @@ public class VisionSystem : MonoBehaviour {
 		return new Vector2(x, y);
 	}
 
-	private static bool IsBlocked(VisionMatrix visionMatrix, short groundLevel, int x0, int y0, int x1, int y1)
+	private bool IsBlocked(VisionMatrix visionMatrix, short groundLevel, int x0, int y0, int x1, int y1)
 	{
 		Profiler.BeginSample("IsBlocked");
 
@@ -234,15 +227,8 @@ public class VisionSystem : MonoBehaviour {
 		
 		for (;;)
 		{
-//			if (_currentBlocked[x1 - x0 + 50, y1 - y0 + 50])
-//			{
-//				blocked = true;
-//				break;
-//			}
-			
+			// TODO: improve logic by not calling other methods here but access the matrix directly
 			var ground = visionMatrix.GetGround(x0, y0);
-
-			// var visionField = visionMatrix.vision[x0 + y0 * visionMatrix.width];
 
 			if (ground > groundLevel)
 			{
@@ -252,6 +238,12 @@ public class VisionSystem : MonoBehaviour {
 			
 			if (x0 == x1 && y0 == y1)
 				break;
+
+			// Test if current pixel is already visible, that means the line to the center is clear.
+			if (_cacheVisible && visionMatrix.temporaryVisible[x0 + y0 * visionMatrix.width] == 2)
+			{
+				break;
+			}
 
 			e2 = err;
 			
@@ -276,25 +268,37 @@ public class VisionSystem : MonoBehaviour {
 	{
 		if (!visionMatrix.IsInside(x, y))
 			return;
-		
-		var blocked = raycastEnabled && IsBlocked(visionMatrix, groundLevel, x, y, x0, y0);
 
-		if (blocked)
+		var blocked = false;
+		
+		// 0 means not visited yet
+		// 1 means blocked
+		// 2 means not blocked and visited
+
+		if (raycastEnabled)
 		{
-//			_currentBlocked[x0 - x + 50, y0 - y + 50] = true;
-			return;
+			if (_cacheVisible)
+				visionMatrix.temporaryVisible[x + y * visionMatrix.width] = 1;
+			blocked = IsBlocked(visionMatrix, groundLevel, x, y, x0, y0);
 		}
 		
-//		_currentBlocked[x0 - x + 50, y0 - y + 50] = false;
-		// TODO: think a way of improving this..
-		// if (_visionMatrix.GetValue(player, x, y) == 0)
+		if (blocked)
+		{
+			return;
+		} 
+		
+		if (_cacheVisible)
+			visionMatrix.temporaryVisible[x + y * visionMatrix.width] = 2;
 		
 		visionMatrix.SetVisible(player, x, y);
 	}
 
-
 	private void UpdateVision(VisionPosition mp, float visionRange, int player, short groundLevel)
 	{
+		// clear local cache
+		if (raycastEnabled && _cacheVisible)
+			Array.Clear(_visionMatrix.temporaryVisible, 0, _visionMatrix.temporaryVisible.Length);
+		
 		if (!updateMethod)
 		{
 			UpdateVision1(mp, visionRange, player, groundLevel);
@@ -304,9 +308,6 @@ public class VisionSystem : MonoBehaviour {
 			UpdateVision2(mp, visionRange, player, groundLevel);
 		}
 	}
-
-	// max matrix size, if vision range > max, then cant use the cached matrix
-//	private static bool[,] _currentBlocked = new bool[100, 100];
 
 	private void UpdateVision2(VisionPosition mp, float visionRange, int player, short groundLevel)
 	{
@@ -319,9 +320,6 @@ public class VisionSystem : MonoBehaviour {
 		int xChange = 1 - (radius << 1);
 		int yChange = 0;
 		int radiusError = 0;
-		
-		// use a cached sub matrix for blocked pixels
-//		Array.Clear(_currentBlocked, 0, _currentBlocked.Length);
 		
 		while (x >= y)
 		{
@@ -365,8 +363,6 @@ public class VisionSystem : MonoBehaviour {
 		var maxColSize = visionWidth;
 		var maxRowSize = visionHeight;
 
-//		var visionMatrix = _visionMatrix[player];
-
 		while (currentRowSize != maxRowSize && currentColSize != maxColSize)
 		{
 			var x = -currentColSize;
@@ -387,18 +383,12 @@ public class VisionSystem : MonoBehaviour {
 				
 				if (mx >= 0 && mx < width && my >= 0 && my < height)
 				{
-					// check if rect to vision center is not blocked
-
-					// var d = diff.normalized;
-					
 					if (diff.sqrMagnitude < rangeSqr)
 					{
 						var blocked = raycastEnabled && IsBlocked(_visionMatrix, groundLevel, mx, my, mp.x, mp.y);
 						
 						if (!blocked)
 						{
-//							throw new NotImplementedException("new implementation doesnt support this method");
-							// if (_visionMatrix.GetValue(player, mx, my) == 0)
 							_visionMatrix.SetVisible(player, mx, my);
 						}
 					}

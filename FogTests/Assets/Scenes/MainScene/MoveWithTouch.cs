@@ -11,18 +11,18 @@ public class MoveWithTouch : MonoBehaviour
 	[SerializeField]
 	protected VisionSystem _visionSystem;
 
-	void Update () {
+	public bool moveEnabled = true;
 
-		if (Input.GetMouseButton(0))
+	private void Update () {
+
+		if (moveEnabled && Input.GetMouseButton(0))
 		{
 			var v3 = Input.mousePosition;
 			v3 = _referenceCamera.ScreenToWorldPoint(v3);
 			transform.position = v3;
-
-			_vision.groundLevel = 0;
-			_vision.player = _visionSystem._activePlayers;
-
-			_vision.groundLevel = _visionSystem.GetGroundLevel(v3);
 		}
+
+		_vision.player = _visionSystem._activePlayers;
+		_vision.groundLevel = _visionSystem.GetGroundLevel(transform.position);
 	}
 }
