@@ -23,7 +23,7 @@ public class PerformanceSceneController : MonoBehaviour
 
 	private int[] _playerConfigs = new int[]
 	{
-		0, 1, 2, 3
+		0, 1, 2, 4, 8, 3, 7, 15
 	};
 	
 	[SerializeField]
@@ -37,6 +37,15 @@ public class PerformanceSceneController : MonoBehaviour
 	
 	[SerializeField]
 	protected string _defaultLayerName = "Default";
+	
+	public Color[] _playerColors = new Color[] 
+	{
+		Color.red,
+		Color.blue,
+		Color.yellow,
+		Color.green
+	};
+
 	
 	// Use this for initialization
 	private void Start ()
@@ -185,18 +194,13 @@ public class PerformanceSceneController : MonoBehaviour
 			var waypointMovement = unitObject.GetComponentInChildren<WaypointMovement>();
 			waypointMovement.SetWaypoint(waypoints[UnityEngine.Random.Range(0, waypoints.Length)]);
 
+			var randomPlayer = UnityEngine.Random.Range(0, visionSystem.totalPlayers);
+			
 			var vision = unitObject.GetComponentInChildren<Vision>();
-			vision.player = 1 << UnityEngine.Random.Range(0, visionSystem.totalPlayers);
+			vision.player = 1 << randomPlayer;
 			vision.range = UnityEngine.Random.Range(minVision, maxVision);
 
-			if (vision.player == 1)
-			{
-				unitObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
-			}
-			else
-			{
-				unitObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
-			}
+			unitObject.GetComponentInChildren<SpriteRenderer>().color = _playerColors[randomPlayer];
 
 			vision.StartCoroutine(UpdateUnitGround(vision));
 		}

@@ -2082,7 +2082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 1216008585793352, guid: 1be2e41ba05f6a14eaa40e96eb2f8b7b, type: 2}
-  unitsCount: 30
+  unitsCount: 100
   spawnBounds: {fileID: 509982879}
   minVision: 300
   maxVision: 300
@@ -2091,6 +2091,11 @@ MonoBehaviour:
   _visionTerrain: {fileID: 1521183270}
   _fogLayerName: Fog
   _defaultLayerName: Default
+  _playerColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
 --- !u!4 &1023079061
 Transform:
   m_ObjectHideFlags: 0
@@ -2185,7 +2190,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1038996159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1511, y: -589, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4555,16 +4560,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 128
   height: 128
-  totalPlayers: 1
+  totalPlayers: 2
   _activePlayers: 1
   raycastEnabled: 1
   _visionTexture: {fileID: 1955262466}
   _visionCamera: {fileID: 1955262464}
   _visionTerrain: {fileID: 1521183270}
   _updateDisabled: 0
-  _updateTotal: 0
+  _updateTotal: 0.06666667
   _alwaysUpdate: 1
-  _cacheBlocked: 1
+  _cacheVisible: 1
   updateMethod: 1
 --- !u!114 &1955262464
 MonoBehaviour:

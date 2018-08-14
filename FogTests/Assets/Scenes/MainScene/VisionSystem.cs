@@ -14,7 +14,7 @@ public class VisionSystem : MonoBehaviour {
 		public int height;
 
 		public int[] values;
-		private short[] ground;
+		public short[] ground;
 		private int[] visited;
 
 		public int[] temporaryVisible;
@@ -152,6 +152,9 @@ public class VisionSystem : MonoBehaviour {
 
 	[SerializeField]
 	public bool updateMethod;
+
+	[SerializeField]
+	public bool _recalculatePreviousVisible = true;
 	
 	private void Start()
     {
@@ -224,11 +227,21 @@ public class VisionSystem : MonoBehaviour {
 		int e2;
 
 		var blocked = false;
+
+		var width = visionMatrix.width;
 		
 		for (;;)
 		{
 			// TODO: improve logic by not calling other methods here but access the matrix directly
-			var ground = visionMatrix.GetGround(x0, y0);
+//			var ground = visionMatrix.GetGround(x0, y0);
+
+			// Test if current pixel is already visible, that means the line to the center is clear.
+			if (_cacheVisible && visionMatrix.temporaryVisible[x0 + y0 * width] == 2)
+			{
+				break;
+			}
+
+			var ground = visionMatrix.ground[x0 + y0 * width];
 
 			if (ground > groundLevel)
 			{
@@ -238,12 +251,6 @@ public class VisionSystem : MonoBehaviour {
 			
 			if (x0 == x1 && y0 == y1)
 				break;
-
-			// Test if current pixel is already visible, that means the line to the center is clear.
-			if (_cacheVisible && visionMatrix.temporaryVisible[x0 + y0 * visionMatrix.width] == 2)
-			{
-				break;
-			}
 
 			e2 = err;
 			
@@ -267,6 +274,9 @@ public class VisionSystem : MonoBehaviour {
 	private void DrawPixel(VisionMatrix visionMatrix, int player, int x0, int y0, int x, int y, short groundLevel)
 	{
 		if (!visionMatrix.IsInside(x, y))
+			return;
+
+		if (!_recalculatePreviousVisible && visionMatrix.IsVisible(player, x, y))
 			return;
 
 		var blocked = false;
