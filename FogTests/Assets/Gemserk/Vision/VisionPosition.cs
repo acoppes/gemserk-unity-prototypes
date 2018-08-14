@@ -1,37 +1,40 @@
 ﻿using System;
 
-public struct VisionPosition : IEquatable<VisionPosition>
+namespace Gemserk.Vision
 {
-    public int x;
-    public int y;
-
-    public VisionPosition(int x, int y)
+    public struct VisionPosition : IEquatable<VisionPosition>
     {
-        this.x = x;
-        this.y = y;
-    }
+        public int x;
+        public int y;
 
-    public VisionPosition Move(int x, int y)
-    {
-        return new VisionPosition(this.x + x, this.y + y);
-    }
-
-    public override bool Equals(object obj)
-    {
-        if (ReferenceEquals(null, obj)) return false;
-        return obj is VisionPosition && Equals((VisionPosition) obj);
-    }
-
-    public bool Equals(VisionPosition other)
-    {
-        return x == other.x && y == other.y;
-    }
-
-    public override int GetHashCode()
-    {
-        unchecked
+        public VisionPosition(int x, int y)
         {
-            return (x * 397) ^ y;
+            this.x = x;
+            this.y = y;
+        }
+
+        public VisionPosition Move(int x, int y)
+        {
+            return new VisionPosition(this.x + x, this.y + y);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            return obj is VisionPosition && Equals((VisionPosition) obj);
+        }
+
+        public bool Equals(VisionPosition other)
+        {
+            return x == other.x && y == other.y;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (x * 397) ^ y;
+            }
         }
     }
 }

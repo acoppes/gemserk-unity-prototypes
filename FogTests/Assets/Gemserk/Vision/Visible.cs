@@ -1,46 +1,49 @@
 ﻿using System;
 using UnityEngine;
 
-public class Visible : MonoBehaviour
+namespace Gemserk.Vision
 {
-	[NonSerialized] 
-	public VisionPosition matrixPosition = new VisionPosition();
+	public class Visible : MonoBehaviour
+	{
+		[NonSerialized] 
+		public VisionPosition matrixPosition = new VisionPosition();
 
 //	[NonSerialized]
 //	public bool[] visibleByPlayer;
 
-	[NonSerialized]
-	public bool visible;
+		[NonSerialized]
+		public bool visible;
 
-	// bounds could be selected from presets or set custom
+		// bounds could be selected from presets or set custom
 	
-	public Vector2 bounds;
+		public Vector2 bounds;
 	
-	public Vector2 worldPosition => transform.position;
+		public Vector2 worldPosition => transform.position;
 
-	private VisionSystem _visionSystem;
+		private VisionSystem _visionSystem;
 
-	private void Awake()
-	{
-		_visionSystem = FindObjectOfType<VisionSystem>();
-	}
+		private void Awake()
+		{
+			_visionSystem = FindObjectOfType<VisionSystem>();
+		}
 	
-	private void OnEnable()
-	{
-		if (_visionSystem != null)
-			_visionSystem.AddVisible(this);	
-	}
+		private void OnEnable()
+		{
+			if (_visionSystem != null)
+				_visionSystem.AddVisible(this);	
+		}
 
-	private void OnDisable()
-	{
-		if (_visionSystem != null)
-			_visionSystem.RemoveVisible(this);
-	}
+		private void OnDisable()
+		{
+			if (_visionSystem != null)
+				_visionSystem.RemoveVisible(this);
+		}
 
-	private void OnDrawGizmos()
-	{
-		// TODO: in editor, on component added auto configure bounds from sprite.
-		Gizmos.color = Color.green;
-		Gizmos.DrawWireCube(transform.position, bounds);
+		private void OnDrawGizmos()
+		{
+			// TODO: in editor, on component added auto configure bounds from sprite.
+			Gizmos.color = Color.green;
+			Gizmos.DrawWireCube(transform.position, bounds);
+		}
 	}
 }

@@ -1,31 +1,34 @@
 ﻿using System;
 
-public struct CachedIntAbsoluteValues
+namespace Gemserk.Vision
 {
-    private int width;
-
-    private int[] cache;
-
-    public void Init(int width)
+    public struct CachedIntAbsoluteValues
     {
-        this.width = width;
-        cache = new int[width * 2];
-        for (var i = 0; i < width; i++)
+        private int width;
+
+        private int[] cache;
+
+        public void Init(int width)
         {
-            for (var j = 0; j < width; j++)
+            this.width = width;
+            cache = new int[width * 2];
+            for (var i = 0; i < width; i++)
             {
-                Store(i - j, Math.Abs(i - j));
+                for (var j = 0; j < width; j++)
+                {
+                    Store(i - j, Math.Abs(i - j));
+                }
             }
         }
-    }
 
-    private void Store(int x, int value)
-    {
-        cache[x + width] = value;
-    }
+        private void Store(int x, int value)
+        {
+            cache[x + width] = value;
+        }
 
-    public int Abs(int x)
-    {
-        return cache[x + width];
-    } 
+        public int Abs(int x)
+        {
+            return cache[x + width];
+        } 
+    }
 }

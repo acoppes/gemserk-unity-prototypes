@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gemserk.Vision;
+using UnityEngine;
 using NUnit.Framework;
 
 public class CachedAbsoluteTests {

@@ -2,51 +2,54 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Vision : MonoBehaviour
+namespace Gemserk.Vision
 {
-	public int player;
-	
-	[FormerlySerializedAs("currentRange")]
-	public float range = 100;
-
-	public short groundLevel = 0;
-
-	[NonSerialized]
-	public VisionPosition position;
-	
-	#if UNITY_EDITOR
-	public Color _debugColor;
-	#endif
-	
-	public Vector2 worldPosition
+	public class Vision : MonoBehaviour
 	{
-		get { return transform.position; }
-	}
-
-	private VisionSystem _visionSystem;
-
-	private void Awake()
-	{
-		_visionSystem = FindObjectOfType<VisionSystem>();
-	}
-
-	private void OnEnable()
-	{
-		if (_visionSystem != null)
-			_visionSystem.Register(this);	
-	}
-
-	private void OnDisable()
-	{
-		if (_visionSystem != null)
-			_visionSystem.Unregister(this);
-	}
-
-	#if UNITY_EDITOR
-	void OnDrawGizmos() {
-		Gizmos.color = _debugColor;
-		Gizmos.DrawWireSphere(worldPosition, range);	
-	}
-	#endif
+		public int player;
 	
+		[FormerlySerializedAs("currentRange")]
+		public float range = 100;
+
+		public short groundLevel = 0;
+
+		[NonSerialized]
+		public VisionPosition position;
+	
+#if UNITY_EDITOR
+		public Color _debugColor;
+#endif
+	
+		public Vector2 worldPosition
+		{
+			get { return transform.position; }
+		}
+
+		private VisionSystem _visionSystem;
+
+		private void Awake()
+		{
+			_visionSystem = FindObjectOfType<VisionSystem>();
+		}
+
+		private void OnEnable()
+		{
+			if (_visionSystem != null)
+				_visionSystem.Register(this);	
+		}
+
+		private void OnDisable()
+		{
+			if (_visionSystem != null)
+				_visionSystem.Unregister(this);
+		}
+
+#if UNITY_EDITOR
+		void OnDrawGizmos() {
+			Gizmos.color = _debugColor;
+			Gizmos.DrawWireSphere(worldPosition, range);	
+		}
+#endif
+	
+	}
 }

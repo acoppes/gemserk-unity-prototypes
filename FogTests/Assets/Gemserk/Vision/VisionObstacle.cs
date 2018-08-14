@@ -1,22 +1,10 @@
 ﻿using UnityEngine;
 
-public class VisionObstacle : MonoBehaviour
+namespace Gemserk.Vision
 {
-    public short groundLevel;
-    
-    [SerializeField]
-    protected Collider2D _collider;
-    
-    private void Awake()
+    public abstract class VisionObstacle : MonoBehaviour
     {
-        if (_collider == null)
-            _collider = GetComponentInChildren<Collider2D>();
-    }
-
-    public short GetGroundLevel(Vector2 worldPosition)
-    {
-        if (_collider.OverlapPoint(worldPosition))
-            return groundLevel;
-        return 0;
+        public short groundLevel;
+        public abstract short GetGroundLevel(Vector2 worldPosition);
     }
 }
