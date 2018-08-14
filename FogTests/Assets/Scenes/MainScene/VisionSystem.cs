@@ -5,99 +5,7 @@ using Gemserk.Vision;
 using UnityEngine;
 using UnityEngine.Profiling;
 
-
 public class VisionSystem : MonoBehaviour {
-
-	public struct VisionMatrix
-	{
-		public int width;
-		public int height;
-
-		public int[] values;
-		public short[] ground;
-		private int[] visited;
-
-		public int[] temporaryVisible;
-		
-		public void Init(int width, int height, int value, short groundLevel)
-		{
-			this.width = width;
-			this.height = height;
-
-			var length = width * height;
-			
-			values = new int[length];
-			ground = new short[length];
-			visited = new int[length];
-
-			temporaryVisible = new int[length];
-			
-			Clear(value, groundLevel);
-		}
-
-		public bool IsInside(int i, int j)
-		{
-			return i >= 0 && i < width && j >= 0 && j < height;
-		}
-
-		public void SetVisible(int playerFlags, int i, int j)
-		{
-			visited[i + j * width] |= playerFlags;
-			values[i + j * width] |= playerFlags;
-		}
-
-		public bool IsVisible(int playerFlags, int i, int j)
-		{
-			return (values[i + j * width] & playerFlags) > 0;
-		}
-		
-		public bool IsVisible(int playerFlags, int i)
-		{
-			return (values[i] & playerFlags) > 0;
-		}
-		
-		public bool WasVisible(int playerFlags, int i)
-		{
-			return (visited[i] & playerFlags) > 0;
-		}
-
-		public short GetGround(int i, int j)
-		{
-			return ground[i + j * width];
-		}
-		
-		public short GetGround(int i)
-		{
-			return ground[i];
-		}
-		
-		public void SetGround(int i, int j, short ground)
-		{
-			this.ground[i + j * width] = ground;
-		}
-
-		public void Clear(int value, short groundLevel)
-		{
-			for (var i = 0; i < width * height; i++)
-			{
-				visited[i] = 0;
-				ground[i] = groundLevel;
-				values[i] = value;
-			}
-		}
-		
-		public void ClearValues()
-		{
-			Array.Clear(values, 0, values.Length);
-		}
-
-		public void Clear()
-		{
-			Array.Clear(values, 0, values.Length);
-			Array.Clear(visited, 0, visited.Length);
-		}
-
-	}
 
 	public int width = 128;
 	public int height = 128;
@@ -232,10 +140,8 @@ public class VisionSystem : MonoBehaviour {
 		
 		for (;;)
 		{
-			// TODO: improve logic by not calling other methods here but access the matrix directly
-//			var ground = visionMatrix.GetGround(x0, y0);
-
-			// Test if current pixel is already visible, that means the line to the center is clear.
+			// Tests if current pixel is already visible by current vision,
+			// that means the line to the center is clear.
 			if (_cacheVisible && visionMatrix.temporaryVisible[x0 + y0 * width] == 2)
 			{
 				break;
@@ -276,9 +182,6 @@ public class VisionSystem : MonoBehaviour {
 		if (!visionMatrix.IsInside(x, y))
 			return;
 
-		if (!_recalculatePreviousVisible && visionMatrix.IsVisible(player, x, y))
-			return;
-
 		var blocked = false;
 		
 		// 0 means not visited yet
@@ -287,8 +190,13 @@ public class VisionSystem : MonoBehaviour {
 
 		if (raycastEnabled)
 		{
+			// Avoid recalculating this pixel blocked if was already visible by another vision of the same player 
+			if (!_recalculatePreviousVisible && visionMatrix.IsVisible(player, x, y))
+				return;
+			
 			if (_cacheVisible)
 				visionMatrix.temporaryVisible[x + y * visionMatrix.width] = 1;
+			
 			blocked = IsBlocked(visionMatrix, groundLevel, x, y, x0, y0);
 		}
 		
@@ -297,7 +205,7 @@ public class VisionSystem : MonoBehaviour {
 			return;
 		} 
 		
-		if (_cacheVisible)
+		if (raycastEnabled && _cacheVisible)
 			visionMatrix.temporaryVisible[x + y * visionMatrix.width] = 2;
 		
 		visionMatrix.SetVisible(player, x, y);

@@ -40,10 +40,10 @@ namespace Gemserk.Vision
             _texture.Apply();
         }
 
-        private VisionSystem.VisionMatrix _visionMatrix;
+        private VisionMatrix _visionMatrix;
         private bool _dirty = true;
 
-        public void UpdateTexture(VisionSystem.VisionMatrix visionMatrix)
+        public void UpdateTexture(VisionMatrix visionMatrix)
         {
             _visionMatrix = visionMatrix;
             _dirty = true;

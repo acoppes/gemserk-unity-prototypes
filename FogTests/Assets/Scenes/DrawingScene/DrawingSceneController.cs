@@ -19,7 +19,7 @@ public class DrawingSceneController : MonoBehaviour
 	
 	private Vector2 _localScale;
 
-	private VisionSystem.VisionMatrix _visionMatrix;
+	private VisionMatrix _visionMatrix;
 	
 	// Use this for initialization
 	private void Start () {
@@ -32,7 +32,7 @@ public class DrawingSceneController : MonoBehaviour
 	}
 
 	// TODO: create struct/class for vision matrix with width/height in it.
-	private static void DrawPixel(VisionSystem.VisionMatrix visionMatrix, int x, int y, int value)
+	private static void DrawPixel(VisionMatrix visionMatrix, int x, int y, int value)
 	{
 		if (visionMatrix.IsInside(x, y))
 		{

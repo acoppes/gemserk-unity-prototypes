@@ -63,12 +63,12 @@ public class VisionTexture : MonoBehaviour
         _texture.Apply();
     }
 
-    private VisionSystem.VisionMatrix _visionMatrix;
+    private VisionMatrix _visionMatrix;
     private bool _dirty = true;
 
     private int _activePlayers;
     
-    public void UpdateTexture(VisionSystem.VisionMatrix visionMatrix, int activePlayers)
+    public void UpdateTexture(VisionMatrix visionMatrix, int activePlayers)
     {
         _visionMatrix = visionMatrix;
         _activePlayers = activePlayers;
