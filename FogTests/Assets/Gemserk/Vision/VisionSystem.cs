@@ -55,7 +55,7 @@ namespace Gemserk.Vision
         [SerializeField]
         public bool _recalculatePreviousVisible = true;
 	
-        private void Start()
+        public void Init()
         {
             // update on first frame
             _updateCurrent = _updateTotal;
@@ -77,11 +77,6 @@ namespace Gemserk.Vision
 
             // register static ground configuration...
 
-            var obstacles = FindObjectsOfType<VisionObstacle>();
-            foreach (var obstacle in obstacles)
-            {
-                RegisterObstacle(obstacle);
-            }
 
             cachedAbsoluteValues.Init(Math.Max(width, height));
         }
@@ -416,7 +411,7 @@ namespace Gemserk.Vision
             Profiler.EndSample();
         }
 
-        private void RegisterObstacle(VisionObstacle obstacle)
+        public void RegisterObstacle(VisionObstacle obstacle)
         {
             for (var i = 0; i < width; i++)
             {

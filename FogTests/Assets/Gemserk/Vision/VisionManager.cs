@@ -16,6 +16,17 @@ namespace Gemserk.Vision
 		private bool _dirty;
 		
 		private readonly List<Visible> _visibles = new List<Visible>();
+
+		private void Start()
+		{
+			_visionSystem.Init();
+			
+			var obstacles = FindObjectsOfType<VisionObstacle>();
+			foreach (var obstacle in obstacles)
+			{
+				_visionSystem.RegisterObstacle(obstacle);
+			}
+		}
 		
 		private void ProcessPendingVisions()
 		{
@@ -65,6 +76,7 @@ namespace Gemserk.Vision
 			
 			_visionSystem.UpdateTextures();
 		}
+		
 
 	}
 }
