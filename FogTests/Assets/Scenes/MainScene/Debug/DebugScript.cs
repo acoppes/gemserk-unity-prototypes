@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DebugScript : MonoBehaviour
 {
 	[SerializeField]
-	private VisionSystem _visionSystem;
+	private VisionManager _visionSystem;
 
 	[SerializeField]
 	private CanvasGroup _fpsGroup;

@@ -25,11 +25,11 @@ namespace Gemserk.Vision
 			get { return transform.position; }
 		}
 
-		private VisionSystem _visionSystem;
+		private VisionManager _visionSystem;
 
 		private void Awake()
 		{
-			_visionSystem = FindObjectOfType<VisionSystem>();
+			_visionSystem = FindObjectOfType<VisionManager>();
 		}
 
 		private void OnEnable()

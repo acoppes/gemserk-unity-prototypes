@@ -4668,7 +4668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be0b5a9895996f43b564893307ae7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _visionSystem: {fileID: 1955262463}
+  _visionSystem: {fileID: 0}
   _fpsGroup: {fileID: 1453501322}
   _mainCamera: {fileID: 1038996162}
   _fogLayerName: Fog
@@ -5224,6 +5224,7 @@ GameObject:
   - component: {fileID: 1955262463}
   - component: {fileID: 1955262466}
   - component: {fileID: 1955262464}
+  - component: {fileID: 1955262467}
   m_Layer: 0
   m_Name: VisionSystem
   m_TagString: Untagged
@@ -5304,6 +5305,18 @@ MonoBehaviour:
   _startColor: {r: 0, g: 0, b: 0, a: 1}
   _interpolateColorSpeed: 6
   _previousVision: 1
+--- !u!114 &1955262467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1955262462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f9239e2ef54980a84239d131a375f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visionSystem: {fileID: 1955262463}
 --- !u!1 &1968844762
 GameObject:
   m_ObjectHideFlags: 0
