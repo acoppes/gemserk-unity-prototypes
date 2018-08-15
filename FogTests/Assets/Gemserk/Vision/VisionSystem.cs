@@ -418,20 +418,17 @@ namespace Gemserk.Vision
 
         private void RegisterObstacle(VisionObstacle obstacle)
         {
-            for (var j = 0; j < totalPlayers; j++)
+            for (var i = 0; i < width; i++)
             {
-                for (var i = 0; i < width; i++)
+                for (var k = 0; k < height; k++)
                 {
-                    for (var k = 0; k < height; k++)
-                    {
-                        var p = GetWorldPosition(i, k);
-                        var currentLevel = _visionMatrix.GetGround(i, k);
+                    var p = GetWorldPosition(i, k);
+                    var currentLevel = _visionMatrix.GetGround(i, k);
 					
-                        if (currentLevel == 0)
-                            currentLevel = obstacle.GetGroundLevel(p);
+                    if (currentLevel == 0)
+                        currentLevel = obstacle.GetGroundLevel(p);
 
-                        _visionMatrix.SetGround(i, k, currentLevel);
-                    }
+                    _visionMatrix.SetGround(i, k, currentLevel);
                 }
             }		
         }
