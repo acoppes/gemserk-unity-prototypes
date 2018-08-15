@@ -5251,8 +5251,6 @@ MonoBehaviour:
   _visionTexture: {fileID: 1955262466}
   _visionCamera: {fileID: 1955262464}
   _visionTerrain: {fileID: 1521183270}
-  _updateDisabled: 0
-  _updateTotal: 0.1
   _alwaysUpdate: 1
   _cacheVisible: 1
   updateMethod: 1
@@ -5317,6 +5315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _visionSystem: {fileID: 1955262463}
+  _updateTotal: 0.1
 --- !u!1 &1968844762
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace Gemserk.Vision
 {
@@ -16,6 +17,11 @@ namespace Gemserk.Vision
 		private bool _dirty;
 		
 		private readonly List<Visible> _visibles = new List<Visible>();
+		
+		[SerializeField]
+		protected float _updateTotal;
+		
+		private float _updateCurrent;
 
 		private void Start()
 		{
@@ -26,6 +32,8 @@ namespace Gemserk.Vision
 			{
 				_visionSystem.RegisterObstacle(obstacle);
 			}
+			
+			_updateCurrent = _updateTotal;
 		}
 		
 		private void ProcessPendingVisions()
@@ -71,12 +79,32 @@ namespace Gemserk.Vision
 		{
 			ProcessPendingVisions();
 			
-			_visionSystem.UpdateVision(_visions);
-			_visionSystem.UpdateVisibles(_visibles);
+			_updateCurrent += Time.deltaTime;
+
+			if (_updateCurrent < _updateTotal)
+				return;
 			
+			Profiler.BeginSample("VisionUpdate");
+				
+			_visionSystem.ClearVision();
+			foreach (var vision in _visions)
+			{
+				_visionSystem.UpdateVision(vision);
+			}
+				
+			Profiler.EndSample();
+				
+							
+			Profiler.BeginSample("Visible");
+			for (var i = 0; i < _visibles.Count; i++)
+			{
+				var visible = _visibles[i];
+				_visionSystem.UpdateVisible(visible);
+			}
+			Profiler.EndSample();
+
 			_visionSystem.UpdateTextures();
 		}
 		
-
 	}
 }

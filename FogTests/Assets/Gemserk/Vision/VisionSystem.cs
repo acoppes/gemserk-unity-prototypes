@@ -26,15 +26,8 @@ namespace Gemserk.Vision
         [SerializeField]
         protected VisionTerrainTexture _visionTerrain;
 
-        [SerializeField]
-        protected bool _updateDisabled;
-	
-        [SerializeField]
-        protected float _updateTotal;
-
         private VisionMatrix _visionMatrix;
 
-        private float _updateCurrent;
 
         private Vector2 _localScale;
 
@@ -57,9 +50,6 @@ namespace Gemserk.Vision
 	
         public void Init()
         {
-            // update on first frame
-            _updateCurrent = _updateTotal;
-
             _localScale = _visionCamera.GetScale(width, height);
 	   
             _visionTexture.Create(width, height, _localScale);
@@ -339,31 +329,15 @@ namespace Gemserk.Vision
             _visionMatrix.Clear();
         }
 
-        public void UpdateVision(List<Vision> visions)
+        public void ClearVision()
         {
-            if (_updateDisabled) 
-                return;
-
-
-
-            _updateCurrent += Time.deltaTime;
-
-            if (_updateCurrent < _updateTotal)
-                return;
-            
-            Profiler.BeginSample("VisionUpdate");
-
-            _updateCurrent = 0;
-
             _visionMatrix.ClearValues();
-			
-            foreach (var vision in visions)
-            {	
-                vision.position = GetMatrixPosition(vision.worldPosition);
-                UpdateVision(vision.position, vision.range, vision.player, vision.groundLevel);
-            }
-			
-            Profiler.EndSample();
+        }
+        
+        public void UpdateVision(Vision vision)
+        {
+            vision.position = GetMatrixPosition(vision.worldPosition);
+            UpdateVision(vision.position, vision.range, vision.player, vision.groundLevel);
         }
 
         public void UpdateTextures()
@@ -375,40 +349,31 @@ namespace Gemserk.Vision
             _visionTexture.UpdateTexture(_visionMatrix, _activePlayers);
         }
 
-        public void UpdateVisibles(List<Visible> visibles)
+        public void UpdateVisible(Visible visible)
         {
-            Profiler.BeginSample("Visibles");
-		
-            for (var i = 0; i < visibles.Count; i++)
+            var halfwidth = Mathf.CeilToInt(visible.bounds.x * 0.5f / _localScale.x);
+            var halfheight = Mathf.CeilToInt(visible.bounds.y * 0.5f / _localScale.y);
+			
+            visible.matrixPosition = GetMatrixPosition(visible.worldPosition);
+
+            var isVisible = false;
+
+            var colStart = Math.Max(visible.matrixPosition.x - halfwidth, 0);
+            var colEnd = Math.Min(visible.matrixPosition.x + halfwidth, width - 1);
+
+            var rowStart = Math.Max(visible.matrixPosition.y - halfheight, 0);
+            var rowEnd = Math.Min(visible.matrixPosition.y + halfheight, height - 1);
+
+            for (var j = colStart; !isVisible && j <= colEnd; j++)
             {
-                var visible = visibles[i];
-			
-                var halfwidth = Mathf.CeilToInt(visible.bounds.x * 0.5f / _localScale.x);
-                var halfheight = Mathf.CeilToInt(visible.bounds.y * 0.5f / _localScale.y);
-			
-                visible.matrixPosition = GetMatrixPosition(visible.worldPosition);
-
-                var isVisible = false;
-
-                var colStart = Math.Max(visible.matrixPosition.x - halfwidth, 0);
-                var colEnd = Math.Min(visible.matrixPosition.x + halfwidth, width - 1);
-
-                var rowStart = Math.Max(visible.matrixPosition.y - halfheight, 0);
-                var rowEnd = Math.Min(visible.matrixPosition.y + halfheight, height - 1);
-
-                for (var j = colStart; !isVisible && j <= colEnd; j++)
+                for (var k = rowStart; !isVisible && k <= rowEnd; k++)
                 {
-                    for (var k = rowStart; !isVisible && k <= rowEnd; k++)
-                    {
-                        isVisible = _visionMatrix.IsVisible(_activePlayers, j, k);
-                    }
+                    isVisible = _visionMatrix.IsVisible(_activePlayers, j, k);
                 }
-			
-                visible.visible = isVisible;
-                visible.gameObject.SetLayerRecursive(isVisible ? _layerVisible : _layerHidden);
             }
-		
-            Profiler.EndSample();
+			
+            visible.visible = isVisible;
+            visible.gameObject.SetLayerRecursive(isVisible ? _layerVisible : _layerHidden);
         }
 
         public void RegisterObstacle(VisionObstacle obstacle)
