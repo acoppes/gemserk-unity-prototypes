@@ -77,44 +77,44 @@ namespace Gemserk.Vision
             _dirty = true;
         }
 
-        private void Update()
+private void Update()
+{
+    if (!_dirty || _visionMatrix.values == null)
+        return;
+
+    _dirty = false;
+
+    var interpolationEnabled = _interpolateColorSpeed > Mathf.Epsilon;
+    var alpha = Time.deltaTime * _interpolateColorSpeed;
+
+    var width = _visionMatrix.width;
+    var height = _visionMatrix.height;
+
+    for (var i = 0; i < width * height; i++)
+    {
+        var isVisible = _visionMatrix.IsVisible(_activePlayers, i);
+        
+        var newColor = _startColor;
+        
+        if (isVisible)
         {
-            if (!_dirty || _visionMatrix.values == null)
-                return;
+            newColor = _whiteColor;
+        } else if (_previousVision && _visionMatrix.WasVisible(_activePlayers, i))
+        {
+            newColor = _greyColor;
+        } 
 
-            _dirty = false;
-        
-            var interpolationEnabled = _interpolateColorSpeed > Mathf.Epsilon;
-            var alpha = Time.deltaTime * _interpolateColorSpeed;
-
-            var width = _visionMatrix.width;
-            var height = _visionMatrix.height;
-        
-            for (var i = 0; i < width * height; i++)
-            {
-                var isVisible = _visionMatrix.IsVisible(_activePlayers, i);
-                
-                var newColor = _startColor;
-                
-                if (isVisible)
-                {
-                    newColor = _whiteColor;
-                } else if (_previousVision && _visionMatrix.WasVisible(_activePlayers, i))
-                {
-                    newColor = _greyColor;
-                } 
-    
-                if (interpolationEnabled)
-                {
-                    newColor.r = Mathf.LerpUnclamped(_colors[i].r, newColor.r, alpha);
-                }
-            
-                _colors[i] = newColor;
-            }
-		
-            _texture.SetPixels(_colors);
-            _texture.Apply();
+        if (interpolationEnabled)
+        {
+            newColor.r = Mathf.LerpUnclamped(_colors[i].r, newColor.r, alpha);
         }
+    
+        _colors[i] = newColor;
+    }
+
+    _texture.SetPixels(_colors);
+    _texture.Apply();
+}
 
     }
 }

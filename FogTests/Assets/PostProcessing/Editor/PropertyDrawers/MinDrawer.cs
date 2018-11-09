@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.PostProcessing;
 
 namespace UnityEditor.PostProcessing
 {
@@ -8,7 +7,7 @@ namespace UnityEditor.PostProcessing
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            MinAttribute attribute = (MinAttribute)base.attribute;
+            UnityEngine.MinAttribute attribute = (UnityEngine.MinAttribute) base.attribute;
 
             if (property.propertyType == SerializedPropertyType.Integer)
             {
