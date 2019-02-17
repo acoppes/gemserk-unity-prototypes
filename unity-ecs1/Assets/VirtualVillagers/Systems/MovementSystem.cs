@@ -10,7 +10,7 @@ namespace VirtualVillagers.Systems
     {
         private struct Data
         {
-            public int Length;
+            public readonly int Length;
             public ComponentArray<MovementComponent> movement;
             public ComponentArray<Transform> transform;
         }

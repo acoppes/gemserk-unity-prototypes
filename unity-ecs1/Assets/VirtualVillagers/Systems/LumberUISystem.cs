@@ -7,13 +7,13 @@ namespace VirtualVillagers.Systems
     {
         private struct Data
         {
-            public int Length;
+            public readonly int Length;
             public ComponentArray<LumberMillUIComponent> lumberUI;
         }
         
         private struct LumberMillData
         {
-            public int Length;
+            public readonly int Length;
             public ComponentArray<LumberMillComponent> lumberMill;
             public ComponentArray<LumberComponent> lumber;
         }

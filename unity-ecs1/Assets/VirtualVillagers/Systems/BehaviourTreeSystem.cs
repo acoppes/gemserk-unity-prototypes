@@ -11,11 +11,11 @@ namespace VirtualVillagers.Systems
     {
         private struct Data
         {
-            public int Length;
+            public readonly int Length;
             public ComponentArray<BehaviourTreeComponent> behaviourTree;
         }
 
-        [Inject] private Data m_Data;
+        [Inject] private readonly Data m_Data;
 
         private BehaviourTreeManager _btManager;
 

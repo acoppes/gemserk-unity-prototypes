@@ -20,11 +20,11 @@ namespace VirtualVillagers.Components
     {
         private struct Data
         {
-            public int Length;
+            public readonly int Length;
             public ComponentArray<LumberUIComponent> lumberUI;
         }
         
-        [Inject] private Data _data;
+        [Inject] private readonly Data _data;
         
         private readonly List<GameObject> _toDestroy = new List<GameObject>();
 

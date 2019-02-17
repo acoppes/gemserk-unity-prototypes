@@ -19,7 +19,7 @@ namespace VirtualVillagers.Components
     {
         private struct Data
         {
-            public int Length;
+            public readonly int Length;
             public ComponentArray<ModelComponent> model;
             public ComponentArray<Transform> transform;
             public EntityArray entity;

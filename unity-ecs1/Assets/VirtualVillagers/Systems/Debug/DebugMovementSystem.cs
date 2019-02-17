@@ -10,13 +10,13 @@ namespace VirtualVillagers.Systems
     {
         private struct Data
         {
-            public int Length;
+            public readonly int Length;
             public EntityArray entity;
             public ComponentArray<MovementComponent> movement;
             public ComponentArray<Transform> transform;
         }
 
-        [Inject] private Data m_Data;
+        [Inject] private readonly Data m_Data;
 
         private DebugMovementSystemBehaviour _debugBehaviour;
         

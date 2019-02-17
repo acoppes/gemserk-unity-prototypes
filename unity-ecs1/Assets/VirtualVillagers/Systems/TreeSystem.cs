@@ -8,7 +8,7 @@ namespace VirtualVillagers.Systems
     {
         private struct Data
         {
-            public int Length;
+            public readonly int Length;
             public ComponentArray<LumberComponent> lumbers;
             public ComponentArray<Components.TreeComponent> trees;
         }

@@ -8,7 +8,7 @@ namespace VirtualVillagers.Systems
     {
         private struct Data
         {
-            public int Length;
+            public readonly int Length;
             public ComponentDataArray<SimulationTime> _simulation;
         }
 

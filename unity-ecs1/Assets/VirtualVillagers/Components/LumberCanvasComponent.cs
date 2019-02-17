@@ -30,7 +30,7 @@ namespace VirtualVillagers.Components
     {
         private struct Data
         {
-            public int Length;
+            public readonly int Length;
             public ComponentArray<LumberCanvasComponent> lumberCanvas;
             public ComponentArray<LumberComponent> lumber;
 //            public EntityArray entities;

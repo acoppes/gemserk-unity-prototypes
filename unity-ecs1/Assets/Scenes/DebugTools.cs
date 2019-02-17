@@ -1,7 +1,6 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using Unity.Transforms2D;
 using UnityEngine;
 using VirtualVillagers;
 using VirtualVillagers.Components;
@@ -39,6 +38,7 @@ public class DebugTools : MonoBehaviour
 			tree.seedPrefab = treePrefab;
 		}
 		
+
 		tree.currentSize = size;
 		gameObject.GetComponent<LumberComponent>().current = (size + 1) * tree.lumberPerSize;
 //		btContext.treeCurrentLumber = (size + 1) * btContext.treeLumberPerSize;
@@ -49,7 +49,7 @@ public class DebugTools : MonoBehaviour
 		btContext.idleCurrentTime = UnityEngine.Random.RandomRange(0, btContext.idleTotalTime);
 		
 		var entity = gameObject.GetComponent<GameObjectEntity>();
-		entity.EntityManager.SetComponentData(entity.Entity, new Position
+		entity.EntityManager.AddComponentData(entity.Entity, new Position
 		{
 			Value = gameObject.transform.position
 		});
@@ -73,7 +73,7 @@ public class DebugTools : MonoBehaviour
 		);
 
 		var entity = gameObject.GetComponent<GameObjectEntity>();
-		entity.EntityManager.SetComponentData(entity.Entity, new Position
+		entity.EntityManager.AddComponentData(entity.Entity, new Position
 		{
 			Value = gameObject.transform.position
 		});
@@ -102,10 +102,12 @@ public class DebugTools : MonoBehaviour
 		);
 
 		var entity = gameObject.GetComponent<GameObjectEntity>();
-		entity.EntityManager.SetComponentData(entity.Entity, new Position
-		{
-			Value = gameObject.transform.position
-		});
+        var po = new Position()
+        {
+            Value = new float3(gameObject.transform.position)
+        };
+
+        entity.EntityManager.AddComponentData(entity.Entity, po);
 
 		var btComponent = gameObject.GetComponent<BehaviourTreeComponent>();
 		if (btComponent)
@@ -128,7 +130,7 @@ public class DebugTools : MonoBehaviour
 		);
 
 		var entity = gameObject.GetComponent<GameObjectEntity>();
-		entity.EntityManager.SetComponentData(entity.Entity, new Position
+		entity.EntityManager.AddComponentData(entity.Entity, new Position
 		{
 			Value = gameObject.transform.position
 		});
@@ -153,7 +155,7 @@ public class DebugTools : MonoBehaviour
 		);
 
 		var entity = gameObject.GetComponent<GameObjectEntity>();
-		entity.EntityManager.SetComponentData(entity.Entity, new Position
+		entity.EntityManager.AddComponentData(entity.Entity, new Position
 		{
 			Value = gameObject.transform.position
 		});
