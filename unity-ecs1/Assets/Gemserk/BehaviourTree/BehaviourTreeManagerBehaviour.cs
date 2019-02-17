@@ -8,14 +8,14 @@ namespace Gemserk.BehaviourTree
     {
         private readonly Dictionary<string, IBehaviourTreeNode> _trees = new Dictionary<string, IBehaviourTreeNode>();
 
-        private object _context;
+        private BehaviourTreeContext _context;
 
         public void Add(string name, IBehaviourTreeNode t)
         {
             _trees[name] = t;
         }
 
-        public object GetContext()
+        public BehaviourTreeContext GetContext()
         {
             return _context;
         }
@@ -27,7 +27,7 @@ namespace Gemserk.BehaviourTree
             return node;
         }
 
-        public void SetContext(object context)
+        public void SetContext(BehaviourTreeContext context)
         {
             _context = context;
         }

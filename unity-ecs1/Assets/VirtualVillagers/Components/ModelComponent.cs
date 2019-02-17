@@ -10,8 +10,7 @@ namespace VirtualVillagers.Components
     public class ModelComponent : MonoBehaviour
     {
         [NonSerialized]
-        public Model model;
-        
+        public Model model;  
         public string modelAsset;
     }
     

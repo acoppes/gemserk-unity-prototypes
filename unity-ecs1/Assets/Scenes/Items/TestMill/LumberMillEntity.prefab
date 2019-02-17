@@ -131,4 +131,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d282ea7a674828b82e3084e9f28d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelAsset: 
+  modelAsset: Models/LumberMillModel

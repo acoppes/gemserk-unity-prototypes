@@ -6,7 +6,6 @@ using VirtualVillagers.Components;
 
 namespace VirtualVillagers.Systems
 {
-    // ReSharper disable once UnusedMember.Global
     public class BehaviourTreeSystem : ComponentSystem
     {
         private struct Data
@@ -24,11 +23,7 @@ namespace VirtualVillagers.Systems
             _btManager = btManager;
         }
 
-//        protected override void OnCreateManager(int capacity)
-//        {
-//            base.OnCreateManager(capacity);
-//            _btManager = GameObject.FindObjectOfType<BehaviourTreeManagerBehaviour>();
-//        }
+        private UnityBehaviourTreeContext _context = new UnityBehaviourTreeContext();
 
         protected override void OnUpdate()
         {
@@ -48,8 +43,11 @@ namespace VirtualVillagers.Systems
                     return;
 
                 ActionNode.DebugCurrentNode = "None";
+
+                _btManager.SetContext(_context);
+                _context.SetGameObject(bt.gameObject);
                 
-                _btManager.SetContext(bt.gameObject);
+                // _btManager.SetContext(bt.gameObject);
                 tree.Tick(new FluentBehaviourTree.TimeData(dt));
                 _btManager.SetContext(null);
                 
