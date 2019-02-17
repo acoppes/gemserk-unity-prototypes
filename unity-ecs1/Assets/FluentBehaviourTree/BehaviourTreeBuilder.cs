@@ -23,7 +23,7 @@ namespace FluentBehaviourTree
         /// <summary>
         /// Create an action node.
         /// </summary>
-        public BehaviourTreeBuilder Do(string name, Func<TimeData, BehaviourTreeStatus> fn)
+        public BehaviourTreeBuilder Do(string name, Func<object, TimeData, BehaviourTreeStatus> fn)
         {
             if (parentNodeStack.Count <= 0)
             {
@@ -48,9 +48,9 @@ namespace FluentBehaviourTree
         /// <summary>
         /// Like an action node... but the function can return true/false and is mapped to success/failure.
         /// </summary>
-        public BehaviourTreeBuilder Condition(string name, Func<TimeData, bool> fn)
+        public BehaviourTreeBuilder Condition(string name, Func<object, TimeData, bool> fn)
         {
-            return Do(name, t => fn(t) ? BehaviourTreeStatus.Success : BehaviourTreeStatus.Failure);
+            return Do(name, (c, t) => fn(c, t) ? BehaviourTreeStatus.Success : BehaviourTreeStatus.Failure);
         }
 
         /// <summary>

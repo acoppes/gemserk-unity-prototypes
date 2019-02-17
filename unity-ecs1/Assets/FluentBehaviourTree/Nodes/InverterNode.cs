@@ -25,14 +25,14 @@ namespace FluentBehaviourTree
             this.name = name;
         }
 
-        public BehaviourTreeStatus Tick(TimeData time)
+        public BehaviourTreeStatus Tick(object context, TimeData time)
         {
             if (childNode == null)
             {
                 throw new ApplicationException("InverterNode must have a child node!");
             }
 
-            var result = childNode.Tick(time);
+            var result = childNode.Tick(context, time);
             if (result == BehaviourTreeStatus.Failure)
             {
                 return BehaviourTreeStatus.Success;

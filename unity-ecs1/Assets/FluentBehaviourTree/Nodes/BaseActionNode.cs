@@ -5,11 +5,11 @@ namespace FluentBehaviourTree
     {
         private BehaviourTreeStatus _status = BehaviourTreeStatus.Failure;
         
-        public BehaviourTreeStatus Tick(TimeData time)
+        public BehaviourTreeStatus Tick(object context, TimeData time)
         {
             if (_status != BehaviourTreeStatus.Running)
                 OnInitialize();
-            _status = Update(time);
+            _status = Update(context, time);
             if (_status != BehaviourTreeStatus.Running)
                 OnTerminate();
             return _status;
@@ -25,6 +25,6 @@ namespace FluentBehaviourTree
             
         }
         
-        protected abstract BehaviourTreeStatus Update(TimeData time);
+        protected abstract BehaviourTreeStatus Update(object context, TimeData time);
     }
 }

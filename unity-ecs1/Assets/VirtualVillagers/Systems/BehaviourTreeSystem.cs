@@ -29,11 +29,10 @@ namespace VirtualVillagers.Systems
                 return;
             
             var dt = Time.deltaTime;
+            var fluentTimeData = new FluentBehaviourTree.TimeData(dt);
 
             for (var i = 0; i < m_Data.Length; i++)
             {
-                // m_Data.myComponent[i].superValue++;
-
                 var bt = m_Data.behaviourTree[i];
                 
                 var tree = _btManager.GetTree(bt._behaviourTreeName);
@@ -45,7 +44,7 @@ namespace VirtualVillagers.Systems
                 var context = _btManager.GetContext();
                 context.SetObject(bt.gameObject);
                 
-                tree.Tick(new FluentBehaviourTree.TimeData(dt));
+                tree.Tick(context, fluentTimeData);
                 
                 // just for debug!
                 bt._debugCurrentAction = ActionNode.DebugCurrentNode;

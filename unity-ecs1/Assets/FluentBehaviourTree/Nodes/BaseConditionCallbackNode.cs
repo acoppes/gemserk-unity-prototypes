@@ -4,17 +4,16 @@ namespace FluentBehaviourTree
 {
     public class BaseConditionCallbackNode : IBehaviourTreeNode
     {
-        private readonly Func<TimeData, bool> _fn;
+        private readonly Func<object, TimeData, bool> _fn;
         
-        
-        public BaseConditionCallbackNode(Func<TimeData, bool> fn)
+        public BaseConditionCallbackNode(Func<object, TimeData, bool> fn)
         {
             _fn = fn;
         }
         
-        public BehaviourTreeStatus Tick(TimeData time)
+        public BehaviourTreeStatus Tick(object context, TimeData time)
         {
-            return _fn(time) ? BehaviourTreeStatus.Success : BehaviourTreeStatus.Failure;
+            return _fn(context, time) ? BehaviourTreeStatus.Success : BehaviourTreeStatus.Failure;
         }
     }
 }

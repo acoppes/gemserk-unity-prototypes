@@ -110,10 +110,19 @@ public class BehaviourTreeTestSceneController : MonoBehaviour, GameWorld {
         // aunque terminen teniendo logica en si. Por ejemplo, los sub graph/ sub tree podrían ser un scriptable object hoy en día
         // y armar la jerarquía usando eso.
 
+        // Quizás deberían ser módulos básicos, no código en sí. Es decir, tener elementos como condiciones, while, etc, pero no 
+        // lógica elaborada, a menos que sea algo reusable que valga la pena tener como sub graph pero seguramente esté compuesto por los
+        // otros elementos. 
+
         // Que pasa si necesito algo como un manager, por ejemplo pedirle algo al quadtree para buscar enemigos cercanos?
         // Podría tener una entidad unica con un componente para esto... podría también tenerlo incorporado en mi sistema de contexto
         // del bt, aunque ahí me caga que el sistema no lo está seteando hoy en día. Podría hacer algo para setear un extra de contexto
         // al sistema y/o al btmanager en vez del sistema y usarlo en mis acciones. En vez de castear a un contexto, castear a otro con mas
         // datos.
+
+        // Me gustaría que los behaviours tuvieran acceso al contexto y pedirle cosas a ese, castearlo a algo, etc, pero no usar
+        // el btmanager como hacen hoy en día. Podría ser un parámetro al llamar el nodo o algo que se setea. Tener en cuenta
+        // que los tree se reusan entre entidades entonces seguramente es mejor tener algo como un parámetro que define la lógica, el 
+        // tree ejecuta sobre ese contexto temporalmente, si se llama con otro parámetro, ejecuta distinto según las variables, etc.
 	}
 }
