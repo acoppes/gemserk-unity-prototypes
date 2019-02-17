@@ -41,6 +41,8 @@ namespace VirtualVillagers.Components
                         continue;
                     }
 
+                    // TODO: pool models
+
                     var modelPrefab = Resources.Load<GameObject>(model.modelAsset);
                     var gameObject = GameObject.Instantiate(modelPrefab);
                     model.model = gameObject.GetComponent<Model>();
@@ -50,12 +52,21 @@ namespace VirtualVillagers.Components
                 }
 
                 model.model.UpdateRender(_data.transform[i]);
-//
-//                if (!EntityManager.Exists(_data.entity[i]))
-//                {
-//                    GameObject.Destroy(model.model);
-//                    model.model = null;
-//                }
+
+                if (this.EntityManager.HasComponent<MovementComponent>(_data.entity[i])) {
+                    var movement = this.EntityManager.GetComponentObject<MovementComponent>(_data.entity[i]);
+                    var speed = Vector2.SqrMagnitude(movement.velocity);
+
+                    var animator = model.model.GetComponentInChildren<Animator>();
+                    if (animator != null)
+                        animator.SetBool("Moving", speed > 0);
+                }
+                //
+                //                if (!EntityManager.Exists(_data.entity[i]))
+                //                {
+                //                    GameObject.Destroy(model.model);
+                //                    model.model = null;
+                //                }
             }
 
             var toRemove = _models.Where(m => !EntityManager.Exists(m.entity)).ToList();
