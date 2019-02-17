@@ -7,13 +7,13 @@ using VirtualVillagers.Components;
 
 public static class BehavioursFactory
 {
-    public static void CreateDefaultBehaviours(BehaviourTreeManager btManager)
+    public static void CreateDefaultBehaviours(BehaviourTreeManager bt)
     {
         var moveTo = new BehaviourTreeBuilder()
             .Sequence("MoveSequence")
             .Do("Moveto", delegate (object c, TimeData time)
             {
-                var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                var context = c as UnityBehaviourTreeContext;
                 var movement = context.GetComponent<MovementComponent>();
                 var transform = context.GetComponent<Transform>();
 
@@ -41,7 +41,7 @@ public static class BehavioursFactory
             .Sequence("Spawner")
                 .Condition("NotAtMaximum", (c, time) =>
                 {
-                    var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                    var context = c as UnityBehaviourTreeContext;
                     var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
                     if (btContext.spawnItemsMax < 0)
@@ -53,15 +53,15 @@ public static class BehavioursFactory
                 })
                 .Do("WaitSomeTime", delegate (object c, TimeData time)
                 {
-                    var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                    var context = c as UnityBehaviourTreeContext;
                     var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
                     btContext.spawnIdleCurrentTime -= time.deltaTime;
                     return btContext.spawnIdleCurrentTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
                 })
-                .Do("Spawn", delegate
+                .Do("Spawn", (c, t) =>
                 {
-                    var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                    var context = c as UnityBehaviourTreeContext;
                     var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
                     var spawnPosition = UnityEngine.Random.insideUnitCircle * 10.0f;
@@ -73,13 +73,13 @@ public static class BehavioursFactory
             .End()
             .Build();
 
-        btManager.Add("Spawner", spawner);
+        bt.Add("Spawner", spawner);
 
         var notMovingCondition = new BehaviourTreeBuilder()
             .Sequence("NotMoving")
                 .Condition("NotMoving", (c, time) => {
 
-                    var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                    var context = c as UnityBehaviourTreeContext;
                     var movement = context.GetComponent<MovementComponent>();
 
                     if (movement == null)
@@ -94,7 +94,7 @@ public static class BehavioursFactory
             .Sequence("IdleSequence")
                 .Do("WaitSomeTime", delegate (object c, TimeData time)
                 {
-                    var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                    var context = c as UnityBehaviourTreeContext;
                     var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
                     btContext.idleCurrentTime -= time.deltaTime;
@@ -113,7 +113,7 @@ public static class BehavioursFactory
             .Sequence("SearchFood")
             .Condition("IsThereAnyFood", delegate (object c, TimeData data)
             {
-                var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                var context = c as UnityBehaviourTreeContext;
                 var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
                 if (btContext.foodSelection != null)
@@ -124,7 +124,7 @@ public static class BehavioursFactory
             })
             .Do("SelectRandomFood", delegate (object c, TimeData time)
             {
-                var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                var context = c as UnityBehaviourTreeContext;
                 var btContext = context.GetComponent<BehaviourTreeContextComponent>();
                 var movement = context.GetComponent<MovementComponent>();
 
@@ -140,7 +140,7 @@ public static class BehavioursFactory
             .Splice(moveTo)
             .Do("Consumefood", delegate (object c, TimeData time)
             {
-                var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                var context = c as UnityBehaviourTreeContext;
                 var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
                 // consumes food
@@ -158,14 +158,14 @@ public static class BehavioursFactory
                 .Sequence("SetWanderDestination")
                     .Condition("NotHasDestination", delegate (object c, TimeData time)
                     {
-                        var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                        var context = c as UnityBehaviourTreeContext;
                         var btContext = context.GetComponent<BehaviourTreeContextComponent>();
                         var movement = context.GetComponent<MovementComponent>();
 
                         return !movement.hasDestination;
                     })
                     .Do("SetDestination", delegate (object c, TimeData time) {
-                        var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                        var context = c as UnityBehaviourTreeContext;
                         var btContext = context.GetComponent<BehaviourTreeContextComponent>();
                         var movement = context.GetComponent<MovementComponent>();
                         movement.SetDestination(UnityEngine.Random.insideUnitCircle * 10.0f);
@@ -185,14 +185,14 @@ public static class BehavioursFactory
                 .Condition("HasLumber", delegate (object c, TimeData time)
                 {
                     // has at least 1 of lumber
-                    var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                    var context = c as UnityBehaviourTreeContext;
                     var harvester = context.GetComponent<HarvesterComponent>();
                     return harvester.currentLumber > 0;
                 })
                 .Do("DeployLumber", (c, time) =>
                 {
                     // deploy lumber 
-                    var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                    var context = c as UnityBehaviourTreeContext;
                     var btContext = context.GetComponent<BehaviourTreeContextComponent>();
                     var movement = context.GetComponent<MovementComponent>();
                     var transform = context.GetComponent<Transform>();
@@ -234,13 +234,13 @@ public static class BehavioursFactory
                 .Sequence("Harvest")
                     .Condition("NotAtMaximumLumber", delegate (object c, TimeData time)
                     {
-                        var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                        var context = c as UnityBehaviourTreeContext;
                         var harvester = context.GetComponent<HarvesterComponent>();
                         return harvester.currentLumber < harvester.maxLumber;
                     })
                     .Condition("IsSelectedTreaAtHarvestDistance", delegate (object c, TimeData time)
                     {
-                        var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                        var context = c as UnityBehaviourTreeContext;
                         var btContext = context.GetComponent<BehaviourTreeContextComponent>();
                         var movement = context.GetComponent<MovementComponent>();
 
@@ -254,7 +254,7 @@ public static class BehavioursFactory
                     })
                     .Do("HarvestTree", (c, time) =>
                     {
-                        var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                        var context = c as UnityBehaviourTreeContext;
                         var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
                         var currentTree = btContext.harvestLumberCurrentTree;
@@ -272,7 +272,7 @@ public static class BehavioursFactory
                 .Sequence("MoveToTree")
                     .Condition("NotAtMaximumLumber", delegate (object c, TimeData time)
                     {
-                        var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                        var context = c as UnityBehaviourTreeContext;
                         var harvester = context.GetComponent<HarvesterComponent>();
 
                         return harvester.currentLumber < harvester.maxLumber;
@@ -280,7 +280,7 @@ public static class BehavioursFactory
                     })
                     .Do("SelectTree", delegate (object c, TimeData time)
                     {
-                        var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                        var context = c as UnityBehaviourTreeContext;
                         var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
                         if (btContext.harvestLumberCurrentTree != null)
@@ -306,7 +306,7 @@ public static class BehavioursFactory
                         return BehaviourTreeStatus.Success;
                     })
                     .Do("MoveToTree", delegate (object c, TimeData time) {
-                        var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                        var context = c as UnityBehaviourTreeContext;
                         var btContext = context.GetComponent<BehaviourTreeContextComponent>();
                         var movement = context.GetComponent<MovementComponent>();
                         movement.SetDestination(btContext.harvestLumberCurrentTree.transform.position);
@@ -317,14 +317,14 @@ public static class BehavioursFactory
                     .Sequence("MoveToLumberMill")
                         .Condition("MaximumLumber", delegate (object c, TimeData time)
                         {
-                            var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                            var context = c as UnityBehaviourTreeContext;
                             var harvester = context.GetComponent<HarvesterComponent>();
                             return harvester.currentLumber >= harvester.maxLumber;
                         })
                         // if at distance of lumber mill deposit lumber and reset
                         .Do("Move", delegate (object c, TimeData time)
                         {
-                            var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                            var context = c as UnityBehaviourTreeContext;
                             var btContext = context.GetComponent<BehaviourTreeContextComponent>();
                             var movement = context.GetComponent<MovementComponent>();
 
@@ -362,7 +362,7 @@ public static class BehavioursFactory
                 .End()
             .Build();
 
-        btManager.Add("WandererAndEater", new BehaviourTreeBuilder()
+        bt.Add("WandererAndEater", new BehaviourTreeBuilder()
             .Selector("Selector")
                 .Splice(searchFood)
                 .Sequence("Idle")
@@ -374,7 +374,7 @@ public static class BehavioursFactory
             .Build());
 
 
-        btManager.Add("Wanderer", new BehaviourTreeBuilder()
+        bt.Add("Wanderer", new BehaviourTreeBuilder()
             .Selector("Selector")
                 .Sequence("Idle")
                     .Splice(notMovingCondition)
@@ -384,7 +384,7 @@ public static class BehavioursFactory
             .End()
             .Build());
 
-        btManager.Add("LumberHarvester", new BehaviourTreeBuilder()
+        bt.Add("LumberHarvester", new BehaviourTreeBuilder()
             .Selector("Selector")
                 .Splice(harvestLumber)
                 .Sequence("Idle")
@@ -395,10 +395,10 @@ public static class BehavioursFactory
             .End()
             .Build());
 
-        btManager.Add("Tree", new BehaviourTreeBuilder()
+        bt.Add("Tree", new BehaviourTreeBuilder()
             .Selector("Selector")
                 .Do("DoNothing", (c, time) => {
-                    var context = btManager.GetContext() as UnityBehaviourTreeContext;
+                    var context = c as UnityBehaviourTreeContext;
                     var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
                     var lumber = context.GetComponent<LumberComponent>();
