@@ -42,7 +42,7 @@ namespace VirtualVillagers.Systems
                 ActionNode.DebugCurrentNode = "None";
 
                 var context = _btManager.GetContext();
-                context.SetObject(bt.gameObject);
+                context.SetOwner(bt.gameObject);
                 
                 tree.Tick(context, fluentTimeData);
                 

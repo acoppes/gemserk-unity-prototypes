@@ -24,7 +24,7 @@ namespace Gemserk.BehaviourTree
             return _managers[typeof(T)] as T;
         }
 
-        public void SetObject(object o)
+        public void SetOwner(object o)
         {
             var go = o as GameObject;
             _gameObject = go;

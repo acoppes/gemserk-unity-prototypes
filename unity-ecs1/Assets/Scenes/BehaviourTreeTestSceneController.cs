@@ -105,6 +105,8 @@ public class BehaviourTreeTestSceneController : MonoBehaviour, GameWorld {
         // Se podría tener un concepto que vive dentro del sistema de behaviourstree/actions/statescript que encapsule
         // el concepto de entidad/gameobject. De manera que los behaviours solo saben de estos conceptos. Es como
         // si fuera el sistema del quadtree, para el qt solo le interesa ese sistema.
+        // La otra es casarse con algun sistema, sea ECS o GameObject y que los behaviours usesn eso. Entonces
+        // el contexto ya podría tener algo como GetEntity() (o similar) que retorne la entidad sobre la cual está ejecutando.
 
         // Estaria bueno identificar los elementos estáticos, readonly (tipo assets) y mover a scriptable object, 
         // aunque terminen teniendo logica en si. Por ejemplo, los sub graph/ sub tree podrían ser un scriptable object hoy en día
@@ -124,5 +126,21 @@ public class BehaviourTreeTestSceneController : MonoBehaviour, GameWorld {
         // el btmanager como hacen hoy en día. Podría ser un parámetro al llamar el nodo o algo que se setea. Tener en cuenta
         // que los tree se reusan entre entidades entonces seguramente es mejor tener algo como un parámetro que define la lógica, el 
         // tree ejecuta sobre ese contexto temporalmente, si se llama con otro parámetro, ejecuta distinto según las variables, etc.
+
+        // Hay elementos del componente de "contexto" no generico que se podrían comenzar a pasar al genérico, aunque es un embole 
+        // terminar usando GetBool("pipote"), etc. No se si se puede hacer de otra forma, quizás puedo dejar el grupo de fields todos juntos
+        // y setear un struct o un puntero en el contexto pero no usar un componente para eso que tiene pinta que es logica de comportamientos
+        // del btree.
+
+        // Otra cosa interesante sería comenzar a hacer pruebas pero con animaciones, efectos y sonidos, para ver como todo esto semi
+        // generico comienza a romperse un poco cuando se necesitan transiciones de cosas.
+
+        // Me gustaría laburar en contexto del estilo Self/Target/etc, cosas que se pueden pedir a alguien para saber sobre quien actuar.
+        // Por ejemplo, un comportamiento pide Self.position o GetPosition(source), luego hace GetTrees(position, distance), 
+        // SetTarget(First(GetTrees(position, distance));
+
+        // Otra cosa a testear, agregar/remover nodos/subgrafos del bt para agregar o remover cierto comportamiento temporal. En varios
+        // lados lo he visto y en el Statescript dicen que lo usan para agregar cosas como stun, etc. Para esto parece necesario determinar
+        // una especie de orden/prioridad entre los graphs para poder agregarlo antes que otros.
 	}
 }

@@ -2,7 +2,8 @@
 {
     public interface BehaviourTreeContext
     {
-        void SetObject(object o);
+        // this is the owner object
+        void SetOwner(object o);
 
         void SetManager<T>(T t) where T : class;
 

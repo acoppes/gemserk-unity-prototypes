@@ -5,6 +5,19 @@ using Gemserk.BehaviourTree;
 using Unity.Entities;
 using VirtualVillagers.Components;
 
+public static class BehaviourTreeContextExtensions
+{
+    public static SpawnerData GetSpawnerData(this BehaviourTreeContextComponent c)
+    {
+        return c.GetData<SpawnerData>("spawnerData");
+    }
+
+    public static HarvesterData GetHarvesterData(this BehaviourTreeContextComponent c)
+    {
+        return c.GetData<HarvesterData>("harvesterData");
+    }
+}
+
 public static class BehavioursFactory
 {
     public static void CreateDefaultBehaviours(BehaviourTreeManager bt)
@@ -44,30 +57,36 @@ public static class BehavioursFactory
                     var context = c as UnityBehaviourTreeContext;
                     var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
-                    if (btContext.spawnItemsMax < 0)
+                    var spawnerData = btContext.GetSpawnerData();
+
+                    if (spawnerData.spawnItemsMax < 0)
                         return true;
-                    if (string.IsNullOrEmpty(btContext.spawnPrefab.tag))
+                    if (string.IsNullOrEmpty(spawnerData.spawnPrefab.tag))
                         return true;
-                    var spawnedItems = GameObject.FindGameObjectsWithTag(btContext.spawnPrefab.tag);
-                    return spawnedItems.Length < btContext.spawnItemsMax;
+                    var spawnedItems = GameObject.FindGameObjectsWithTag(spawnerData.spawnPrefab.tag);
+                    return spawnedItems.Length < spawnerData.spawnItemsMax;
                 })
                 .Do("WaitSomeTime", delegate (object c, TimeData time)
                 {
                     var context = c as UnityBehaviourTreeContext;
                     var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
-                    btContext.spawnIdleCurrentTime -= time.deltaTime;
-                    return btContext.spawnIdleCurrentTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
+                    var spawnerData = btContext.GetSpawnerData();
+
+                    spawnerData.spawnIdleCurrentTime -= time.deltaTime;
+                    return spawnerData.spawnIdleCurrentTime > 0 ? BehaviourTreeStatus.Running : BehaviourTreeStatus.Success;
                 })
                 .Do("Spawn", (c, t) =>
                 {
                     var context = c as UnityBehaviourTreeContext;
                     var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
+                    var spawnerData = btContext.GetSpawnerData();
+
                     var spawnPosition = UnityEngine.Random.insideUnitCircle * 10.0f;
-                    var spawnItem = GameObject.Instantiate(btContext.spawnPrefab);
+                    var spawnItem = GameObject.Instantiate(spawnerData.spawnPrefab);
                     spawnItem.transform.position = spawnPosition;
-                    btContext.spawnIdleCurrentTime = btContext.spawnIdleTotalTime;
+                    spawnerData.spawnIdleCurrentTime = spawnerData.spawnIdleTotalTime;
                     return BehaviourTreeStatus.Success;
                 })
             .End()
@@ -244,29 +263,33 @@ public static class BehavioursFactory
                         var btContext = context.GetComponent<BehaviourTreeContextComponent>();
                         var movement = context.GetComponent<MovementComponent>();
 
-                        if (btContext.harvestLumberCurrentTree == null)
+                        var harvesterData = btContext.GetHarvesterData();
+                        
+                        if (harvesterData.harvestLumberCurrentTree == null)
                             return false;
 
                         var transform = context.GetComponent<Transform>();
 
-                        return Vector2.Distance(transform.position, btContext.harvestLumberCurrentTree.transform.position) <
-                               btContext.harvestLumberMinDistance;
+                        return Vector2.Distance(transform.position, harvesterData.harvestLumberCurrentTree.transform.position) <
+                               harvesterData.harvestLumberMinDistance;
                     })
                     .Do("HarvestTree", (c, time) =>
                     {
                         var context = c as UnityBehaviourTreeContext;
                         var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
-                        var currentTree = btContext.harvestLumberCurrentTree;
+                        var harvesterData = btContext.GetHarvesterData();
+
+                        var currentTree = harvesterData.harvestLumberCurrentTree;
 
                         var harvester = context.GetComponent<HarvesterComponent>();
-                        if (harvester != null && btContext.harvestLumberCurrentTree != null)
+                        if (harvester != null && harvesterData.harvestLumberCurrentTree != null)
                         {
                             harvester.currentLumberTarget =
-                                btContext.harvestLumberCurrentTree.GetComponent<GameObjectEntity>().Entity;
+                                harvesterData.harvestLumberCurrentTree.GetComponent<GameObjectEntity>().Entity;
                         }
 
-                        return btContext.harvestLumberCurrentTree == null ? BehaviourTreeStatus.Success : BehaviourTreeStatus.Running;
+                        return harvesterData.harvestLumberCurrentTree == null ? BehaviourTreeStatus.Success : BehaviourTreeStatus.Running;
                     })
                 .End()
                 .Sequence("MoveToTree")
@@ -283,7 +306,9 @@ public static class BehavioursFactory
                         var context = c as UnityBehaviourTreeContext;
                         var btContext = context.GetComponent<BehaviourTreeContextComponent>();
 
-                        if (btContext.harvestLumberCurrentTree != null)
+                        var harvesterData = btContext.GetHarvesterData();
+
+                        if (harvesterData.harvestLumberCurrentTree != null)
                         {
 
                             return BehaviourTreeStatus.Success;
@@ -296,12 +321,12 @@ public static class BehavioursFactory
                         var transform = context.GetComponent<Transform>();
 
                         var nearByTrees = trees.Where(tree => Vector2.Distance(transform.position, tree.transform.position) <
-                                                              btContext.harvestLumberMaxDistance &&
+                                                              harvesterData.harvestLumberMaxDistance &&
                                                               tree.GetComponent<LumberComponent>().current > 0).ToList();
                         if (nearByTrees.Count == 0)
                             return BehaviourTreeStatus.Failure;
 
-                        btContext.harvestLumberCurrentTree = nearByTrees[UnityEngine.Random.Range(0, nearByTrees.Count)];
+                        harvesterData.harvestLumberCurrentTree = nearByTrees[UnityEngine.Random.Range(0, nearByTrees.Count)];
 
                         return BehaviourTreeStatus.Success;
                     })
@@ -309,7 +334,9 @@ public static class BehavioursFactory
                         var context = c as UnityBehaviourTreeContext;
                         var btContext = context.GetComponent<BehaviourTreeContextComponent>();
                         var movement = context.GetComponent<MovementComponent>();
-                        movement.SetDestination(btContext.harvestLumberCurrentTree.transform.position);
+                        var harvesterData = btContext.GetHarvesterData();
+
+                        movement.SetDestination(harvesterData.harvestLumberCurrentTree.transform.position);
                         return BehaviourTreeStatus.Success;
                     })
                     .Splice(moveTo)

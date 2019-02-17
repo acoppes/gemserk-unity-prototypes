@@ -90,7 +90,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4100611757222804}
   - component: {fileID: 114195733536269768}
-  - component: {fileID: 114901051393172958}
   - component: {fileID: 114538284091026270}
   - component: {fileID: 114061716184108622}
   - component: {fileID: 114025137438250260}
@@ -130,30 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114901051393172958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500401482982804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: 8a35a4f94ec742f88ccc0fde289b13e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnIdleTotalTime: 0
-  spawnIdleCurrentTime: 0
-  spawnItemsMax: 0
-  spawnPrefab: {fileID: 0}
-  foodSelection: {fileID: 0}
-  foodConsumed: 0
-  idleTotalTime: 0
-  idleCurrentTime: 0
-  harvestLumberMaxDistance: 10
-  harvestLumberMinDistance: 1.5
-  harvestLumberCurrentTree: {fileID: 0}
 --- !u!114 &114538284091026270
 MonoBehaviour:
   m_ObjectHideFlags: 0

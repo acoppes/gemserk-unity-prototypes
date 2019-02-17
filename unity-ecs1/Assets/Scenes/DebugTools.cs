@@ -81,9 +81,17 @@ public class DebugTools : MonoBehaviour
 		var btComponent = gameObject.GetComponent<BehaviourTreeComponent>();
 		if (btComponent)
 		{
-			var debugBT = GameObject.Instantiate(_debugBTPrefab, gameObject.transform);
+            var debugBT = GameObject.Instantiate(_debugBTPrefab, gameObject.transform);
 			debugBT.GetComponent<DebugBT>()._btComponent = btComponent;
 		}
+
+        var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
+        btContext.SetData<HarvesterData>("harvesterData", new HarvesterData()
+        {
+            harvestLumberCurrentTree = null,
+            harvestLumberMaxDistance = 10.0f,
+            harvestLumberMinDistance = 1.5f,
+        });
 	}
 
 	public void SpawnLumbermillNoReturn()
