@@ -23,8 +23,6 @@ namespace VirtualVillagers.Systems
             _btManager = btManager;
         }
 
-        private UnityBehaviourTreeContext _context = new UnityBehaviourTreeContext();
-
         protected override void OnUpdate()
         {
             if (_btManager == null)
@@ -44,12 +42,10 @@ namespace VirtualVillagers.Systems
 
                 ActionNode.DebugCurrentNode = "None";
 
-                _btManager.SetContext(_context);
-                _context.SetGameObject(bt.gameObject);
+                var context = _btManager.GetContext() as UnityBehaviourTreeContext;
+                context.SetGameObject(bt.gameObject);
                 
-                // _btManager.SetContext(bt.gameObject);
                 tree.Tick(new FluentBehaviourTree.TimeData(dt));
-                _btManager.SetContext(null);
                 
                 // just for debug!
                 bt._debugCurrentAction = ActionNode.DebugCurrentNode;
