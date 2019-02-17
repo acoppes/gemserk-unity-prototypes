@@ -1,4 +1,6 @@
 ﻿using Unity.Entities;
+using UnityEngine;
+using System.Collections.Generic;
 
 namespace Gemserk.BehaviourTree
 {
@@ -10,8 +12,21 @@ namespace Gemserk.BehaviourTree
 
         private Unity.Entities.EntityManager _entityManager;
 
-        public void SetGameObject(UnityEngine.GameObject go)
+        private Dictionary<object, object> _managers = new Dictionary<object, object>();
+
+        public void SetManager<T>(T t) where T : class
         {
+            _managers.Add(typeof(T), t);
+        }
+
+        public T GetManager<T>() where T : class
+        {
+            return _managers[typeof(T)] as T;
+        }
+
+        public void SetObject(object o)
+        {
+            var go = o as GameObject;
             _gameObject = go;
             _entity = go.GetComponent<Unity.Entities.GameObjectEntity>().Entity;
             _entityManager = go.GetComponent<Unity.Entities.GameObjectEntity>().EntityManager;

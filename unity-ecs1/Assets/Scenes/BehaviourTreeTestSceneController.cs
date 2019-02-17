@@ -3,10 +3,18 @@ using UnityEngine;
 using Gemserk.BehaviourTree;
 using Unity.Entities;
 using UnityScript.Lang;
-using VirtualVillagers;
+using VirtualVillagers.Components;
 using VirtualVillagers.Systems;
+using System.Linq;
 
-public class BehaviourTreeTestSceneController : MonoBehaviour {
+public interface GameWorld
+{
+    int GetTreeCount();
+
+    List<LumberComponent> GetLumberMills();
+}
+
+public class BehaviourTreeTestSceneController : MonoBehaviour, GameWorld {
 
     public UnityEngine.Object _behaviourTreeManager;
 	
@@ -14,8 +22,18 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 	public int maxTrees;
 
 	public DebugTools debugTools;
-	
-	private void CreateWorld()
+
+    public List<LumberComponent> GetLumberMills()
+    {
+        return FindObjectsOfType<LumberComponent>().ToList();
+    }
+
+    public int GetTreeCount()
+    {
+        return 10;
+    }
+
+    private void CreateWorld()
 	{
 		var treesCount = UnityEngine.Random.Range(minTrees, maxTrees);
 		
@@ -30,7 +48,11 @@ public class BehaviourTreeTestSceneController : MonoBehaviour {
 
 	private void Start() {
         var btManager = _behaviourTreeManager as BehaviourTreeManager;
-        btManager.SetContext(new UnityBehaviourTreeContext());
+        UnityBehaviourTreeContext context = new UnityBehaviourTreeContext();
+
+        context.SetManager<GameWorld>(this);
+
+        btManager.SetContext(context);
 
         BehavioursFactory.CreateDefaultBehaviours(btManager);
 

@@ -192,7 +192,10 @@ public static class BehavioursFactory
                     var movement = context.GetComponent<MovementComponent>();
                     var transform = context.GetComponent<Transform>();
 
-                    var lumberMills = GameObject.FindGameObjectsWithTag("LumberMill");
+                    // var lumberMills = GameObject.FindGameObjectsWithTag("LumberMill");
+
+                    var gameWorld = context.GetManager<GameWorld>();
+                    var lumberMills = gameWorld.GetLumberMills();
 
                     var validLumberMills = lumberMills.Where(lm =>
                     {

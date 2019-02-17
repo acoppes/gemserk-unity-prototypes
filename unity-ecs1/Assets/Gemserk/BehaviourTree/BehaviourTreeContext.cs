@@ -2,6 +2,6 @@
 {
     public interface BehaviourTreeContext
     {
-
+        void SetObject(object o);
     }
 }

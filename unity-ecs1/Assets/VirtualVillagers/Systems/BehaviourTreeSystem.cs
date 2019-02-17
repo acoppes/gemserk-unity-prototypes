@@ -42,8 +42,8 @@ namespace VirtualVillagers.Systems
 
                 ActionNode.DebugCurrentNode = "None";
 
-                var context = _btManager.GetContext() as UnityBehaviourTreeContext;
-                context.SetGameObject(bt.gameObject);
+                var context = _btManager.GetContext();
+                context.SetObject(bt.gameObject);
                 
                 tree.Tick(new FluentBehaviourTree.TimeData(dt));
                 
