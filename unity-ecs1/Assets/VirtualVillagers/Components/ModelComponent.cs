@@ -53,13 +53,19 @@ namespace VirtualVillagers.Components
 
                 model.model.UpdateRender(_data.transform[i]);
 
-                if (this.EntityManager.HasComponent<MovementComponent>(_data.entity[i])) {
-                    var movement = this.EntityManager.GetComponentObject<MovementComponent>(_data.entity[i]);
-                    var speed = Vector2.SqrMagnitude(movement.velocity);
+                if (this.EntityManager.HasComponent<BehaviourTreeContextComponent>(_data.entity[i])) {
+                    var btContext = this.EntityManager.GetComponentObject<BehaviourTreeContextComponent>(_data.entity[i]);
+                    // var speed = Vector2.SqrMagnitude(movement.velocity);
 
                     var animator = model.model.GetComponentInChildren<Animator>();
                     if (animator != null)
-                        animator.SetBool("Moving", speed > 0);
+                    {
+                        animator.SetBool("Moving", btContext.actionState == BehaviourTreeContextComponent.ActionState.Moving);
+                        animator.SetBool("Harvesting", btContext.actionState == BehaviourTreeContextComponent.ActionState.Harvesting);
+                    }
+
+                    // Me imagino que necesito una especie de "estado" del unit en algun lado
+                    // y traducir este estado al animator.
                 }
                 //
                 //                if (!EntityManager.Exists(_data.entity[i]))

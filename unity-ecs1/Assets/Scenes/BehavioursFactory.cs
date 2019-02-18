@@ -35,15 +35,20 @@ public static class BehavioursFactory
 
                 // Distance(GetPosition(GetTarget()), GetPosition(GetOwner()) < Float(3.0f)
 
+                var btContext = context.GetComponent<BehaviourTreeContextComponent>();
+
                 var distance = Vector2.Distance(transform.position, movement.destination);
                 if (distance < movement.destinationDistance)
                 {
+                    btContext.actionState = BehaviourTreeContextComponent.ActionState.Idle;
                     movement.hasDestination = false;
                     return BehaviourTreeStatus.Success;
                 }
 
                 movement.direction.x = movement.destination.x - transform.position.x;
                 movement.direction.y = movement.destination.y - transform.position.y;
+
+                btContext.actionState = BehaviourTreeContextComponent.ActionState.Moving;
 
                 return BehaviourTreeStatus.Running;
             })
@@ -118,8 +123,10 @@ public static class BehavioursFactory
 
                     btContext.idleCurrentTime -= time.deltaTime;
 
-                    if (btContext.idleCurrentTime > 0)
+                    if (btContext.idleCurrentTime > 0) {
+                        btContext.actionState = BehaviourTreeContextComponent.ActionState.Idle;
                         return BehaviourTreeStatus.Running;
+                    }
 
                     btContext.idleCurrentTime = btContext.idleTotalTime;
 
@@ -246,6 +253,9 @@ public static class BehavioursFactory
 
                     var harvester = context.GetComponent<HarvesterComponent>();
                     harvester.currentLumberMill = lumberMill.GetComponent<GameObjectEntity>().Entity;
+
+                    btContext.actionState = BehaviourTreeContextComponent.ActionState.Harvesting;
+
                     return BehaviourTreeStatus.Running;
 
                 })
@@ -289,6 +299,11 @@ public static class BehavioursFactory
                                 harvesterData.harvestLumberCurrentTree.GetComponent<GameObjectEntity>().Entity;
                         }
 
+                        if (harvesterData.harvestLumberCurrentTree != null)
+                        {
+                            btContext.actionState = BehaviourTreeContextComponent.ActionState.Harvesting;
+                        }
+
                         return harvesterData.harvestLumberCurrentTree == null ? BehaviourTreeStatus.Success : BehaviourTreeStatus.Running;
                     })
                 .End()
@@ -310,7 +325,6 @@ public static class BehavioursFactory
 
                         if (harvesterData.harvestLumberCurrentTree != null)
                         {
-
                             return BehaviourTreeStatus.Success;
                         }
 

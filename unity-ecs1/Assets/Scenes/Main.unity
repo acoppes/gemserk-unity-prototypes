@@ -1048,9 +1048,6 @@ MonoBehaviour:
   foodConsumed: 0
   idleTotalTime: 0
   idleCurrentTime: 0
-  harvestLumberMaxDistance: 10
-  harvestLumberMinDistance: 1.5
-  harvestLumberCurrentTree: {fileID: 0}
 --- !u!114 &810224084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1200,9 +1197,6 @@ MonoBehaviour:
   foodConsumed: 0
   idleTotalTime: 2
   idleCurrentTime: 0
-  harvestLumberMaxDistance: 10
-  harvestLumberMinDistance: 1.5
-  harvestLumberCurrentTree: {fileID: 0}
 --- !u!1 &815299330
 GameObject:
   m_ObjectHideFlags: 0
@@ -2639,9 +2633,6 @@ MonoBehaviour:
   foodConsumed: 0
   idleTotalTime: 0
   idleCurrentTime: 0
-  harvestLumberMaxDistance: 10
-  harvestLumberMinDistance: 1.5
-  harvestLumberCurrentTree: {fileID: 0}
 --- !u!4 &1629513819
 Transform:
   m_ObjectHideFlags: 0
@@ -3207,9 +3198,6 @@ MonoBehaviour:
   foodConsumed: 0
   idleTotalTime: 0
   idleCurrentTime: 0
-  harvestLumberMaxDistance: 10
-  harvestLumberMinDistance: 1.5
-  harvestLumberCurrentTree: {fileID: 0}
 --- !u!114 &1928344251
 MonoBehaviour:
   m_ObjectHideFlags: 0

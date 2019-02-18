@@ -134,6 +134,7 @@ public class BehaviourTreeTestSceneController : MonoBehaviour, GameWorld {
 
         // Otra cosa interesante sería comenzar a hacer pruebas pero con animaciones, efectos y sonidos, para ver como todo esto semi
         // generico comienza a romperse un poco cuando se necesitan transiciones de cosas.
+        // TODO: Probar justamente una transición de animación, como afecta al juego (me suena que pasa a ser un comportamiento o algo)
 
         // Me gustaría laburar en contexto del estilo Self/Target/etc, cosas que se pueden pedir a alguien para saber sobre quien actuar.
         // Por ejemplo, un comportamiento pide Self.position o GetPosition(source), luego hace GetTrees(position, distance), 

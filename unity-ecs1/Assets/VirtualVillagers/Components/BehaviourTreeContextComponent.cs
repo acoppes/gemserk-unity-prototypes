@@ -43,6 +43,13 @@ namespace VirtualVillagers.Components
 
     public class BehaviourTreeContextComponent : MonoBehaviour
     {
+        public enum ActionState
+        {
+            Idle,
+            Moving,
+            Harvesting
+        }
+
         private Dictionary<string, object> _data = new Dictionary<string, object>();
 
         public bool HasData(string name)
@@ -75,5 +82,7 @@ namespace VirtualVillagers.Components
         //public float harvestLumberMaxDistance;
         //public float harvestLumberMinDistance;
         //public GameObject harvestLumberCurrentTree;
+
+        public ActionState actionState;
     }
 }
