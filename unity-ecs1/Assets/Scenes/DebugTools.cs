@@ -58,7 +58,7 @@ public class DebugTools : MonoBehaviour
 		if (btComponent)
 		{
 			var debugBT = GameObject.Instantiate(_debugBTPrefab, gameObject.transform);
-			debugBT.GetComponent<DebugBT>()._btComponent = btComponent;
+			debugBT.GetComponent<DebugBT>().behaviourTreeComponent = btComponent;
 		}
 	}
 
@@ -82,7 +82,7 @@ public class DebugTools : MonoBehaviour
 		if (btComponent)
 		{
             var debugBT = GameObject.Instantiate(_debugBTPrefab, gameObject.transform);
-			debugBT.GetComponent<DebugBT>()._btComponent = btComponent;
+			debugBT.GetComponent<DebugBT>().behaviourTreeComponent = btComponent;
 		}
 
         var btContext = gameObject.GetComponent<BehaviourTreeContextComponent>();
@@ -121,7 +121,7 @@ public class DebugTools : MonoBehaviour
 		if (btComponent)
 		{
 			var debugBT = GameObject.Instantiate(_debugBTPrefab, gameObject.transform);
-			debugBT.GetComponent<DebugBT>()._btComponent = btComponent;
+			debugBT.GetComponent<DebugBT>().behaviourTreeComponent = btComponent;
 		}
 
 		return gameObject;
@@ -147,7 +147,7 @@ public class DebugTools : MonoBehaviour
 		if (btComponent)
 		{
 			var debugBT = GameObject.Instantiate(_debugBTPrefab, gameObject.transform);
-			debugBT.GetComponent<DebugBT>()._btComponent = btComponent;
+			debugBT.GetComponent<DebugBT>().behaviourTreeComponent = btComponent;
 		}
 
 		return gameObject;
@@ -172,7 +172,7 @@ public class DebugTools : MonoBehaviour
 		if (btComponent)
 		{
 			var debugBT = GameObject.Instantiate(_debugBTPrefab, gameObject.transform);
-			debugBT.GetComponent<DebugBT>()._btComponent = btComponent;
+			debugBT.GetComponent<DebugBT>().behaviourTreeComponent = btComponent;
 		}
 	}
 

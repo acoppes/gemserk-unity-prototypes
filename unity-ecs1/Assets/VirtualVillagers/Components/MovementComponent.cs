@@ -18,6 +18,8 @@ namespace VirtualVillagers.Components
         public bool hasDestination;
         public Vector2 destination;
 
+        public float2 lookingDirection;
+
         public void SetDestination(Vector2 destination)
         {
             this.destination = destination;

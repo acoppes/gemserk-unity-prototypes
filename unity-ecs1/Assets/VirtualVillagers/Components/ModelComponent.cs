@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace VirtualVillagers.Components
@@ -51,7 +52,16 @@ namespace VirtualVillagers.Components
                     _models.Add(model.model);
                 }
 
-                model.model.UpdateRender(_data.transform[i]);
+                float2 lookingDirection = new float2(1, 0);
+
+                if (this.EntityManager.HasComponent<MovementComponent>(_data.entity[i]))
+                {
+                    var movement = this.EntityManager.GetComponentObject<MovementComponent>(_data.entity[i]);
+                    // no tiene porque, puede caminar para un lado y mirar para otro.
+                    lookingDirection = movement.lookingDirection;
+                }
+
+                model.model.UpdateRender(lookingDirection, _data.transform[i]);
 
                 if (this.EntityManager.HasComponent<BehaviourTreeContextComponent>(_data.entity[i])) {
                     var btContext = this.EntityManager.GetComponentObject<BehaviourTreeContextComponent>(_data.entity[i]);
@@ -67,12 +77,7 @@ namespace VirtualVillagers.Components
                     // Me imagino que necesito una especie de "estado" del unit en algun lado
                     // y traducir este estado al animator.
                 }
-                //
-                //                if (!EntityManager.Exists(_data.entity[i]))
-                //                {
-                //                    GameObject.Destroy(model.model);
-                //                    model.model = null;
-                //                }
+
             }
 
             var toRemove = _models.Where(m => !EntityManager.Exists(m.entity)).ToList();

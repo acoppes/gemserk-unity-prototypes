@@ -40,6 +40,9 @@ namespace VirtualVillagers.Systems
                 var direction = new Vector2(movement.direction.x, movement.direction.y);
                 direction.Normalize();
 
+                movement.lookingDirection.x = movement.destination.x - p.x;
+                movement.lookingDirection.y = movement.destination.y - p.y;
+                
                 movement.velocity = direction * movement.speed * dt;
               
                 p.x += movement.velocity.x;

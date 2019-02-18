@@ -8,13 +8,13 @@ public class DebugBT : MonoBehaviour
 	[SerializeField]
 	protected Text _text;
 
-	public BehaviourTreeComponent _btComponent;
+	public BehaviourTreeComponent behaviourTreeComponent;
 
 	private void LateUpdate()
 	{
-		if (_text != null && _btComponent != null)
+		if (_text != null && behaviourTreeComponent != null)
 		{
-			_text.text = string.Format("{0}.{1}", _btComponent._behaviourTreeName, _btComponent._debugCurrentAction);
+			_text.text = string.Format("{0}.{1}", behaviourTreeComponent._behaviourTreeName, behaviourTreeComponent._debugCurrentAction);
 		}
 	}
 }
